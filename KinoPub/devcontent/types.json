@@ -1,0 +1,41 @@
+{
+    "status": 200,
+    "items": [
+        {
+            "id": "movie",
+            "title": "Фильмы"
+        },
+        {
+            "id": "serial",
+            "title": "Сериалы"
+        },
+        {
+            "id": "tvshow",
+            "title": "ТВ шоу"
+        },
+        {
+            "id": "4k",
+            "title": "4K"
+        },
+        {
+            "id": "3d",
+            "title": "3D"
+        },
+        {
+            "id": "concert",
+            "title": "Концерты"
+        },
+        {
+            "id": "documovie",
+            "title": "Документальные фильмы"
+        },
+        {
+            "id": "docuserial",
+            "title": "Документальные сериалы"
+        },
+		{
+			"id": "misc",
+			"title": "ІЇЎЁіўїё"
+		}
+    ]
+}

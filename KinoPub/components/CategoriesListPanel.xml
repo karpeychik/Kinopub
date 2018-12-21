@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+<component name = "CategoriesListPanel" extends = "ListPanel" >
+
+  <script type = "text/brightscript" uri="pkg:/components/CategoriesListPanel.brs"/>
+
+  <children>
+
+    <LabelList id = "categoriesLabelList" >
+        <Font role = "font" uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf" size = "24" />
+        <Font role = "focusedFont" uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf" size = "24" />
+    </LabelList>
+
+  </children>
+
+</component>
