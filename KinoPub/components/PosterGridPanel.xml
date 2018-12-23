@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="PosterGridPanel" extends="GridPanel" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
+
+	<script type="text/brightscript" uri="pkg:/components/PosterGridPanel.brs" />
+	<children>
+	   <PosterGrid 
+          id = "posterGrid" 
+          basePosterSize = "[ 512, 288 ]" 
+          caption1NumLines = "1" 
+          numColumns = "2" 
+          numRows = "2" 
+          itemSpacing = "[ 20, 20 ]" />
+	</children>
+	<interface>
+        <field id = "overhangtext" type = "string" />
+        <field id = "gridcontenturi" type = "uri" onChange = "loadCategoryPosters" />
+    </interface>
+</component>

@@ -10,56 +10,50 @@ end sub
 
 sub setcategories()
     content = createObject("roSGNode", "ContentNode")
+    itemId = 0
     for each item in m.readContentTask.content.items
         itemcontent = content.createChild("ContentNode")
-        itemcontent.setField("id", item.id)
+        itemcontent.setField("id", itemId.ToStr())
+        itemcontent.setField("kinoPubId", item.id)
         title = recode(item.title)
         itemcontent.setField("title", title)
+        itemId = itemId+1
     end for
    
     m.categoriespanel = m.top.panelSet.createChild("CategoriesListPanel")
+    m.categoryinfopanel = m.top.panelSet.createChild("EmptyPanel")
+    m.categoryinfopanel.observeField("focusedChild", "categorySelected")
     m.categoriespanel.list.content = content
+    m.categoriespanel.list.observeField("itemFocused", "showCategoryInfo")
+    m.categoriespanel.setFocus(true)
     
-    #if false
-    print m.readContentTask.content.items[1].title
-    byteArray = createObject("roByteArray")
-    byteArray.FromAsciiString(m.readContentTask.content.items[1].title)
-    print byteArray.Count()
-    for i=0 to byteArray.Count()-1 step 1
-        print byteArray[i]
-    end for
+end sub
+
+sub categorySelected()
+    print "Category selected" 
+    if not m.top.panelSet.isGoingBack
+        m.top.panelSet.appendChild(m.childPanel)
+   
+        m.childPanel.grid.observeField("itemSelected", "runSelectedCategory")
+        m.childPanel.grid.setFocus(true)
+
+        else
+        m.categoriespanel.setFocus(true)
+    end if
+end sub
+
+sub runSelectedCategory()
     print ""
-    for i=0 to byteArray.Count()-1 step 2
-        print i
-        print byteArray[i]
-        print byteArray[i+1]
-        firstByte=byteArray[i]
-        code = ((firstByte and &H1F)<<6) + (byteArray[i+1] and &H3F)
-        newCode = (code-1040)+192
-        print code
-        print newCode
-        secondByte = &H80 + (newCode and &H3F)  
-        firstByte = &HC0+ ((newCode >> 6) and &H1F) 
-        byteArray[i] = firstByte
-        byteArray[i+1]=secondByte
-        print firstByte
-        print secondByte
-        print i
-        print ""
-    end for
+end sub
+
+sub showCategoryInfo()
+    print "Category focused"
     
-    str = byteArray.ToAsciiString()
-    print str
-    print str.len()
-    
-    
-    itemcontent = content.createChild("ContentNode")
-    itemcontent.setField("id", "1")
-    itemcontent.setField("title", str)
-    m.categoriespanel = m.top.panelSet.createChild("CategoriesListPanel")
-    m.categoriespanel.list.content = content
-    #end if
-    
+    categorycontent = m.categoriespanel.list.content.getChild(m.categoriespanel.list.itemFocused)
+    print categoryContent
+    m.childPanel = createObject("roSGNode", "PosterGridPanel")
+    m.childPanel.overhangtext = categorycontent.title
+    m.childPanel.gridcontenturi = categorycontent.title
 end sub
 
 sub recode(str as string) as string
@@ -94,12 +88,9 @@ sub recode(str as string) as string
                 newCode = 129
             end if
             
-            if(newCode <> -1)
-                print "Replacing " + code.ToStr() + " into " + newCode.ToStr() 
+            if(newCode <> -1) 
                 input[i] = &HC0+ ((newCode >> 6) and &H1F)
                 input[i+1] = &H80 + (newCode and &H3F)
-                
-                print "First " + input[i].ToStr() + " second " + input[i+1].ToStr()
             end if
             i=i+1
         end if
