@@ -9,10 +9,15 @@
           caption1NumLines = "1" 
           numColumns = "2" 
           numRows = "2" 
-          itemSpacing = "[ 20, 20 ]" />
+          itemSpacing = "[ 20, 20 ]"
+          useAtlas = "false"
+          posterDisplayMode = "scaleToFit" >
+          <Font role = "caption1Font" uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf" size = "24" />
+       </PosterGrid>
 	</children>
 	<interface>
         <field id = "overhangtext" type = "string" />
-        <field id = "gridcontenturi" type = "uri" onChange = "loadCategoryPosters" />
+        <field id = "gridContentBaseUri" type = "uri" onChange = "loadCategoryPosters" />
+        <field id = "gridContentUriParameters" type = "roArray" />
     </interface>
 </component>

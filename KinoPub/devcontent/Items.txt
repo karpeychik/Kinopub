@@ -1,0 +1,1255 @@
+{
+    "status": 200,
+    "items": [
+        {
+            "id": 42916,
+            "type": "movie",
+            "subtype": "",
+            "title": "Положение вещей / Der Stand der Dinge",
+            "year": 1982,
+            "cast": "Патрик Бошо, Аллен Гарфилд, Изабель Вайнгартен, Ребекка Поли, Джефри Кайм, Джефри Кэри, Камила Мора, Александра Одер, Пол Гетти мл., Вива",
+            "director": "Вим Вендерс",
+            "genres": [
+                {
+                    "id": 9,
+                    "title": "Драма"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                },
+                {
+                    "id": 5,
+                    "title": "Великобритания"
+                },
+                {
+                    "id": 8,
+                    "title": "Франция"
+                },
+                {
+                    "id": 9,
+                    "title": "Испания"
+                },
+                {
+                    "id": 11,
+                    "title": "Нидерланды"
+                },
+                {
+                    "id": 85,
+                    "title": "Португалия"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 6991,
+                "total": 6991
+            },
+            "langs": 2,
+            "quality": 480,
+            "plot": "Картина рассказывает о судьбе художника в мире коммерции.",
+            "tracklist": [],
+            "imdb": 84725,
+            "imdb_rating": 7.0999999999999996,
+            "imdb_votes": 2411,
+            "kinopoisk": 17719,
+            "kinopoisk_rating": 7.0890000000000004,
+            "kinopoisk_votes": 582,
+            "rating": 2,
+            "rating_votes": "2",
+            "rating_percentage": "100",
+            "views": 7,
+            "comments": 0,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42916.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42916.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42916.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42916.jpg"
+            },
+            "trailer": {
+                "id": "Nzbbvy7QwZk",
+                "url": "https://www.youtube.com/watch?v=Nzbbvy7QwZk"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "0"
+        },
+        {
+            "id": 42907,
+            "type": "movie",
+            "subtype": "",
+            "title": "Битва на гирляндах  / Battle of the Bulbs",
+            "year": 2010,
+            "cast": "Дэниел Стерн, Мэтт Фрюэр, Эллисон Хоссак, Терил Ротери, Эмили Теннант, Уильям Хатчинсон, Тим Генри, Райан Грэнтхем, Максин Миллер, Луис Хавьер",
+            "director": "Харви Фрост",
+            "genres": [
+                {
+                    "id": 1,
+                    "title": "Комедия"
+                },
+                {
+                    "id": 6,
+                    "title": "Семейный"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                },
+                {
+                    "id": 14,
+                    "title": "Канада"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 5256,
+                "total": 5256
+            },
+            "langs": 2,
+            "quality": 1080,
+            "plot": "Каждое Рождество Боб Уоллес старается как можно нарядней украсить свой дом, чтобы он был самым ярким и праздничным в районе. Но в этом году новый сосед Боба превзошел его по всем параметрам...",
+            "tracklist": [],
+            "imdb": 1721625,
+            "imdb_rating": 5.5,
+            "imdb_votes": 569,
+            "kinopoisk": 565833,
+            "kinopoisk_rating": 5.9320000000000004,
+            "kinopoisk_votes": 207,
+            "rating": 0,
+            "rating_votes": "0",
+            "rating_percentage": "0",
+            "views": 630,
+            "comments": 0,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42907.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42907.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42907.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42907.jpg"
+            },
+            "trailer": {
+                "id": "U_SAdK97670",
+                "url": "https://www.youtube.com/watch?v=U_SAdK97670"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        },
+        {
+            "id": 42910,
+            "type": "movie",
+            "subtype": "",
+            "title": "В канун Рождества  / One Christmas Eve",
+            "year": 2014,
+            "cast": "Энн Хеч, Брайан Ти, Алиса Сковбай, Хуан Карлос Велис, Пол Андрич, Стефани Остин, Джейми Эймерих, Мария Бек, Кевин Дэниелс, Карлос Гомес",
+            "director": "Джей Расселл",
+            "genres": [
+                {
+                    "id": 6,
+                    "title": "Семейный"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 5225,
+                "total": 5225
+            },
+            "langs": 2,
+            "quality": 1080,
+            "plot": "В канун Рождества сотрудники торгового центра обнаруживают возле входа красивую подарочную коробку, в которой сидит щенок и лежит записка с просьбой отдать малыша в добрые руки. Коллеги никак не могут договориться, кто же будет заниматься щенком и решают бросить монетку.",
+            "tracklist": [],
+            "imdb": 3725224,
+            "imdb_rating": 6.4000000000000004,
+            "imdb_votes": 418,
+            "kinopoisk": 845425,
+            "kinopoisk_rating": 6.0490000000000004,
+            "kinopoisk_votes": 397,
+            "rating": -1,
+            "rating_votes": "1",
+            "rating_percentage": "0",
+            "views": 460,
+            "comments": 0,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42910.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42910.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42910.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42910.jpg"
+            },
+            "trailer": {
+                "id": "PHWmAWdZjOU",
+                "url": "https://www.youtube.com/watch?v=PHWmAWdZjOU"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        },
+        {
+            "id": 42841,
+            "type": "movie",
+            "subtype": "",
+            "title": "Ничего хорошего в отеле «Эль рояль» / Bad Times at the El Royale",
+            "year": 2018,
+            "cast": "Джефф Бриджес, Синтиа Эриво, Дакота Джонсон, Джон Хэмм, Крис Хемсворт, Кэйли Спэни, Льюис Пуллман, Ник Офферман, Ксавье Долан, Шей Уигэм",
+            "director": "Дрю Годдард",
+            "genres": [
+                {
+                    "id": 7,
+                    "title": "Триллер"
+                },
+                {
+                    "id": 9,
+                    "title": "Драма"
+                },
+                {
+                    "id": 13,
+                    "title": "Детектив"
+                },
+                {
+                    "id": 17,
+                    "title": "Криминал"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 8661,
+                "total": 8661
+            },
+            "langs": 1,
+            "quality": 1080,
+            "plot": "Семь незнакомцев, у каждого из которых есть своя тайна, встречаются в заброшенном отеле «Эль Рояль» на озере Тахо. И этой ночью у каждого будет шанс на искупление... прежде чем всё пойдет к чертям.",
+            "tracklist": [],
+            "imdb": 6628394,
+            "imdb_rating": 7.4000000000000004,
+            "imdb_votes": 23790,
+            "kinopoisk": 1047143,
+            "kinopoisk_rating": 7.1440000000000001,
+            "kinopoisk_votes": 19437,
+            "rating": 20,
+            "rating_votes": "32",
+            "rating_percentage": "81.25",
+            "views": 6951,
+            "comments": 3,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42841.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42841.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42841.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42841.jpg"
+            },
+            "trailer": {
+                "id": "yQAN6HfgfV8",
+                "url": "https://www.youtube.com/watch?v=yQAN6HfgfV8"
+            },
+            "finished": false,
+            "advert": true,
+            "poor_quality": false,
+            "subtitles": "0"
+        },
+        {
+            "id": 42853,
+            "type": "movie",
+            "subtype": "",
+            "title": "Инволюция / Involution",
+            "year": 2018,
+            "cast": "Алёна Константинова, Раян Мэссон, Дэннис Хёрли, Адам Джианун, Мерлин Леонхардт, Карстен Майэлки, Марина Зудина, Константин Самоуков, Глеб Бочков",
+            "director": "Павел Хвалеев",
+            "genres": [
+                {
+                    "id": 4,
+                    "title": "Фантастика"
+                },
+                {
+                    "id": 7,
+                    "title": "Триллер"
+                },
+                {
+                    "id": 9,
+                    "title": "Драма"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 2,
+                    "title": "Россия"
+                },
+                {
+                    "id": 4,
+                    "title": "Германия"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 4936,
+                "total": 4936
+            },
+            "langs": 3,
+            "quality": 1080,
+            "plot": "В связи с перенаселением Земли поведение и инстинкты людей всё больше становятся похожими на животные. В этом хаосе нерешительному Хеммингу необходимо отправиться на поиски своей любимой.",
+            "tracklist": [],
+            "imdb": 5730248,
+            "imdb_rating": 6.2999999999999998,
+            "imdb_votes": 54,
+            "kinopoisk": 970133,
+            "kinopoisk_rating": 0,
+            "kinopoisk_votes": 69,
+            "rating": -1,
+            "rating_votes": "3",
+            "rating_percentage": "33.33",
+            "views": 158,
+            "comments": 0,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42853.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42853.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42853.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42853.jpg"
+            },
+            "trailer": {
+                "id": "vBXlNkqN4Sk",
+                "url": "https://www.youtube.com/watch?v=vBXlNkqN4Sk"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "0"
+        },
+        {
+            "id": 42898,
+            "type": "movie",
+            "subtype": "",
+            "title": "Сорняки / Mauvaises herbes",
+            "year": 2018,
+            "cast": "Керон, Катрин Денёв, Андре Дюссолье, Луизон Бливе, Adil Dehbi, Hakou Benosmane, Youssouf Wague, Ouassima Zrouki, Joseph Jovanovic, Leila Boumedjane",
+            "director": "Керон",
+            "genres": [
+                {
+                    "id": 1,
+                    "title": "Комедия"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 8,
+                    "title": "Франция"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 6270,
+                "total": 6270
+            },
+            "langs": 3,
+            "quality": 1080,
+            "plot": "Ваэль (Керон), бывший беспризорник, зарабатывает на жизнь мелким мошенничеством со своей приёмной матерью и соучастницей Моник (Катрин Денёв). Когда этот нетрадиционный дуэт обманывает не того парня, Виктора (Андре Дюссолье), старого знакомого Моники, в настоящее время отвечающего за организацию поддержки для проблемных подростков, у него нет другого выбора, кроме как стать его временным секретарём и педагогом, чтобы искупить свою вину. Столкнувшись с шестью своенравными детьми, полными решимости испортить все его усилия, личная история Ваэля и его изобретательские уловки становятся ключом к завоеванию их доверия - и вскоре он понимает, что ему тоже дан шанс исправить своё прошлое и найти своё место в обществе.",
+            "tracklist": [],
+            "imdb": 6708116,
+            "imdb_rating": 7.5999999999999996,
+            "imdb_votes": 92,
+            "kinopoisk": 1081377,
+            "kinopoisk_rating": 0,
+            "kinopoisk_votes": 26,
+            "rating": 4,
+            "rating_votes": "6",
+            "rating_percentage": "83.33",
+            "views": 732,
+            "comments": 2,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42898.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42898.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42898.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42898.jpg"
+            },
+            "trailer": {
+                "id": "ES0v-vwQ3rM",
+                "url": "https://www.youtube.com/watch?v=ES0v-vwQ3rM"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        },
+        {
+            "id": 42793,
+            "type": "movie",
+            "subtype": "",
+            "title": "Гардемарины 3",
+            "year": 1992,
+            "cast": "Дмитрий Харатьян, Михаил Мамаев, Александр Домогаров, Людмила Гурченко, Наталья Гундарева, Кристина Орбакайте, Лев Дуров, Евгений Евстигнеев, Юрий Яковлев, Виктор Раков",
+            "director": "Светлана Дружинина",
+            "genres": [
+                {
+                    "id": 8,
+                    "title": "Приключения"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 2,
+                    "title": "Россия"
+                },
+                {
+                    "id": 4,
+                    "title": "Германия"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 6087,
+                "total": 6087
+            },
+            "langs": 3,
+            "quality": 480,
+            "plot": "Идет семилетняя война, русские солдаты вынуждены сражаться за интересы Франции и Австрии против Пруссии. Гардемарины продолжают самоотверженно служить Родине. Один - в экспедиции, другой - при дворе, а третий послан в Венецию, передать шкатулку с украшением. На самом деле, в шкатулке послание, от которого зависят дальнейшие судьбы Европы и России!",
+            "tracklist": [],
+            "imdb": 135427,
+            "imdb_rating": 5.5,
+            "imdb_votes": 300,
+            "kinopoisk": 41178,
+            "kinopoisk_rating": 6.8010000000000002,
+            "kinopoisk_votes": 4430,
+            "rating": 0,
+            "rating_votes": "0",
+            "rating_percentage": "0",
+            "views": 27,
+            "comments": 0,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42793.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42793.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42793.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42793.jpg"
+            },
+            "trailer": null,
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "0"
+        },
+        {
+            "id": 42886,
+            "type": "movie",
+            "subtype": "",
+            "title": "Смолфут / Smallfoot",
+            "year": 2018,
+            "cast": "Ченнинг Татум, Джеймс Корден, Зендея, Коммон, Леброн Джеймс, Дэнни ДеВито, Джина Родригез, Яра Шахиди, Эли Генри, Джимми Татро",
+            "director": "Кэри Киркпатрик",
+            "genres": [
+                {
+                    "id": 1,
+                    "title": "Комедия"
+                },
+                {
+                    "id": 5,
+                    "title": "Фэнтези"
+                },
+                {
+                    "id": 6,
+                    "title": "Семейный"
+                },
+                {
+                    "id": 8,
+                    "title": "Приключения"
+                },
+                {
+                    "id": 19,
+                    "title": "Музыкальный"
+                },
+                {
+                    "id": 23,
+                    "title": "Мультфильм"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 5831,
+                "total": 5831
+            },
+            "langs": 1,
+            "quality": 1080,
+            "plot": "Молодой находчивый йети сталкивается с тем, кого, по его глубокому убеждению, не существует - человеком. Новости о «смолфуте» приносят ему славу и шанс завоевать девушку его мечты. А ещё - вызывают переполох среди простых йети, которые теперь гадают, кто же ещё обитает в большом мире за пределами их маленькой заснеженной деревушки.",
+            "tracklist": [],
+            "imdb": 6182908,
+            "imdb_rating": 6.7000000000000002,
+            "imdb_votes": 11268,
+            "kinopoisk": 1035311,
+            "kinopoisk_rating": 7.2389999999999999,
+            "kinopoisk_votes": 6188,
+            "rating": 11,
+            "rating_votes": "15",
+            "rating_percentage": "86.67",
+            "views": 4762,
+            "comments": 5,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42886.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42886.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42886.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42886.jpg"
+            },
+            "trailer": {
+                "id": "dTxXLOCpfNA",
+                "url": "https://www.youtube.com/watch?v=dTxXLOCpfNA"
+            },
+            "finished": false,
+            "advert": true,
+            "poor_quality": false,
+            "subtitles": "0"
+        },
+        {
+            "id": 42883,
+            "type": "movie",
+            "subtype": "",
+            "title": "Середина 90-х / Mid90s",
+            "year": 2018,
+            "cast": "Санни Сулджик, Кэтрин Уотерстон, Лукас Хеджес, Na-kel Smith, Olan Prenatt, Gio Galicia, Ryder McLaughlin, Alexa Demie, Fig Camila Abner, Liana Perlich",
+            "director": "Джона Хилл",
+            "genres": [
+                {
+                    "id": 1,
+                    "title": "Комедия"
+                },
+                {
+                    "id": 9,
+                    "title": "Драма"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 5122,
+                "total": 5122
+            },
+            "langs": 3,
+            "quality": 720,
+            "plot": "Лос-Анджелес, 1990-е. 13-летний Стивен должен думать о будущем, но вместо этого предпочитает кататься на скейте и тусоваться с друзьями. Именно на улицах города ему предстоит получить первые уроки жизни и найти себя.",
+            "tracklist": [],
+            "imdb": 5613484,
+            "imdb_rating": 7.7000000000000002,
+            "imdb_votes": 4203,
+            "kinopoisk": 1040690,
+            "kinopoisk_rating": 7.2709999999999999,
+            "kinopoisk_votes": 134,
+            "rating": 11,
+            "rating_votes": "15",
+            "rating_percentage": "86.67",
+            "views": 630,
+            "comments": 2,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42883.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42883.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42883.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42883.jpg"
+            },
+            "trailer": {
+                "id": "IpauFijK7Uw",
+                "url": "https://www.youtube.com/watch?v=IpauFijK7Uw"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        },
+        {
+            "id": 42877,
+            "type": "movie",
+            "subtype": "multi",
+            "title": "Любить, чтить и слушаться: Последнее супружество мафии / Love, Honor & Obey: The Last Mafia Marriage",
+            "year": 1993,
+            "cast": "Эрик Робертс, Нэнси МакКеон, Бен Газзара, Алекс Рокко, Филлис Лайонс, Томас Милиан, Майк Нуссбаум, Питер Джурасик, Джоанна Мерлин, Дилан Бейкер",
+            "director": "Джон Паттерсон",
+            "genres": [
+                {
+                    "id": 9,
+                    "title": "Драма"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 11178,
+                "total": 11178
+            },
+            "langs": 2,
+            "quality": 480,
+            "plot": "Удалившись от дел, Билл готов рассказать детали своей карьеры CAPO в семье Бонанно, одного из самых могущественных синдикатов Америки.",
+            "tracklist": [],
+            "imdb": 107452,
+            "imdb_rating": 6.7999999999999998,
+            "imdb_votes": 234,
+            "kinopoisk": 326571,
+            "kinopoisk_rating": 0,
+            "kinopoisk_votes": 46,
+            "rating": 1,
+            "rating_votes": "1",
+            "rating_percentage": "100",
+            "views": 40,
+            "comments": 0,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42877.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42877.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42877.jpg",
+                "wide": null
+            },
+            "trailer": {
+                "id": "cL6Lu_JB5rk",
+                "url": "https://www.youtube.com/watch?v=cL6Lu_JB5rk"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "0"
+        },
+        {
+            "id": 42529,
+            "type": "movie",
+            "subtype": "",
+            "title": "Закону тут не место / L'ora legale",
+            "year": 2017,
+            "cast": "Сальво Фикарра, Валентино Пиконе, Винченцо Амато, Антонио Катания, Серджо Фришия, Eleonora De Luca, Лео Гульотта, Алессандро Ройа, Тони Сперандео, Ersilia Lombardo",
+            "director": "Сальво Фикарра",
+            "genres": [
+                {
+                    "id": 1,
+                    "title": "Комедия"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 19,
+                    "title": "Италия"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 5334,
+                "total": 5334
+            },
+            "langs": 2,
+            "quality": 1080,
+            "plot": "Жители маленького сицилийского городка устали от коррупции и беспредела властей и выбрали себе нового мэра - такого честного, каких не видел мир. Новоизбранный глава администрации дает слово бороться со всем, что противоречит закону - и это не просто красивые слова для агитации. Он обещает горожанам чистые улицы, велодорожки, бесплатную медицину, но оказывается, не все жители городка готовы к таким переменам.\nОсобенно недовольны зятья нового мэра, которые привыкли к легкой жизни при прошлой власти. Они решают вернуть все на круги своя и придумывают коварный план.",
+            "tracklist": [],
+            "imdb": 6137734,
+            "imdb_rating": 6.2999999999999998,
+            "imdb_votes": 1754,
+            "kinopoisk": 1025397,
+            "kinopoisk_rating": 6.657,
+            "kinopoisk_votes": 285,
+            "rating": 4,
+            "rating_votes": "4",
+            "rating_percentage": "100",
+            "views": 1352,
+            "comments": 1,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42529.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42529.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42529.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42529.jpg"
+            },
+            "trailer": {
+                "id": "rMruo0YIfxI",
+                "url": "https://www.youtube.com/watch?v=rMruo0YIfxI"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        },
+        {
+            "id": 42874,
+            "type": "movie",
+            "subtype": "multi",
+            "title": "Ушастик и его друзья",
+            "year": 1979,
+            "cast": "Мария Виноградова",
+            "director": "Ольга Розовская",
+            "genres": [
+                {
+                    "id": 23,
+                    "title": "Мультфильм"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 3,
+                    "title": "СССР"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 3882,
+                "total": 3882
+            },
+            "langs": 5,
+            "quality": 480,
+            "plot": "Пять историй, главным героем которых является пушистый зайчик по имени Ушастик, от лица которого и ведётся повествование. Вместе со своими верными друзьями Медвежонком, Лисичкой, Волчонком и Гусенком Ушастик попадает в смешные и забавные истории, каждая из которых служит поучительным примером для маленьких зрителей.",
+            "tracklist": [],
+            "imdb": null,
+            "imdb_rating": 0,
+            "imdb_votes": null,
+            "kinopoisk": 258022,
+            "kinopoisk_rating": 6.9020000000000001,
+            "kinopoisk_votes": 166,
+            "rating": 1,
+            "rating_votes": "1",
+            "rating_percentage": "100",
+            "views": 144,
+            "comments": 0,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42874.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42874.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42874.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42874.jpg"
+            },
+            "trailer": null,
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "0"
+        },
+        {
+            "id": 42895,
+            "type": "movie",
+            "subtype": "",
+            "title": "Женщины мафии / Kobiety mafii",
+            "year": 2018,
+            "cast": "Ольга Болондзь, Агнешка Дигант, Александра Поплавска, Катажина Варнке, Julia Wieniawa-Narkiewicz, Януш Хабёр, Sebastian Fabijanski, Filip Guzla, Богуслав Линда, Оляф Любашенко",
+            "director": "Патрик Вега",
+            "genres": [
+                {
+                    "id": 2,
+                    "title": "Боевик"
+                },
+                {
+                    "id": 9,
+                    "title": "Драма"
+                },
+                {
+                    "id": 17,
+                    "title": "Криминал"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 13,
+                    "title": "Польша"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 8279,
+                "total": 8279
+            },
+            "langs": 3,
+            "quality": 1080,
+            "plot": "Бела уволена из полиции за самоуправство. Анка после ареста богатого мужа лишается средств на привычную роскошную жизнь. Секира, изворотливая хищница, вместе с любовником сбегает от мужа, прихватив с собой огромную сумму денег. Шубка подсаживается на наркотики, а заодно попадает под разработку спецслужб. В единую нить сплетаются истории этих женщин, тем или иным образом причастных к делам польских преступных группировок.",
+            "tracklist": [],
+            "imdb": 7372728,
+            "imdb_rating": 4.7999999999999998,
+            "imdb_votes": 552,
+            "kinopoisk": 1076574,
+            "kinopoisk_rating": 6.2850000000000001,
+            "kinopoisk_votes": 228,
+            "rating": 1,
+            "rating_votes": "5",
+            "rating_percentage": "60",
+            "views": 992,
+            "comments": 2,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42895.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42895.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42895.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42895.jpg"
+            },
+            "trailer": {
+                "id": "xPJPIUJ8-wg",
+                "url": "https://www.youtube.com/watch?v=xPJPIUJ8-wg"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "0"
+        },
+        {
+            "id": 39880,
+            "type": "movie",
+            "subtype": "",
+            "title": "Счастливый Лазарь / Lazzaro felice",
+            "year": 2018,
+            "cast": "Адриано Тардиоло, Агнесса Грациани, Лука Чиковани, Альба Рорвахер, Серхи Лопес, Наталино Балассо, Томмазо Раньо, Николетта Браски, Daria Pascal Attolini, Маддалена Байокко",
+            "director": "Аличе Рорвахер",
+            "genres": [
+                {
+                    "id": 9,
+                    "title": "Драма"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 4,
+                    "title": "Германия"
+                },
+                {
+                    "id": 8,
+                    "title": "Франция"
+                },
+                {
+                    "id": 19,
+                    "title": "Италия"
+                },
+                {
+                    "id": 26,
+                    "title": "Швейцария"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 7658,
+                "total": 7658
+            },
+            "langs": 3,
+            "quality": 1080,
+            "plot": "Лазарь настолько чистосердечный юноша, что некоторые считают его дурачком. Может быть он и простак, но так не считает избалованный выходец из аристократичной семьи Танкреди, который заводит дружбу с Лазарем. Вскоре судьба проверит их дружбу на прочность.",
+            "tracklist": [],
+            "imdb": 6752992,
+            "imdb_rating": 7.5999999999999996,
+            "imdb_votes": 3042,
+            "kinopoisk": 1094629,
+            "kinopoisk_rating": 7.7329999999999997,
+            "kinopoisk_votes": 797,
+            "rating": 3,
+            "rating_votes": "9",
+            "rating_percentage": "66.67",
+            "views": 391,
+            "comments": 0,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/39880.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/39880.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/39880.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/39880.jpg"
+            },
+            "trailer": {
+                "id": "30KW3i3bxEo",
+                "url": "https://www.youtube.com/watch?v=30KW3i3bxEo"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        },
+        {
+            "id": 22548,
+            "type": "movie",
+            "subtype": "",
+            "title": "Инопланетное рагу / Bad Taste",
+            "year": 1987,
+            "cast": "Терри Поттер, Пит О’Херн, Крэйг Смит, Майк Минетт, Питер Джексон, Даг Рен, Дин Лаури, Питер Вере-Джонс, Кен Хаммон, Робин Григгс, Майкл Гуч, Питер Гуч, Laurie Yarrall, Shane Yarrall, Philip Lamey",
+            "director": "Питер Джексон",
+            "genres": [
+                {
+                    "id": 1,
+                    "title": "Комедия"
+                },
+                {
+                    "id": 4,
+                    "title": "Фантастика"
+                },
+                {
+                    "id": 12,
+                    "title": "Ужасы"
+                },
+                {
+                    "id": 128,
+                    "title": "Эксклюзив"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 15,
+                    "title": "Новая Зеландия"
+                }
+            ],
+            "voice": "Авторский одноголосый, Оригинал",
+            "duration": {
+                "average": 5486,
+                "total": 5486
+            },
+            "langs": 7,
+            "quality": 1080,
+            "plot": "Инопланетный лидер — Лорд Крамб со своей армией приземлился в маленьком прибрежном городке Каихоро, разделав, и упаковав всех жителей в коробки, готовые для отправки в качестве нового деликатеса в галактическую империю ресторанов быстрого питания. Правительство получило сигнал бедствия и направила туда спец. команду, которая расправляется с пришельцами наиболее кровавыми из всех доступных им способов.",
+            "tracklist": [],
+            "imdb": 92610,
+            "imdb_rating": 6.7000000000000002,
+            "imdb_votes": 40481,
+            "kinopoisk": 5915,
+            "kinopoisk_rating": 6.5129999999999999,
+            "kinopoisk_votes": 2144,
+            "rating": 4,
+            "rating_votes": "8",
+            "rating_percentage": "75",
+            "views": 73,
+            "comments": 0,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/22548.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/22548.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/22548.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/22548.jpg"
+            },
+            "trailer": {
+                "id": "LcqscKtxSB8",
+                "url": "https://www.youtube.com/watch?v=LcqscKtxSB8"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "0"
+        },
+        {
+            "id": 42577,
+            "type": "movie",
+            "subtype": "",
+            "title": "Птичий короб / Bird Box",
+            "year": 2018,
+            "cast": "Сандра Буллок, Треванте Роудс, Джон Малкович, Сара Полсон, Джеки Уивер, Роза Салазар, Даниэль МакДональд, Лил Релл, Том Холландер, Машин Ган Келли",
+            "director": "Сюзанна Бир",
+            "genres": [
+                {
+                    "id": 4,
+                    "title": "Фантастика"
+                },
+                {
+                    "id": 7,
+                    "title": "Триллер"
+                },
+                {
+                    "id": 9,
+                    "title": "Драма"
+                },
+                {
+                    "id": 12,
+                    "title": "Ужасы"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 7428,
+                "total": 7428
+            },
+            "langs": 3,
+            "quality": 1080,
+            "plot": "Мир погрузился в хаос: увидев нечто, люди кончают жизнь самоубийством. Мать-одиночка с двумя детьми отправляется на поиски выживших. Чтобы сохранить жизнь в этом новом мире, самое главное - не смотреть.",
+            "tracklist": [],
+            "imdb": 2737304,
+            "imdb_rating": 6.5999999999999996,
+            "imdb_votes": 1639,
+            "kinopoisk": 741214,
+            "kinopoisk_rating": 6.4729999999999999,
+            "kinopoisk_votes": 1451,
+            "rating": 22,
+            "rating_votes": "46",
+            "rating_percentage": "73.91",
+            "views": 6716,
+            "comments": 11,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42577.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42577.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42577.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42577.jpg"
+            },
+            "trailer": {
+                "id": "pe6i6rWbmck",
+                "url": "https://www.youtube.com/watch?v=pe6i6rWbmck"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        },
+        {
+            "id": 42871,
+            "type": "movie",
+            "subtype": "",
+            "title": "Леди - Сказка / The Story Lady",
+            "year": 1991,
+            "cast": "Джессика Тэнди, Стефани Цимбалист, Лиза Якуб, Кристофер Гартин, Тэнди Кронин, Ричард Мейсер, Эд Бегли мл., Луис Авалос, Андре Рози Браун, Чарльз Чемпион",
+            "director": "Лэрри Илайкэнн",
+            "genres": [
+                {
+                    "id": 6,
+                    "title": "Семейный"
+                },
+                {
+                    "id": 9,
+                    "title": "Драма"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 5370,
+                "total": 5370
+            },
+            "langs": 2,
+            "quality": 480,
+            "plot": "Когда Грейс приезжает, чтобы пожить со своей дочерью и зятем, она стремится найти способ быть полезной. Она любит читать детям истории, и однажды решает прочесть одну из них по телевидению.\nПоложительный отклик зрителей был так велик, что большая телекомпания узнала об этом и предложила ей сняться в цикле передач. Но пройдя через многие испытания, Грейс понимает, что только время - самый ценный подарок, который она может дать дочери...",
+            "tracklist": [],
+            "imdb": 102988,
+            "imdb_rating": 7.2999999999999998,
+            "imdb_votes": 355,
+            "kinopoisk": 252111,
+            "kinopoisk_rating": 0,
+            "kinopoisk_votes": 22,
+            "rating": 1,
+            "rating_votes": "1",
+            "rating_percentage": "100",
+            "views": 70,
+            "comments": 0,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42871.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42871.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42871.jpg",
+                "wide": null
+            },
+            "trailer": {
+                "id": "ZTMIMuutpkg",
+                "url": "https://www.youtube.com/watch?v=ZTMIMuutpkg"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "0"
+        },
+        {
+            "id": 266,
+            "type": "movie",
+            "subtype": "",
+            "title": "Ронин / Ronin",
+            "year": 1998,
+            "cast": "Роберт Де Ниро, Жан Рено, Наташа МакЭлхоун, Стеллан Скарсгард, Шон Бин, Скипп Саддат, Микаэль Лонсдаль, Ян Триска, Джонатан Прайс, Рон Перкинс, Федор Аткин, Катарина Витт, Бернард Блох, Доминик Гульяметти, Алан Бекуорт",
+            "director": "Джон Франкенхаймер",
+            "genres": [
+                {
+                    "id": 2,
+                    "title": "Боевик"
+                },
+                {
+                    "id": 7,
+                    "title": "Триллер"
+                },
+                {
+                    "id": 8,
+                    "title": "Приключения"
+                },
+                {
+                    "id": 17,
+                    "title": "Криминал"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                },
+                {
+                    "id": 5,
+                    "title": "Великобритания"
+                },
+                {
+                    "id": 8,
+                    "title": "Франция"
+                }
+            ],
+            "voice": "Профессиональный многоголосый, Авторский одноголосый, Оригинал",
+            "duration": {
+                "average": 7294,
+                "total": 7294
+            },
+            "langs": 20,
+            "quality": 1080,
+            "plot": "Хотя холодная война давно закончена, тайные наемники, чьи навыки в слежке, шпионаже и силовых схватках буквально легендарны, остаются востребованными при новом мировом порядке и всегда находят высокооплачиваемую работу. Некий таинственный клиент собирает в Париже команду таких «платных оперативников», известных как «Ронины», для похищения сверхсекретного портфеля.Вскоре выясняется, что это, на первый взгляд простое, задание почти невыполнимо: та же цена обещана за тот же портфель еще нескольким нелегальным группам.Чтобы справиться с работой, бывший агент ЦРУ по кличке «Сэм» и его наспех сколоченный отряд должны делать то, чего им не приходилось делать никогда раньше: довериться друг другу...",
+            "tracklist": [],
+            "imdb": 122690,
+            "imdb_rating": 7.2999999999999998,
+            "imdb_votes": 158905,
+            "kinopoisk": 5221,
+            "kinopoisk_rating": 7.29,
+            "kinopoisk_votes": 17345,
+            "rating": 35,
+            "rating_votes": "41",
+            "rating_percentage": "92.68",
+            "views": 957,
+            "comments": 7,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/266.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/266.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/266.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/266.jpg"
+            },
+            "trailer": {
+                "id": "-TqaVEIUw4U",
+                "url": "http://www.youtube.com/watch?v=-TqaVEIUw4U"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "0"
+        },
+        {
+            "id": 42838,
+            "type": "movie",
+            "subtype": "",
+            "title": "Большой белый обман / The Great White Hype",
+            "year": 1996,
+            "cast": "Сэмюэл Л. Джексон, Джефф Голдблюм, Питер Берг, Корбин Бернсен, Джон Ловиц, Чич Марин, Джон Рис-Дэвис, Салли Ричардсон-Уитфилд, Джейми Фокс, Роки Кэрролл",
+            "director": "Реджинальд Хадлин",
+            "genres": [
+                {
+                    "id": 1,
+                    "title": "Комедия"
+                },
+                {
+                    "id": 20,
+                    "title": "Спорт"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 5438,
+                "total": 5438
+            },
+            "langs": 5,
+            "quality": 1080,
+            "plot": "Бокс - это всегда больше, чем просто спорт, чаще это бизнес и тотализатор. И Фред Салтан - менеджер чемпиона среди тяжеловесов - не новичок в этой игре. По его мнению, все средства хороши, чтобы озолотиться. А значит, его подопечному - чемпиону Джеймсу Роперу - недостаточно заполучить достойного соперника, ему необходим скандал.\n\nФреду нужен Тэри Конклин - «белый» боксер, некогда одержавший громкую победу над Ропером. Правда, он давно отошел от большого спорта. Что ж, тем ярче будет победа. Но в этот раз безупречное чутье Салтана дало осечку: все с самого начала пошло не так...",
+            "tracklist": [],
+            "imdb": 116448,
+            "imdb_rating": 5.4000000000000004,
+            "imdb_votes": 7720,
+            "kinopoisk": 5592,
+            "kinopoisk_rating": 6.2729999999999997,
+            "kinopoisk_votes": 740,
+            "rating": 3,
+            "rating_votes": "3",
+            "rating_percentage": "100",
+            "views": 254,
+            "comments": 0,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42838.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42838.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42838.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42838.jpg"
+            },
+            "trailer": null,
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        },
+        {
+            "id": 42844,
+            "type": "movie",
+            "subtype": "",
+            "title": "Все о Нине / All About Nina",
+            "year": 2018,
+            "cast": "Мэри Элизабет Уинстэд, Коммон, Чейс Кроуфорд, Камрин Менхейм, Джей Мор, Минди Стерлинг, Анжелика Кебрал, Клеа ДюВалл, Кейт дель Кастильо, Бо Бриджес",
+            "director": "Эва Вивес",
+            "genres": [
+                {
+                    "id": 1,
+                    "title": "Комедия"
+                },
+                {
+                    "id": 9,
+                    "title": "Драма"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 6217,
+                "total": 6217
+            },
+            "langs": 1,
+            "quality": 720,
+            "plot": "История о стендап-комике Нине Гельд, чья карьера на взлёте, а вот личная жизнь представляет собой полную катастрофу. Чтобы сбежать от проблематичного бывшего и подготовиться к крайне важному прослушиванию, Нина отправляется в Лос-Анджелес, где встречает Рейфа - и он ставит её жизнь с ног на голову.",
+            "tracklist": [],
+            "imdb": 7542576,
+            "imdb_rating": 5,
+            "imdb_votes": 245,
+            "kinopoisk": 1084610,
+            "kinopoisk_rating": 0,
+            "kinopoisk_votes": 15,
+            "rating": 0,
+            "rating_votes": "4",
+            "rating_percentage": "50",
+            "views": 146,
+            "comments": 1,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/42844.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/42844.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/42844.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/42844.jpg"
+            },
+            "trailer": null,
+            "finished": false,
+            "advert": true,
+            "poor_quality": false,
+            "subtitles": "0"
+        }
+    ],
+    "pagination": {
+        "total": 1016,
+        "current": 1,
+        "perpage": 20,
+        "total_items": 20314
+    }
+}

@@ -26,18 +26,15 @@ sub getcontent()
         end for
     end if
     
-  'content = createObject("roSGNode", "ContentNode")
-
-  'contentxml = createObject("roXMLElement")
-
-  ' uncomment/conditionalize for development package XML transfers (pkg:/server/foo.xml)
-  ' xmlstring = ReadAsciiFile(m.top.contenturi)
-  ' contentxml.parse(xmlstring)
-
-  ' uncomment/conditionalize for published channel Internet XML transfers (http://serverdomain/foo.xml)
 #if development
     print "ContentReader: DevMode: getContent: " + url
-    urlContent = ReadAsciiFile("pkg:/devcontent/types.json")
+    if url.Instr("https://api.service-kp.com/v1/types?") >= 0
+        urlContent = ReadAsciiFile("pkg:/devcontent/types.json")
+    else if url.Instr("https://api.service-kp.com/v1/bookmarks?") >= 0
+        urlContent = ReadAsciiFile("pkg:/devcontent/Bookmarks.txt")
+    else if url.Instr("https://api.service-kp.com/v1/items") >= 0
+        urlContent = ReadAsciiFile("pkg:/devcontent/Items.txt")
+    end if
     print urlContent
 #else
     print "ContentReader: RealMode: getContent: " + url

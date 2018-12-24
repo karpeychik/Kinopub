@@ -1,0 +1,495 @@
+{
+    "status": 200,
+    "folder": {
+        "id": 174340,
+        "title": "Мультфильмы",
+        "views": 1,
+        "created": 1542693219,
+        "updated": 1544412926
+    },
+    "items": [
+        {
+            "id": 2505,
+            "type": "movie",
+            "subtype": "",
+            "title": "Суперсемейка / The Incredibles",
+            "year": 2004,
+            "cast": "Крэйг Т. Нельсон, Холли Хантер, Сэмюэл Л. Джексон, Джейсон Ли, Доминик Луи, Тедди Ньютон, Джин Синсере, Илай Фучиле, Маив Эндрюс, Уоллес Шоун, Спенсер Фокс, Лу Романо, Уэйн Кэнни, Сара Вауэлл, Майкл Бёрд",
+            "director": "Брэд Бёрд",
+            "genres": [
+                {
+                    "id": 2,
+                    "title": "Боевик"
+                },
+                {
+                    "id": 6,
+                    "title": "Семейный"
+                },
+                {
+                    "id": 8,
+                    "title": "Приключения"
+                },
+                {
+                    "id": 23,
+                    "title": "Мультфильм"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": "",
+            "duration": {
+                "average": 6925,
+                "total": 6925
+            },
+            "langs": 9,
+            "quality": 1080,
+            "plot": "История семьи супергероев, члены которой уже отошли от больших дел и предпочитают жить непримечательной жизнью обычных землян. Они обладают сверхъестественными способностями и относительно легко справлялись с мировым злом.\n\nНо в один прекрасный день папаше и его домочадцам приходится вновь облачиться в прорезиненные костюмы супергероев (а для этого нужно срочно сбросить лишние килограммы) и в очередной раз спасти человечество от таинственного злодея.",
+            "tracklist": [],
+            "imdb": 317705,
+            "imdb_rating": 8,
+            "imdb_votes": 570676,
+            "kinopoisk": 38903,
+            "kinopoisk_rating": 7.5119999999999996,
+            "kinopoisk_votes": 92417,
+            "rating": 126,
+            "rating_votes": "134",
+            "rating_percentage": "97.01",
+            "views": 11626,
+            "comments": 7,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/2505.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/2505.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/2505.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/2505.jpg"
+            },
+            "trailer": {
+                "id": "rXYuDaNeT40",
+                "url": "https://www.youtube.com/watch?v=rXYuDaNeT40"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        },
+        {
+            "id": 7319,
+            "type": "movie",
+            "subtype": "",
+            "title": "Лего. Фильм / The Lego Movie",
+            "year": 2014,
+            "cast": "Крис Пратт, Уилл Феррелл, Элизабет Бэнкс, Уилл Арнетт, Морган Фриман, Лиам Нисон, Крэйг Берри, Элисон Бри, Дэвид Берроуз, Энтони Дэниелс, Чарли Дэй, Аманда Фаринос, Кит Фергюсон, Уилл Форте, Дэйв Франко",
+            "director": "Фил Лорд, Кристофер Миллер",
+            "genres": [
+                {
+                    "id": 1,
+                    "title": "Комедия"
+                },
+                {
+                    "id": 5,
+                    "title": "Фэнтези"
+                },
+                {
+                    "id": 6,
+                    "title": "Семейный"
+                },
+                {
+                    "id": 8,
+                    "title": "Приключения"
+                },
+                {
+                    "id": 23,
+                    "title": "Мультфильм"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                },
+                {
+                    "id": 10,
+                    "title": "Австралия"
+                },
+                {
+                    "id": 21,
+                    "title": "Дания"
+                }
+            ],
+            "voice": "Дубляж, Авторский одноголосый, Оригинал",
+            "duration": {
+                "average": 6035,
+                "total": 6035
+            },
+            "langs": 7,
+            "quality": 1080,
+            "plot": "Обычная лего-фигурка соглашается присоединиться к походу против злого лего-диктатора, планирующего склеить вместе всю вселенную",
+            "tracklist": [],
+            "imdb": 1490017,
+            "imdb_rating": 7.7999999999999998,
+            "imdb_votes": 275943,
+            "kinopoisk": 471644,
+            "kinopoisk_rating": 7.1719999999999997,
+            "kinopoisk_votes": 48268,
+            "rating": 211,
+            "rating_votes": "233",
+            "rating_percentage": "95.28",
+            "views": 3136,
+            "comments": 22,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/7319.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/7319.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/7319.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/7319.jpg"
+            },
+            "trailer": {
+                "id": "fZ_JOBCLF-I",
+                "url": "http://www.youtube.com/watch?v=fZ_JOBCLF-I"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        },
+        {
+            "id": 7268,
+            "type": "movie",
+            "subtype": "",
+            "title": "Lego: Приключения Клатча Пауэрса / Lego: The Adventures of Clutch Powers",
+            "year": 2010,
+            "cast": "Райан МакПартлин, Ивонн Страховски, Пол Майкл Глейзер, Роджер Роуз, Джефф Беннетт, Грегг Бергер, Стефан Кокс, Алекс Десерт, Крис Хардвик, Крис Эмерсон, Ричард Дойл, Джон Ди Кроста, Скотт Вейл, Джейк Бартон",
+            "director": "Ховард Э. Бэйкер",
+            "genres": [
+                {
+                    "id": 6,
+                    "title": "Семейный"
+                },
+                {
+                    "id": 8,
+                    "title": "Приключения"
+                },
+                {
+                    "id": 23,
+                    "title": "Мультфильм"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": "",
+            "duration": {
+                "average": 4898,
+                "total": 4898
+            },
+            "langs": 1,
+            "quality": 480,
+            "plot": "Познакомьтесь с Клатчем Пауэрсом, лучшим строителем и исследователем во Вселенной LEGO, выполняющим самую опасную миссию в жизни. Удивительные приключения приводят Клатча и его команду экспертов LEGO из Города LEGO на планету-тюрьму Космической Полиции, где они переносятся в средневековый мир Ашлар.\n\nОни должны помочь законному наследнику королевского трона найти мужество отвоевать свое королевство у злого волшебника Мэллока Малина. Способности героев к конструированию подвергнутся серьезному испытанию в битве с армией скелетов Мэллока.",
+            "tracklist": [],
+            "imdb": 1587414,
+            "imdb_rating": 5.7999999999999998,
+            "imdb_votes": 1410,
+            "kinopoisk": 481099,
+            "kinopoisk_rating": 5.9039999999999999,
+            "kinopoisk_votes": 376,
+            "rating": 14,
+            "rating_votes": "28",
+            "rating_percentage": "75",
+            "views": 590,
+            "comments": 7,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/7268.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/7268.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/7268.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/7268.jpg"
+            },
+            "trailer": null,
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        },
+        {
+            "id": 131,
+            "type": "movie",
+            "subtype": "",
+            "title": "Замёрзшие / Frozen",
+            "year": 2010,
+            "cast": "Эмма Белл, Шон Эшмор, Кевин Зегерс, Эд Акерман, Райли Вандербилт, Кэйн Ходдер, Адам Джонсон, Крис Йорк, Педер Мелхёз, Уилл Бэррэтт, Адам Грин, Джо Линч, Коуди Блу Снайдер, Ди Снайдер",
+            "director": "Адам Грин",
+            "genres": [
+                {
+                    "id": 7,
+                    "title": "Триллер"
+                },
+                {
+                    "id": 9,
+                    "title": "Драма"
+                },
+                {
+                    "id": 12,
+                    "title": "Ужасы"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": "Дубляж, Оригинал",
+            "duration": {
+                "average": 5598,
+                "total": 5598
+            },
+            "langs": 3,
+            "quality": 1080,
+            "plot": "Не всматривайтесь в бездну, иначе бездна начнет всматриваться в вас... Три молодых человека - сноубордисты и лыжник даже и не подозревали, как это может быть в реальности, и какой чудовищный кошмар ожидает их. Они застревают на подъемнике, и веселый вечер в заснеженных зимних горах превращается в ад. Жуткий холод и обжигающий ветер несут гибель несчастным, оказавшимся в ловушке на огромной высоте. Время работает против них - никто не придет на помощь, ведь горнолыжный курорт закрыт на несколько дней. Остается одно - спасаться самим. Но чтобы спастись - нужно победить ужас этой ночи! Весь ужас...",
+            "tracklist": [],
+            "imdb": 1323045,
+            "imdb_rating": 6.2000000000000002,
+            "imdb_votes": 60404,
+            "kinopoisk": 432713,
+            "kinopoisk_rating": 6.2859999999999996,
+            "kinopoisk_votes": 39808,
+            "rating": 30,
+            "rating_votes": "54",
+            "rating_percentage": "77.78",
+            "views": 370,
+            "comments": 17,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/131.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/131.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/131.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/131.jpg"
+            },
+            "trailer": {
+                "id": "IHV6ewgKWRM",
+                "url": "http://www.youtube.com/watch?v=IHV6ewgKWRM"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        },
+        {
+            "id": 5664,
+            "type": "movie",
+            "subtype": "",
+            "title": "Ральф / Wreck-It Ralph",
+            "year": 2012,
+            "cast": "Джон Си Райли, Джек МакБрайер, Сара Силверман, Джейн Линч, Алан Тьюдик, Минди Кейлинг, Джо Ло Трульо, Эд О’Нил, Деннис Хейсбёрт, Эди МакКлёрг, Рэймонд С. Перси, Джесс Харнелл, Рэйчел Харрис, Скайлар Эстин, Адам Каролла",
+            "director": "Рич Мур",
+            "genres": [
+                {
+                    "id": 1,
+                    "title": "Комедия"
+                },
+                {
+                    "id": 6,
+                    "title": "Семейный"
+                },
+                {
+                    "id": 8,
+                    "title": "Приключения"
+                },
+                {
+                    "id": 23,
+                    "title": "Мультфильм"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": "",
+            "duration": {
+                "average": 6073,
+                "total": 6073
+            },
+            "langs": 5,
+            "quality": 1080,
+            "plot": "Ральф &#151; второстепенный персонаж восьмибитной компьютерной игры, и ему надоело находиться в тени главного героя, мастера на все руки Феликса, который всегда появляется, чтобы «исправить» ситуацию! После тридцати лет добросовестной работы в роли злодея, в течение которых все похвалы выпадали на долю Феликса, Ральф больше не хочет быть плохим.\n\nОн решает отправиться в путешествие по аркадным играм разных жанров, чтобы доказать всем, что и он тоже может быть героем. На своем пути Ральф встречает героев разных игр &#151; хладнокровную сержанта Калхун из игры Hero’s Duty, оберегающую планету от нашествия инопланетных захватчиков, и сладкую на вид, но острую на язычок Сластену фон Дю, чье существование в гоночном симуляторе Sugar Rush внезапно оказывается под угрозой. Наконец-то Ральфу выпадает шанс показать, что он умеет не только разрушать!",
+            "tracklist": [],
+            "imdb": 1772341,
+            "imdb_rating": 7.7000000000000002,
+            "imdb_votes": 322033,
+            "kinopoisk": 586260,
+            "kinopoisk_rating": 7.7539999999999996,
+            "kinopoisk_votes": 78575,
+            "rating": 432,
+            "rating_votes": "441",
+            "rating_percentage": "98.87",
+            "views": 13496,
+            "comments": 55,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/5664.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/5664.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/5664.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/5664.jpg"
+            },
+            "trailer": {
+                "id": "xxx7P5O45D4",
+                "url": "http://www.youtube.com/watch?v=xxx7P5O45D4"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        },
+        {
+            "id": 39397,
+            "type": "movie",
+            "subtype": "",
+            "title": "Суперсемейка 2 / Incredibles 2",
+            "year": 2018,
+            "cast": "Крэйг Т. Нельсон, Холли Хантер, Сара Вауэлл, Хак Милнер, Кэтрин Кинер, Илай Фучиле, Боб Оденкёрк, Сэмюэл Л. Джексон, Майкл Бёрд, София Буш",
+            "director": "Брэд Бёрд",
+            "genres": [
+                {
+                    "id": 1,
+                    "title": "Комедия"
+                },
+                {
+                    "id": 2,
+                    "title": "Боевик"
+                },
+                {
+                    "id": 4,
+                    "title": "Фантастика"
+                },
+                {
+                    "id": 6,
+                    "title": "Семейный"
+                },
+                {
+                    "id": 8,
+                    "title": "Приключения"
+                },
+                {
+                    "id": 23,
+                    "title": "Мультфильм"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": null,
+            "duration": {
+                "average": 7069,
+                "total": 7069
+            },
+            "langs": 4,
+            "quality": 1080,
+            "plot": "После событий первой части суперсемейка пользуется повышенным вниманием со стороны журналистов. Неожиданно оказалось, что обаятельная Миссис Исключительная гораздо лучше смотрится на экране телевизора, чем её муж. Мистеру Исключительному все чаще приходится сидеть дома и приглядывать за детьми, у каждого из которых есть свои причины быть недовольным собственными суперспособностями. Однако семейным проблемам предстоит отступить на второй план, когда окажется, что спокойствию Суперсемейки угрожает новый могущественный враг.",
+            "tracklist": [],
+            "imdb": 3606756,
+            "imdb_rating": null,
+            "imdb_votes": null,
+            "kinopoisk": 839650,
+            "kinopoisk_rating": null,
+            "kinopoisk_votes": null,
+            "rating": 117,
+            "rating_votes": "143",
+            "rating_percentage": "90.91",
+            "views": 60483,
+            "comments": 13,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/39397.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/39397.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/39397.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/39397.jpg"
+            },
+            "trailer": {
+                "id": "fT2WBr8Cy5U",
+                "url": "https://youtube.com/watch?v=fT2WBr8Cy5U"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        },
+        {
+            "id": 8096,
+            "type": "movie",
+            "subtype": "",
+            "title": "Самолеты: Огонь и вода / Planes: Fire and Rescue",
+            "year": 2014,
+            "cast": "Дейн Кук, Эд Харрис, Джули Боуэн, Кертис Армстронг, Джон Майкл Хиггинс, Хэл Холбрук, Уэс Стьюди, Брэд Гэррет, Тери Хэтчер, Стейси Кич, Седрик «Развлекатель», Дэнни Манн, Бэрри Корбин, Реджина Кинг, Энн Мира",
+            "director": "Роберт Ганнавей",
+            "genres": [
+                {
+                    "id": 1,
+                    "title": "Комедия"
+                },
+                {
+                    "id": 6,
+                    "title": "Семейный"
+                },
+                {
+                    "id": 8,
+                    "title": "Приключения"
+                },
+                {
+                    "id": 23,
+                    "title": "Мультфильм"
+                }
+            ],
+            "countries": [
+                {
+                    "id": 1,
+                    "title": "США"
+                }
+            ],
+            "voice": "Дубляж, Оригинал",
+            "duration": {
+                "average": 5018,
+                "total": 5018
+            },
+            "langs": 3,
+            "quality": 1080,
+            "plot": "Самолетик Дасти, который стал уже легендой воздушных гонок, вскоре узнает, что его двигатель сильно повреждён, и он никогда не может больше участвовать в скоростных воздушных гонках. Дасти ищет себе новое занятие и знакомится с мужественной пожарно-спасательной командой, которой руководит ветеран авиации вертолёт по имени Ренждер. Узнав, насколько тяжела и опасна работа пожарной авиации, Дасти поймёт, что такое настоящий героизм и самоотдача, и сам захочет стать спасателем.",
+            "tracklist": [],
+            "imdb": 2980706,
+            "imdb_rating": 6,
+            "imdb_votes": 14079,
+            "kinopoisk": 769220,
+            "kinopoisk_rating": 6.6310000000000002,
+            "kinopoisk_votes": 5370,
+            "rating": 74,
+            "rating_votes": "90",
+            "rating_percentage": "91.11",
+            "views": 1320,
+            "comments": 12,
+            "posters": {
+                "small": "https://cdn.service-kp.com/poster/item/small/8096.jpg",
+                "medium": "https://cdn.service-kp.com/poster/item/medium/8096.jpg",
+                "big": "https://cdn.service-kp.com/poster/item/big/8096.jpg",
+                "wide": "https://cdn.service-kp.com/poster/item/wide/8096.jpg"
+            },
+            "trailer": {
+                "id": "oyLj1g6YH0A",
+                "url": "http://www.youtube.com/watch?v=oyLj1g6YH0A"
+            },
+            "finished": false,
+            "advert": false,
+            "poor_quality": false,
+            "subtitles": "1"
+        }
+    ],
+    "pagination": {
+        "total": 1,
+        "current": 1,
+        "perpage": 20
+    }
+}
