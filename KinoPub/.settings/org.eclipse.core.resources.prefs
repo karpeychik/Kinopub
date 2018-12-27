@@ -4,4 +4,6 @@ encoding//components/ContentReader.xml=UTF-8
 encoding//components/EmptyPanel.xml=UTF-8
 encoding//components/MenuScene.xml=UTF-8
 encoding//components/PosterGridPanel.xml=UTF-8
+encoding//components/VideoDescriptionPanel.xml=UTF-8
+encoding//components/VideoNode.xml=UTF-8
 encoding/manifest=UTF-8

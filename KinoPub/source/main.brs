@@ -9,7 +9,7 @@ sub showChannelSGScreen()
     m.port = CreateObject("roMessagePort")
     m.global = screen.getGlobalNode()  
     m.global.id = "GlobalNode"
-    m.global.addFields({accessToken: "ky8c3ink1g880n6wwv48i419f28m2qwz"})
+    m.global.addFields({accessToken: "wvt1rer5o3tc0y7q4z05ddip554pr064"})
     screen.setMessagePort(m.port)
     scene = screen.CreateScene("MenuScene")
     screen.show()

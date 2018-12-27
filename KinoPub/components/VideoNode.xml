@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="VideoNode" extends="Group" initialFocus = "exampleVideo">
+
+    <script type="text/brightscript" uri="pkg:/components/VideoNode.brs" />
+	
+    <children >
+        <Video id = "exampleVideo" />
+    </children>
+    <interface>
+        <field id="videoUri" type="string" onChange="uriChanged"/>
+        <field id="videoFormat" type="string"/>
+    </interface>
+	
+</component>

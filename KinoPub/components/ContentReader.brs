@@ -30,8 +30,12 @@ sub getcontent()
     print "ContentReader: DevMode: getContent: " + url
     if url.Instr("https://api.service-kp.com/v1/types?") >= 0
         urlContent = ReadAsciiFile("pkg:/devcontent/types.json")
+    else if url.Instr("https://api.service-kp.com/v1/bookmarks/174340?") >= 0
+        urlContent = ReadAsciiFile("pkg:/devcontent/Bookmark.txt")
     else if url.Instr("https://api.service-kp.com/v1/bookmarks?") >= 0
         urlContent = ReadAsciiFile("pkg:/devcontent/Bookmarks.txt")
+    else if url.Instr("https://api.service-kp.com/v1/items/42916") >= 0
+        urlContent = ReadAsciiFile("pkg:/devcontent/Item.txt")
     else if url.Instr("https://api.service-kp.com/v1/items") >= 0
         urlContent = ReadAsciiFile("pkg:/devcontent/Items.txt")
     end if
@@ -47,6 +51,6 @@ sub getcontent()
 #end if
   
   json = parseJSON(urlContent)
-
+  
   m.top.content = json
 end sub

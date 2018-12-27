@@ -45,13 +45,10 @@ sub showCategoryInfo()
     
     if m.id = "bookmarks"
         m.childPanel = createObject("roSGNode", "CategoriesListPanel")
-        m.childPanel.isFullScreen = true
         
     else
         m.childPanel = createObject("roSGNode", "PosterGridPanel")
         m.childPanel.overhangtext = recode(categorycontent.title)
-        
-        urlParameters = createObject("roArray", 2, false)
     end if 
 end sub
 
@@ -68,13 +65,17 @@ sub categorySelected()
             m.childPanel.gridContentBaseUri = "https://api.service-kp.com/v1/items"
             m.childPanel.grid.setFocus(true)
         else
-            m.childPanel.list.setFocus(true)
             m.readBookmarksTask = createObject("roSGNode", "ContentReader")
             m.readBookmarksTask.observeField("content", "getBookmarks")
                 
             m.readBookmarksTask.baseUrl = "https://api.service-kp.com/v1/bookmarks"
             m.readBookmarksTask.parameters = ["access_token", m.global.accessToken]
             m.readBookmarksTask.control = "RUN"
+            m.bookmarkInfoPanel = m.top.panelSet.createChild("EmptyPanel")
+            m.bookmarkInfoPanel.observeField("focusedChild", "bookmarkSelected")
+            m.childPanel.list.observeField("itemFocused", "showBookmarkInfo")
+            m.childPanel.setFocus(true)
+            m.bookmarkListPanel = m.childPanel
         end if
 
     else
@@ -84,6 +85,31 @@ end sub
 
 sub runSelectedVideo()
     print "RunSelectedVideo"
+    if m.id = "bookmarks"
+        selectedItem = m.bookmarkPanel.grid.content.getChild(m.bookmarkPanel.grid.itemSelected)
+    else
+        selectedItem = m.childPanel.grid.content.getChild(m.childPanel.grid.itemSelected)
+    end if
+    m.videoDescriptionPanel = m.top.panelSet.createChild("VideoDescriptionPanel")
+    m.videoDescriptionPanel.itemUriParameters = ["access_token", m.global.accessToken]
+    m.videoDescriptionPanel.observeField("videoUri", "playVideo")
+    
+    print selectedItem
+    print type(selectedItem.kinoPubId)
+    
+    itemUrl = "https://api.service-kp.com/v1/items/" + selectedItem.kinoPubId
+    m.videoDescriptionPanel.itemUri = itemUrl
+end sub
+
+sub playVideo()
+    print "Play video"
+    m.top.overhang.visible = false
+    m.top.panelset.visible = false
+    m.video = createObject("roSGNode", "VideoNode")
+    m.video.videoUri = m.videoDescriptionPanel.videoUri
+    m.video.videoFormat = m.videoDescriptionPanel.videoFormat
+    m.top.appendChild(m.video)
+    m.video.setFocus(true)
 end sub
 
 sub getBookmarks()
@@ -95,12 +121,34 @@ sub getBookmarks()
     for each item in m.readBookmarksTask.content.items
         itemcontent = content.createChild("ContentNode")
         itemcontent.setField("id", itemId.ToStr())
-        itemcontent.setField("kinoPubId", item.id)
+        itemcontent.addFields({kinoPubId: item.id.ToStr()})
         itemcontent.setField("title", recode(item.title))
         itemId = itemId+1
     end for
-   
+    
     m.childPanel.list.content = content
+    'm.childPanel.list.observeField(fieldName,functionName)
+end sub
+
+sub bookmarkSelected()
+    print "Bookmark selected"
+    if not m.top.panelSet.isGoingBack
+        m.top.panelSet.appendChild(m.bookmarkPanel)
+        content = m.childPanel.list.content.getChild(m.categoriespanel.list.itemFocused)
+        print content
+        kinoPubId = content.kinoPubId
+        m.bookmarkPanel.grid.observeField("itemSelected", "runSelectedVideo")
+        m.bookmarkPanel.gridContentUriParameters = ["access_token", m.global.accessToken]
+        m.bookmarkPanel.gridContentBaseUri = "https://api.service-kp.com/v1/bookmarks/" + kinoPubId.ToStr()
+        m.bookmarkPanel.grid.setFocus(true)
+    else
+        m.bookmarkListPanel.setFocus(true)
+    end if
+end sub
+
+sub showBookmarkInfo()
+    print "Bookmark focused"
+    m.bookmarkPanel = createObject("roSGNode", "PosterGridPanel")
 end sub
 
 sub recode(str as string) as string

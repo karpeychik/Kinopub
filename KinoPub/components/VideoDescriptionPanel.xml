@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="VideoDescriptionPanel" extends="Panel" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
+
+	<script type="text/brightscript" uri="pkg:/components/VideoDescriptionPanel.brs" />
+	<children>
+	   <Label text = "Hello world!"/>
+	</children>
+	<interface>
+	   <field id="itemUri" type="string" onChange="showVideoDetails"/>
+	   <field id="itemUriParameters" type="roArray" />
+	   <field id="videoFormat" type="string" />
+	   <field id="videoUri" type="string" />
+	   <field id="videoTitle" type="string" />
+	</interface>
+</component>

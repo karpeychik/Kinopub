@@ -1,0 +1,120 @@
+{
+    "status": 200,
+    "item": {
+        "id": 42838,
+        "type": "movie",
+        "subtype": "",
+        "title": "Большой белый обман / The Great White Hype",
+        "year": 1996,
+        "cast": "Сэмюэл Л. Джексон, Джефф Голдблюм, Питер Берг, Корбин Бернсен, Джон Ловиц, Чич Марин, Джон Рис-Дэвис, Салли Ричардсон-Уитфилд, Джейми Фокс, Роки Кэрролл",
+        "director": "Реджинальд Хадлин",
+        "genres": [
+            {
+                "id": 1,
+                "title": "Комедия"
+            },
+            {
+                "id": 20,
+                "title": "Спорт"
+            }
+        ],
+        "countries": [
+            {
+                "id": 1,
+                "title": "США"
+            }
+        ],
+        "voice": null,
+        "duration": {
+            "average": 5438,
+            "total": 5438
+        },
+        "langs": 5,
+        "quality": 1080,
+        "plot": "Бокс - это всегда больше, чем просто спорт, чаще это бизнес и тотализатор. И Фред Салтан - менеджер чемпиона среди тяжеловесов - не новичок в этой игре. По его мнению, все средства хороши, чтобы озолотиться. А значит, его подопечному - чемпиону Джеймсу Роперу - недостаточно заполучить достойного соперника, ему необходим скандал.\n\nФреду нужен Тэри Конклин - «белый» боксер, некогда одержавший громкую победу над Ропером. Правда, он давно отошел от большого спорта. Что ж, тем ярче будет победа. Но в этот раз безупречное чутье Салтана дало осечку: все с самого начала пошло не так...",
+        "tracklist": [],
+        "imdb": 116448,
+        "imdb_rating": 5.4000000000000004,
+        "imdb_votes": 7720,
+        "kinopoisk": 5592,
+        "kinopoisk_rating": 6.2729999999999997,
+        "kinopoisk_votes": 741,
+        "rating": 3,
+        "rating_votes": "3",
+        "rating_percentage": "100",
+        "views": 254,
+        "comments": 0,
+        "posters": {
+            "small": "https://cdn.service-kp.com/poster/item/small/42838.jpg",
+            "medium": "https://cdn.service-kp.com/poster/item/medium/42838.jpg",
+            "big": "https://cdn.service-kp.com/poster/item/big/42838.jpg",
+            "wide": "https://cdn.service-kp.com/poster/item/wide/42838.jpg"
+        },
+        "trailer": null,
+        "finished": false,
+        "advert": false,
+        "poor_quality": false,
+        "subtitles": "1",
+        "bookmarks": [],
+        "ac3": 0,
+        "videos": [
+            {
+                "id": 584062,
+                "title": "",
+                "thumbnail": "https://cdn.service-kp.com/thumb/4/3f/CFM0bVe48Qx0n2fFO/2719000/480x270.jpg",
+                "duration": 5438,
+                "tracks": 5,
+                "number": 1,
+                "ac3": 0,
+                "watched": -1,
+                "watching": {
+                    "status": -1,
+                    "time": 0
+                },
+                "subtitles": [
+                    {
+                        "lang": "eng",
+                        "shift": 0,
+                        "embed": false,
+                        "url": "https://cdn.streambox.in/pd/subtitle/aWQ9MjE3Njg0OzQwMzc4MzM5ODswOzM2OTM1OSZoPUhSRnFla1F0amlDQkJfQnI0ekt3d1EmZT0xNTQ1Njc3OTAy/1/08/73315.srt"
+                    }
+                ],
+                "files": [
+                    {
+                        "w": 720,
+                        "h": 404,
+                        "quality": "480p",
+                        "url": {
+                            "http": "https://cdn.streambox.in/pd/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7OTQ1MzczJmg9aFJwNnhDUm1VTkxwd3FjeGNjekRRZyZlPTE1NDU2Nzc5MDI/6/66/bfr1I3YUrohnlbVK4.mp4?uid=217684",
+                            "hls": "https://cdn.streambox.in/hls/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7NzI3OTc0Jmg9ejl0clp0OHVGclRJUW9Pdm9tNVQ1dyZlPTE1NDU2Nzc5MDI/6/66/bfr1I3YUrohnlbVK4.mp4/master-v1a1.m3u8?uid=217684",
+                            "hls4": "https://cdn.streambox.in/hls4/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7NTM2OTMwJmg9QWxEZXQxZlhyb2NqeC14TzN3eDRWUSZlPTE1NDU2Nzc5MDI/584062.m3u8?uid=217684",
+                            "hls2": "https://cdn.streambox.in/hls2/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7NzIwNTQ5Jmg9ZTJoZ1hLWkhkWW9RS1BfXzZlTnlIdyZlPTE1NDU2Nzc5MDI/584062.m3u8?uid=217684"
+                        }
+                    },
+                    {
+                        "w": 1280,
+                        "h": 720,
+                        "quality": "720p",
+                        "url": {
+                            "http": "https://cdn.streambox.in/pd/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7OTQ1MTg0Jmg9ZXFFOWgwQzRNMnBlU3FKdzJBbWZfZyZlPTE1NDU2Nzc5MDI/e/3f/6pq9OMreCRtX5NSUL.mp4?uid=217684",
+                            "hls": "https://cdn.streambox.in/hls/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7NzU2MzQ3Jmg9aEIyNllidlUxd0VpOWdIcmFieUdjdyZlPTE1NDU2Nzc5MDI/e/3f/6pq9OMreCRtX5NSUL.mp4/master-v1a1.m3u8?uid=217684",
+                            "hls4": "https://cdn.streambox.in/hls4/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7OTc0MzA5Jmg9THNUcTkweHBiVFBsVm5qZUhrTW8zQSZlPTE1NDU2Nzc5MDI/584062.m3u8?uid=217684",
+                            "hls2": "https://cdn.streambox.in/hls2/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTAyNzkmaD1jb1R2MmxSdmZndHpVYUd0ZnZ4NjR3JmU9MTU0NTY3NzkwMg/584062.m3u8?uid=217684"
+                        }
+                    },
+                    {
+                        "w": 1920,
+                        "h": 1080,
+                        "quality": "1080p",
+                        "url": {
+                            "http": "https://cdn.streambox.in/pd/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTA5NTU1Jmg9SkVKWGFtRktjcTNzQ3NYVGJ2ZUZfZyZlPTE1NDU2Nzc5MDI/4/3f/CFM0bVe48Qx0n2fFO.mp4?uid=217684",
+                            "hls": "https://cdn.streambox.in/hls/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7OTE3NzQ5Jmg9TTNWNHVfYUtYOW5VNGNIU0wyWW9sUSZlPTE1NDU2Nzc5MDI/4/3f/CFM0bVe48Qx0n2fFO.mp4/master-v1a1.m3u8?uid=217684",
+                            "hls4": "https://cdn.streambox.in/hls4/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7OTc4MDk1Jmg9TEo5OEFjSnQzQTY4RkxDeFgzX2xaUSZlPTE1NDU2Nzc5MDI/584062.m3u8?uid=217684",
+                            "hls2": "https://cdn.streambox.in/hls2/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7NzMzMDQ3Jmg9TjE1NWZBUXhrVlhPRHNzUW9hLXVxZyZlPTE1NDU2Nzc5MDI/584062.m3u8?uid=217684"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

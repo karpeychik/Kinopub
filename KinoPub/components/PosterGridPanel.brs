@@ -27,18 +27,10 @@ sub showPosterGrid()
         itemcontent = createObject("roSGNode", "ContentNode")
         itemcontent.setField("shortdescriptionline1", recode(item.title))
         itemcontent.setField("hdgridposterurl", item.posters.small)
+        itemcontent.setField("id", item.id)
+        itemcontent.addFields({kinoPubId: item.id.ToStr()})
         content.appendChild(itemContent)
     end for
-    'itemcontent = createObject("roSGNode", "ContentNode")
-    'itemcontent.setField("shortdescriptionline1", "bookmarks")
-    'itemcontent.setField("shortdescriptionline2", "Hello")
-    'itemcontent.setField("x", "0")
-    'itemcontent.setField("y", "0")
-    'itemcontent.setField("hdgridposterurl", "http://www.sdktestinglab.com/rectanglepg.jpg")
-    
-    
-    
-    print content
     
     m.top.grid.visible = true
     m.top.grid.content = content
