@@ -4,20 +4,21 @@
 	<script type="text/brightscript" uri="pkg:/components/PosterGridPanel.brs" />
 	<children>
 	   <PosterGrid 
-          id = "posterGrid" 
-          basePosterSize = "[ 512, 288 ]" 
-          caption1NumLines = "1" 
-          numColumns = "2" 
-          numRows = "2" 
-          itemSpacing = "[ 20, 20 ]"
-          useAtlas = "false"
+          id = "posterGrid"  
+          caption1NumLines = "1"  
+          itemSpacing = "[ 10, 10 ]"
+          useAtlas = "true"
           posterDisplayMode = "scaleToFit" >
-          <Font role = "caption1Font" uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf" size = "24" />
+          <Font role = "caption1Font" uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf" size = "14" />
        </PosterGrid>
 	</children>
 	<interface>
-        <field id = "overhangtext" type = "string" />
-        <field id = "gridContentBaseUri" type = "uri" onChange = "loadCategoryPosters" />
-        <field id = "gridContentUriParameters" type = "roArray" />
+        <field id="overhangtext" type = "string" />
+        <field id="gridContentBaseUri" type = "uri" onChange = "loadCategoryPosters" />
+        <field id="gridContentUriParameters" type = "roArray" />
+        
+        <field id="nextPanel" type = "node" />
+        <field id="isVideo" type = "bool" />
+        <field id="start" type="bool" />
     </interface>
 </component>

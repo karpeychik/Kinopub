@@ -6,6 +6,9 @@ sub init()
     m.top.focusable = true
     m.top.hasNextPanel = false
     m.top.createNextPanelOnItemFocus = false
+    
+    m.top.observeField("start","showVideoDetails")
+    m.top.isVideo = false
 end sub
 
 sub showVideoDetails()
@@ -23,5 +26,8 @@ sub itemReceived()
     m.top.videoTitle = "ExampleVideo"
     m.top.videoUri = m.readItemTask.content.item.videos[0].files[1].url.hls2
     
-    print "Video url is: " + m.top.videoUri   
+    nextpanel = createObject("roSGNode", "VideoNode")
+    nextPanel.videoFormat = "hls2"
+    nextPanel.videoUri = m.readItemTask.content.item.videos[0].files[1].url.hls2
+    m.top.nextPanel = nextPanel
 end sub

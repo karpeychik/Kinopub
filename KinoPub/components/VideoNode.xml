@@ -4,11 +4,14 @@
     <script type="text/brightscript" uri="pkg:/components/VideoNode.brs" />
 	
     <children >
-        <Video id = "exampleVideo" />
+        <Video id="exampleVideo" />
     </children>
     <interface>
-        <field id="videoUri" type="string" onChange="uriChanged"/>
-        <field id="videoFormat" type="string"/>
+        <field id="videoUri" type="string"/>
+        <field id="videoFormat" type="string" />
+        <field id="previousPanel" type="node" />
+        <field id="isVideo" type="bool" />
+        <field id="start" type="bool" />
     </interface>
 	
 </component>

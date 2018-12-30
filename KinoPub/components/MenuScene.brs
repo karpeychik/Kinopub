@@ -2,6 +2,9 @@ sub init()
     print "MenuScene: Init"
     print m.global.accessToken
 
+    utilities = createObject("roSGNode", "Utilities")
+    m.global.addFields({utilities: utilities})
+    print type(m.encoder)
     m.readContentTask = createObject("roSGNode", "ContentReader")
     m.readContentTask.observeField("content", "setcategories")
         
@@ -15,7 +18,8 @@ sub setcategories()
     
     itemcontent = content.createChild("ContentNode")
     itemcontent.setField("id", "bookmarks")
-    itemcontent.setField("title", recode("Закладки"))
+    str = recode("Закладки")
+    itemcontent.setField("title", str)
     
     itemId = 0
     for each item in m.readContentTask.content.items
@@ -60,9 +64,11 @@ sub categorySelected()
         if m.id <> "bookmarks"
             content = m.categoriespanel.list.content.getChild(m.categoriespanel.list.itemFocused)
             kinoPubId = content.kinoPubId
-            m.childPanel.grid.observeField("itemSelected", "runSelectedVideo")
+            'm.childPanel.grid.observeField("itemSelected", "runSelectedVideo")
             m.childPanel.gridContentUriParameters = ["access_token", m.global.accessToken, "type", kinoPubId]
             m.childPanel.gridContentBaseUri = "https://api.service-kp.com/v1/items"
+            m.childPanel.observeField("nextPanel","nextPanelAdded")
+            m.currentPanel = m.childPanel
             m.childPanel.grid.setFocus(true)
         else
             m.readBookmarksTask = createObject("roSGNode", "ContentReader")
@@ -83,11 +89,36 @@ sub categorySelected()
     end if
 end sub
 
+sub nextPanelAdded()
+    print "MenuScene:nextPanelAdded"
+    m.currentPanel.unobserveField("nextPanel")
+    nextPanel = m.currentPanel.nextPanel
+    if nextPanel.isVideo
+        print "MenuScene:nextPanelAdded:video"
+        m.top.overhang.visible = false
+        m.top.panelset.visible = false
+        nextPanel.previousPanel = m.currentPanel
+        m.video = nextPanel
+        m.currentPanel = nextPanel
+        nextPanel.start = true
+        m.top.appendChild(nextPanel)
+        nextPanel.setFocus(true)
+    else
+        print "MenuScene:nextPanelAdded:panel"
+        nextPanel.observeField("nextPanel","nextPanelAdded")
+        m.currentPanel = nextPanel
+        m.top.panelSet.appendChild(nextPanel)
+        m.currentPanel.start = true
+    end if    
+end sub
+
 sub runSelectedVideo()
     print "RunSelectedVideo"
     if m.id = "bookmarks"
+        m.preVideoPanel = m.bookmarkPanel
         selectedItem = m.bookmarkPanel.grid.content.getChild(m.bookmarkPanel.grid.itemSelected)
     else
+        m.preVideoPanel = m.childPanel
         selectedItem = m.childPanel.grid.content.getChild(m.childPanel.grid.itemSelected)
     end if
     m.videoDescriptionPanel = m.top.panelSet.createChild("VideoDescriptionPanel")
@@ -127,14 +158,13 @@ sub getBookmarks()
     end for
     
     m.childPanel.list.content = content
-    'm.childPanel.list.observeField(fieldName,functionName)
 end sub
 
 sub bookmarkSelected()
     print "Bookmark selected"
     if not m.top.panelSet.isGoingBack
         m.top.panelSet.appendChild(m.bookmarkPanel)
-        content = m.childPanel.list.content.getChild(m.categoriespanel.list.itemFocused)
+        content = m.childPanel.list.content.getChild(m.childPanel.list.itemFocused)
         print content
         kinoPubId = content.kinoPubId
         m.bookmarkPanel.grid.observeField("itemSelected", "runSelectedVideo")
@@ -151,45 +181,30 @@ sub showBookmarkInfo()
     m.bookmarkPanel = createObject("roSGNode", "PosterGridPanel")
 end sub
 
-sub recode(str as string) as string
-    input = createObject("roByteArray")
-    input.FromAsciiString(str)
-    for i=0 to input.Count()-1 step 1
-        firstByte = input[i]
-        if firstByte > 240
-            i=i+3
-        else if firstByte > 224
-            i=i+2
-        else if firstByte > 192
-            code = ((firstByte and &H1F)<<6) + (input[i+1] and &H3F)
-            newCode = -1
-            if code > 1039 and code < 1104
-                newCode = (code-1040)+192
-            else if code = 1031
-                newCode = 134
-            else if code = 1030
-                newCode = 132
-            else if code = 1038
-                newCode = 128
-            else if code = 1025
-                newCode = 130
-            else if code = 1110
-                newCode = 133
-            else if code = 1111
-                newCode = 135
-            else if code = 1105
-                newCode = 131
-            else if code = 1118
-                newCode = 129
-            end if
+function onKeyEvent(key as String, press as Boolean) as Boolean
+      print "Key pressed"
+      if press then
+        if key = "back"
+
+          if (m.video <> invalid)
+            m.top.removeChild(m.video)
+            previousPanel = m.video.previousPanel
+            m.video = invalid
+
+            m.top.overhang.visible = true
+            m.top.panelset.visible = true
+
+            m.currentPanel = previousPanel
+            previousPanel.setFocus(true)
             
-            if(newCode <> -1) 
-                input[i] = &HC0+ ((newCode >> 6) and &H1F)
-                input[i+1] = &H80 + (newCode and &H3F)
-            end if
-            i=i+1
+            return true
+          end if
         end if
-    end for
-    
-    return input.ToAsciiString()
+      end if
+
+      return false
+ end function
+
+sub recode(str as string) as string
+    return m.global.utilities.callFunc("Encode", {str: str})
 end sub

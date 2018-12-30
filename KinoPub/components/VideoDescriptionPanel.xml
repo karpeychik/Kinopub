@@ -6,10 +6,14 @@
 	   <Label text = "Hello world!"/>
 	</children>
 	<interface>
-	   <field id="itemUri" type="string" onChange="showVideoDetails"/>
+	   <field id="itemUri" type="string" />
 	   <field id="itemUriParameters" type="roArray" />
 	   <field id="videoFormat" type="string" />
 	   <field id="videoUri" type="string" />
 	   <field id="videoTitle" type="string" />
+	   
+	   <field id="nextPanel" type="node" />
+	   <field id="isVideo" type="bool" />
+	   <field id="start" type="bool" />
 	</interface>
 </component>

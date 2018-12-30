@@ -1,20 +1,14 @@
 sub init()
-      videocontent = createObject("RoSGNode", "ContentNode")
+      print "VideoNode:init()"
 
-      videocontent.title = "Example Video"
-      videocontent.streamformat = "mp4"
-      videocontent.url = "http://roku.cpl.delvenetworks.com/media/59021fabe3b645968e382ac726cd6c7b/f8de8daf2ba34aeb90edc55b2d380c3f/b228eeaba0f248c48e01e158f99cd96e/rr_123_segment_1_072715.mp4"
-
-      video = m.top.findNode("exampleVideo")
-      video.content = videocontent
-
-      video.control = "play"
+      m.videoNode = m.top.findNode("exampleVideo")
+      
+      m.top.isVideo = true
+      m.top.observeField("start", "startVideo")
 end sub
 
-sub uriChanged()
-    print "VideoUriChanged"
-    print m.top.videoFormat+":"+m.top.videoUri 
-    
+sub startVideo()
+    print "VideoNode:startVideo()"
     videocontent = createObject("RoSGNode", "ContentNode")
 
     videocontent.title = "Example Video"
@@ -25,4 +19,5 @@ sub uriChanged()
     video.content = videocontent
 
     video.control = "play"
+    video.setFocus(true)
 end sub
