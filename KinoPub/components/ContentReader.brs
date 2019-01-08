@@ -39,7 +39,7 @@ sub getcontent()
     else if url.Instr("https://api.service-kp.com/v1/items") >= 0
         urlContent = ReadAsciiFile("pkg:/devcontent/Items.txt")
     end if
-    print urlContent
+    'print urlContent
 #else
     print "ContentReader: RealMode: getContent: " + url
     readInternet = createObject("roUrlTransfer")

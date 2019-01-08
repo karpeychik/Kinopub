@@ -3,6 +3,5 @@
 
 	<script type="text/brightscript" uri="pkg:/components/EmptyPanel.brs" />
 	<interface>
-        <field id = "description" type = "string" onChange = "showdescription" />
-  </interface>
+    </interface>
 </component>

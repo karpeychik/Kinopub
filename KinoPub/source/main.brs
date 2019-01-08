@@ -1,4 +1,4 @@
-' ********** Copyright 2016 Roku Corp.  All Rights Reserved. ********** 
+﻿' ********** Copyright 2016 Roku Corp.  All Rights Reserved. ********** 
 
 sub Main()
     showChannelSGScreen()
@@ -9,7 +9,7 @@ sub showChannelSGScreen()
     m.port = CreateObject("roMessagePort")
     m.global = screen.getGlobalNode()  
     m.global.id = "GlobalNode"
-    m.global.addFields({accessToken: "4ucpzyqidyhwkk8nwffo13bugtjzmerq" })
+    m.global.addFields({accessToken: "5hbe46uyfpgfu5g3mim397ghr2q3yyjp" })
     screen.setMessagePort(m.port)
     scene = screen.CreateScene("MenuScene")
     screen.show()

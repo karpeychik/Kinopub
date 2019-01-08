@@ -50,6 +50,7 @@ sub showPosterGrid()
         content.appendChild(itemContent)
     end for
     
+    m.top.grid.setFocus(true)
     m.top.grid.visible = true
     m.top.grid.content = content
 end sub

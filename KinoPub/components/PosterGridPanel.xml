@@ -13,11 +13,11 @@
        </PosterGrid>
 	</children>
 	<interface>
+	    <field id="nextPanel" type = "node" />
+        <field id="dialog" type="node" />
         <field id="overhangtext" type = "string" />
-        <field id="gridContentBaseUri" type = "uri" onChange = "loadCategoryPosters" />
+        <field id="gridContentBaseUri" type = "uri" />
         <field id="gridContentUriParameters" type = "roArray" />
-        
-        <field id="nextPanel" type = "node" />
         <field id="isVideo" type = "bool" />
         <field id="start" type="bool" />
     </interface>

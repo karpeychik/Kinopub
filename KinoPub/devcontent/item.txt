@@ -1,21 +1,41 @@
 {
     "status": 200,
     "item": {
-        "id": 42838,
+        "id": 6970,
         "type": "movie",
         "subtype": "",
-        "title": "Большой белый обман / The Great White Hype",
-        "year": 1996,
-        "cast": "Сэмюэл Л. Джексон, Джефф Голдблюм, Питер Берг, Корбин Бернсен, Джон Ловиц, Чич Марин, Джон Рис-Дэвис, Салли Ричардсон-Уитфилд, Джейми Фокс, Роки Кэрролл",
-        "director": "Реджинальд Хадлин",
+        "title": "Холодное сердце / Frozen",
+        "year": 2013,
+        "cast": "Кристен Белл, Идина Мензел, Джонатан Грофф, Джош Гад, Сантино Фонтана, Алан Тьюдик, Киран Хайндс, Крис Уильямс, Стивен Дж. Андерсон, Майа Уилсон, Эди МакКлёрг, Роберт Пайн, Морис ЛаМарш, Ливвай Штубенраух, Ева Белла",
+        "director": "Крис Бак, Дженнифер Ли",
         "genres": [
             {
                 "id": 1,
                 "title": "Комедия"
             },
             {
-                "id": 20,
-                "title": "Спорт"
+                "id": 5,
+                "title": "Фэнтези"
+            },
+            {
+                "id": 6,
+                "title": "Семейный"
+            },
+            {
+                "id": 8,
+                "title": "Приключения"
+            },
+            {
+                "id": 10,
+                "title": "Мелодрама"
+            },
+            {
+                "id": 19,
+                "title": "Музыкальный"
+            },
+            {
+                "id": 23,
+                "title": "Мультфильм"
             }
         ],
         "countries": [
@@ -24,93 +44,165 @@
                 "title": "США"
             }
         ],
-        "voice": null,
+        "voice": "Дубляж, Авторский одноголосый, Оригинал",
         "duration": {
-            "average": 5438,
-            "total": 5438
+            "average": 6133,
+            "total": 6133
         },
-        "langs": 5,
+        "langs": 6,
         "quality": 1080,
-        "plot": "Бокс - это всегда больше, чем просто спорт, чаще это бизнес и тотализатор. И Фред Салтан - менеджер чемпиона среди тяжеловесов - не новичок в этой игре. По его мнению, все средства хороши, чтобы озолотиться. А значит, его подопечному - чемпиону Джеймсу Роперу - недостаточно заполучить достойного соперника, ему необходим скандал.\n\nФреду нужен Тэри Конклин - «белый» боксер, некогда одержавший громкую победу над Ропером. Правда, он давно отошел от большого спорта. Что ж, тем ярче будет победа. Но в этот раз безупречное чутье Салтана дало осечку: все с самого начала пошло не так...",
+        "plot": "Когда древнее предсказание сбывается и королевство погружается в объятия вечной зимы, трое бесстрашных героев &#151; принцесса Анна, отважный Кристофф и его верный олень Свен &#151; отправляются в горы, чтобы найти сестру Анны, Эльзу, которая может снять со страны леденящее заклятие. По пути их ждет множество увлекательных сюрпризов и захватывающих приключений: встреча с мистическими троллями, знакомство с очаровательным снеговиком по имени Олаф, горные вершины покруче Эвереста и магия в каждой снежинке. Анне и Кристоффу предстоит сплотиться и противостоять могучей стихии, чтобы спасти королевство и тех, кто им дорог&#133;",
         "tracklist": [],
-        "imdb": 116448,
-        "imdb_rating": 5.4000000000000004,
-        "imdb_votes": 7720,
-        "kinopoisk": 5592,
-        "kinopoisk_rating": 6.2729999999999997,
-        "kinopoisk_votes": 741,
-        "rating": 3,
-        "rating_votes": "3",
-        "rating_percentage": "100",
-        "views": 254,
-        "comments": 0,
+        "imdb": 2294629,
+        "imdb_rating": 7.5,
+        "imdb_votes": 501648,
+        "kinopoisk": 493208,
+        "kinopoisk_rating": 7.8159999999999998,
+        "kinopoisk_votes": 127301,
+        "rating": 425,
+        "rating_votes": "468",
+        "rating_percentage": "95.3",
+        "views": 15822,
+        "comments": 55,
         "posters": {
-            "small": "https://cdn.service-kp.com/poster/item/small/42838.jpg",
-            "medium": "https://cdn.service-kp.com/poster/item/medium/42838.jpg",
-            "big": "https://cdn.service-kp.com/poster/item/big/42838.jpg",
-            "wide": "https://cdn.service-kp.com/poster/item/wide/42838.jpg"
+            "small": "https://cdn.service-kp.com/poster/item/small/6970.jpg",
+            "medium": "https://cdn.service-kp.com/poster/item/medium/6970.jpg",
+            "big": "https://cdn.service-kp.com/poster/item/big/6970.jpg",
+            "wide": "https://cdn.service-kp.com/poster/item/wide/6970.jpg"
         },
-        "trailer": null,
+        "trailer": {
+            "id": "uxQ2GzsJpME",
+            "url": "http://www.youtube.com/watch?v=uxQ2GzsJpME"
+        },
         "finished": false,
         "advert": false,
         "poor_quality": false,
+        "created_at": 1393585731,
+        "updated_at": 1472335212,
         "subtitles": "1",
         "bookmarks": [],
-        "ac3": 0,
+        "ac3": 1,
         "videos": [
             {
-                "id": 584062,
+                "id": 18787,
                 "title": "",
-                "thumbnail": "https://cdn.service-kp.com/thumb/4/3f/CFM0bVe48Qx0n2fFO/2719000/480x270.jpg",
-                "duration": 5438,
-                "tracks": 5,
+                "thumbnail": "https://cdn.service-kp.com/thumb/e/08/ZbJRDc8R4Ex3Xut2j/3067000/480x270.jpg",
+                "duration": 6133,
+                "tracks": 6,
                 "number": 1,
-                "ac3": 0,
-                "watched": -1,
+                "ac3": 1,
+                "audios": [
+                    {
+                        "id": 71521,
+                        "index": 1,
+                        "codec": "aac",
+                        "channels": 1,
+                        "lang": "unk",
+                        "type": null,
+                        "author": null
+                    },
+                    {
+                        "id": 71524,
+                        "index": 2,
+                        "codec": "aac",
+                        "channels": 1,
+                        "lang": "unk",
+                        "type": null,
+                        "author": null
+                    },
+                    {
+                        "id": 71527,
+                        "index": 3,
+                        "codec": "aac",
+                        "channels": 1,
+                        "lang": "unk",
+                        "type": null,
+                        "author": null
+                    },
+                    {
+                        "id": 71530,
+                        "index": 4,
+                        "codec": "aac",
+                        "channels": 1,
+                        "lang": "unk",
+                        "type": null,
+                        "author": null
+                    },
+                    {
+                        "id": 71533,
+                        "index": 5,
+                        "codec": "aac",
+                        "channels": 1,
+                        "lang": "unk",
+                        "type": null,
+                        "author": null
+                    },
+                    {
+                        "id": 71536,
+                        "index": 6,
+                        "codec": "ac3",
+                        "channels": 7,
+                        "lang": "unk",
+                        "type": null,
+                        "author": null
+                    }
+                ],
+                "watched": 0,
                 "watching": {
-                    "status": -1,
-                    "time": 0
+                    "status": 0,
+                    "time": 91
                 },
                 "subtitles": [
                     {
                         "lang": "eng",
                         "shift": 0,
-                        "embed": false,
-                        "url": "https://cdn.streambox.in/pd/subtitle/aWQ9MjE3Njg0OzQwMzc4MzM5ODswOzM2OTM1OSZoPUhSRnFla1F0amlDQkJfQnI0ekt3d1EmZT0xNTQ1Njc3OTAy/1/08/73315.srt"
+                        "embed": true,
+                        "url": "https://cdn.streambox.in/pd/subtitle/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTU0NjQwOTk1MyZoPV9xN3Y2NnhjTTI4d2Z6eTFVOGZnRWcmZT0xNTQ2NDk2MzUz/6/fa/6282.srt"
+                    },
+                    {
+                        "lang": "rus",
+                        "shift": 0,
+                        "embed": true,
+                        "url": "https://cdn.streambox.in/pd/subtitle/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTU0NjQwOTk1MyZoPV9xN3Y2NnhjTTI4d2Z6eTFVOGZnRWcmZT0xNTQ2NDk2MzUz/8/d8/9903.srt"
                     }
                 ],
                 "files": [
                     {
-                        "w": 720,
-                        "h": 404,
-                        "quality": "480p",
-                        "url": {
-                            "http": "https://cdn.streambox.in/pd/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7OTQ1MzczJmg9aFJwNnhDUm1VTkxwd3FjeGNjekRRZyZlPTE1NDU2Nzc5MDI/6/66/bfr1I3YUrohnlbVK4.mp4?uid=217684",
-                            "hls": "https://cdn.streambox.in/hls/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7NzI3OTc0Jmg9ejl0clp0OHVGclRJUW9Pdm9tNVQ1dyZlPTE1NDU2Nzc5MDI/6/66/bfr1I3YUrohnlbVK4.mp4/master-v1a1.m3u8?uid=217684",
-                            "hls4": "https://cdn.streambox.in/hls4/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7NTM2OTMwJmg9QWxEZXQxZlhyb2NqeC14TzN3eDRWUSZlPTE1NDU2Nzc5MDI/584062.m3u8?uid=217684",
-                            "hls2": "https://cdn.streambox.in/hls2/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7NzIwNTQ5Jmg9ZTJoZ1hLWkhkWW9RS1BfXzZlTnlIdyZlPTE1NDU2Nzc5MDI/584062.m3u8?uid=217684"
-                        }
-                    },
-                    {
-                        "w": 1280,
-                        "h": 720,
-                        "quality": "720p",
-                        "url": {
-                            "http": "https://cdn.streambox.in/pd/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7OTQ1MTg0Jmg9ZXFFOWgwQzRNMnBlU3FKdzJBbWZfZyZlPTE1NDU2Nzc5MDI/e/3f/6pq9OMreCRtX5NSUL.mp4?uid=217684",
-                            "hls": "https://cdn.streambox.in/hls/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7NzU2MzQ3Jmg9aEIyNllidlUxd0VpOWdIcmFieUdjdyZlPTE1NDU2Nzc5MDI/e/3f/6pq9OMreCRtX5NSUL.mp4/master-v1a1.m3u8?uid=217684",
-                            "hls4": "https://cdn.streambox.in/hls4/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7OTc0MzA5Jmg9THNUcTkweHBiVFBsVm5qZUhrTW8zQSZlPTE1NDU2Nzc5MDI/584062.m3u8?uid=217684",
-                            "hls2": "https://cdn.streambox.in/hls2/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTAyNzkmaD1jb1R2MmxSdmZndHpVYUd0ZnZ4NjR3JmU9MTU0NTY3NzkwMg/584062.m3u8?uid=217684"
-                        }
-                    },
-                    {
+                        "codec": "h264",
                         "w": 1920,
-                        "h": 1080,
+                        "h": 858,
                         "quality": "1080p",
+                        "quality_id": 3,
                         "url": {
-                            "http": "https://cdn.streambox.in/pd/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTA5NTU1Jmg9SkVKWGFtRktjcTNzQ3NYVGJ2ZUZfZyZlPTE1NDU2Nzc5MDI/4/3f/CFM0bVe48Qx0n2fFO.mp4?uid=217684",
-                            "hls": "https://cdn.streambox.in/hls/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7OTE3NzQ5Jmg9TTNWNHVfYUtYOW5VNGNIU0wyWW9sUSZlPTE1NDU2Nzc5MDI/4/3f/CFM0bVe48Qx0n2fFO.mp4/master-v1a1.m3u8?uid=217684",
-                            "hls4": "https://cdn.streambox.in/hls4/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7OTc4MDk1Jmg9TEo5OEFjSnQzQTY4RkxDeFgzX2xaUSZlPTE1NDU2Nzc5MDI/584062.m3u8?uid=217684",
-                            "hls2": "https://cdn.streambox.in/hls2/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7NzMzMDQ3Jmg9TjE1NWZBUXhrVlhPRHNzUW9hLXVxZyZlPTE1NDU2Nzc5MDI/584062.m3u8?uid=217684"
+                            "http": "https://cdn.streambox.in/pd/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTU0NjQwOTk1MyZoPV9xN3Y2NnhjTTI4d2Z6eTFVOGZnRWcmZT0xNTQ2NDk2MzUz/e/08/ZbJRDc8R4Ex3Xut2j.mp4?loc=de",
+                            "hls": "https://cdn.streambox.in/hls/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTU0NjQwOTk1MyZoPV9xN3Y2NnhjTTI4d2Z6eTFVOGZnRWcmZT0xNTQ2NDk2MzUz/e/08/ZbJRDc8R4Ex3Xut2j.mp4/master-v1a1.m3u8?loc=de",
+                            "hls4": "https://cdn.streambox.in/hls4/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTU0NjQwOTk1MyZoPV9xN3Y2NnhjTTI4d2Z6eTFVOGZnRWcmZT0xNTQ2NDk2MzUz/18787.m3u8?loc=de",
+                            "hls2": "https://cdn.streambox.in/hls2/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTU0NjQwOTk1MyZoPV9xN3Y2NnhjTTI4d2Z6eTFVOGZnRWcmZT0xNTQ2NDk2MzUz/18787.m3u8?loc=de"
+                        }
+                    },
+                    {
+                        "codec": "h264",
+                        "w": 1280,
+                        "h": 572,
+                        "quality": "720p",
+                        "quality_id": 2,
+                        "url": {
+                            "http": "https://cdn.streambox.in/pd/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTU0NjQwOTk1MyZoPV9xN3Y2NnhjTTI4d2Z6eTFVOGZnRWcmZT0xNTQ2NDk2MzUz/7/bf/RWWb32SrtfeQxFZjW.mp4?loc=de",
+                            "hls": "https://cdn.streambox.in/hls/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTU0NjQwOTk1MyZoPV9xN3Y2NnhjTTI4d2Z6eTFVOGZnRWcmZT0xNTQ2NDk2MzUz/7/bf/RWWb32SrtfeQxFZjW.mp4/master-v1a1.m3u8?loc=de",
+                            "hls2": "https://cdn.streambox.in/hls2/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTU0NjQwOTk1MyZoPV9xN3Y2NnhjTTI4d2Z6eTFVOGZnRWcmZT0xNTQ2NDk2MzUz/18787.m3u8?loc=de"
+                        }
+                    },
+                    {
+                        "codec": "h264",
+                        "w": 720,
+                        "h": 322,
+                        "quality": "480p",
+                        "quality_id": 1,
+                        "url": {
+                            "http": "https://cdn.streambox.in/pd/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTU0NjQwOTk1MyZoPV9xN3Y2NnhjTTI4d2Z6eTFVOGZnRWcmZT0xNTQ2NDk2MzUz/4/87/VUELtPjZCTIXHkdbV.mp4?loc=de",
+                            "hls": "https://cdn.streambox.in/hls/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTU0NjQwOTk1MyZoPV9xN3Y2NnhjTTI4d2Z6eTFVOGZnRWcmZT0xNTQ2NDk2MzUz/4/87/VUELtPjZCTIXHkdbV.mp4/master-v1a1.m3u8?loc=de",
+                            "hls4": "https://cdn.streambox.in/hls4/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTU0NjQwOTk1MyZoPV9xN3Y2NnhjTTI4d2Z6eTFVOGZnRWcmZT0xNTQ2NDk2MzUz/18787.m3u8?loc=de",
+                            "hls2": "https://cdn.streambox.in/hls2/kinopub/aWQ9MjE3Njg0OzQwMzc4MzM5ODs0NDU1ODI7MTU0NjQwOTk1MyZoPV9xN3Y2NnhjTTI4d2Z6eTFVOGZnRWcmZT0xNTQ2NDk2MzUz/18787.m3u8?loc=de"
                         }
                     }
                 ]
