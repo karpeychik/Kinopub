@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="SerialGridPanel" extends="Panel" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
+
+	<script type="text/brightscript" uri="pkg:/components/SerialGridPanel.brs" />
+	
+	<interface>
+	    <field id="nPanel" type = "node" />
+        <field id="dialog" type="node" />
+        <field id="isVideo" type = "bool" />
+        <field id="start" type="bool" />
+        <field id="serialBaseUri" type = "uri" />
+        <field id="serialUriParameters" type = "roArray" />
+	</interface>
+</component>

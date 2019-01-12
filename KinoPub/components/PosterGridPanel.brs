@@ -1,3 +1,4 @@
+'TODO: add rating to the 2nd caption line
 sub init()
     print "Initializing poster"
     m.top.panelSize = "full"
@@ -58,9 +59,18 @@ end sub
 sub itemSelected()
     print "PosterGrid:itemSelected"
     selectedItem = m.top.grid.content.getChild(m.top.grid.itemSelected)
-    nextPanel = createObject("roSGNode", "VideoDescriptionPanel")
-    nextPanel.itemUriParameters = ["access_token", m.global.accessToken]
-    itemUrl = "https://api.service-kp.com/v1/items/" + selectedItem.kinoPubId
-    nextPanel.itemUri = itemUrl
-    m.top.nextPanel = nextPanel
+    print selectedItem
+    if selectedItem.kinoPubType = "movie"
+        nPanel = createObject("roSGNode", "VideoDescriptionPanel")
+        nPanel.itemUriParameters = ["access_token", m.global.accessToken]
+        itemUrl = "https://api.service-kp.com/v1/items/" + selectedItem.kinoPubId
+        nPanel.itemUri = itemUrl
+        m.top.nPanel = nPanel
+    else if selectedItem.kinoPubType = "serial"
+        nPanel = createObject("roSGNode", "SerialGridPanel")
+        nPanel.serialUriParameters = ["access_token", m.global.accessToken]
+        itemUrl = "https://api.service-kp.com/v1/items/" + selectedItem.kinoPubId
+        nPanel.serialBaseUri = itemUrl
+        m.top.nPanel = nPanel
+    end if
 end sub

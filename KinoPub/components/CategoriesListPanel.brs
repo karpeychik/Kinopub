@@ -108,7 +108,7 @@ sub categorySelected()
                 end if
             end if
             
-            m.top.nextPanel = m.preparedPanel
+            m.top.nPanel = m.preparedPanel
         else
             m.emptyPanel.setFocus(false)
             m.top.list.setFocus(true)

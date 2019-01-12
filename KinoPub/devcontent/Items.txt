@@ -77,8 +77,8 @@
             "subtitles": "0"
         },
         {
-            "id": 42907,
-            "type": "movie",
+            "id": 8739,
+            "type": "serial",
             "subtype": "",
             "title": "Битва на гирляндах  / Battle of the Bulbs",
             "year": 2010,

@@ -7,7 +7,6 @@ sub init()
     m.top.leftPosition = 130
     m.top.focusable = true
     m.top.hasNextPanel = false
-    m.top.createNextPanelOnItemFocus = false
     
     m.top.observeField("start","showVideoDetails")
     m.top.isVideo = false
@@ -29,10 +28,10 @@ sub itemReceived()
     m.top.videoUri = m.readItemTask.content.item.videos[0].files[1].url.hls2
     
     if false
-        nextpanel = createObject("roSGNode", "VideoNode")
-        nextPanel.videoFormat = "hls2"
-        nextPanel.videoUri = m.readItemTask.content.item.videos[0].files[1].url.hls2
-        m.top.nextPanel = nextPanel
+        nPanel = createObject("roSGNode", "VideoNode")
+        nPanel.videoFormat = "hls2"
+        nPanel.videoUri = m.readItemTask.content.item.videos[0].files[1].url.hls2
+        m.top.nPanel = nPanel
     else
         
         deviceInfo = createObject("roDeviceInfo")
@@ -138,7 +137,7 @@ sub itemReceived()
         addButton(buttonGroup, "p", "playButton")
         
         'TODO: add subtitle and audio support
-        'addButton(buttonGroup, "audio", "audioButton")
+        addButton(buttonGroup, "audio", "audioButton")
         'addButton(buttonGroup, "sub", "otherButton")
         addButton(buttonGroup, m.qualities[m.qualityIndex], "qualityButton")
         m.qualityButton = m.buttons[m.buttons.Count()-1]
@@ -177,7 +176,7 @@ end sub
 
 sub playButton()
     print "VideoDescriptionPanel:playButton"
-    nextpanel = createObject("roSGNode", "VideoNode")
+    nPanel = createObject("roSGNode", "VideoNode")
     
     for each video in m.readItemTask.content.item.videos[0].files
         if video.quality = m.qualities[m.qualityIndex]
@@ -189,13 +188,20 @@ sub playButton()
     print m.streams[m.streamIndex]
     
     'TODO: what if we couldn't find the correct video? Should handle and not crash
-    nextPanel.videoFormat = m.streams[m.streamIndex]
-    nextPanel.videoUri = videoUri
-    m.top.nextPanel = nextPanel
+    nPanel.videoFormat = m.streams[m.streamIndex]
+    nPanel.audioTrack = m.audioIndexes[m.audioIndex]
+    nPanel.videoUri = videoUri
+    m.top.nPanel = nPanel
 end sub
 
 sub audioButton()
     print "VideoDescriptionPanel:audioButton"
+    m.dialog = createObject("roSGNode", "Dialog")
+    m.dialog.buttons = m.audioTitles
+    m.dialog.ButtonGroup.textFont = m.font18
+    m.dialog.ButtonGroup.focusedTextFont = m.font18
+    m.dialog.observeField("buttonSelected", "audioSelected")
+    m.top.dialog = m.dialog
 end sub
 
 sub streamButton()
@@ -230,6 +236,12 @@ sub streamSelected()
     m.streamButton.text = m.streams[m.streamIndex]
 end sub
 
+sub audioSelected()
+    print "VideoDescriptionPanel:audioSelected"
+    m.audioIndex = m.dialog.buttonSelected
+    m.dialog.close = true
+end sub
+
 sub setQuality(item as Object)
     print "VideoDescriptionPanel:setQuality"
     qualityCount = item.videos[0].files.Count()
@@ -252,7 +264,7 @@ end sub
 sub setStreams(item as Object)
     print "VideoDescriptionPanel:setStreams"
     
-    preferredStream = "hls2"
+    preferredStream = "hls4"
     if(m.streamIndex >= 0)
         preferredStream = m.streams[m.streamIndex]
     end if
@@ -273,7 +285,22 @@ sub setStreams(item as Object)
 end sub
 
 sub setAudio(item as Object)
+    m.audioTitles = createObject("roArray", item.videos[0].audios.Count(), false)
+    m.audioIndexes = createObject("roArray", item.videos[0].audios.Count(), false)
+    m.audioIndex = 0
+    index = 1
     for each track in item.videos[0].audios
+        m.audioIndexes.push(track.index.ToStr())
+        if track.type = invalid
+            title = createObject("roString")
+            title.AppendString("Track ",6)
+            str = index.ToStr()
+            title.AppendString(str, str.Len())
+        else
+            title = recode(track.type.title)
+        end if
+        m.audioTitles.push(title)
+        index = index+1
     end for
 end sub
 

@@ -1,6 +1,7 @@
 sub init()
     m.top.functionName = "getcontent"
     m.top.appended = false
+    m.top.requestType = "GET"
 end sub
 
 sub getcontent()
@@ -36,16 +37,18 @@ sub getcontent()
         urlContent = ReadAsciiFile("pkg:/devcontent/Bookmarks.txt")
     else if url.Instr("https://api.service-kp.com/v1/items/42916") >= 0
         urlContent = ReadAsciiFile("pkg:/devcontent/Item.txt")
+     else if url.Instr("https://api.service-kp.com/v1/items/8739") >= 0
+        urlContent = ReadAsciiFile("pkg:/devcontent/serial.txt")
     else if url.Instr("https://api.service-kp.com/v1/items") >= 0
         urlContent = ReadAsciiFile("pkg:/devcontent/Items.txt")
     end if
     'print urlContent
 #else
-    print "ContentReader: RealMode: getContent: " + url
+    print "ContentReader: RealMode: getContent: " + m.top.requestType+": " + url
     readInternet = createObject("roUrlTransfer")
     readInternet.setUrl(url)
     readInternet.SetCertificatesFile("common:/certs/ca-bundle.crt")
-    readInternet.setRequest("GET")
+    readInternet.setRequest(m.top.requestType)
     urlContent = readInternet.GetToString()
     print urlContent
 #end if

@@ -1,7 +1,5 @@
 sub init()
       print "VideoNode:init()"
-
-      m.videoNode = m.top.findNode("exampleVideo")
       
       m.top.isVideo = true
       m.top.observeField("start", "startVideo")
@@ -12,12 +10,18 @@ sub startVideo()
     videocontent = createObject("RoSGNode", "ContentNode")
 
     videocontent.title = "Example Video"
-    videocontent.streamformat = m.top.uriFormat
+    videocontent.streamformat = m.top.videoFormat
     videocontent.url = m.top.videoUri
+    videocontent.TrackIdAudio = m.top.audioTrack
+    
+    print videocontent
+    print m.top.audioTrack
 
-    video = m.top.findNode("exampleVideo")
-    video.content = videocontent
+    m.video = createObject("roSGNode", "Video")
+    m.top.appendChild(m.video)
+    m.video.content = videocontent
+    m.video.audioTrack = m.top.audioTrack
 
-    video.control = "play"
-    video.setFocus(true)
+    m.video.control = "play"
+    m.video.setFocus(true)
 end sub

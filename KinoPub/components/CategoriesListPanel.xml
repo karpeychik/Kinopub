@@ -3,7 +3,7 @@
 
   <script type = "text/brightscript" uri="pkg:/components/CategoriesListPanel.brs"/>
   <interface>
-        <field id="nextPanel" type ="node" />
+        <field id="nPanel" type ="node" />
         <field id="dialog" type="node" />
         
         <field id="isVideo" type ="bool" />

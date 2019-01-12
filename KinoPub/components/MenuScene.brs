@@ -5,23 +5,63 @@ sub init()
     utilities = createObject("roSGNode", "Utilities")
     m.global.addFields({utilities: utilities})
     
+    m.top.overhang.visible = false
+    m.top.panelset.visible = false
+    
+    start()
+    
+end sub
+
+sub start()
+    sec = createObject("roRegistrySection", "Authentication")
+    if sec.Exists("AuthenticationToken") and sec.Exists("RefreshToken") and sec.Exists("TokenExpiration")
+        authToken = sec.Read("AuthenticationToken")
+        refreshToken = sec.Read("RefreshToken")
+        expiry = sec.Read("TokenExpiration")
+        
+        print "Current auth:"
+        print "AuthToken: " + authToken
+        print "RefreshToken: " + refreshToken
+        print "Expiration:" + expiry
+        startPanels()
+    else
+        print "Auth not found..."
+        if false
+            showAuthentication()
+        else
+            startPanels()
+        end if
+    end if
+    
+    'startPanels()
+end sub
+
+sub showAuthentication()
+    authenticator = m.top.createChild("Authenticator") 'createObject("roSGNode", "Authenticator")
+    'm.top.appendChild(authenticator)
+end sub
+
+sub startPanels()
+    m.top.overhang.visible = true
+    m.top.panelset.visible = true
+    
     panel = m.top.panelSet.createChild("CategoriesListPanel")
     
-    m.panelArray = createObject("roArray", 10, false)    
+    m.panelArray = createObject("roArray", 14, false)    
     m.panelArray[0] = panel
         
     m.panelArray[0].panelSet = m.top.panelSet
     m.panelArray[0].pType = ""
-    m.panelArray[0].nextPanel = invalid
-    m.panelArray[0].observeField("nextPanel","nextPanelAdded")
+    m.panelArray[0].nPanel = invalid
+    m.panelArray[0].observeField("nPanel","nPanelAdded")
     m.panelArray[0].start = true
 end sub
 
-sub nextPanelAdded()
-    print "MenuScene:nextPanelAdded"
+sub nPanelAdded()
+    print "MenuScene:nPanelAdded"
     
     index = 0
-    while m.panelArray[index] <> invalid and m.panelArray[index].nextPanel = invalid
+    while m.panelArray[index] <> invalid and m.panelArray[index].nPanel = invalid
         index = index + 1
     end while
     
@@ -30,39 +70,39 @@ sub nextPanelAdded()
     end if
     
     currentPanel = m.panelArray[index]
-    nextPanel = currentPanel.nextPanel
-    currentPanel.unobserveField("nextPanel")
-    currentPanel.nextPanel = invalid 
-    currentPanel.observeField("nextPanel", "nextPanelAdded")
+    nPanel = currentPanel.nPanel
+    currentPanel.unobserveField("nPanel")
+    currentPanel.nPanel = invalid 
+    currentPanel.observeField("nPanel", "nPanelAdded")
     
     nextIndex = index + 1
     while(m.panelArray[nextIndex] <> invalid)
-        m.panelArray[nextIndex].unobserveField("nextPanel")
+        m.panelArray[nextIndex].unobserveField("nPanel")
         m.panelArray[nextIndex].unobserveField("dialog")
         m.panelArray[nextIndex] = invalid
         nextIndex = nextIndex + 1
     end while
     
-    m.panelArray[index+1] = nextPanel
-    nextPanel.observeField("nextPanel", "nextPanelAdded")
-    nextPanel.observeField("dialog","dialogAdded")
+    m.panelArray[index+1] = nPanel
+    nPanel.observeField("nPanel", "nPanelAdded")
+    nPanel.observeField("dialog","dialogAdded")
     
-    if nextPanel.isVideo
-        print "MenuScene:nextPanelAdded:video"
+    if nPanel.isVideo
+        print "MenuScene:nPanelAdded:video"
         m.top.overhang.visible = false
         m.top.panelset.visible = false
-        m.video = nextPanel
+        m.video = nPanel
         m.video.previousPanel = m.panelArray[index]
-        nextPanel.start = true
-        m.top.appendChild(nextPanel)
-        nextPanel.setFocus(true)
+        nPanel.start = true
+        m.top.appendChild(nPanel)
+        nPanel.setFocus(true)
     else
-        print "MenuScene:nextPanelAdded:panel"
-        m.top.panelSet.appendChild(nextPanel)
-        nextPanel.start = true
+        print "MenuScene:nPanelAdded:panel"
+        m.top.panelSet.appendChild(nPanel)
+        nPanel.start = true
     end if
     
-    print "MenuScene:nextPanelAdded:end"    
+    print "MenuScene:nPanelAdded:end"    
 end sub
 
 sub dialogAdded()

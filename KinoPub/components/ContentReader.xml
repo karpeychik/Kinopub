@@ -5,6 +5,7 @@
 	
     <interface>
         <field id = "baseUrl" type = "string" />
+        <field id = "requestType" type = "string" />
         <field id = "parameters" type = "stringarray" />
         <field id = "content" type = "roAssociativeArray" />
     </interface> 

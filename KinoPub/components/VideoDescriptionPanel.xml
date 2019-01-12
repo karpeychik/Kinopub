@@ -5,7 +5,7 @@
 	<children>
 	</children>
 	<interface>
-	   <field id="nextPanel" type="node" />
+	   <field id="nPanel" type="node" />
        <field id="dialog" type="node" />
        
 	   <field id="itemUri" type="string" />
