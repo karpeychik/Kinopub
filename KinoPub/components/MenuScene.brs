@@ -1,3 +1,6 @@
+'TODO: Make this async
+'TODO: custom overhang
+
 sub init()
     print "MenuScene: Init"
     print m.global.accessToken
@@ -14,34 +17,50 @@ end sub
 
 sub start()
     sec = createObject("roRegistrySection", "Authentication")
-    if sec.Exists("AuthenticationToken") and sec.Exists("RefreshToken") and sec.Exists("TokenExpiration")
+    if sec.Exists("AuthenticationToken") and sec.Exists("RefreshToken") and sec.Exists("TokenExpiration") and sec.Exists("TokenType")
         authToken = sec.Read("AuthenticationToken")
         refreshToken = sec.Read("RefreshToken")
         expiry = sec.Read("TokenExpiration")
+        tokenType = sec.Read("TokenType")
+        
+        m.global.addFields({accessToken: authToken, refreshToken: refreshToken, tokenExpiration: expiry.ToInt()})
         
         print "Current auth:"
         print "AuthToken: " + authToken
         print "RefreshToken: " + refreshToken
         print "Expiration:" + expiry
-        startPanels()
+        print "TokenType:" + tokenType
+        deviceNotify()
     else
         print "Auth not found..."
-        if false
-            showAuthentication()
-        else
-            startPanels()
-        end if
+        showAuthentication()
     end if
     
-    'startPanels()
 end sub
 
 sub showAuthentication()
-    authenticator = m.top.createChild("Authenticator") 'createObject("roSGNode", "Authenticator")
-    'm.top.appendChild(authenticator)
+    m.authenticator = m.top.createChild("Authenticator") 
+    m.authenticator.observeField("access_token", "authenticated")
+end sub
+
+sub authenticated()
+    print "MenuScene:authenticated()"
+    sec = createObject("roRegistrySection", "Authentication")
+    sec.Write("AuthenticationToken", m.authenticator.access_token)
+    sec.Write("RefreshToken", m.authenticator.refresh_token)
+    sec.Write("TokenExpiration", m.authenticator.token_expiration.ToStr())
+    sec.Write("TokenType", m.authenticator.token_type)
+    sec.Flush()
+    m.top.removeChild(m.authenticator)
+    
+    m.global.addFields({accessToken: m.authenticator.access_token, refreshToken: m.authenticator.refresh_token, tokenExpiration: m.authenticator.token_expiration})
+    
+    deviceNotify()
 end sub
 
 sub startPanels()
+    print "MenuScene:startPanels()"
+
     m.top.overhang.visible = true
     m.top.panelset.visible = true
     
@@ -55,6 +74,19 @@ sub startPanels()
     m.panelArray[0].nPanel = invalid
     m.panelArray[0].observeField("nPanel","nPanelAdded")
     m.panelArray[0].start = true
+end sub
+
+sub deviceNotify()
+    print "MenuScene:deviceNotify()"
+    
+    deviceInfo = createObject("roDeviceInfo")
+    
+    m.deviceNotifyTask = createObject("roSGNode", "ContentReader")
+    m.deviceNotifyTask.baseUrl = "https://api.service-kp.com/v1/device/notify"
+    m.deviceNotifyTask.requestType = "POST"
+    m.deviceNotifyTask.observeField("content", "startPanels")
+    m.deviceNotifyTask.parameters = ["access_token", m.global.accessToken, "title", deviceInfo.GetFriendlyName(), "hardware", deviceInfo.GetModel(), "software", deviceInfo.GetVersion()]
+    m.deviceNotifyTask.control = "RUN"
 end sub
 
 sub nPanelAdded()

@@ -134,11 +134,20 @@ sub showSerial()
     content = createObject("roSGNode", "ContentNode")
     row = createObject("roSGNode", "ContentNode")
     row.title = "Seasons"
+    
     for each item in m.readSerialTask.content.item.seasons
+        seasonWatched = true
+        for each episode in item.episodes
+            if episode.watched <> 1
+                seasonWatched = false
+                exit for
+            end if
+        end for
+    
         itemContent = createObject("roSGNode", "ContentNode")
         itemContent.title = recode("Сезон " + item.number.ToStr())
         itemContent.HDPosterUrl = m.readSerialTask.content.item.posters.small
-        itemContent.addFields({itemWidth: 100, itemHeight: 200 })
+        itemContent.addFields({itemWidth: 100, itemHeight: 200, seasonWatched: seasonWatched })
         row.appendChild(itemContent)
     end for 
     
@@ -159,7 +168,8 @@ sub rowItemSelected()
     print "SerialGridPanel:rowItemSelected"
     print m.rowList.rowItemSelected
     
-    nPanel = createObject("roSGNode", "SeasonListPanel")
+    'nPanel = createObject("roSGNode", "SeasonListPanel")
+    nPanel = createObject("roSGNode", "SeasonRowListPanel")
     nPanel.serial = m.readSerialTask.content.item
     nPanel.seasonIndex = m.rowList.rowItemSelected[1]
     
@@ -193,10 +203,12 @@ end function
 function getRate(item as Object)
     result = createObject("roString")
     
-    if(item.DoesExist("imdb_rating"))
+    if item.DoesExist("imdb_rating") and item.imdb_rating <> invalid
         iString = "imbd: "
         result.AppendString(iString,iString.Len())
         
+        print type(item.imdb_rating)
+        print item.imdb_rating
         rate = item.imdb_rating.ToStr()
         if rate.Len() > 3
             rate = rate.Left(3)
@@ -205,7 +217,7 @@ function getRate(item as Object)
         result.AppendString("    ", 4)
     end if
     
-    if(item.DoesExist("kinopoisk_rating"))
+    if item.DoesExist("kinopoisk_rating") and item.kinopoisk_rating <> invalid
         iString = "Кинопоиск: "
         result.AppendString(iString,iString.Len())
         

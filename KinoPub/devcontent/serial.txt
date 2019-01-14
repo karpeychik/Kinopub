@@ -231,7 +231,7 @@
                                 "author": null
                             }
                         ],
-                        "watched": -1,
+                        "watched": 1,
                         "watching": {
                             "status": -1,
                             "time": 0

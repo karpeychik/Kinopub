@@ -3,15 +3,17 @@ sub init()
     
     m.readContentTask = createObject("roSGNode", "ContentReader")
     m.readContentTask.observeField("content", "codeReceived")
-    m.readContentTask.baseUrl = "https://api.service-kp.com/v1/types"
+    m.readContentTask.baseUrl = "https://api.service-kp.com/oauth2/device"
     m.readContentTask.requestType = "POST"
+    m.readContentTask.refreshAuth = false
     
-    m.readContentTask.parameters = ["grant_type", "device_code", "client_id", "xbmc", "client_secret", "cgg3gtifu46urtfp2zp1nqtba0k2ezxh"]
+    m.readContentTask.parameters = ["grant_type", "device_code", "client_id", m.global.clientId, "client_secret", m.global.clientSecret]
     m.readContentTask.control = "RUN"
     
 end sub
 
 sub codeReceived()
+    print "Authenticator:codeReceived"
     print m.readContentTask.content
     
     m.code = m.readContentTask.content.code
@@ -91,6 +93,40 @@ sub codeReceived()
     m.top.appendChild(group)
     
     button.setFocus(true)
+    
+    m.timer = createObject("roSGNode", "Timer")
+    m.top.appendChild(m.timer)
+    m.timer.repeat = true
+    m.timer.observeField("fire", "timerFired")
+    m.timer.duration = interval
+    m.timer.control = "start"
+end sub
+
+sub timerFired()
+    print "Authenticator:timerFired()"
+    m.authenticationCheck = createObject("roSGNode", "ContentReader")
+    m.authenticationCheck.observeField("content", "authenticationResponse")
+    m.authenticationCheck.baseUrl = "https://api.service-kp.com/oauth2/device"
+    m.authenticationCheck.requestType = "POST"
+    m.authenticationCheck.refreshAuth = false
+    
+    m.authenticationCheck.parameters = ["grant_type", "device_token", "client_id", m.global.clientId, "client_secret", m.global.clientSecret, "code", m.code]
+    m.authenticationCheck.control = "RUN"
+end sub
+
+sub authenticationResponse()
+    print "Authenticator:authenticationResponse()"
+    print m.authenticationCheck.content
+    if m.authenticationCheck.content.doesExist("access_token") 
+       print "Authentified!"
+       m.timer.control = "stop"
+       m.top.refresh_token = m.authenticationCheck.content.refresh_token
+       m.top.token_type = m.authenticationCheck.content.token_type
+       
+       date = CreateObject("roDateTime")
+       m.top.token_expiration = date.GetSeconds() + m.authenticationCheck.content.expires_in
+       m.top.access_token = m.authenticationCheck.content.access_token
+    end if 
 end sub
 
 sub addLabel(group as Object, text as String, maxLines as Integer, fnt as Object, x as Integer, y as Integer, labelWidth as Integer)

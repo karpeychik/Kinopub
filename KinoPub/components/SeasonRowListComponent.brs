@@ -4,13 +4,6 @@ sub init()
     m.font18  = CreateObject("roSGNode", "Font")
     m.font18.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
     m.font18.size = 18
-     
-    'm.itemlabel = createObject("roSGNode", "Label")
-    'm.itemlabel.font = m.font18 
-    'm.itemlabel.translation = [ 0, 135 ]
-    'm.itemlabel.horizAlign = "center"
-    'm.itemlabel.width = 100
-    'm.top.appendChild(m.itemLabel)
     
 end sub
 
@@ -51,6 +44,9 @@ sub showcontent()
     poster.height = height
     poster.loadDisplayMode = "scaleToFit"
     poster.uri = itemcontent.HDPosterUrl
+    if itemcontent.seasonWatched
+        poster.opacity = 0.5
+    end if
     m.top.appendChild(poster)
    
     itemlabel = createObject("roSGNode", "Label")

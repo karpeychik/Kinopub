@@ -10,7 +10,9 @@ sub showChannelSGScreen()
     
     m.global = screen.getGlobalNode()  
     m.global.id = "GlobalNode"
-    m.global.addFields({accessToken: "335rjz07p40dbl527g6nsk0hg9qe80c2" })
+    
+    m.global.addFields({clientId: "xbmc", clientSecret: "cgg3gtifu46urtfp2zp1nqtba0k2ezxh"})
+    
     screen.setMessagePort(m.port)
     scene = screen.CreateScene("MenuScene")
     screen.show()

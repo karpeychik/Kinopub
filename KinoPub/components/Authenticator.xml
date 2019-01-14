@@ -51,5 +51,9 @@
   </children>
 
   <interface>
+    <field id="access_token" type="string" />
+    <field id="refresh_token" type="string" />
+    <field id="token_type" type="string" />
+    <field id="token_expiration" type="integer" />
   </interface>
 </component>

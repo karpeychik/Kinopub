@@ -12,6 +12,7 @@
         <field id="previousPanel" type="node" />
         <field id="isVideo" type="bool" />
         <field id="start" type="bool" />
+        <field id="seek" type="double" />
     </interface>
 	
 </component>
