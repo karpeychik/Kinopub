@@ -4,7 +4,7 @@ This is a Roku channel for Kino.pub. The author of this chanel has no affiliatio
 # If you only want to install it
 1) Switch your Roku into the [dev mode](https://developer.roku.com/develop/getting-started/setup-guide).
 2) Download the release of your choice as a zip file.
-3) Go to to the application installer from #1. Upload the zip file and enjoy.
+3) Go to to the application installer from 1). Upload the zip file and enjoy.
 
 # Getting Started
 To get started you need a couple of things.
