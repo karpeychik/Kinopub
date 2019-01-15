@@ -1,20 +1,17 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+This is a Roku channel for Kino.pub. The author of this chanel has no affiliation with Kino.pub. I have put this channel together simply to have some fun and make watching this service possible through Roku.
+
+# If you only want to install it
+1) Switch your Roku into the [dev mode](https://developer.roku.com/develop/getting-started/setup-guide).
+2) Download the release of your choice as a zip file.
+3) Go to to the application installer from 1). Upload the zip file and enjoy.
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
-
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+To get started you need a couple of things.
+1) Get yourself an IDE. There is a good plugin for Eclipse. There is a plugin for VS Code (I can't call it good but...)
+2) Switch your Roku into dev mode. This is described above.
+3) [Have fun.](https://sdkdocs.roku.com/display/sdkdoc/Roku+SDK+Documentation)
+4) Build and deploy using your IDE (or manually)
 
 # Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+Shoot an email with the account to add as a contributor to ulka@outlook.com.
