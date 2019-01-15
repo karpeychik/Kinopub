@@ -136,7 +136,7 @@ sub itemReceived()
         
         setAudio(m.readItemTask.content.item)
         
-        addButton(buttonGroup, "p", "playButton")
+        addButton(buttonGroup, "play", "playButton")
         
         'TODO: add subtitle and audio support
         addButton(buttonGroup, "audio", "audioButton")
@@ -189,7 +189,7 @@ sub playButton()
         title = createObject("roString")
         appStr = "Вы хотите продолжить c "
         title.appendString(appStr, appStr.Len())
-        durationStr = getDuration(episode.watching.time)
+        durationStr = getDurationString(episode.watching.time)
         title.AppendString(durationStr,durationStr.Len())
         
         m.dialog.buttons = [ recode("Да"), recode("Нет")]
@@ -421,10 +421,11 @@ function getDurationString(durationSeconds as  Integer) as String
         if(hour < 10)
             result.AppendString("0",1)
         end if
+        
         hourString = hour.ToStr()
+        result.AppendString(hourString,hourString.Len())
     else 
-        hourString = "00"
-        result.AppendString(hourString, hourString.Len())
+        result.AppendString("00", 2)
     end if
     
     result.AppendString(":", 1)
@@ -435,6 +436,8 @@ function getDurationString(durationSeconds as  Integer) as String
         end if
         minuteString = minute.ToStr()
         result.AppendString(minuteString, minuteString.Len())
+    else
+        result.AppendString("00", 2)
     end if
     
     result.AppendString(":", 1)
@@ -445,6 +448,8 @@ function getDurationString(durationSeconds as  Integer) as String
         end if
         secondString = second.ToStr()
         result.AppendString(secondString, secondString.Len())
+    else
+        result.AppendString("00", 2)
     end if
     
     return result
