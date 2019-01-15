@@ -69,7 +69,7 @@ sub start()
         
         title.appendString(item.title, item.title.Len())
         
-        title = m.global.utilities.callFunc("Encode", {str: title})
+        title = recode(title)
         episodeWatched = false
         if item.watched = 1
             episodeWatched = true
@@ -98,9 +98,51 @@ end sub
 
 sub rowItemSelected()
     print "SeasonRowListPanel:rowItemSelected()"
+    episodeIndex = m.rowList.rowItemSelected[0] * m.numColumns + m.rowList.rowItemSelected[1]
+    m.episodeIndex = episodeIndex 
+    episode = m.top.serial.seasons[m.top.seasonIndex].episodes[episodeIndex]
+    if episode.doesExist("watching") and episode.watching <> invalid and episode.watching.doesExist("status") and episode.watching.doesExist("time") and episode.watching.status = 0 and episode.watching.time <> invalid
+        m.dialog = createObject("roSGNode", "Dialog")
+        
+        font  = CreateObject("roSGNode", "Font")
+        font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
+        font.size = 24
+        
+        title = createObject("roString")
+        appStr = "Вы хотите продолжить c "
+        title.appendString(appStr, appStr.Len())
+        durationStr = getDuration(episode.watching.time)
+        title.AppendString(durationStr,durationStr.Len())
+        
+        m.dialog.buttons = [ recode("Да"), recode("Нет")]
+        m.dialog.title = recode(title)
+        m.dialog.titleFont = font
+        m.dialog.buttonGroup.textFont = font
+        m.dialog.buttonGroup.focusedTextFont = font
+        m.dialog.observeField("buttonSelected","watchingDialogResponse")
+        m.top.dialog = m.dialog
+    else 
+        'There is no existing status to continue, start from scratch
+        gotoVideo(episodeIndex, 0.0)
+    end if
     
-    episodeIndex = m.rowList.rowItemSelected[0] * m.numColumns + m.rowList.rowItemSelected[1] 
+end sub
+
+sub watchingDialogResponse()
+    button = m.dialog.buttonSelected
+    m.dialog.close = true
+    seekTo = 0.0
+    if button = 0
+        seekTo = m.top.serial.seasons[m.top.seasonIndex].episodes[m.episodeIndex].watching.time
+    end if
     
+    gotoVideo(m.episodeIndex, seekTo)
+end sub
+
+sub gotoVideo(episodeIndex as Integer, seekTo as Float)
+    print "SeasonRowListPanel:gotoVideo()"
+    
+    serial = m.top.serial
     episode = m.top.serial.seasons[m.top.seasonIndex].episodes[episodeIndex]
     quality = getPreferredQuality(episode)
     
@@ -112,6 +154,10 @@ sub rowItemSelected()
             nPanel.videoFormat = stream
             nPanel.videoUri = item.url[stream]
             nPanel.audioTrack = episode.audios[0].index.ToStr()
+            nPanel.videoId = serial.id.ToStr()
+            nPanel.videoNumber = episodeIndex + 1
+            nPanel.seasonId = (m.top.seasonIndex + 1).ToStr()
+            nPanel.seek = seekTo
             exit for
         end if
     end for
@@ -120,8 +166,48 @@ sub rowItemSelected()
         print "SeasonListPanel:PanelSelected"
         m.top.nPanel = nPanel
     end if
-    
 end sub
+
+function getDuration(durationSeconds as  Integer) as String
+    second = durationSeconds MOD 60
+    durationSeconds = durationSeconds \ 60
+    minute = durationSeconds MOD 60
+    durationSeconds = durationSeconds \ 60
+    hour = durationSeconds MOD 60
+    
+    result = createObject("roString")
+    if(hour > 0)
+        if(hour < 10)
+            result.AppendString("0",1)
+        end if
+        hourString = hour.ToStr()
+    else 
+        hourString = "00"
+        result.AppendString(hourString, hourString.Len())
+    end if
+    
+    result.AppendString(":", 1)
+    
+    if(minute > 0)
+        if(minute < 10)
+            result.AppendString("0",1)
+        end if
+        minuteString = minute.ToStr()
+        result.AppendString(minuteString, minuteString.Len())
+    end if
+    
+    result.AppendString(":", 1)
+    
+    if(second > 0)
+        if(second < 10)
+            result.AppendString("0",1)
+        end if
+        secondString = second.ToStr()
+        result.AppendString(secondString, secondString.Len())
+    end if
+    
+    return result
+end function
 
 function getPreferredQuality(episode as Object) as Object
     print "SeasonListPanel:getPreferredQuality()"
@@ -160,4 +246,8 @@ function getPreferredStream(file as Object) as Object
     end if
     
     return streams[streamIndex]
+end function
+
+function recode(str as String)
+    return m.global.utilities.callFunc("Encode", {str: str})
 end function

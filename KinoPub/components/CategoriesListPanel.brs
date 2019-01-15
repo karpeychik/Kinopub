@@ -26,7 +26,7 @@ sub start()
         m.readContentTask.baseUrl = "https://api.service-kp.com/v1/bookmarks"
     end if
     
-    m.readContentTask.parameters = ["access_token", m.global.accessToken]
+    m.readContentTask.parameters = []
     m.readContentTask.control = "RUN"
     
 end sub
@@ -101,10 +101,10 @@ sub categorySelected()
             if m.currentCategory <> "bookmarks"
                 if m.top.pType <> "bookmarks"
                     m.preparedPanel.gridContentBaseUri = "https://api.service-kp.com/v1/items"
-                    m.preparedPanel.gridContentUriParameters = ["access_token", m.global.accessToken, "type", m.currentCategory]
+                    m.preparedPanel.gridContentUriParameters = ["type", m.currentCategory]
                 else
                     m.preparedPanel.gridContentBaseUri = "https://api.service-kp.com/v1/bookmarks/" + m.currentCategory
-                    m.preparedPanel.gridContentUriParameters = ["access_token", m.global.accessToken]
+                    m.preparedPanel.gridContentUriParameters = []
                 end if
             end if
             

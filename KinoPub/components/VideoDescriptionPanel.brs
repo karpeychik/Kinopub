@@ -176,6 +176,46 @@ end sub
 
 sub playButton()
     print "VideoDescriptionPanel:playButton"
+    episode = m.readItemTask.content.item.videos[0]
+    if episode.doesExist("watching") and episode.watching <> invalid and episode.watching.doesExist("status") and episode.watching.doesExist("time") and episode.watching.status = 0 and episode.watching.time <> invalid
+        m.dialog = createObject("roSGNode", "Dialog")
+        
+        font  = CreateObject("roSGNode", "Font")
+        font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
+        font.size = 24
+        
+        title = createObject("roString")
+        appStr = "Вы хотите продолжить c "
+        title.appendString(appStr, appStr.Len())
+        durationStr = getDuration(episode.watching.time)
+        title.AppendString(durationStr,durationStr.Len())
+        
+        m.dialog.buttons = [ recode("Да"), recode("Нет")]
+        m.dialog.title = recode(title)
+        m.dialog.titleFont = font
+        m.dialog.buttonGroup.textFont = font
+        m.dialog.buttonGroup.focusedTextFont = font
+        m.dialog.observeField("buttonSelected","watchingDialogResponse")
+        m.top.dialog = m.dialog
+    else 
+        'There is no existing status to continue, start from scratch
+        gotoVideo(0.0)
+    end if
+end sub
+
+sub watchingDialogResponse()
+    button = m.dialog.buttonSelected
+    m.dialog.close = true
+    seekTo = 0.0
+    if button = 0
+        seekTo = m.readItemTask.content.item.videos[0].watching.time
+    end if
+    
+    gotoVideo(seekTo)
+end sub
+
+sub gotoVideo(seek as Float)
+    print "VideoDescriptionPanel:gotoVideo"
     nPanel = createObject("roSGNode", "VideoNode")
     
     for each video in m.readItemTask.content.item.videos[0].files
@@ -191,6 +231,10 @@ sub playButton()
     nPanel.videoFormat = m.streams[m.streamIndex]
     nPanel.audioTrack = m.audioIndexes[m.audioIndex]
     nPanel.videoUri = videoUri
+    nPanel.seek = seek
+    nPanel.videoId = m.readItemTask.content.item.id.ToStr()
+    nPanel.seasonId = invalid
+    nPanel.videoNumber = 1
     m.top.nPanel = nPanel
 end sub
 
@@ -353,6 +397,17 @@ function getCast(item as Object)
 end function
 
 function getDuration(durationSeconds as  Integer) as String
+    durationString = getDurationString(durationSeconds)
+    
+    result = createObject("roString")
+    dString = "Длительность: "
+    result.AppendString(dString,dString.Len())
+    result.AppendString(durationString,durationString.Len())
+    
+    return result
+end function
+
+function getDurationString(durationSeconds as  Integer) as String
     second = durationSeconds MOD 60
     durationSeconds = durationSeconds \ 60
     minute = durationSeconds MOD 60
@@ -360,13 +415,13 @@ function getDuration(durationSeconds as  Integer) as String
     hour = durationSeconds MOD 60
     
     result = createObject("roString")
-    dString = "Длительность: "
-    result.AppendString(dString,dString.Len())
     if(hour > 0)
         if(hour < 10)
             result.AppendString("0",1)
         end if
         hourString = hour.ToStr()
+    else 
+        hourString = "00"
         result.AppendString(hourString, hourString.Len())
     end if
     

@@ -124,7 +124,7 @@ sub authenticationResponse()
        m.top.token_type = m.authenticationCheck.content.token_type
        
        date = CreateObject("roDateTime")
-       m.top.token_expiration = date.GetSeconds() + m.authenticationCheck.content.expires_in
+       m.top.token_expiration = date.AsSeconds() + m.authenticationCheck.content.expires_in
        m.top.access_token = m.authenticationCheck.content.access_token
     end if 
 end sub

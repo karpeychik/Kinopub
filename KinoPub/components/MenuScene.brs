@@ -3,7 +3,6 @@
 
 sub init()
     print "MenuScene: Init"
-    print m.global.accessToken
 
     utilities = createObject("roSGNode", "Utilities")
     m.global.addFields({utilities: utilities})
@@ -16,6 +15,9 @@ sub init()
 end sub
 
 sub start()
+    date = createObject("roDateTime")
+    print "CurrentTime: " + date.AsSeconds().ToStr()
+
     sec = createObject("roRegistrySection", "Authentication")
     if sec.Exists("AuthenticationToken") and sec.Exists("RefreshToken") and sec.Exists("TokenExpiration") and sec.Exists("TokenType")
         authToken = sec.Read("AuthenticationToken")
@@ -66,7 +68,7 @@ sub startPanels()
     
     panel = m.top.panelSet.createChild("CategoriesListPanel")
     
-    m.panelArray = createObject("roArray", 14, false)    
+    m.panelArray = createObject("roArray", 14, false) 
     m.panelArray[0] = panel
         
     m.panelArray[0].panelSet = m.top.panelSet

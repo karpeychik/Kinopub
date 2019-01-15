@@ -7,7 +7,7 @@ end sub
 
 sub getcontent()
     currentTime = createObject("roDateTime")
-    currentSeconds = currentTime.GetSeconds()
+    currentSeconds = currentTime.AsSeconds()
     if m.top.refreshAuth and m.global.doesExist("tokenExpiration") and currentSeconds + 3600 > m.global.tokenExpiration
         print "Token is about to expire, need to refresh"
         renewToken()
@@ -55,9 +55,11 @@ end sub
 function buildUrl(baseUrl as String, parameters as Object) as String
     url = createObject("roString")
     url.AppendString(baseUrl, baseUrl.len())
+    foundAuth = false
     if parameters.Count() > 0
         url.AppendString("?", 1)
         tempStr = createObject("roString")
+        foundAuth = false
         for i=0 to parameters.Count()-1 step 2
             if i>0
                 url.AppendString("&", 1)
@@ -65,11 +67,29 @@ function buildUrl(baseUrl as String, parameters as Object) as String
             
             key = parameters[i]
             value = parameters[i+1]
+            
+            if key = "access_token"
+                value = m.global.accessToken
+                foundAuth = true
+            end if
            
             url.AppendString(key, key.Len())
             url.AppendString("=", 1)
             url.AppendString(value, value.Len())
         end for
+    end if
+    
+    if false = foundAuth and m.top.refreshAuth
+        if parameters.Count() > 0
+            url.AppendString("&", 1)
+        else
+            url.AppendString("?", 1)
+        end if
+        
+        appendString = "access_token"
+        url.AppendString(appendString, appendString.Len())
+        url.AppendString("=", 1)
+        url.AppendString(m.global.accessToken, m.global.accessToken.Len())    
     end if
     
     return url
@@ -94,7 +114,7 @@ sub renewToken()
         m.global.accessToken = json.access_token
         m.global.refreshToken = json.refresh_token
         date = CreateObject("roDateTime")
-        m.global.tokenExpiration = date.GetSeconds() + json.expires_in
+        m.global.tokenExpiration = date.AsSeconds() + json.expires_in
         sec = createObject("roRegistrySection", "Authentication")
         sec.Write("AuthenticationToken", json.access_token)
         sec.Write("RefreshToken", json.refresh_token)
