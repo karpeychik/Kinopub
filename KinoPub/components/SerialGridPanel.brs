@@ -17,11 +17,19 @@ end sub
 sub loadSerial()
     print "SerialGridPanel:loadSerial()"
     m.top.overhangTitle = "Kino.pub"
+    m.top.panelSet.observeField("isGoingBack","slideBack")
     m.readSerialTask = createObject("roSGNode", "ContentReader")
     m.readSerialTask.baseUrl = m.top.serialBaseUri
     m.readSerialTask.parameters = m.top.serialUriParameters
     m.readSerialTask.observeField("content", "showSerial")
     m.readSerialTask.control = "RUN"
+end sub
+
+sub slideBack()
+    if m.top.isInFocusChain() and false = m.top.panelSet.isGoingBack
+        print "SerialGridPanel:slideBack"
+        m.rowList.setFocus(true)
+    end if
 end sub
 
 sub showSerial()
@@ -69,6 +77,7 @@ sub showSerial()
     group.itemSpacings = [ 50.0 ]
     
     poster = createObject("roSGNode", "Poster")
+    poster.focusable = false
     poster.translation = [0, 0]
     poster.width = width
     poster.height = height 
@@ -80,6 +89,7 @@ sub showSerial()
     labelGroup = createObject("roSGNode", "LayoutGroup")
     labelGroup.addItemSpacingAfterChild =  false
     labelGroup.translation = [left, 0]
+    labelGroup.focusable = false
     
     'HACKHACK: the unusedSpace here is a total banana. There is unused space on the screen which doesn't belong
     'to the panel and is not accounted in m.top.width. I couldn't figure out how to calculate it so hack.

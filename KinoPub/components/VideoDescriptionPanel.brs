@@ -8,6 +8,8 @@ sub init()
     m.top.focusable = true
     m.top.hasNextPanel = false
     
+    m.top.updateFocus = false
+    m.top.observeField("updateFocus",updateFocus)
     m.top.observeField("start","showVideoDetails")
     m.top.isVideo = false
 end sub
@@ -493,6 +495,13 @@ function getGenres(genres as Object) as String
     
     return genreString
 end function
+
+sub updateFocus()
+    print "VideoDescriptionPanel:updateFocus"
+    if m.top.updateFocus
+        m.buttons[0].setFocus(true)
+    end if
+end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
 print "VideoDescriptionPanel:onKeyEvent"

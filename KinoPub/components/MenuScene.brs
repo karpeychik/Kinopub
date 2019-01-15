@@ -9,6 +9,7 @@ sub init()
     
     m.top.overhang.visible = false
     m.top.panelset.visible = false
+    m.top.panelSet.observeField("isGoingBack","slideBack")
     
     start()
     
@@ -91,6 +92,11 @@ sub deviceNotify()
     m.deviceNotifyTask.control = "RUN"
 end sub
 
+sub slideBack()
+    print "MenuScene:slideBack"
+    print m.top.panelSet.isGoingBack
+end sub
+
 sub nPanelAdded()
     print "MenuScene:nPanelAdded"
     
@@ -133,6 +139,7 @@ sub nPanelAdded()
     else
         print "MenuScene:nPanelAdded:panel"
         m.top.panelSet.appendChild(nPanel)
+        nPanel.panelSet = m.top.panelSet
         nPanel.start = true
     end if
     
@@ -172,6 +179,8 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
 
             m.currentPanel = previousPanel
             previousPanel.setFocus(true)
+            previousPanel.updateFocus = true
+            previousPanel.updateFocus = false
             
             return true
           end if

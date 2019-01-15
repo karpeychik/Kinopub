@@ -6,7 +6,11 @@ sub init()
     m.top.focusable = true
     m.top.hasNextPanel = false
     m.top.isVideo = false
+    
+    m.top.updateFocus = false
+    
     m.top.observeField("start","start")
+    m.top.observeField("updateFocus","updateFocus")
     
     'HACKHACK: These are expected thumbnail dimensions. How can we make sure that this is always the case?
     thumbWidth = 480
@@ -94,6 +98,13 @@ sub start()
     
     rowList.setFocus(true)
 
+end sub
+
+sub updateFocus()
+    print "SeasonRowListPanel:updateFocus()"
+    if m.top.updateFocus
+        m.rowList.setFocus(true)
+    end if
 end sub
 
 sub rowItemSelected()

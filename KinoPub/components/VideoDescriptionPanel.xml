@@ -7,6 +7,8 @@
 	<interface>
 	   <field id="nPanel" type="node" />
        <field id="dialog" type="node" />
+       <field id="panelSet" type="node" />
+       <field id="updateFocus" type="bool" />
        
 	   <field id="itemUri" type="string" />
 	   <field id="itemUriParameters" type="roArray" />

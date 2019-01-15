@@ -10,5 +10,7 @@
        <field id="isVideo" type="bool" />
        <field id="start" type="bool" />
        <field id="seasonIndex" type="Integer" />
+       <field id="panelSet" type="node" />
+       <field id="updateFocus" type="bool" />
 	</interface>
 </component>

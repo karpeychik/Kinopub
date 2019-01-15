@@ -10,5 +10,6 @@
         <field id="start" type="bool" />
         <field id="serialBaseUri" type = "uri" />
         <field id="serialUriParameters" type = "roArray" />
+        <field id="panelSet" type="node" />
 	</interface>
 </component>
