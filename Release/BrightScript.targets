@@ -1,0 +1,35 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Target Name="CopyComponents" BeforeTargets="Build">
+		<ItemGroup>
+			<Components Include="@(Component)" />   
+		</ItemGroup>
+		<Copy SourceFiles="@(Components)" DestinationFolder="out\source\components" />  
+	</Target>
+	<Target Name="CopyFonts" BeforeTargets="Build">
+		<ItemGroup>
+			<Fonts Include="@(Font)" />   
+		</ItemGroup>
+		<Copy SourceFiles="@(Fonts)" DestinationFolder="out\source\fonts" />  
+	</Target>
+	<Target Name="CopyImages" BeforeTargets="Build">
+		<ItemGroup>
+			<Images Include="@(Image)" />   
+		</ItemGroup>
+		<Copy SourceFiles="@(Images)" DestinationFolder="out\source\images" />  
+	</Target>
+	<Target Name="CopySources" BeforeTargets="Build">
+		<ItemGroup>
+			<Sources Include="@(Source)" />   
+		</ItemGroup>
+		<Copy SourceFiles="@(Sources)" DestinationFolder="out\source\source" />  
+	</Target>
+	<Target Name="CopyManifest" BeforeTargets="Build">
+		<ItemGroup>
+			<Manifests Include="@(Manifest)" />   
+		</ItemGroup>
+		<Copy SourceFiles="@(Manifests)" DestinationFolder="out\source" />  
+	</Target>
+	<Target Name="Build" AfterTargets="CopyComponents;CopyFonts;CopyImages;CopySources;CopyManifest">
+		<ZipDirectory Overwrite="true" DestinationFile="out\KinoPub.zip" SourceDirectory="out\source"/>
+	</Target>
+</Project>

@@ -4,3 +4,5 @@
 /.vs/slnx.sqlite
 /.vs/VSWorkspaceState.json
 /Release/.vs/Release/v15/.suo
+/Release/out/
+/Release/.vs/Release/v15/Server/sqlite3
