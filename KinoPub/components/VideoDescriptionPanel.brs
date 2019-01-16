@@ -364,7 +364,7 @@ end function
 function getRate(item as Object)
     result = createObject("roString")
     
-    if(item.DoesExist("imdb_rating"))
+    if(item.DoesExist("imdb_rating") and item.imdb_rating <> invalid)
         iString = "imbd: "
         result.AppendString(iString,iString.Len())
         
@@ -376,7 +376,7 @@ function getRate(item as Object)
         result.AppendString("    ", 4)
     end if
     
-    if(item.DoesExist("kinopoisk_rating"))
+    if(item.DoesExist("kinopoisk_rating") and item.kinopoisk_rating <> invalid)
         iString = "Кинопоиск: "
         result.AppendString(iString,iString.Len())
         
