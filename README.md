@@ -1,6 +1,8 @@
 # Introduction 
 This is a Roku channel for Kino.pub. The author of this chanel has no affiliation with Kino.pub. I have put this channel together simply to have some fun and make watching this service possible through Roku.
 
+Right now only dev mode install is supported. If there is enough demand I will try to get the channel to Roku chanel store.
+
 # If you only want to install it
 1) Switch your Roku into the [dev mode](https://developer.roku.com/develop/getting-started/setup-guide).
 2) Download the release of your choice as a zip file.
