@@ -49,7 +49,6 @@ sub start()
     columnCount = 0
     row = createObject("roSGNode", "ContentNode")
     for each item in season.episodes            
-        print "Adding item"
         
         if columnCount = m.numColumns 
             columnCount = 0
@@ -103,7 +102,30 @@ end sub
 sub updateFocus()
     print "SeasonRowListPanel:updateFocus()"
     if m.top.updateFocus
-        m.rowList.setFocus(true)
+        if m.playlist <> invalid
+            for i = m.top.getChildCount() - 1 to 0 step -1
+                m.top.removeChildIndex(i)
+            end for
+            
+            for i = 0 to m.playlist.getChildCount()-1 step 1
+                'episodeIndex is 1 based
+                print "Setting item as watched"
+                episodeIndex = m.playlist.getChild(i).videoNumber - 1
+                print episodeIndex
+                print m.top.serial.seasons[m.top.seasonIndex].episodes[episodeIndex].watched
+                print m.playlist.getChild(i).watched
+                
+                if m.playlist.getChild(i).watched
+                    m.top.serial.seasons[m.top.seasonIndex].episodes[episodeIndex].watched = 1
+                else
+                    m.top.serial.seasons[m.top.seasonIndex].episodes[episodeIndex].watched = 0
+                end if 
+            end for 
+            
+            start()
+        else 
+            m.rowList.setFocus(true)
+        end if
     end if
 end sub
 
@@ -158,20 +180,55 @@ sub gotoVideo(episodeIndex as Integer, seekTo as Float)
     quality = getPreferredQuality(episode)
     
     nPanel = invalid
-    for each item in episode.files
-        if item.quality = quality
-            stream = getPreferredStream(item)
-            nPanel = createObject("roSGNode", "VideoNode")
-            nPanel.videoFormat = stream
-            nPanel.videoUri = item.url[stream]
-            nPanel.audioTrack = episode.audios[0].index.ToStr()
-            nPanel.videoId = serial.id.ToStr()
-            nPanel.videoNumber = episodeIndex + 1
-            nPanel.seasonId = (m.top.seasonIndex + 1).ToStr()
-            nPanel.seek = seekTo
-            exit for
+    
+    playlist = createObject("roSGNode", "ContentNode")
+    for i=episodeIndex to m.top.serial.seasons[m.top.seasonIndex].episodes.Count()-1
+        episode = m.top.serial.seasons[m.top.seasonIndex].episodes[i]
+        quality = getPreferredQuality(episode)
+        
+        for each item in episode.files
+            if item.quality = quality
+                stream = getPreferredStream(item)
+                
+                videoFormat = stream
+                videoUri = item.url[stream]
+                audioTrack = episode.audios[0].index.ToStr()
+                videoId = serial.id.ToStr()
+                videoNumber = i + 1
+                seasonId = (m.top.seasonIndex + 1).ToStr()
+                
+                if i = episodeIndex
+                    seek = seekTo
+                else seek = 0
+                end if
+                
+                exit for
+            end if
+        end for
+        
+        if episode.watched = 1
+            episodeWatched = true
+        else
+            episodeWatched = false
         end if
+        
+        episodeEntry = createObject("roSGNode", "ContentNode")
+        episodeEntry.addFields({
+            videoFormat: videoFormat, 
+            videoUri : videoUri,
+            audioTrack : audioTrack,
+            videoId : videoId,
+            videoNumber : videoNumber,
+            seasonId : seasonId,
+            seek : seek,
+            watched : episodeWatched})
+        playlist.appendChild(episodeEntry)
     end for
+    
+    m.playlist = playlist
+    
+    nPanel = createObject("roSGNode", "VideoNode")
+    nPanel.playlist = playlist
     
     if nPanel <> invalid
         print "SeasonListPanel:PanelSelected"

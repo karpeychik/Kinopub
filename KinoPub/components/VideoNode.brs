@@ -18,33 +18,29 @@ end sub
 
 sub startVideo()
     print "VideoNode:startVideo()"
-    videocontent = createObject("RoSGNode", "ContentNode")
-
-    videocontent.title = ""
-    videocontent.streamformat = m.top.videoFormat
-    videocontent.url = m.top.videoUri
-    videocontent.TrackIdAudio = m.top.audioTrack
     
-    print videocontent
-    print m.top.audioTrack
+    content = getContentPlaylist(invalid, 0, m.top.playlist.getChild(0).seek.ToStr())
 
     m.video = createObject("roSGNode", "Video")
     m.top.appendChild(m.video)
-    m.video.content = videocontent
-    m.video.audioTrack = m.top.audioTrack
-    m.video.seek = m.top.seek
+    m.video.content = content
+    m.firstPlaylistVideo = 0
+    m.video.contentIsPlaylist = true
 
     m.video.observeField("state","stateChanged")
     
     m.video.control = "play"
+    m.video.observeField("audioTrack","audioStreamUpdate")
+    m.video.observeField("contentIndex","trackUpdate")
     m.video.setFocus(true)
 end sub
 
 sub stateChanged()
     print "VideoNode:StateChanged: "
     print m.video.state
+    contentIndex = m.video.contentIndex
     if m.video.state = "playing"
-        if m.top.videoId <> invalid and m.top.seasonId <> "invalid" and m.top.videoNumber <> 0
+        if m.top.playlist.getChild(contentIndex).videoId <> invalid and m.top.playlist.getChild(contentIndex).seasonId <> "invalid" and m.top.playlist.getChild(contentIndex).videoNumber <> 0
             m.statusTimer.control = "start"
         end if
     else
@@ -71,20 +67,21 @@ end sub
 
 sub markWatched()
     print "VideoNode:markWatched"
+    contentIndex = m.video.contentIndex
     m.updateStatusTask = createObject("roSGNode", "ContentReader")
     m.updateStatusTask.requestType = "GET"
 
     parameters = createObject("roArray", 8, false)
     
     parameters.Push("id")
-    parameters.Push(m.top.videoId)
+    parameters.Push(m.top.playlist.getChild(contentIndex).videoId)
     
     parameters.Push("video")
-    parameters.Push(m.top.videoNumber.ToStr())
+    parameters.Push(m.top.playlist.getChild(contentIndex).videoNumber.ToStr())
     
-    if(m.top.seasonId <> invalid)
+    if(m.top.playlist.getChild(contentIndex).seasonId <> invalid)
         parameters.Push("season") 
-        parameters.Push(m.top.seasonId)
+        parameters.Push(m.top.playlist.getChild(contentIndex).seasonId)
     end if
     
     m.updateStatusTask.baseUrl = "https://api.service-kp.com/v1/watching/toggle"
@@ -93,24 +90,30 @@ sub markWatched()
     
     m.updateStatusTask.parameters = parameters
     m.updateStatusTask.control = "RUN"
+    
+    print "Marking watched"
+    playlistIndex = m.firstPlaylistVideo + contentIndex
+    m.top.playList.getChild(playListIndex).watched = true
+    print m.top.playList.getChild(playListIndex)
 end sub
 
 sub markTime()
     print "VideoNode:markTime"
+    contentIndex = m.video.contentIndex
     m.updateStatusTask = createObject("roSGNode", "ContentReader")
     m.updateStatusTask.requestType = "GET"
 
     parameters = createObject("roArray", 8, false)
     
     parameters.Push("id")
-    parameters.Push(m.top.videoId)
+    parameters.Push(m.top.playlist.getChild(contentIndex).videoId)
     
     parameters.Push("video")
-    parameters.Push(m.top.videoNumber.ToStr())
+    parameters.Push(m.top.playlist.getChild(contentIndex).videoNumber.ToStr())
     
-    if(m.top.seasonId <> invalid)
+    if(m.top.playlist.getChild(contentIndex).seasonId <> invalid)
         parameters.Push("season") 
-        parameters.Push(m.top.seasonId)
+        parameters.Push(m.top.playlist.getChild(contentIndex).seasonId)
     end if
     
     m.updateStatusTask.baseUrl = "https://api.service-kp.com/v1/watching/marktime"
@@ -119,4 +122,50 @@ sub markTime()
     
     m.updateStatusTask.parameters = parameters
     m.updateStatusTask.control = "RUN"
+    
+    print "Marking unwatched"
+    playlistIndex = m.firstPlaylistVideo + contentIndex
+    m.top.playList.getChild(playListIndex).watched = false
+    print m.top.playList.getChild(playListIndex)
+end sub
+
+sub audioStreamUpdate()
+    print "VideoNode:audioStreamUpdate"
+    print m.video.audioTrack
+    
+    videoTrackIndex = m.video.audioTrack
+    currentVideo = m.video.contentIndex
+    currentTime = m.video.position
+    
+    'm.video.control = "stop"
+    if m.top.playlist.getChildCount() > 1
+        newContent = getContentPlaylist(videoTrackIndex, currentVideo, currentTime.ToStr())
+        
+        m.video.content = newContent
+        m.firstPlaylistVideo = currentVideo
+        m.video.control = "play"
+    end if
+end sub
+
+function getContentPlaylist(preferredAudio as Object, firstVideo as Integer, firstSeek as String) as Object
+    content = createObject("roSGNode", "ContentNode")
+    for i=firstVideo to m.top.playList.getChildCount()-1
+        item = m.top.playList.getChild(i)
+        videocontent = createObject("roSGNode", "ContentNode")
+        videocontent.streamformat = item.videoFormat
+        videocontent.url = item.videoUri
+        if preferredAudio = invalid
+            videocontent.TrackIdAudio = item.audioTrack
+        else 
+            videocontent.TrackIdAudio = preferredAudio
+        end if
+        videocontent.title = ""
+        videocontent.PlayStart = item.seek
+        content.appendChild(videoContent)
+    end for
+    return content
+end function
+
+sub trackUpdate()
+    print m.video.content.getChild(m.video.contentIndex)
 end sub

@@ -25,11 +25,11 @@ end sub
 
 sub itemReceived()
     print "VideoDescriptionPanel:itemReceived"
-    m.top.videoFormat = "hls2"
-    m.top.videoTitle = "ExampleVideo"
-    m.top.videoUri = m.readItemTask.content.item.videos[0].files[1].url.hls2
-    
     if false
+        m.top.videoFormat = "hls2"
+        m.top.videoTitle = "ExampleVideo"
+        m.top.videoUri = m.readItemTask.content.item.videos[0].files[1].url.hls2
+    
         nPanel = createObject("roSGNode", "VideoNode")
         nPanel.videoFormat = "hls2"
         nPanel.videoUri = m.readItemTask.content.item.videos[0].files[1].url.hls2
@@ -226,17 +226,20 @@ sub gotoVideo(seek as Float)
         end if
     end for
     
-    print videoUri
-    print m.streams[m.streamIndex]
-    
     'TODO: what if we couldn't find the correct video? Should handle and not crash
-    nPanel.videoFormat = m.streams[m.streamIndex]
-    nPanel.audioTrack = m.audioIndexes[m.audioIndex]
-    nPanel.videoUri = videoUri
-    nPanel.seek = seek
-    nPanel.videoId = m.readItemTask.content.item.id.ToStr()
-    nPanel.seasonId = invalid
-    nPanel.videoNumber = 1
+    playlist = createObject("roArray", 1, false)
+    episodeEntry = createObject("roAssociativeArray")
+    episodeEntry.videoFormat = m.streams[m.streamIndex]
+    episodeEntry.videoUri = videoUri
+    episodeEntry.audioTrack = m.audioIndexes[m.audioIndex]
+    episodeEntry.videoId = m.readItemTask.content.item.id.ToStr()
+    episodeEntry.videoNumber = 1
+    episodeEntry.seasonId = invalid
+    episodeEntry.seek = seek
+    episodeEntry.watched = false
+    playlist.Push(episodeEntry)
+    
+    nPanel.playlist = playlist
     m.top.nPanel = nPanel
 end sub
 

@@ -9,14 +9,16 @@
         <field id="videoUri" type="string"/>
         <field id="videoFormat" type="string" />
         <field id="audioTrack" type="string"/>
-        <field id="previousPanel" type="node" />
-        <field id="isVideo" type="bool" />
-        <field id="start" type="bool" />
         <field id="seek" type="integer" />
-        
         <field id="videoId" type="string"/>
         <field id="seasonId" type="string"/>
         <field id="videoNumber" type="integer"/>
+        
+        <field id="playlist" type="node" />
+        
+        <field id="previousPanel" type="node" />
+        <field id="isVideo" type="bool" />
+        <field id="start" type="bool" />
     </interface>
 	
 </component>
