@@ -94,10 +94,14 @@ sub showcontent()
     itemlabel.width = width - 7
     itemlabel.height = labelRectHeight
     itemLabel.text = itemcontent.itemTitle
+    m.itemLabel = itemLabel
     m.top.appendChild(itemLabel)
     
     if itemcontent.EpisodeWatched
         poster.opacity = 0.5
+        itemLabel.color = "#80FF80"
+    else
+        itemLabel.color = "#DDDDFF"
     end if
     
     m.top.itemContent.observeField("episodeWatched", "watchedChange")
@@ -109,8 +113,10 @@ sub watchedChange()
     print "EpisodeRowListComponent:watchedChange()"
     if m.top.itemContent.episodeWatched
         m.poster.opacity = 0.5
+        m.itemLabel.color = "#80FF80"
     else
         m.poster.opacity = 1
+        m.itemLabel.color = "#DDDDFF"
     end if
 end sub
 

@@ -103,13 +103,13 @@ sub updateFocus()
     if m.top.updateFocus
         if m.playlist <> invalid            
             for i = 0 to m.playlist.getChildCount()-1 step 1
-                'episodeIndex is 1 based
                 episodeIndex = m.playListFirstIndex + i
                 rowIndex = episodeIndex \ m.numColumns
                 columnIndex = episodeIndex MOD m.numColumns
                 row = m.rowList.content.getChild(rowIndex)
                 item = row.getChild(columnIndex)
                 item.episodeWatched = m.playlist.getChild(i).watched
+                m.top.seasonNode.getChild(episodeIndex).watched = m.playlist.getChild(i).watched 
             end for 
         end if
         

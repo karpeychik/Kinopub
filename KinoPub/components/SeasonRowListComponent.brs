@@ -4,10 +4,15 @@ sub init()
     m.font18  = CreateObject("roSGNode", "Font")
     m.font18.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
     m.font18.size = 18
-    
+    m.firstLoad = true
 end sub
 
 sub showcontent()
+    if false = m.firstLoad
+        return
+    end if
+
+    m.firstLoad = false
     itemcontent = m.top.itemContent 
     
     borderStroke = 2
@@ -39,6 +44,7 @@ sub showcontent()
     m.top.appendChild(m.rectangle)
    
     poster = createObject("roSGNode", "Poster")
+    m.poster = poster
     poster.width = width
     poster.translation = [left, borderStroke ]
     poster.height = height
@@ -48,6 +54,8 @@ sub showcontent()
         poster.opacity = 0.5
     end if
     m.top.appendChild(poster)
+    
+    itemContent.observeField("seasonWatched","updateWatched")
    
     itemlabel = createObject("roSGNode", "Label")
     itemlabel.font = m.font18 
@@ -59,6 +67,15 @@ sub showcontent()
     
     m.top.appendChild(itemLabel)
     
+end sub
+
+sub updateWatched()
+    print "SeasonRowListComponent:updateWatched()"
+    if m.top.itemContent.seasonWatched
+        m.poster.opacity = 0.5
+    else
+        m.poster.opacity = 1
+    end if
 end sub
 
 sub showfocus()
