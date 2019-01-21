@@ -17,12 +17,17 @@ end sub
 sub loadSerial()
     print "SerialGridPanel:loadSerial()"
     m.top.overhangTitle = "Kino.pub"
+    
+    m.progressDialog = createObject("roSGNode", "ProgressDialog")
+    
     m.top.panelSet.observeField("isGoingBack","slideBack")
     m.readSerialTask = createObject("roSGNode", "ContentReader")
     m.readSerialTask.baseUrl = m.top.serialBaseUri
     m.readSerialTask.parameters = m.top.serialUriParameters
     m.readSerialTask.observeField("content", "showSerial")
     m.readSerialTask.control = "RUN"
+    
+    m.top.dialog = m.progressDialog
 end sub
 
 sub slideBack()
@@ -172,6 +177,7 @@ sub showSerial()
     m.top.appendChild(vGroup)
     
     rowList.setFocus(true)
+    m.progressDialog.close = true
 end sub
 
 sub rowItemSelected()
