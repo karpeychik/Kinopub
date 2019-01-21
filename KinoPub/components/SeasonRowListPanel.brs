@@ -102,30 +102,19 @@ end sub
 sub updateFocus()
     print "SeasonRowListPanel:updateFocus()"
     if m.top.updateFocus
-        if m.playlist <> invalid
-            for i = m.top.getChildCount() - 1 to 0 step -1
-                m.top.removeChildIndex(i)
-            end for
-            
+        if m.playlist <> invalid            
             for i = 0 to m.playlist.getChildCount()-1 step 1
                 'episodeIndex is 1 based
-                print "Setting item as watched"
-                episodeIndex = m.playlist.getChild(i).videoNumber - 1
-                print episodeIndex
-                print m.top.serial.seasons[m.top.seasonIndex].episodes[episodeIndex].watched
-                print m.playlist.getChild(i).watched
-                
-                if m.playlist.getChild(i).watched
-                    m.top.serial.seasons[m.top.seasonIndex].episodes[episodeIndex].watched = 1
-                else
-                    m.top.serial.seasons[m.top.seasonIndex].episodes[episodeIndex].watched = 0
-                end if 
+                episodeIndex = m.playListFirstIndex + i
+                rowIndex = episodeIndex \ m.numColumns
+                columnIndex = episodeIndex MOD m.numColumns
+                row = m.rowList.content.getChild(rowIndex)
+                item = row.getChild(columnIndex)
+                item.episodeWatched = m.playlist.getChild(i).watched
             end for 
-            
-            start()
-        else 
-            m.rowList.setFocus(true)
         end if
+        
+        m.rowList.setFocus(true)
     end if
 end sub
 
@@ -226,6 +215,8 @@ sub gotoVideo(episodeIndex as Integer, seekTo as Float)
     end for
     
     m.playlist = playlist
+    m.playListFirstIndex = episodeIndex
+    m.focusedIndex = episodeIndex
     
     nPanel = createObject("roSGNode", "VideoNode")
     nPanel.playlist = playlist

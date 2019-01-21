@@ -227,17 +227,18 @@ sub gotoVideo(seek as Float)
     end for
     
     'TODO: what if we couldn't find the correct video? Should handle and not crash
-    playlist = createObject("roArray", 1, false)
-    episodeEntry = createObject("roAssociativeArray")
-    episodeEntry.videoFormat = m.streams[m.streamIndex]
-    episodeEntry.videoUri = videoUri
-    episodeEntry.audioTrack = m.audioIndexes[m.audioIndex]
-    episodeEntry.videoId = m.readItemTask.content.item.id.ToStr()
-    episodeEntry.videoNumber = 1
-    episodeEntry.seasonId = invalid
-    episodeEntry.seek = seek
-    episodeEntry.watched = false
-    playlist.Push(episodeEntry)
+    playlist = createObject("roSGNode", "ContentNode")
+    episodeEntry = createObject("roSGNode", "ContentNode")
+        episodeEntry.addFields({
+            videoFormat: m.streams[m.streamIndex], 
+            videoUri : videoUri,
+            audioTrack : m.audioIndexes[m.audioIndex],
+            videoId : m.readItemTask.content.item.id.ToStr(),
+            videoNumber : 1,
+            seasonId : invalid,
+            seek : seek,
+            watched : false})
+        playlist.appendChild(episodeEntry)
     
     nPanel.playlist = playlist
     m.top.nPanel = nPanel
