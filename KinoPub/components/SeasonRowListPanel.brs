@@ -45,11 +45,10 @@ sub start()
     rowList.observeField("rowItemSelected", "rowItemSelected")
     
     content = createObject("roSGNode", "ContentNode")
-    season = m.top.serial.seasons[m.top.seasonIndex]
     columnCount = 0
     row = createObject("roSGNode", "ContentNode")
-    for each item in season.episodes            
-        
+    for i=0 to m.top.seasonNode.getChildCount()-1            
+        item = m.top.seasonNode.getChild(i)
         if columnCount = m.numColumns 
             columnCount = 0
             content.appendChild(row)
@@ -122,8 +121,8 @@ sub rowItemSelected()
     print "SeasonRowListPanel:rowItemSelected()"
     episodeIndex = m.rowList.rowItemSelected[0] * m.numColumns + m.rowList.rowItemSelected[1]
     m.episodeIndex = episodeIndex 
-    episode = m.top.serial.seasons[m.top.seasonIndex].episodes[episodeIndex]
-    if episode.doesExist("watching") and episode.watching <> invalid and episode.watching.doesExist("status") and episode.watching.doesExist("time") and episode.watching.status = 0 and episode.watching.time <> invalid
+    episode = m.top.seasonNode.getChild(episodeIndex)
+    if episode.doesExist("watchingStatus") and episode.doesExist("watchedTime") and episode.watchingStatus = 0 and episode.watchedTime <> invalid
         m.dialog = createObject("roSGNode", "Dialog")
         
         font  = CreateObject("roSGNode", "Font")
@@ -133,7 +132,7 @@ sub rowItemSelected()
         title = createObject("roString")
         appStr = "Вы хотите продолжить c "
         title.appendString(appStr, appStr.Len())
-        durationStr = getDuration(episode.watching.time)
+        durationStr = getDuration(episode.watchedTime)
         title.AppendString(durationStr,durationStr.Len())
         
         m.dialog.buttons = [ recode("Да"), recode("Нет")]
@@ -155,7 +154,7 @@ sub watchingDialogResponse()
     m.dialog.close = true
     seekTo = 0.0
     if button = 0
-        seekTo = m.top.serial.seasons[m.top.seasonIndex].episodes[m.episodeIndex].watching.time
+        seekTo = m.top.seasonNode.getChild(m.episodeIndex).watchedTime
     end if
     
     gotoVideo(m.episodeIndex, seekTo)
@@ -165,14 +164,14 @@ sub gotoVideo(episodeIndex as Integer, seekTo as Float)
     print "SeasonRowListPanel:gotoVideo()"
     
     serial = m.top.serial
-    episode = m.top.serial.seasons[m.top.seasonIndex].episodes[episodeIndex]
+    episode = m.top.seasonNode.getChild(m.episodeIndex)
     quality = getPreferredQuality(episode)
     
     nPanel = invalid
     
     playlist = createObject("roSGNode", "ContentNode")
-    for i=episodeIndex to m.top.serial.seasons[m.top.seasonIndex].episodes.Count()-1
-        episode = m.top.serial.seasons[m.top.seasonIndex].episodes[i]
+    for i=episodeIndex to m.top.seasonNode.getChildCount()-1
+        episode = m.top.seasonNode.getChild(i)
         quality = getPreferredQuality(episode)
         
         for each item in episode.files
@@ -182,9 +181,9 @@ sub gotoVideo(episodeIndex as Integer, seekTo as Float)
                 videoFormat = stream
                 videoUri = item.url[stream]
                 audioTrack = episode.audios[0].index.ToStr()
-                videoId = serial.id.ToStr()
+                videoId = m.top.seasonNode.videoId
                 videoNumber = i + 1
-                seasonId = (m.top.seasonIndex + 1).ToStr()
+                seasonId = (m.top.seasonNode.seasonIndex + 1).ToStr()
                 
                 if i = episodeIndex
                     seek = seekTo

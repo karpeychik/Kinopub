@@ -184,13 +184,45 @@ sub rowItemSelected()
     print "SerialGridPanel:rowItemSelected"
     print m.rowList.rowItemSelected
     
+    seasonIndex = m.rowList.rowItemSelected[1]
+    seasonNode = buildSeasonNode(seasonIndex)
+    
     'nPanel = createObject("roSGNode", "SeasonListPanel")
     nPanel = createObject("roSGNode", "SeasonRowListPanel")
     nPanel.serial = m.readSerialTask.content.item
-    nPanel.seasonIndex = m.rowList.rowItemSelected[1]
+    nPanel.seasonIndex = seasonIndex
+    nPanel.seasonNode = seasonNode
     
     m.top.nPanel = nPanel
 end sub
+
+function buildSeasonNode(seasonIndex as Integer)
+    print "SerialGridPanel:buildContentNode"
+    content = createObject("roSGNode", "ContentNode")
+    serial = m.readSerialTask.content.item
+    seasonIndex = m.rowList.rowItemSelected[1]
+    
+    content.addFields({serialName: serial.title, videoId: serial.id.ToStr(), seasonIndex: seasonIndex})
+    season = serial.seasons[seasonIndex]
+    
+    for each episode in season.episodes
+        episodeNode = createObject("roSGNode", "ContentNode")
+        episodeNode.addFields({
+            title: episode.title,
+            thumbnail: episode.thumbnail,
+            number: episode.number,
+            audios: episode.audios,
+            watched: episode.watched
+            watchedTime: episode.watching.time,
+            watchingStatus: episode.watching.status
+            subtitles: episode.subtitles,
+            files: episode.files})
+            
+        content.appendChild(episodeNode)
+    end for
+    
+    return content
+end function
 
 function getGenres(genres as Object) as String
     print "SerialGridPanel:getGenres"
