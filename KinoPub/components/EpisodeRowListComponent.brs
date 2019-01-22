@@ -4,9 +4,17 @@ sub init()
     m.font18  = CreateObject("roSGNode", "Font")
     m.font18.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
     m.font18.size = 12
+    m.itemContent = invalid
+    
+    m.loaded = false
 end sub
 
 sub showcontent()
+    print "EpisodeRowListComponent:showContent()"
+    if m.loaded
+        return
+    end if
+   
     itemcontent = m.top.itemContent 
     
     borderStroke = 2
@@ -65,6 +73,7 @@ sub showcontent()
     poster.height = height
     poster.loadDisplayMode = "scaleToFit"
     poster.uri = itemcontent.posterLink
+    m.poster = poster
     
     m.top.appendChild(poster)
     
@@ -85,12 +94,30 @@ sub showcontent()
     itemlabel.width = width - 7
     itemlabel.height = labelRectHeight
     itemLabel.text = itemcontent.itemTitle
+    m.itemLabel = itemLabel
     m.top.appendChild(itemLabel)
     
     if itemcontent.EpisodeWatched
         poster.opacity = 0.5
+        itemLabel.color = "#80FF80"
+    else
+        itemLabel.color = "#DDDDFF"
     end if
     
+    m.top.itemContent.observeField("episodeWatched", "watchedChange")
+    m.loaded = true
+    
+end sub
+
+sub watchedChange()
+    print "EpisodeRowListComponent:watchedChange()"
+    if m.top.itemContent.episodeWatched
+        m.poster.opacity = 0.5
+        m.itemLabel.color = "#80FF80"
+    else
+        m.poster.opacity = 1
+        m.itemLabel.color = "#DDDDFF"
+    end if
 end sub
 
 sub showfocus()

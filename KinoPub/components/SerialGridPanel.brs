@@ -17,17 +17,42 @@ end sub
 sub loadSerial()
     print "SerialGridPanel:loadSerial()"
     m.top.overhangTitle = "Kino.pub"
-    m.top.panelSet.observeField("isGoingBack","slideBack")
+    
+    m.progressDialog = createObject("roSGNode", "ProgressDialog")
+    
     m.readSerialTask = createObject("roSGNode", "ContentReader")
     m.readSerialTask.baseUrl = m.top.serialBaseUri
     m.readSerialTask.parameters = m.top.serialUriParameters
     m.readSerialTask.observeField("content", "showSerial")
     m.readSerialTask.control = "RUN"
+    
+    m.top.dialog = m.progressDialog
+    m.top.updateFocus = false
+    m.top.panelSet.observeField("isGoingBack", "slideBack")
 end sub
 
 sub slideBack()
     if m.top.isInFocusChain() and false = m.top.panelSet.isGoingBack
         print "SerialGridPanel:slideBack"
+        for i=0 to m.rowList.content.getChild(0).getChildCount()-1
+            season = m.rowList.content.getChild(0).getChild(i)
+            seasonWatched = true
+            for j=season.getChildCount()-1 to 0 step -1
+                episode = season.getChild(j)
+                
+                if i = 1
+                    print episode
+                end if
+                
+                if 1 <> episode.watched
+                    seasonWatched = false
+                    exit for
+                end if
+            end for
+            
+            season.seasonWatched = seasonWatched
+        end for
+        
         m.rowList.setFocus(true)
     end if
 end sub
@@ -145,17 +170,18 @@ sub showSerial()
     row = createObject("roSGNode", "ContentNode")
     row.title = "Seasons"
     
-    for each item in m.readSerialTask.content.item.seasons
+    for i=0 to m.readSerialTask.content.item.seasons.Count()-1 step 1
         seasonWatched = true
-        for each episode in item.episodes
+        for each episode in m.readSerialTask.content.item.seasons[i].episodes
             if episode.watched <> 1
                 seasonWatched = false
                 exit for
             end if
         end for
-    
-        itemContent = createObject("roSGNode", "ContentNode")
-        itemContent.title = recode("Сезон " + item.number.ToStr())
+        
+        
+        itemContent = buildSeasonNode(i)
+        itemContent.title = recode("Сезон " + m.readSerialTask.content.item.seasons[i].number.ToStr())
         itemContent.HDPosterUrl = m.readSerialTask.content.item.posters.small
         itemContent.addFields({itemWidth: 100, itemHeight: 200, seasonWatched: seasonWatched })
         row.appendChild(itemContent)
@@ -172,19 +198,55 @@ sub showSerial()
     m.top.appendChild(vGroup)
     
     rowList.setFocus(true)
+    m.progressDialog.close = true
 end sub
 
 sub rowItemSelected()
     print "SerialGridPanel:rowItemSelected"
     print m.rowList.rowItemSelected
     
+    seasonIndex = m.rowList.rowItemSelected[1]
+    seasonNode = m.rowList.content.getChild(0).getChild(seasonIndex)
+    
     'nPanel = createObject("roSGNode", "SeasonListPanel")
     nPanel = createObject("roSGNode", "SeasonRowListPanel")
     nPanel.serial = m.readSerialTask.content.item
-    nPanel.seasonIndex = m.rowList.rowItemSelected[1]
+    nPanel.seasonIndex = seasonIndex
+    nPanel.seasonNode = seasonNode
     
     m.top.nPanel = nPanel
 end sub
+
+function buildSeasonNode(seasonIndex as Integer)
+    print "SerialGridPanel:buildContentNode"
+    content = createObject("roSGNode", "ContentNode")
+    serial = m.readSerialTask.content.item
+    
+    content.addFields({
+        serialName: serial.title, 
+        videoId: serial.id.ToStr(), 
+        seasonIndex: seasonIndex})
+        
+    season = serial.seasons[seasonIndex]
+    
+    for each episode in season.episodes
+        episodeNode = createObject("roSGNode", "ContentNode")
+        episodeNode.addFields({
+            title: episode.title,
+            thumbnail: episode.thumbnail,
+            number: episode.number,
+            audios: episode.audios,
+            watched: episode.watched
+            watchedTime: episode.watching.time,
+            watchingStatus: episode.watching.status
+            subtitles: episode.subtitles,
+            files: episode.files})
+            
+        content.appendChild(episodeNode)
+    end for
+    
+    return content
+end function
 
 function getGenres(genres as Object) as String
     print "SerialGridPanel:getGenres"
