@@ -54,12 +54,13 @@ sub showPosterGrid()
         m.nextPage = 1
         m.column = 0
         m.itemsPromised = m.readPosterGridTask.content.items.Count()
-        if m.readPosterGridTask.content.doesExist("pagination")
+        if m.readPosterGridTask.content.doesExist("pagination") and m.readPosterGridTask.content.pagination.doesExist("total_items") 
             m.shouldPage = true
             m.perPage = m.readPosterGridTask.content.pagination.perpage
+            m.totalItems = m.readPosterGridTask.content.pagination.total_items
         end if
         
-        for i=0 to m.perPage-1 step 1
+        for i=0 to m.readPosterGridTask.content.items.Count()-1 step 1
             content = createObject("roSGNode", "ContentNode")
             m.top.grid.content.appendChild(content)
         end for
@@ -76,7 +77,6 @@ sub showPosterGrid()
     end for
     
     m.nextPage = m.nextPage + 1
-    m.totalItems = m.totalItems + m.readPosterGridTask.content.pagination.total_items
     
     if m.itemsPromised > m.itemsLoaded
         loadPage(m.nextPage)
@@ -97,7 +97,7 @@ sub itemFocused()
     itemCount = m.top.grid.content.getChildCount()
     lastRow = (itemCount-1) \ m.numColumns
     firstLastRowItem = lastRow * m.numColumns
-    if m.top.grid.itemFocused >= firstLastRowItem and m.itemsLoaded < m.totalItems and m.itemsLoaded < m.maxItemsToLoad
+    if m.shouldPage and m.top.grid.itemFocused >= firstLastRowItem and m.itemsLoaded < m.totalItems and m.itemsLoaded < m.maxItemsToLoad
         m.itemsPromised = m.itemsPromised + m.perPage
         for i=0 to m.perPage-1 step 1
             content = createObject("roSGNode", "ContentNode")
