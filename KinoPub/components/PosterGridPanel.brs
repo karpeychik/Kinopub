@@ -28,6 +28,7 @@ sub init()
     
     m.top.observeField("start","loadCategoryPosters")
     m.top.grid.observeField("itemSelected","itemSelected")
+    m.nextPage = 1
     m.top.isVideo = false
     m.firstPage = true
 end sub
@@ -40,6 +41,7 @@ sub loadCategoryPosters()
     m.readPosterGridTask.baseUrl = m.top.gridContentBaseUri
     m.readPosterGridTask.parameters = m.top.gridContentUriParameters
     m.readPosterGridTask.observeField("content", "showPosterGrid")
+    m.readPosterGridTask.observeField("error", "error")
     m.readPosterGridTask.control = "RUN"
 end sub
 
@@ -51,7 +53,6 @@ sub showPosterGrid()
         m.totalItems = 0
         m.itemsLoaded = 0
         m.maxItemsToLoad = 1000
-        m.nextPage = 1
         m.column = 0
         m.itemsPromised = m.readPosterGridTask.content.items.Count()
         if m.readPosterGridTask.content.doesExist("pagination") and m.readPosterGridTask.content.pagination.doesExist("total_items") 
@@ -70,7 +71,7 @@ sub showPosterGrid()
     
     for each item in m.readPosterGridTask.content.items
         itemcontent = m.top.grid.content.getChild(m.itemsLoaded)
-        itemcontent.setField("shortdescriptionline1", m.global.utilities.callFunc("Encode", {str: item.title}))
+        itemcontent.setField("shortdescriptionline1", recode(item.title))
         itemcontent.setField("hdgridposterurl", item.posters.small)
         itemcontent.addFields({kinoPubId: item.id.ToStr(), kinoPubType: item.type})
         m.itemsLoaded = m.itemsLoaded + 1 
@@ -122,7 +123,25 @@ sub loadPage(pageNumber as Integer)
     parameters.Push(m.nextPage.ToStr())
     m.readPosterGridTask.parameters = parameters
     m.readPosterGridTask.observeField("content", "showPosterGrid")
+    m.readPosterGridTask.observeField("error", "error")
     m.readPosterGridTask.control = "RUN"
+end sub
+
+sub error()
+    print "PosterGrid:error()"
+    source = "PosterGrid:"+m.nextPage.ToStr()
+    errorMessage = m.global.utilities.callFunc("GetErrorMessage", {errorCode: m.readPosterGridTask.error, source: source})
+    print errorMessage
+    font  = CreateObject("roSGNode", "Font")
+    font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
+    font.size = 24
+
+    m.dialog = createObject("roSGNode", "Dialog")
+    m.dialog.title = recode("Ошибка")
+    m.dialog.titleFont = font
+    m.dialog.message = recode(errorMessage)
+    m.dialog.messageFont = font
+    m.top.dialog = m.dialog
 end sub
 
 sub itemSelected()
@@ -141,4 +160,8 @@ sub itemSelected()
         nPanel.serialBaseUri = itemUrl
         m.top.nPanel = nPanel
     end if
+end sub
+
+sub recode(str as string) as string
+    return m.global.utilities.callFunc("Encode", {str: str})
 end sub

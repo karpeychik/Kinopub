@@ -76,6 +76,7 @@ sub startPanels()
     m.panelArray[0].pType = ""
     m.panelArray[0].nPanel = invalid
     m.panelArray[0].observeField("nPanel","nPanelAdded")
+    m.panelArray[0].observeField("dialog","dialogAdded")
     m.panelArray[0].start = true
 end sub
 

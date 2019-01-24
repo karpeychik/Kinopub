@@ -20,7 +20,25 @@ sub showVideoDetails()
     m.readItemTask.baseUrl = m.top.itemUri
     m.readItemTask.parameters = m.top.itemUriParameters
     m.readItemTask.observeField("content", "itemReceived")
+    m.readItemTask.observeField("error", "error")
     m.readItemTask.control = "RUN"
+end sub
+
+sub error()
+    print "VideoDescriptionPanel:error()"
+    source = "VideoDescriptionPanel:"
+    errorMessage = m.global.utilities.callFunc("GetErrorMessage", {errorCode: m.readItemTask.error, source: source})
+    print errorMessage
+    font  = CreateObject("roSGNode", "Font")
+    font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
+    font.size = 24
+
+    m.dialog = createObject("roSGNode", "Dialog")
+    m.dialog.title = recode("Ошибка")
+    m.dialog.titleFont = font
+    m.dialog.message = recode(errorMessage)
+    m.dialog.messageFont = font
+    m.top.dialog = m.dialog
 end sub
 
 sub itemReceived()

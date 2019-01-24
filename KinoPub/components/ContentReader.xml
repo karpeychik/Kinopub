@@ -10,5 +10,6 @@
         <field id ="content" type = "roAssociativeArray" />
         <field id="error" type="string" />
         <field id="refreshAuth" type="bool" />
+        <field id="timeout" type="integer" />
     </interface> 
 </component>

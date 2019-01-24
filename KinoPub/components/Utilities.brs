@@ -1,6 +1,22 @@
 sub init()
 end sub
 
+function GetErrorMessage(params as Object) as String
+    if params.errorCode = "-1"
+        return "Не удалось отправить запрос на сервер. Обратитесь к разработчику. Ошибка: " + params.source 
+    end if
+    
+    if params.errorCode = "-2"
+        return "Сервер не ответил на запрос. Ошибка: " + params.source
+    end if
+    
+    if params.errorCode = "401"
+        return "Ошибка авторизации. Проверьте настройки аккаунта. Попробуйте удалить канал, перезагрузить Roku и установить канал заново. Ошибка: " + params.source
+    end if
+    
+    return "Сервер не смог обработать запрос. Ошибка: " + params.errorCode + " " + params.source
+end function
+
 function Encode(params as Object) as String
     str = params.str
     input = createObject("roByteArray")

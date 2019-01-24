@@ -33,7 +33,7 @@ sub start()
     m.rowList = createObject("roSGNode", "RowList")
     rowList = m.rowList
     rowList.itemComponentName = "EpisodeRowListComponent"
-    rowList.numRows = 100
+    rowList.numRows = 5
     rowList.rowItemSize = [ [m.posterWidth, m.posterHeight] ]
     rowList.rowItemSpacing = [[ m.separ, m.separ ]]
     rowList.showRowLabel = [ true ]

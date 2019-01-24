@@ -11,6 +11,8 @@ sub init()
     m.top.overhangTitle = "Kino.Pub"
     m.top.list = m.top.findNode("categoriesLabelList")
     
+    m.top.dialog = invalid
+    
     m.currentCategory = ""
     m.top.observeField("start","start")
 end sub
@@ -19,6 +21,7 @@ sub start()
     print "CategoriesListPanel:start()"
     m.readContentTask = createObject("roSGNode", "ContentReader")
     m.readContentTask.observeField("content", "setcategories")
+    m.readContentTask.observeField("error", "error")
     
     if m.top.pType <> "bookmarks"
         m.readContentTask.baseUrl = "https://api.service-kp.com/v1/types"
@@ -29,6 +32,23 @@ sub start()
     m.readContentTask.parameters = []
     m.readContentTask.control = "RUN"
     
+end sub
+
+sub error()
+    print "CategoriesListPanel:error()"
+    source = "CategoriesListPanel:"+m.top.pType
+    errorMessage = m.global.utilities.callFunc("GetErrorMessage", {errorCode: m.readContentTask.error, source: source})
+    print errorMessage
+    font  = CreateObject("roSGNode", "Font")
+    font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
+    font.size = 24
+
+    m.dialog = createObject("roSGNode", "Dialog")
+    m.dialog.title = recode("Ошибка")
+    m.dialog.titleFont = font
+    m.dialog.message = recode(errorMessage)
+    m.dialog.messageFont = font
+    m.top.dialog = m.dialog
 end sub
 
 sub setCategories()

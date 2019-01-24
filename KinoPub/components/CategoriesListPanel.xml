@@ -10,6 +10,7 @@
         <field id="start" type="bool" />
         <field id="pType" type="string" />
         <field id="panelSet" type="node" />
+        
     </interface>
 
   <children>
