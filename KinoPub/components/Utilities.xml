@@ -3,6 +3,7 @@
 
 	<script type="text/brightscript" uri="pkg:/components/Utilities.brs" />
 	<interface>
+	   <function name="GetErrorMessage" />
 	   <function name="Encode" />
 	</interface>
 </component>

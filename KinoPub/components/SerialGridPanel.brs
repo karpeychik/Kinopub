@@ -24,11 +24,29 @@ sub loadSerial()
     m.readSerialTask.baseUrl = m.top.serialBaseUri
     m.readSerialTask.parameters = m.top.serialUriParameters
     m.readSerialTask.observeField("content", "showSerial")
+    m.readSerialTask.observeField("error", "error")
     m.readSerialTask.control = "RUN"
     
     m.top.dialog = m.progressDialog
     m.top.updateFocus = false
     m.top.panelSet.observeField("isGoingBack", "slideBack")
+end sub
+
+sub error()
+    print "SerialGridPanel:error()"
+    source = "SerialGridPanel:"
+    errorMessage = m.global.utilities.callFunc("GetErrorMessage", {errorCode: m.readSerialTask.error, source: source})
+    print errorMessage
+    font  = CreateObject("roSGNode", "Font")
+    font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
+    font.size = 24
+
+    m.dialog = createObject("roSGNode", "Dialog")
+    m.dialog.title = recode("Ошибка")
+    m.dialog.titleFont = font
+    m.dialog.message = recode(errorMessage)
+    m.dialog.messageFont = font
+    m.top.dialog = m.dialog
 end sub
 
 sub slideBack()

@@ -3,6 +3,7 @@ sub init()
     m.top.appended = false
     m.top.requestType = "GET"
     m.top.refreshAuth = true
+    m.top.timeout = 30000
 end sub
 
 sub getcontent()
@@ -17,39 +18,88 @@ sub getcontent()
 end sub
 
 sub fetchUrl()
-print "in ContentReader getContent"
+    print "ContentReader:getContent"
     print "m.top.baseUrl is " m.top.baseUrl
     url = buildUrl(m.top.baseUrl, m.top.parameters)
     
 #if development
     print "ContentReader: DevMode: getContent: " + url
     if url.Instr("https://api.service-kp.com/v1/types?") >= 0
-        urlContent = ReadAsciiFile("pkg:/devcontent/types.json")
+        data = ReadAsciiFile("pkg:/devcontent/types.json")
+        errorCode = 200
     else if url.Instr("https://api.service-kp.com/v1/bookmarks/174340?") >= 0
-        urlContent = ReadAsciiFile("pkg:/devcontent/Bookmark.txt")
+        data = ReadAsciiFile("pkg:/devcontent/Bookmark.txt")
+        errorCode = 200
     else if url.Instr("https://api.service-kp.com/v1/bookmarks?") >= 0
-        urlContent = ReadAsciiFile("pkg:/devcontent/Bookmarks.txt")
+        data = ReadAsciiFile("pkg:/devcontent/Bookmarks.txt")
+        errorCode = 200
     else if url.Instr("https://api.service-kp.com/v1/items/42916") >= 0
-        urlContent = ReadAsciiFile("pkg:/devcontent/Item.txt")
+        data = ReadAsciiFile("pkg:/devcontent/Item.txt")
+        errorCode = 200
      else if url.Instr("https://api.service-kp.com/v1/items/8739") >= 0
-        urlContent = ReadAsciiFile("pkg:/devcontent/serial.txt")
+        data = ReadAsciiFile("pkg:/devcontent/serial.txt")
+        errorCode = 200
     else if url.Instr("https://api.service-kp.com/v1/device/notify") >= 0
-        urlContent = ReadAsciiFile("pkg:/devcontent/success.txt")
+        data = ReadAsciiFile("pkg:/devcontent/success.txt")
+        errorCode = 200
     else if url.Instr("https://api.service-kp.com/v1/items") >= 0
-        urlContent = ReadAsciiFile("pkg:/devcontent/Items.txt")
+        data = ReadAsciiFile("pkg:/devcontent/Items.txt")
+        errorCode = 200
     end if
 #else
     print "ContentReader: RealMode: getContent: " + m.top.requestType+": " + url
+    
+    port=createobject("roMessagePort")
+    
     readInternet = createObject("roUrlTransfer")
     readInternet.setUrl(url)
+    readInternet.setPort(port)
     readInternet.SetCertificatesFile("common:/certs/ca-bundle.crt")
-    readInternet.setRequest(m.top.requestType)
-    urlContent = readInternet.GetToString()
+    'readInternet.setRequest(m.top.requestType)
+    
+    if m.top.requestType = "GET"
+        createRequest = readInternet.AsyncGetToString()
+    else if m.top.requestType = "POST"
+        createRequest = readInternet.AsyncPostFromString("")
+    end if
+    
+    if createRequest
+        timer=createobject("roTimeSpan")
+        timer.mark()
+        
+        while true
+            msg=wait(100,port) '100 millisecond pause
+            if type(msg)="roUrlEvent"
+                errorCode = msg.getresponsecode() 
+                if errorCode = 200
+                    data=msg.getstring()
+                end if
+                
+                exit while
+            end if
+            
+            'Check if we have hit the timeout
+            if timer.totalmilliseconds() > m.top.timeout then
+                print "ContentReader:timeout exceeded"
+                readInternet.AsyncCancel()
+                errorCode = -2
+                exit while
+            end if
+        end while
+    else
+        errorCode = -1
+    end if
+    
+    'urlContent = readInternet.GetToString()
 #end if
-  
-  json = parseJSON(urlContent)
-  
-  m.top.content = json
+    
+    print "ContentReader:errorCode:" + errorCode.ToStr()
+    if errorCode <> 200
+        m.top.error = errorCode.ToStr()
+    else
+        json = parseJSON(data)
+        m.top.content = json
+    end if
 end sub
 
 function buildUrl(baseUrl as String, parameters as Object) as String
