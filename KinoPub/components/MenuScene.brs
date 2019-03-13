@@ -89,7 +89,7 @@ sub deviceNotify()
     m.deviceNotifyTask.baseUrl = "https://api.service-kp.com/v1/device/notify"
     m.deviceNotifyTask.requestType = "POST"
     m.deviceNotifyTask.observeField("content", "startPanels")
-    m.deviceNotifyTask.parameters = ["access_token", m.global.accessToken, "title", deviceInfo.GetFriendlyName(), "hardware", deviceInfo.GetModel(), "software", deviceInfo.GetVersion()]
+    m.deviceNotifyTask.parameters = ["access_token", m.global.accessToken, "title", deviceInfo.GetFriendlyName().EncodeUriComponent(), "hardware", deviceInfo.GetModel(), "software", deviceInfo.GetVersion()]
     m.deviceNotifyTask.control = "RUN"
 end sub
 
