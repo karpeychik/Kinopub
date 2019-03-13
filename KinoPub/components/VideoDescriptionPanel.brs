@@ -43,14 +43,22 @@ end sub
 
 sub itemReceived()
     print "VideoDescriptionPanel:itemReceived"
+    
+    filesCount = m.readItemTask.content.item.videos[0].files.Count()
+    selectedFile = 1
+    
+   	if filesCount = 1
+		selectedFile = 0 
+	end if
+
     if false
         m.top.videoFormat = "hls2"
         m.top.videoTitle = "ExampleVideo"
-        m.top.videoUri = m.readItemTask.content.item.videos[0].files[1].url.hls2
+        m.top.videoUri = m.readItemTask.content.item.videos[0].files[selectedFile].url.hls2
     
         nPanel = createObject("roSGNode", "VideoNode")
         nPanel.videoFormat = "hls2"
-        nPanel.videoUri = m.readItemTask.content.item.videos[0].files[1].url.hls2
+        nPanel.videoUri = m.readItemTask.content.item.videos[0].files[selectedFile].url.hls2
         m.top.nPanel = nPanel
     else
         
