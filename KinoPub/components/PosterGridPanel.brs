@@ -9,6 +9,8 @@ sub init()
     m.top.createNextPanelOnItemFocus = false
     m.posterWidth = 250.0
     m.top.grid = m.top.findNode("posterGrid")
+
+	m.top.grid.vertFocusAnimationStyle = "floatingFocus"
     
     deviceInfo = CreateObject("roDeviceInfo")
     resolution = deviceInfo.GetUIResolution()
@@ -19,149 +21,91 @@ sub init()
     posterWidth = m.posterWidth * mmPixelCoef
     
     numColumns = Fix(gridRect.width / posterWidth)
-    m.numColumns = numColumns
     m.top.grid.numColumns = numColumns
     
-    m.top.grid.numRows = 200
+    m.top.grid.numRows = 100
     posterWidth = gridRect.width / numColumns
     m.top.grid.basePosterSize = [ posterWidth, (250 * posterWidth) / 165]
     
     m.top.observeField("start","loadCategoryPosters")
     m.top.grid.observeField("itemSelected","itemSelected")
-    m.nextPage = 1
     m.top.isVideo = false
-    m.firstPage = true
 end sub
 
 sub loadCategoryPosters()
     print "loadCategoryPosters"
-    m.top.grid.content = createObject("roSGNode", "ContentNode")
     m.top.overhangTitle = "Kino.pub"
     m.readPosterGridTask = createObject("roSGNode", "ContentReader")
     m.readPosterGridTask.baseUrl = m.top.gridContentBaseUri
     m.readPosterGridTask.parameters = m.top.gridContentUriParameters
     m.readPosterGridTask.observeField("content", "showPosterGrid")
-    m.readPosterGridTask.observeField("error", "error")
     m.readPosterGridTask.control = "RUN"
 end sub
 
 sub showPosterGrid()    
     print "PosterGrid:showPosterGrid"
-    
-    if m.firstPage
-        m.shouldPage = false
-        m.totalItems = 0
-        m.itemsLoaded = 0
-        m.maxItemsToLoad = 1000
-        m.column = 0
-        m.itemsPromised = m.readPosterGridTask.content.items.Count()
-        if m.readPosterGridTask.content.doesExist("pagination") and m.readPosterGridTask.content.pagination.doesExist("total_items") 
-            m.shouldPage = true
-            m.perPage = m.readPosterGridTask.content.pagination.perpage
-            m.totalItems = m.readPosterGridTask.content.pagination.total_items
-        end if
-        
-        for i=0 to m.readPosterGridTask.content.items.Count()-1 step 1
-            content = createObject("roSGNode", "ContentNode")
-            m.top.grid.content.appendChild(content)
-        end for
-        
-        m.rowCount = 0
-    end if
-    
+    content = createObject("roSGNode", "ContentNode")
     for each item in m.readPosterGridTask.content.items
-        itemcontent = m.top.grid.content.getChild(m.itemsLoaded)
-        itemcontent.setField("shortdescriptionline1", recode(item.title))
+        itemcontent = createObject("roSGNode", "ContentNode")
+        itemcontent.setField("shortdescriptionline1", m.global.utilities.callFunc("Encode", {str: item.title}))
         itemcontent.setField("hdgridposterurl", item.posters.small)
         itemcontent.addFields({kinoPubId: item.id.ToStr(), kinoPubType: item.type})
-        m.itemsLoaded = m.itemsLoaded + 1 
+        content.appendChild(itemContent)
     end for
-    
-    m.nextPage = m.nextPage + 1
-    
-    if m.itemsPromised > m.itemsLoaded
-        loadPage(m.nextPage)
-    else
-        m.isLoading = false
-    end if
-    
-    if m.firstPage
-        m.firstPage = false
-        m.top.grid.observeField("itemFocused", "itemFocused")
-        m.top.grid.setFocus(true)
-        m.top.grid.visible = true
-    end if
+
+	totalPages = m.readPosterGridTask.content.pagination.total
+	currentPage = m.readPosterGridTask.content.pagination.current
+	nextPage = currentPage + 1
+
+	m.top.hasNextPanel = true
+	if nextPage > totalPages
+		nextPage = totalPages
+		m.top.hasNextPanel = false		
+	end if
+	m.top.nextPage = nextPage
+
+    m.top.grid.setFocus(true)
+    m.top.grid.visible = true
+    m.top.grid.content = content
+
+    m.top.grid.observeField("focusedChild","nextPageSlide")
 end sub
 
-sub itemFocused()
-    print "PosterGrid:itemFocused"
-    itemCount = m.top.grid.content.getChildCount()
-    lastRow = (itemCount-1) \ m.numColumns
-    firstLastRowItem = lastRow * m.numColumns
-    if m.shouldPage and m.top.grid.itemFocused >= firstLastRowItem and m.itemsLoaded < m.totalItems and m.itemsLoaded < m.maxItemsToLoad
-        m.itemsPromised = m.itemsPromised + m.perPage
-        for i=0 to m.perPage-1 step 1
-            content = createObject("roSGNode", "ContentNode")
-            m.top.grid.content.appendChild(content)
-        end for
-        
-        if false = m.isLoading
-            'If we are not loading we should kick off the loading task
-            loadPage(m.nextPage)
-        end if
-    end if
-end sub
-
-sub loadPage(pageNumber as Integer)
-    print "PosterGrid:loadPage"
-    m.isLoading = true
-    m.readPosterGridTask.unobserveField("content")
-    m.readPosterGridTask = createObject("roSGNode", "ContentReader")
-    m.readPosterGridTask.baseUrl = m.top.gridContentBaseUri
-    parameters = m.top.gridContentUriParameters
-    parameters.Push("page")
-    parameters.Push(m.nextPage.ToStr())
-    m.readPosterGridTask.parameters = parameters
-    m.readPosterGridTask.observeField("content", "showPosterGrid")
-    m.readPosterGridTask.observeField("error", "error")
-    m.readPosterGridTask.control = "RUN"
-end sub
-
-sub error()
-    print "PosterGrid:error()"
-    source = "PosterGrid:"+m.nextPage.ToStr()
-    errorMessage = m.global.utilities.callFunc("GetErrorMessage", {errorCode: m.readPosterGridTask.error, source: source})
-    print errorMessage
-    font  = CreateObject("roSGNode", "Font")
-    font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-    font.size = 24
-
-    m.dialog = createObject("roSGNode", "Dialog")
-    m.dialog.title = recode("Ошибка")
-    m.dialog.titleFont = font
-    m.dialog.message = recode(errorMessage)
-    m.dialog.messageFont = font
-    m.top.dialog = m.dialog
+sub nextPageSlide(evt)
+print "PosterGrid:nextPageSlide"
+data = evt.getData()
+print m.top.nextPage
+if not m.top.panelSet.isGoingBack and type(data) <> "roInvalid"	 and m.top.hasNextPanel = true	
+	if data.horizFocusDirection = "none" and data.vertFocusDirection = "none"
+		nPanel = createObject("roSGNode", "PosterGridPanel")
+		nPanel.gridContentBaseUri = m.top.gridContentBaseUri
+		nPanel.category = m.top.category
+		
+		if m.top.category = ""
+			nPanel.gridContentUriParameters = ["page", m.top.nextPage, "perpage", 14]
+		else
+			nPanel.gridContentUriParameters = ["type", m.top.category, "page", m.top.nextPage, "perpage", 14]
+		endif
+		m.top.nPanel = nPanel
+	end if
+end if 
 end sub
 
 sub itemSelected()
     print "PosterGrid:itemSelected"
     selectedItem = m.top.grid.content.getChild(m.top.grid.itemSelected)
-    if selectedItem.kinoPubType = "movie"
+    print selectedItem
+    if selectedItem.kinoPubType = "movie" or selectedItem.kinoPubType = "documovie" or selectedItem.kinoPubType = "concert" or selectedItem.kinoPubType = "3d" or selectedItem.kinoPubType = "4k"
         nPanel = createObject("roSGNode", "VideoDescriptionPanel")
         nPanel.itemUriParameters = ["access_token", m.global.accessToken]
         itemUrl = "https://api.service-kp.com/v1/items/" + selectedItem.kinoPubId
         nPanel.itemUri = itemUrl
         m.top.nPanel = nPanel
-    else if selectedItem.kinoPubType = "serial"
+    else if selectedItem.kinoPubType = "serial" or selectedItem.kinoPubType = "docuserial" or selectedItem.kinoPubType = "tvshow"
         nPanel = createObject("roSGNode", "SerialGridPanel")
         nPanel.serialUriParameters = ["access_token", m.global.accessToken]
         itemUrl = "https://api.service-kp.com/v1/items/" + selectedItem.kinoPubId
         nPanel.serialBaseUri = itemUrl
         m.top.nPanel = nPanel
     end if
-end sub
-
-sub recode(str as string) as string
-    return m.global.utilities.callFunc("Encode", {str: str})
 end sub
