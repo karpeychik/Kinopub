@@ -1,20 +1,25 @@
 sub init()
     m.top.functionName = "getcontent"
-    m.top.appended = false
     m.top.requestType = "GET"
     m.top.refreshAuth = true
     m.top.timeout = 30000
+    m.top.authFailure = false
 end sub
 
 sub getcontent()
     currentTime = createObject("roDateTime")
     currentSeconds = currentTime.AsSeconds()
+    print "Auth mode:" m.top.refreshAuth
     if m.top.refreshAuth and m.global.doesExist("tokenExpiration") and currentSeconds + 3600 > m.global.tokenExpiration
         print "Token is about to expire, need to refresh"
         renewToken()
     end if
     
-    fetchUrl()
+    if false = m.top.authFailure
+        fetchUrl()
+    else
+        print "Skip fetch because of auth failure"
+    end if
 end sub
 
 sub fetchUrl()
@@ -94,12 +99,16 @@ sub fetchUrl()
 #end if
     
     print "ContentReader:errorCode:" + errorCode.ToStr()
-    if errorCode <> 200
+    if errorCode = 401
+        print "Got 401 back - auth"
+        m.top.authFailure = true
+    else if errorCode <> 200
         m.top.error = errorCode.ToStr()
     else
         json = parseJSON(data)
         m.top.content = json
     end if
+    
 end sub
 
 function buildUrl(baseUrl as String, parameters as Object) as String
@@ -158,25 +167,31 @@ sub renewToken()
     readInternet.SetCertificatesFile("common:/certs/ca-bundle.crt")
     readInternet.setRequest("POST")
     urlContent = readInternet.GetToString()
-    json = parseJSON(urlContent)
     
-    if json <> invalid    
-        m.global.accessToken = json.access_token
-        m.global.refreshToken = json.refresh_token
-        date = CreateObject("roDateTime")
-        m.global.tokenExpiration = date.AsSeconds() + json.expires_in
-        sec = createObject("roRegistrySection", "Authentication")
-        sec.Write("AuthenticationToken", json.access_token)
-        sec.Write("RefreshToken", json.refresh_token)
-        sec.Write("TokenExpiration", m.global.tokenExpiration.ToStr())
-        sec.Flush()
-        
-        print "Current auth:"
-        print "AuthToken: " + m.global.accessToken
-        print "RefreshToken: " + m.global.refreshToken
-        print "Expiration:" + m.global.tokenExpiration.ToStr()
+    if urlContent = ""
+        print "Renew response is empty"
+        m.top.authFailure = true
     else
-        print "Couldn't refresh access token."
-        m.top.error = "Couldn't refresh access token."
+        json = parseJSON(urlContent)
+        
+        if json <> invalid    
+            m.global.accessToken = json.access_token
+            m.global.refreshToken = json.refresh_token
+            date = CreateObject("roDateTime")
+            m.global.tokenExpiration = date.AsSeconds() + json.expires_in
+            sec = createObject("roRegistrySection", "Authentication")
+            sec.Write("AuthenticationToken", json.access_token)
+            sec.Write("RefreshToken", json.refresh_token)
+            sec.Write("TokenExpiration", m.global.tokenExpiration.ToStr())
+            sec.Flush()
+            
+            print "Current auth:"
+            print "AuthToken: " + m.global.accessToken
+            print "RefreshToken: " + m.global.refreshToken
+            print "Expiration:" + m.global.tokenExpiration.ToStr()
+        else
+            print "Couldn't refresh access token."
+            m.top.authFailure = true
+        end if
     end if
 end sub

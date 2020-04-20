@@ -88,9 +88,20 @@ sub deviceNotify()
     m.deviceNotifyTask = createObject("roSGNode", "ContentReader")
     m.deviceNotifyTask.baseUrl = "https://api.service-kp.com/v1/device/notify"
     m.deviceNotifyTask.requestType = "POST"
-    m.deviceNotifyTask.observeField("content", "startPanels")
+    m.deviceNotifyTask.observeField("content", "onDeviceNotify")
+    m.deviceNotifyTask.observeField("authFailure", "onDeviceNotify")
     m.deviceNotifyTask.parameters = ["access_token", m.global.accessToken, "title", deviceInfo.GetFriendlyName(), "hardware", deviceInfo.GetModel(), "software", deviceInfo.GetVersion()]
     m.deviceNotifyTask.control = "RUN"
+end sub
+
+sub onDeviceNotify()
+    print "MenuScene:onDeviceNotify"
+    if m.deviceNotifyTask.authFailure
+        print "Auth failed"
+        showAuthentication()
+    else 
+        startPanels()
+    end if
 end sub
 
 sub slideBack()
