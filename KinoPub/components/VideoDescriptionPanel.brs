@@ -12,6 +12,7 @@ sub init()
     m.top.observeField("updateFocus",updateFocus)
     m.top.observeField("start","showVideoDetails")
     m.top.isVideo = false
+    m.videoIndex = 0
 end sub
 
 sub showVideoDetails()
@@ -46,11 +47,11 @@ sub itemReceived()
     if false
         m.top.videoFormat = "hls2"
         m.top.videoTitle = "ExampleVideo"
-        m.top.videoUri = m.readItemTask.content.item.videos[0].files[1].url.hls2
+        m.top.videoUri = m.readItemTask.content.item.videos[m.videosIndex].files[1].url.hls2
     
         nPanel = createObject("roSGNode", "VideoNode")
         nPanel.videoFormat = "hls2"
-        nPanel.videoUri = m.readItemTask.content.item.videos[0].files[1].url.hls2
+        nPanel.videoUri = m.readItemTask.content.item.videos[m.videoIndex].files[1].url.hls2
         m.top.nPanel = nPanel
     else
         
@@ -136,13 +137,67 @@ sub itemReceived()
         
         addLabel(group, plot, 8, m.font16, 0, 0, labelWidth)
         
-        groupSpacings = createObject("roArray", group.getChildCount(), false)
-        for i=0 to group.getChildCount() - 2 step 1
+        ' There may be multiple videos in the movie. Handle them here
+        m.currentVideo = 0
+        m.multiMovie = false
+        if(m.readItemTask.content.item.videos.Count() > 1)
+            m.multiMovie = true
+        end if
+        
+        groupLength = group.getChildCount()
+        groupSpacings = createObject("roArray", groupLength, false)
+        for i=0 to groupLength - 2 step 1
             groupSpacings[i] = 5.0
         end for
         
-        groupSpacings[group.getChildCount() - 1] = 12.0
-        group.itemSpacings = groupSpacings                
+        groupSpacings[groupLength - 1] = 0.0
+        group.itemSpacings = groupSpacings
+        
+        ' There may be multiple videos in the movie. Handle them here
+        m.currentVideo = 0
+        m.multiMovie = false
+        if(m.readItemTask.content.item.videos.Count() > 1)
+            m.multiMovie = true
+        end if
+        
+        if(m.multiMovie)
+            print("This is multi movie!")
+            rowList = createObject("roSGNode", "RowList")
+            rowList.itemComponentName = "SeasonRowListComponent"
+            rowList.numRows = 1
+            rowList.rowItemSize = [ [200, 100] ]
+            rowList.rowItemSpacing = [[ 5, 0 ]]
+            rowList.showRowLabel = [ true ]
+            rowlist.itemSize = [ 700, 100 ]
+            rowList.showRowLabel = false
+            rowList.drawFocusFeedback = false
+            rowList.vertFocusAnimationStyle = "fixedFocusWrap" 
+            rowList.rowFocusAnimationStyle = "floatingFocus"
+            rowList.observeField("rowItemSelected", "rowItemSelected")
+            rowList.height=100
+            m.rowList = rowList
+            
+            content = createObject("roSGNode", "ContentNode")
+            row = createObject("roSGNode", "ContentNode")
+            row.title = ""
+            
+            for i=0 to m.readItemTask.content.item.videos.Count()-1 step 1                
+                
+                itemContent = createObject("roSGNode", "ContentNode")
+                itemContent.title = recode(m.readItemTask.content.item.videos[i].title)
+                itemContent.HDPosterUrl = m.readItemTask.content.item.videos[i].thumbnail
+                itemContent.addFields({itemWidth: 175, itemHeight: 100, seasonWatched: false, scale:false })
+                row.appendChild(itemContent)
+            end for 
+            
+            content.appendChild(row)
+    
+            print content
+    
+            rowList.content = content
+            group.appendChild(rowList)
+            rowList.setFocus(true)
+        end if
         
         m.buttons = createObject("roArray", 5, false)
         buttonGroup = createObject("roSGNode", "LayoutGroup")
@@ -169,7 +224,9 @@ sub itemReceived()
         group.appendChild(buttonGroup)
         m.top.appendChild(group)
         
-        m.buttons[0].setFocus(true)
+        if(m.multiMovie = false)
+            m.buttons[0].setFocus(true)
+        end if
    
    end if
 end sub
@@ -196,7 +253,7 @@ end sub
 
 sub playButton()
     print "VideoDescriptionPanel:playButton"
-    episode = m.readItemTask.content.item.videos[0]
+    episode = m.readItemTask.content.item.videos[m.videoIndex]
     if episode.doesExist("watching") and episode.watching <> invalid and episode.watching.doesExist("status") and episode.watching.doesExist("time") and episode.watching.status = 0 and episode.watching.time <> invalid
         m.dialog = createObject("roSGNode", "Dialog")
         
@@ -228,7 +285,7 @@ sub watchingDialogResponse()
     m.dialog.close = true
     seekTo = 0.0
     if button = 0
-        seekTo = m.readItemTask.content.item.videos[0].watching.time
+        seekTo = m.readItemTask.content.item.videos[m.videoIndex].watching.time
     end if
     
     gotoVideo(seekTo)
@@ -236,9 +293,10 @@ end sub
 
 sub gotoVideo(seek as Float)
     print "VideoDescriptionPanel:gotoVideo"
+    print m.videoIndex
     nPanel = createObject("roSGNode", "VideoNode")
     
-    for each video in m.readItemTask.content.item.videos[0].files
+    for each video in m.readItemTask.content.item.videos[m.videoIndex].files
         if video.quality = m.qualities[m.qualityIndex]
             videoUri = video.url[m.streams[m.streamIndex]]
         end if
@@ -256,7 +314,11 @@ sub gotoVideo(seek as Float)
             seasonId : invalid,
             seek : seek,
             watched : false})
+        print "Playlist add"
+        print episodeEntry
         playlist.appendChild(episodeEntry)
+        
+    print episodeEntry
     
     nPanel.playlist = playlist
     m.top.nPanel = nPanel
@@ -312,12 +374,12 @@ end sub
 
 sub setQuality(item as Object)
     print "VideoDescriptionPanel:setQuality"
-    qualityCount = item.videos[0].files.Count()
+    qualityCount = item.videos[m.videoIndex].files.Count()
     m.qualities = createObject("roArray", qualityCount, false)
     m.qualityIndex = -1
-    for i=0 to item.videos[0].files.Count()-1  step 1
-        m.qualities.push(item.videos[0].files[i].quality)
-        if item.videos[0].files[i].quality = "1080p"
+    for i=0 to item.videos[m.videoIndex].files.Count()-1  step 1
+        m.qualities.push(item.videos[m.videoIndex].files[i].quality)
+        if item.videos[m.videoIndex].files[i].quality = "1080p"
             m.qualityIndex = i
         end if
     end for
@@ -337,7 +399,7 @@ sub setStreams(item as Object)
         preferredStream = m.streams[m.streamIndex]
     end if
     
-    m.streams =  item.videos[0].files[m.qualityIndex].url.Keys()
+    m.streams =  item.videos[m.videoIndex].files[m.qualityIndex].url.Keys()
     m.streams.Sort("")
     
     m.streamIndex = -1
@@ -353,11 +415,11 @@ sub setStreams(item as Object)
 end sub
 
 sub setAudio(item as Object)
-    m.audioTitles = createObject("roArray", item.videos[0].audios.Count(), false)
-    m.audioIndexes = createObject("roArray", item.videos[0].audios.Count(), false)
+    m.audioTitles = createObject("roArray", item.videos[m.videoIndex].audios.Count(), false)
+    m.audioIndexes = createObject("roArray", item.videos[m.videoIndex].audios.Count(), false)
     m.audioIndex = 0
     index = 1
-    for each track in item.videos[0].audios
+    for each track in item.videos[m.videoIndex].audios
         m.audioIndexes.push(track.index.ToStr())
         if track.type = invalid
             title = createObject("roString")
@@ -424,7 +486,7 @@ function getDuration(durationSeconds as  Integer) as String
     durationString = getDurationString(durationSeconds)
     
     result = createObject("roString")
-    dString = "Длительность: "
+    dString = "Продолжительность: "
     result.AppendString(dString,dString.Len())
     result.AppendString(durationString,durationString.Len())
     
@@ -510,7 +572,7 @@ end function
 function getGenres(genres as Object) as String
     print "VideoDescriptionPanel:getGenres"
     genreString = createObject("roString")
-    gString = "Жанр: "
+    gString = "Жанры: "
     genreString.AppendString(gString,gString.Len())
     for i=0 To genres.Count() - 1 Step 1
         if i>0
@@ -532,7 +594,8 @@ end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
 print "VideoDescriptionPanel:onKeyEvent"
-    if press
+print key
+    if press        
         if key = "right" and m.currentButtonIndex < m.buttons.Count() - 1
             m.currentButtonIndex = m.currentButtonIndex + 1
             m.buttons[m.currentButtonIndex].setFocus(true)
@@ -543,6 +606,19 @@ print "VideoDescriptionPanel:onKeyEvent"
             m.currentButtonIndex = m.currentButtonIndex - 1
             m.buttons[m.currentButtonIndex].setFocus(true)
             return true
+        end if
+    else
+        if(m.multiMovie)
+            if key = "OK" and m.rowList.isInFocusChain()
+                print "All right"
+                m.videoIndex = m.rowList.rowItemSelected[1]
+                print m.rowList.rowItemSelected[1]
+                m.buttons[0].setFocus(true)
+            end if
+            
+            if key = "up" and (not m.rowList.hasFocus())
+                m.rowList.setFocus(true) 
+            end if
         end if
     end if
     

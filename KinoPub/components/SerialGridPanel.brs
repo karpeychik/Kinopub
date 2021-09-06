@@ -42,7 +42,7 @@ sub error()
     font.size = 24
 
     m.dialog = createObject("roSGNode", "Dialog")
-    m.dialog.title = recode("Ошибка")
+    m.dialog.title = recode("ÐžÑˆÐ¸Ð±ÐºÐ°")
     m.dialog.titleFont = font
     m.dialog.message = recode(errorMessage)
     m.dialog.messageFont = font
@@ -201,7 +201,7 @@ sub showSerial()
         itemContent = buildSeasonNode(i)
         itemContent.title = recode("Сезон " + m.readSerialTask.content.item.seasons[i].number.ToStr())
         itemContent.HDPosterUrl = m.readSerialTask.content.item.posters.small
-        itemContent.addFields({itemWidth: 100, itemHeight: 200, seasonWatched: seasonWatched })
+        itemContent.addFields({itemWidth: 100, itemHeight: 200, seasonWatched: seasonWatched, scale: true })
         row.appendChild(itemContent)
     end for 
     
@@ -269,7 +269,7 @@ end function
 function getGenres(genres as Object) as String
     print "SerialGridPanel:getGenres"
     genreString = createObject("roString")
-    gString = "Жанр: "
+    gString = "Жанры: "
     genreString.AppendString(gString,gString.Len())
     for i=0 To genres.Count() - 1 Step 1
         if i>0
@@ -308,7 +308,7 @@ function getRate(item as Object)
     end if
     
     if item.DoesExist("kinopoisk_rating") and item.kinopoisk_rating <> invalid
-        iString = "Кинопоиск: "
+        iString = "КиноПоиск: "
         result.AppendString(iString,iString.Len())
         
         rate = item.kinopoisk_rating.ToStr()

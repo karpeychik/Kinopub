@@ -16,37 +16,50 @@ sub showcontent()
     itemcontent = m.top.itemContent 
     
     borderStroke = 2
+    left = borderStroke
+    top = borderStroke
+    rectleft = 0
+    rectTop = 0
+    rectWidth = itemContent.itemWidth
+    rectHeight = itemContent.itemheight
+    height =itemContent.itemheight - borderStroke*2
+    width = itemContent.itemWidth - borderStroke*2 
+    textTop = height - 18
     
-    availableWidth = itemContent.itemWidth - (borderStroke*2)
-    availableHeight = itemContent.itemheight - (borderStroke*2) - 18
-   
-    widthHeight = availableWidth * 250 / 165
-    heightWidth = availableHeight * 165 / 250
+    if itemContent.scale
+        availableWidth = itemContent.itemWidth - (borderStroke*2)
+        availableHeight = itemContent.itemheight - (borderStroke*2) - 18   
+        widthHeight = availableWidth * 250 / 165
+        heightWidth = availableHeight * 165 / 250
     
-    if widthHeight <= availableHeight
-        width = availableWidth
-        height = widthHeight
-    else
-        height = availableHeight
-        width = heightWidth
+        if widthHeight <= availableHeight
+            width = availableWidth
+            height = widthHeight
+        else
+            height = availableHeight
+            width = heightWidth
+        end if
+    
+        left = itemContent.itemwidth/2 - width/2
+        top = itemContent.itemheight/2 - height/2
+        rectLeft = left - borderStroke
+        rectWidth = width + (borderStroke*2)
+        rectHeight = height + (borderStroke*2)
+        rectTop = top - borderStroke
+        textTop = height + borderStroke
     end if
     
-    left = itemContent.itemwidth/2 - width/2
-    
-    rectLeft = left - borderStroke
-    rectWidth = width + (borderStroke*2)
-    rectHeight = height + (borderStroke*2)
     m.rectangle = createObject("roSGNode", "Rectangle")
     m.rectangle.width = rectWidth
     m.rectangle.height = rectHeight
-    m.rectangle.translation = [rectLeft, 0]
+    m.rectangle.translation = [rectLeft, rectTop]
     m.rectangle.opacity = 0
     m.top.appendChild(m.rectangle)
    
     poster = createObject("roSGNode", "Poster")
     m.poster = poster
     poster.width = width
-    poster.translation = [left, borderStroke ]
+    poster.translation = [left, top]
     poster.height = height
     poster.loadDisplayMode = "scaleToFit"
     poster.uri = itemcontent.HDPosterUrl
@@ -59,7 +72,7 @@ sub showcontent()
    
     itemlabel = createObject("roSGNode", "Label")
     itemlabel.font = m.font18 
-    itemlabel.translation = [ 0, height + borderStroke ]
+    itemlabel.translation = [ left, textTop ]
     itemlabel.horizAlign = "center"
     itemlabel.width = itemContent.itemwidth
     itemlabel.height = 18

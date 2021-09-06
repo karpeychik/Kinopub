@@ -20,6 +20,8 @@ sub startVideo()
     print "VideoNode:startVideo()"
     
     content = getContentPlaylist(invalid, 0, m.top.playlist.getChild(0).seek.ToStr())
+    
+    print content
 
     m.video = createObject("roSGNode", "Video")
     m.top.appendChild(m.video)
@@ -162,7 +164,10 @@ function getContentPlaylist(preferredAudio as Object, firstVideo as Integer, fir
         videocontent.title = ""
         videocontent.PlayStart = item.seek
         content.appendChild(videoContent)
+        print videocontent
     end for
+    print "Here is content!"
+    print content
     return content
 end function
 
