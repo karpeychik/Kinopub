@@ -90,8 +90,7 @@ sub deviceNotify()
     m.deviceNotifyTask.requestType = "POST"
     m.deviceNotifyTask.observeField("content", "onDeviceNotify")
     m.deviceNotifyTask.observeField("authFailure", "onDeviceNotify")
-    ' deviceInfo.GetFriendlyName()
-    m.deviceNotifyTask.parameters = ["access_token", m.global.accessToken, "title", "myTV", "hardware", deviceInfo.GetModel(), "software", deviceInfo.GetVersion()]
+    m.deviceNotifyTask.parameters = ["access_token", m.global.accessToken, "title", deviceInfo.GetFriendlyName().EncodeUriComponent(), "hardware", deviceInfo.GetModel(), "software", deviceInfo.GetVersion()]
     m.deviceNotifyTask.control = "RUN"
 end sub
 

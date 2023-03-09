@@ -122,9 +122,11 @@ sub categorySelected()
                 if m.top.pType <> "bookmarks"
                     m.preparedPanel.gridContentBaseUri = "https://api.service-kp.com/v1/items"
                     m.preparedPanel.gridContentUriParameters = ["type", m.currentCategory]
+                    m.preparedPanel.category = m.currentCategory
                 else
                     m.preparedPanel.gridContentBaseUri = "https://api.service-kp.com/v1/bookmarks/" + m.currentCategory
                     m.preparedPanel.gridContentUriParameters = []
+                    m.preparedPanel.category = ""
                 end if
             end if
 

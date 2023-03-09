@@ -511,7 +511,7 @@ end function
 function getGenres(genres as Object) as String
     print "VideoDescriptionPanel:getGenres"
     genreString = createObject("roString")
-    gString = "Жанр: "
+    gString = "Жанры: "
     genreString.AppendString(gString,gString.Len())
     for i=0 To genres.Count() - 1 Step 1
         if i>0
