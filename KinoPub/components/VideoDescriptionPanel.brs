@@ -354,7 +354,7 @@ sub setStreams(item as Object)
 end sub
 
 sub setAudio(item as Object)
-    m.audioTitles = createObject("roArray", item.videos[0].audios.Count(), false)
+    m.audioTitles  = createObject("roArray", item.videos[0].audios.Count(), false)
     m.audioIndexes = createObject("roArray", item.videos[0].audios.Count(), false)
     m.audioIndex = 0
     index = 1
@@ -362,14 +362,24 @@ sub setAudio(item as Object)
         m.audioIndexes.push(track.index.ToStr())
         if track.type = invalid
             title = createObject("roString")
-            title.AppendString("Track ",6)
+            title.AppendString("Track ", 6)
             str = index.ToStr()
             title.AppendString(str, str.Len())
         else
-            title = recode(track.type.title)
+            title = track.type.title
+            if track.lang <> invalid
+                title = title + " (" + track.lang + ")"
+            end if
+            if track.author <> invalid AND track.author.title <> invalid
+                title = title + " - " + track.author.title
+            end if
+            if track.codec <> invalid
+                title = title + " - " + UCase(track.codec)
+            end if
+            title = recode(title)
         end if
         m.audioTitles.push(title)
-        index = index+1
+        index = index + 1
     end for
 end sub
 
