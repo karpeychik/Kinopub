@@ -10,9 +10,9 @@ sub init()
     m.top.optionsAvailable = false
     m.top.overhangTitle = "Kino.Pub"
     m.top.list = m.top.findNode("categoriesLabelList")
-    
+
     m.top.dialog = invalid
-    
+
     m.currentCategory = ""
     m.top.observeField("start","start")
 end sub
@@ -22,16 +22,16 @@ sub start()
     m.readContentTask = createObject("roSGNode", "ContentReader")
     m.readContentTask.observeField("content", "setcategories")
     m.readContentTask.observeField("error", "error")
-    
+
     if m.top.pType <> "bookmarks"
         m.readContentTask.baseUrl = "https://api.service-kp.com/v1/types"
     else
         m.readContentTask.baseUrl = "https://api.service-kp.com/v1/bookmarks"
     end if
-    
+
     m.readContentTask.parameters = []
     m.readContentTask.control = "RUN"
-    
+
 end sub
 
 sub error()
@@ -53,14 +53,14 @@ end sub
 
 sub setCategories()
     print "CategoriesListPanel:setCategories()"
-    
+
     content = createObject("roSGNode", "ContentNode")
     if(m.top.pType <> "bookmarks")
         itemcontent = content.createChild("ContentNode")
         itemcontent.setField("id", "bookmarks")
         itemContent.addFields({ kinoPubId: "bookmarks"})
         itemcontent.setField("title", recode("Закладки"))
-        
+
         itemId = 0
         for each item in m.readContentTask.content.items
             itemcontent = content.createChild("ContentNode")
@@ -69,7 +69,7 @@ sub setCategories()
             itemcontent.setField("title", recode(item.title))
             itemId = itemId+1
         end for
-        
+
     else
         itemId = 0
         for each item in m.readContentTask.content.items
@@ -80,17 +80,17 @@ sub setCategories()
             itemId = itemId+1
         end for
     end if
-    
+
     m.top.list.content = content
     m.top.list.observeField("itemFocused", "itemFocused")
-    
+
     m.emptyPanel = createObject("roSGNode", "EmptyPanel")
     m.emptyPanel.panelSet = m.top.panelSet
     m.emptyPanel.pType = m.top.pType
     m.emptyPanel.observeField("focusedChild", "categorySelected")
-    
+
     m.top.panelSet.appendChild(m.emptyPanel)
-    
+
     m.top.setFocus(true)
 end sub
 
@@ -104,7 +104,7 @@ sub itemFocused()
         m.preparedPanel.panelSet = m.top.panelSet
         m.preparedPanel.pType = "bookmarks"
         m.currentCategory = "bookmarks"
-    else 
+    else
         m.preparedPanel = createObject("roSGNode", "PosterGridPanel")
         m.preparedPanel.previousPanel = m.top
         m.currentCategory = selectedCategory
@@ -127,7 +127,7 @@ sub categorySelected()
                     m.preparedPanel.gridContentUriParameters = []
                 end if
             end if
-            
+
             m.top.nPanel = m.preparedPanel
         else
             m.emptyPanel.setFocus(false)
