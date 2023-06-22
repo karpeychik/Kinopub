@@ -1,6 +1,6 @@
 sub init()
       print "VideoNode:init()"
-      
+
       m.top.isVideo = true
       m.top.seek = 0.0
       m.top.observeField("start", "startVideo")
@@ -18,7 +18,7 @@ end sub
 
 sub startVideo()
     print "VideoNode:startVideo()"
-    
+
     content = getContentPlaylist(invalid, 0, m.top.playlist.getChild(0).seek.ToStr())
 
     m.video = createObject("roSGNode", "Video")
@@ -28,7 +28,7 @@ sub startVideo()
     m.video.contentIsPlaylist = true
 
     m.video.observeField("state","stateChanged")
-    
+
     m.video.control = "play"
     m.video.observeField("audioTrack","audioStreamUpdate")
     m.video.observeField("contentIndex","trackUpdate")
@@ -47,7 +47,7 @@ sub stateChanged()
         if m.statusTimer <> invalid
             m.statusTimer.control = "stop"
          end if
-         
+
          if m.video.state <> "error" and m.video.state <> "buffering"
             timerFired()
          end if
@@ -62,7 +62,7 @@ sub timerFired()
     else if m.watched = false
         m.watched = true
         markwatched()
-    end if    
+    end if
 end sub
 
 sub markWatched()
@@ -72,25 +72,25 @@ sub markWatched()
     m.updateStatusTask.requestType = "GET"
 
     parameters = createObject("roArray", 8, false)
-    
+
     parameters.Push("id")
     parameters.Push(m.top.playlist.getChild(contentIndex).videoId)
-    
+
     parameters.Push("video")
     parameters.Push(m.top.playlist.getChild(contentIndex).videoNumber.ToStr())
-    
+
     if(m.top.playlist.getChild(contentIndex).seasonId <> invalid)
-        parameters.Push("season") 
+        parameters.Push("season")
         parameters.Push(m.top.playlist.getChild(contentIndex).seasonId)
     end if
-    
+
     m.updateStatusTask.baseUrl = "https://api.service-kp.com/v1/watching/toggle"
     parameters.Push("watched")
     parameters.Push("1")
-    
+
     m.updateStatusTask.parameters = parameters
     m.updateStatusTask.control = "RUN"
-    
+
     print "Marking watched"
     playlistIndex = m.firstPlaylistVideo + contentIndex
     m.top.playList.getChild(playListIndex).watched = true
@@ -104,25 +104,25 @@ sub markTime()
     m.updateStatusTask.requestType = "GET"
 
     parameters = createObject("roArray", 8, false)
-    
+
     parameters.Push("id")
     parameters.Push(m.top.playlist.getChild(contentIndex).videoId)
-    
+
     parameters.Push("video")
     parameters.Push(m.top.playlist.getChild(contentIndex).videoNumber.ToStr())
-    
+
     if(m.top.playlist.getChild(contentIndex).seasonId <> invalid)
-        parameters.Push("season") 
+        parameters.Push("season")
         parameters.Push(m.top.playlist.getChild(contentIndex).seasonId)
     end if
-    
+
     m.updateStatusTask.baseUrl = "https://api.service-kp.com/v1/watching/marktime"
     parameters.Push("time")
     parameters.Push(m.video.position.ToStr())
-    
+
     m.updateStatusTask.parameters = parameters
     m.updateStatusTask.control = "RUN"
-    
+
     print "Marking unwatched"
     playlistIndex = m.firstPlaylistVideo + contentIndex
     m.top.playList.getChild(playListIndex).watched = false
@@ -132,15 +132,15 @@ end sub
 sub audioStreamUpdate()
     print "VideoNode:audioStreamUpdate"
     print m.video.audioTrack
-    
+
     videoTrackIndex = m.video.audioTrack
     currentVideo = m.video.contentIndex
     currentTime = m.video.position
-    
+
     'm.video.control = "stop"
     if m.top.playlist.getChildCount() > 1
         newContent = getContentPlaylist(videoTrackIndex, currentVideo, currentTime.ToStr())
-        
+
         m.video.content = newContent
         m.firstPlaylistVideo = currentVideo
         m.video.control = "play"
@@ -156,8 +156,12 @@ function getContentPlaylist(preferredAudio as Object, firstVideo as Integer, fir
         videocontent.url = item.videoUri
         if preferredAudio = invalid
             videocontent.TrackIdAudio = item.audioTrack
-        else 
+        else
             videocontent.TrackIdAudio = preferredAudio
+        end if
+
+        if item.subtitleUrl <> invalid
+            videocontent.srt = item.subtitleUrl
         end if
         videocontent.title = ""
         videocontent.PlayStart = item.seek

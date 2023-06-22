@@ -153,13 +153,14 @@ sub itemReceived()
         setQuality(m.readItemTask.content.item)
 
         setAudio(m.readItemTask.content.item)
+        setSubtitles(m.readItemTask.content.item)
 
         addButton(buttonGroup, "play", "playButton")
 
         'TODO: add subtitle and audio support
         'TODO: save previous settings
         addButton(buttonGroup, "audio", "audioButton")
-        'addButton(buttonGroup, "sub", "otherButton")
+        addButton(buttonGroup, "sub",   "subtitleButton")
         addButton(buttonGroup, m.qualities[m.qualityIndex], "qualityButton")
         m.qualityButton = m.buttons[m.buttons.Count()-1]
         addButton(buttonGroup, m.streams[m.streamIndex], "streamButton")
@@ -252,6 +253,7 @@ sub gotoVideo(seek as Float)
             videoFormat: m.streams[m.streamIndex],
             videoUri : videoUri,
             audioTrack : m.audioIndexes[m.audioIndex],
+            subtitleUrl: m.subtitleUrl,
             videoId : m.readItemTask.content.item.id.ToStr(),
             videoNumber : 1,
             seasonId : invalid,
@@ -270,6 +272,16 @@ sub audioButton()
     m.dialog.ButtonGroup.textFont = m.font18
     m.dialog.ButtonGroup.focusedTextFont = m.font18
     m.dialog.observeField("buttonSelected", "audioSelected")
+    m.top.dialog = m.dialog
+end sub
+
+sub subtitleButton()
+    print "VideoDescriptionPanel:subtitleButton"
+    m.dialog = createObject("roSGNode", "Dialog")
+    m.dialog.buttons = m.subtitlesTitles
+    m.dialog.ButtonGroup.textFont = m.font18
+    m.dialog.ButtonGroup.focusedTextFont = m.font18
+    m.dialog.observeField("buttonSelected", "subtitleSelected")
     m.top.dialog = m.dialog
 end sub
 
@@ -308,6 +320,13 @@ end sub
 sub audioSelected()
     print "VideoDescriptionPanel:audioSelected"
     m.audioIndex = m.dialog.buttonSelected
+    m.dialog.close = true
+end sub
+
+sub subtitleSelected()
+    print "VideoDescriptionPanel:subtitleSelected"
+    m.subtitleIndex = m.dialog.buttonSelected
+    m.subtitleUrl = m.subtitlesUrls[m.subtitleIndex]
     m.dialog.close = true
 end sub
 
@@ -354,11 +373,12 @@ sub setStreams(item as Object)
 end sub
 
 sub setAudio(item as Object)
-    m.audioTitles  = createObject("roArray", item.videos[0].audios.Count(), false)
-    m.audioIndexes = createObject("roArray", item.videos[0].audios.Count(), false)
+    audios = item.videos[0].audios
+    m.audioTitles  = createObject("roArray", audios.Count(), false)
+    m.audioIndexes = createObject("roArray", audios.Count(), false)
     m.audioIndex = 0
     index = 1
-    for each track in item.videos[0].audios
+    for each track in audios
         m.audioIndexes.push(track.index.ToStr())
         if track.type = invalid
             title = createObject("roString")
@@ -383,7 +403,25 @@ sub setAudio(item as Object)
     end for
 end sub
 
-sub otherButton()
+sub setSubtitles(item as Object)
+    subtitles = item.videos[0].subtitles
+    m.subtitlesTitles = createObject("roArray", subtitles.Count(), false)
+    m.subtitlesUrls   = createObject("roArray", subtitles.Count(), false)
+    m.subtitleIndex   = 0
+    m.subtitleUrl     = invalid
+    index = 1
+    m.subtitlesUrls.push(invalid)
+    m.subtitlesTitles.push("-")
+
+    for each subtitle in subtitles
+        m.subtitlesUrls.push(subtitle.url.ToStr())
+        title = subtitle.lang
+        if subtitle.embed
+            title = title + " (embedded)"
+        end if
+        m.subtitlesTitles.push(title)
+        index = index + 1
+    end for
 end sub
 
 function getDirector(item as Object)
