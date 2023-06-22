@@ -7,25 +7,25 @@ sub init()
     m.top.focusable = true
     m.top.hasNextPanel = false
     m.top.createNextPanelOnItemFocus = false
-    m.posterWidth = 250.0
+    m.posterWidth = 200.0
     m.top.grid = m.top.findNode("posterGrid")
-    
+
     deviceInfo = CreateObject("roDeviceInfo")
     resolution = deviceInfo.GetUIResolution()
     physicalWidth = deviceInfo.GetDisplayProperties().Width * 10.0
     mmPixelCoef = physicalWidth / resolution.width
-    
+
     gridRect = m.top.boundingRect()
     posterWidth = m.posterWidth * mmPixelCoef
-    
+
     numColumns = Fix(gridRect.width / posterWidth)
     m.numColumns = numColumns
     m.top.grid.numColumns = numColumns
-    
+
     m.top.grid.numRows = 200
     posterWidth = gridRect.width / numColumns
     m.top.grid.basePosterSize = [ posterWidth, (250 * posterWidth) / 165]
-    
+
     m.top.observeField("start","loadCategoryPosters")
     m.top.grid.observeField("itemSelected","itemSelected")
     m.nextPage = 1
@@ -45,9 +45,9 @@ sub loadCategoryPosters()
     m.readPosterGridTask.control = "RUN"
 end sub
 
-sub showPosterGrid()    
+sub showPosterGrid()
     print "PosterGrid:showPosterGrid"
-    
+
     if m.firstPage
         m.shouldPage = false
         m.totalItems = 0
@@ -55,36 +55,36 @@ sub showPosterGrid()
         m.maxItemsToLoad = 1000
         m.column = 0
         m.itemsPromised = m.readPosterGridTask.content.items.Count()
-        if m.readPosterGridTask.content.doesExist("pagination") and m.readPosterGridTask.content.pagination.doesExist("total_items") 
+        if m.readPosterGridTask.content.doesExist("pagination") and m.readPosterGridTask.content.pagination.doesExist("total_items")
             m.shouldPage = true
             m.perPage = m.readPosterGridTask.content.pagination.perpage
             m.totalItems = m.readPosterGridTask.content.pagination.total_items
         end if
-        
+
         for i=0 to m.readPosterGridTask.content.items.Count()-1 step 1
             content = createObject("roSGNode", "ContentNode")
             m.top.grid.content.appendChild(content)
         end for
-        
+
         m.rowCount = 0
     end if
-    
+
     for each item in m.readPosterGridTask.content.items
         itemcontent = m.top.grid.content.getChild(m.itemsLoaded)
         itemcontent.setField("shortdescriptionline1", recode(item.title))
         itemcontent.setField("hdgridposterurl", item.posters.small)
         itemcontent.addFields({kinoPubId: item.id.ToStr(), kinoPubType: item.type})
-        m.itemsLoaded = m.itemsLoaded + 1 
+        m.itemsLoaded = m.itemsLoaded + 1
     end for
-    
+
     m.nextPage = m.nextPage + 1
-    
+
     if m.itemsPromised > m.itemsLoaded
         loadPage(m.nextPage)
     else
         m.isLoading = false
     end if
-    
+
     if m.firstPage
         m.firstPage = false
         m.top.grid.observeField("itemFocused", "itemFocused")
@@ -104,7 +104,7 @@ sub itemFocused()
             content = createObject("roSGNode", "ContentNode")
             m.top.grid.content.appendChild(content)
         end for
-        
+
         if false = m.isLoading
             'If we are not loading we should kick off the loading task
             loadPage(m.nextPage)
