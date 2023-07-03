@@ -29,27 +29,21 @@ sub fetchUrl()
     
 #if development
     print "ContentReader: DevMode: getContent: " + url
+    errorCode = 200
     if url.Instr("https://api.service-kp.com/v1/types?") >= 0
         data = ReadAsciiFile("pkg:/devcontent/types.json")
-        errorCode = 200
     else if url.Instr("https://api.service-kp.com/v1/bookmarks/174340?") >= 0
         data = ReadAsciiFile("pkg:/devcontent/Bookmark.txt")
-        errorCode = 200
     else if url.Instr("https://api.service-kp.com/v1/bookmarks?") >= 0
         data = ReadAsciiFile("pkg:/devcontent/Bookmarks.txt")
-        errorCode = 200
     else if url.Instr("https://api.service-kp.com/v1/items/42916") >= 0
         data = ReadAsciiFile("pkg:/devcontent/Item.txt")
-        errorCode = 200
      else if url.Instr("https://api.service-kp.com/v1/items/8739") >= 0
         data = ReadAsciiFile("pkg:/devcontent/serial.txt")
-        errorCode = 200
     else if url.Instr("https://api.service-kp.com/v1/device/notify") >= 0
         data = ReadAsciiFile("pkg:/devcontent/success.txt")
-        errorCode = 200
     else if url.Instr("https://api.service-kp.com/v1/items") >= 0
         data = ReadAsciiFile("pkg:/devcontent/Items.txt")
-        errorCode = 200
     end if
 #else
     print "ContentReader: RealMode: getContent: " + m.top.requestType+": " + url

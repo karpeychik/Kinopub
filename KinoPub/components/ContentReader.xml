@@ -7,7 +7,7 @@
         <field id ="baseUrl" type = "string" />
         <field id ="requestType" type = "string" />
         <field id ="parameters" type = "stringarray" />
-        <field id ="content" type = "roAssociativeArray" />
+        <field id ="content" type = "assocarray" />
         <field id="error" type="string" />
         <field id="refreshAuth" type="bool" />
         <field id="authFailure" type="bool" />
