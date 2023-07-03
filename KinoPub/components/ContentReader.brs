@@ -59,7 +59,8 @@ sub fetchUrl()
     if m.top.requestType = "GET"
         createRequest = readInternet.AsyncGetToString()
     else if m.top.requestType = "POST"
-        createRequest = readInternet.AsyncPostFromString("")
+        readInternet.AddHeader("Content-Type", "application/json")
+        createRequest = readInternet.AsyncPostFromString(m.top.postParameters)
     end if
     
     if createRequest

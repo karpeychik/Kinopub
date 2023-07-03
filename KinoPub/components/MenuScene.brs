@@ -92,7 +92,11 @@ sub deviceNotify()
     m.deviceNotifyTask.observeField("authFailure", "onDeviceNotify")
     osVersion = deviceInfo.GetOSVersion()
     version = osVersion.major + "." + osVersion.minor + "." + osVersion.revision + "-" + osVersion.build
-    m.deviceNotifyTask.parameters = ["access_token", m.global.accessToken, "title", deviceInfo.GetFriendlyName().EncodeUriComponent(), "hardware", deviceInfo.GetModel(), "software", version]
+    m.deviceNotifyTask.parameters = ["access_token", m.global.accessToken]
+    m.deviceNotifyTask.postParameters = FormatJson({
+        "title": deviceInfo.GetFriendlyName().EncodeUriComponent(),
+        "hardware": deviceInfo.GetModel(),
+        "software": version})
     m.deviceNotifyTask.control = "RUN"
 end sub
 
