@@ -11,7 +11,7 @@ sub showChannelSGScreen()
 
     m.global.addFields({clientId: "xbmc", clientSecret: "cgg3gtifu46urtfp2zp1nqtba0k2ezxh"})
 
-    screen.setMessagePort(m.port)
+    screen.setMessagePort(port)
     scene = screen.CreateScene("MenuScene")
     screen.show()
     scene.setFocus(true)
@@ -20,7 +20,7 @@ sub showChannelSGScreen()
         msg = wait(0, port)
         msgType = type(msg)
         if msgType = "roSGScreenEvent"
-            if msg.isScreenClosed() return
+            if msg.isScreenClosed() then return
         end if
     end while
 end sub

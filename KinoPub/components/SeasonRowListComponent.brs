@@ -31,7 +31,7 @@ sub showcontent()
         width = heightWidth
     end if
 
-    left = itemContent.itemwidth/2 - width/2
+    left = itemContent.itemwidth / 2 - width / 2
 
     rectLeft = left - borderStroke
     rectWidth = width + (borderStroke*2)

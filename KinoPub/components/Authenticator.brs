@@ -12,7 +12,7 @@ sub retrieveCode()
     m.readContentTask.baseUrl = "https://api.service-kp.com/oauth2/device"
     m.readContentTask.requestType = "POST"
     m.readContentTask.refreshAuth = false
-    
+
     m.readContentTask.parameters = ["grant_type", "device_code", "client_id", m.global.clientId, "client_secret", m.global.clientSecret]
     m.readContentTask.control = "RUN"
 end sub
@@ -20,7 +20,7 @@ end sub
 sub codeReceived()
     print "Authenticator:codeReceived"
     print m.readContentTask.content
-    
+
     m.code = m.readContentTask.content.code
 
     descriptionLabel = m.top.findNode("description")
@@ -46,49 +46,49 @@ sub buildAuthScene()
 
     deviceInfo = CreateObject("roDeviceInfo")
     resolution = deviceInfo.GetDisplaySize()
-    
+
     m.largeFont  = CreateObject("roSGNode", "Font")
     m.largeFont.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
     m.largeFont.size = 40
-    
+
     m.mediumFont  = CreateObject("roSGNode", "Font")
     m.mediumFont.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
     m.mediumFont.size = 18
-    
+
     m.mLFont  = CreateObject("roSGNode", "Font")
     m.mLFont.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
     m.mLFont.size = 25
-    
+
     m.veryLargeFont  = CreateObject("roSGNode", "Font")
     m.veryLargeFont.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
     m.veryLargeFont.size = 70
-    
+
     fullWidth = resolution.w
     fullHeight = resolution.h
-    
+
     rectWidth = fullWidth * 0.6
     rectHeight = fullHeight * 0.6
-    
+
     rect = createObject("roSGNode", "Rectangle")
-    rect.translation = [fullWidth/2 - rectWidth/2, fullHeight/2 - rectHeight/2]
+    rect.translation = [fullWidth / 2 - rectWidth / 2, fullHeight/2 - rectHeight/2]
     rect.width = rectWidth
     rect.height = rectHeight
     rect.opacity = 0.4
     rect.color = "#000000"
-    
+
     group = createObject("roSGNode", "LayoutGroup")
     group.addItemSpacingAfterChild =  false
     group.translation = rect.translation
     group.itemSpacings = [ 20, 30, 30, 30 ]
     group.horizAlignment = "custom"
-    
+
     addLabel(group, "title", "Регистрация устройства", 1, m.largeFont, 0, 0, rectWidth)
     addLabel(group, "description", "Loading...", 3, m.mediumFont, 0, 0, rectWidth - 40)
     addLabel(group, "code", "", 1, m.veryLargeFont, 0, 0, rectWidth)
-    
+
     buttonWidth = rectWidth / 2
     buttonHeight = 55
-    
+
     button = createObject("roSGNode", "Button")
     button.id = "updateCodeButton"
     button.minWidth = buttonWidth
@@ -100,7 +100,7 @@ sub buildAuthScene()
     button.iconUri = ""
     button.focusedIconUri = ""
     button.observeField("buttonSelected", "refreshCode")
-    
+
     buttonLabel = createObject("roSGNode", "Label")
     buttonLabel.text = recode("Получить новый код")
     buttonLabel.font = m.mLFont
@@ -110,13 +110,13 @@ sub buildAuthScene()
     buttonLabel.horizAlign = "center"
     buttonLabel.vertAlign = "center"
     button.appendChild(buttonLabel)
-    
+
     group.appendChild(button)
-    button.translation = [rectWidth/2 - buttonWidth/2, 0]
-    
+    button.translation = [rectWidth / 2 - buttonWidth / 2, 0]
+
     m.top.appendChild(rect)
     m.top.appendChild(group)
-    
+
     button.setFocus(true)
 end sub
 
@@ -127,7 +127,7 @@ sub timerFired()
     m.authenticationCheck.baseUrl = "https://api.service-kp.com/oauth2/device"
     m.authenticationCheck.requestType = "POST"
     m.authenticationCheck.refreshAuth = false
-    
+
     m.authenticationCheck.parameters = ["grant_type", "device_token", "client_id", m.global.clientId, "client_secret", m.global.clientSecret, "code", m.code]
     m.authenticationCheck.control = "RUN"
 end sub
@@ -141,16 +141,16 @@ end sub
 sub authenticationResponse()
     print "Authenticator:authenticationResponse()"
     print m.authenticationCheck.content
-    if m.authenticationCheck.content.doesExist("access_token") 
+    if m.authenticationCheck.content.doesExist("access_token")
        print "Authentified!"
        m.timer.control = "stop"
        m.top.refresh_token = m.authenticationCheck.content.refresh_token
        m.top.token_type = m.authenticationCheck.content.token_type
-       
+
        date = CreateObject("roDateTime")
        m.top.token_expiration = date.AsSeconds() + m.authenticationCheck.content.expires_in
        m.top.access_token = m.authenticationCheck.content.access_token
-    end if 
+    end if
 end sub
 
 sub addLabel(group as Object, id as String, text as String, maxLines as Integer, fnt as Object, x as Integer, y as Integer, labelWidth as Integer)
@@ -169,7 +169,7 @@ sub addLabel(group as Object, id as String, text as String, maxLines as Integer,
     label.wordBreakChars = " ,-:."
     label.text = recode(text)
     label.horizAlign = "center"
-    group.appendChild(label) 
+    group.appendChild(label)
 end sub
 
 function recode(str as string) as string

@@ -1,6 +1,6 @@
 {
     "rules": {
-        "inline-if-style": "no-then",
+        "inline-if-style": "then",
         "block-if-style": "no-then",
         "condition-style": "no-group",
         "named-function-style": "auto",

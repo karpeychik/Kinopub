@@ -43,134 +43,121 @@ end sub
 
 sub itemReceived()
     print "VideoDescriptionPanel:itemReceived"
-    if false
-        m.top.videoFormat = "hls2"
-        m.top.videoTitle = "ExampleVideo"
-        m.top.videoUri = m.readItemTask.content.item.videos[0].files[1].url.hls2
+    ' deviceInfo = createObject("roDeviceInfo")
 
-        nPanel = createObject("roSGNode", "VideoNode")
-        nPanel.videoFormat = "hls2"
-        nPanel.videoUri = m.readItemTask.content.item.videos[0].files[1].url.hls2
-        m.top.nPanel = nPanel
+    title = m.readItemTask.content.item.title
+    imageUri = m.readItemTask.content.item.posters.big
+
+    ' gridRect = m.top.boundingRect()
+
+    availableWidth = m.top.width / 2 - 120
+    availableHeight = m.top.height - 100
+
+    widthHeight = availableWidth * 250 / 165
+    heightWidth = availableHeight * 165 / 250
+
+    if widthHeight <= availableHeight
+        width = availableWidth
+        height = widthHeight
     else
+        height = availableHeight
+        width = heightWidth
+    end if
 
-        deviceInfo = createObject("roDeviceInfo")
+    left = availableWidth / 2 - width / 2
+    print left
 
-        title = m.readItemTask.content.item.title
-        imageUri = m.readItemTask.content.item.posters.big
+    poster = createObject("roSGNode", "Poster")
+    poster.translation = [left, 0]
+    poster.width = width
+    poster.height = height
+    poster.loadDisplayMode = "scaleToFit"
+    poster.uri = imageUri
+    m.top.appendChild(poster)
 
-        gridRect = m.top.boundingRect()
+    m.font24  = CreateObject("roSGNode", "Font")
+    m.font24.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
+    m.font24.size = 24
 
-        availableWidth = m.top.width/2 - 120
-        availableHeight = m.top.height - 100
+    m.font18  = CreateObject("roSGNode", "Font")
+    m.font18.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
+    m.font18.size = 18
 
-        widthHeight = availableWidth * 250 / 165
-        heightWidth = availableHeight * 165 / 250
+    m.font16  = CreateObject("roSGNode", "Font")
+    m.font16.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
+    m.font16.size = 16
 
-        if widthHeight <= availableHeight
-            width = availableWidth
-            height = widthHeight
-        else
-            height = availableHeight
-            width = heightWidth
-        end if
+    title = m.readItemTask.content.item.title
+    year =  m.readItemTask.content.item.year.ToStr()
+    title = getTitle(title, year)
 
-        left = availableWidth/2 - width/2
-        print left
+    duration = getDuration(m.readItemTask.content.item.duration.total)
 
-        poster = createObject("roSGNode", "Poster")
-        poster.translation = [left, 0]
-        poster.width = width
-        poster.height = height
-        poster.loadDisplayMode = "scaleToFit"
-        poster.uri = imageUri
-        m.top.appendChild(poster)
+    genreString = getGenres(m.readItemTask.content.item.genres)
 
-        m.font24  = CreateObject("roSGNode", "Font")
-        m.font24.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-        m.font24.size = 24
+    director = getDirector(m.readItemTask.content.item)
 
-        m.font18  = CreateObject("roSGNode", "Font")
-        m.font18.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-        m.font18.size = 18
+    cast = getCast(m.readItemTask.content.item)
 
-        m.font16  = CreateObject("roSGNode", "Font")
-        m.font16.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-        m.font16.size = 16
+    rate = getRate(m.readItemTask.content.item)
 
-        title = m.readItemTask.content.item.title
-        year =  m.readItemTask.content.item.year.ToStr()
-        title = getTitle(title, year)
+    plot = m.readItemTask.content.item.plot
 
-        duration = getDuration(m.readItemTask.content.item.duration.total)
+    textLeft = left + width + 50
 
-        genreString = getGenres(m.readItemTask.content.item.genres)
+    'HACKHACK: the unusedSpace here is a total banana. There is unused space on the screen which doesn't belong
+    'to the panel and is not accounted in m.top.width. I couldn't figure out how to calculate it so hack.
+    unusedSpace = 135
+    labelWidth = m.top.width - textLeft + unusedSpace
 
-        director = getDirector(m.readItemTask.content.item)
+    group = createObject("roSGNode", "LayoutGroup")
+    group.addItemSpacingAfterChild =  false
+    group.translation = [textLeft, 0]
+    addLabel(group, title, 1, m.font24, 0, 0, labelWidth)
+    if rate.Len() > 0
+        addLabel(group, rate, 1, m.font18, 0, 0, labelWidth)
+    end if
 
-        cast = getCast(m.readItemTask.content.item)
+    addLabel(group, duration, 1, m.font18, 0, 0, labelWidth)
+    addLabel(group, genreString, 2, m.font18, 0, 0, labelWidth)
+    addLabel(group, director, 1, m.font18, 0, 0, labelWidth)
+    addLabel(group, cast, 2, m.font18, 0, 0, labelWidth)
 
-        rate = getRate(m.readItemTask.content.item)
+    addLabel(group, plot, 8, m.font16, 0, 0, labelWidth)
 
-        plot = m.readItemTask.content.item.plot
+    groupSpacings = createObject("roArray", group.getChildCount(), false)
+    for i = 0 to group.getChildCount() - 2 step 1
+        groupSpacings[i] = 5.0
+    end for
 
-        textLeft = left + width + 50
+    groupSpacings[group.getChildCount() - 1] = 12.0
+    group.itemSpacings = groupSpacings
 
-        'HACKHACK: the unusedSpace here is a total banana. There is unused space on the screen which doesn't belong
-        'to the panel and is not accounted in m.top.width. I couldn't figure out how to calculate it so hack.
-        unusedSpace = 135
-        labelWidth = m.top.width - textLeft + unusedSpace
+    m.buttons = createObject("roArray", 5, false)
+    buttonGroup = createObject("roSGNode", "LayoutGroup")
+    buttonGroup.layoutDirection = "horiz"
+    buttonGroup.width = labelWidth
 
-        group = createObject("roSGNode", "LayoutGroup")
-        group.addItemSpacingAfterChild =  false
-        group.translation = [textLeft, 0]
-        addLabel(group, title, 1, m.font24, 0, 0, labelWidth)
-        if rate.Len() > 0
-            addLabel(group, rate, 1, m.font18, 0, 0, labelWidth)
-        end if
+    m.streamIndex = -1
+    setQuality(m.readItemTask.content.item)
 
-        addLabel(group, duration, 1, m.font18, 0, 0, labelWidth)
-        addLabel(group, genreString, 2, m.font18, 0, 0, labelWidth)
-        addLabel(group, director, 1, m.font18, 0, 0, labelWidth)
-        addLabel(group, cast, 2, m.font18, 0, 0, labelWidth)
+    setAudio(m.readItemTask.content.item)
 
-        addLabel(group, plot, 8, m.font16, 0, 0, labelWidth)
+    addButton(buttonGroup, "play", "playButton")
 
-        groupSpacings = createObject("roArray", group.getChildCount(), false)
-        for i=0 to group.getChildCount() - 2 step 1
-            groupSpacings[i] = 5.0
-        end for
+    'TODO: save previous settings
+    addButton(buttonGroup, "audio", "audioButton")
+    addButton(buttonGroup, m.qualities[m.qualityIndex], "qualityButton")
+    m.qualityButton = m.buttons[m.buttons.Count()-1]
+    addButton(buttonGroup, m.streams[m.streamIndex], "streamButton")
+    m.streamButton = m.buttons[m.buttons.Count()-1]
 
-        groupSpacings[group.getChildCount() - 1] = 12.0
-        group.itemSpacings = groupSpacings
+    m.currentButtonIndex = 0
 
-        m.buttons = createObject("roArray", 5, false)
-        buttonGroup = createObject("roSGNode", "LayoutGroup")
-        buttonGroup.layoutDirection = "horiz"
-        buttonGroup.width = labelWidth
+    group.appendChild(buttonGroup)
+    m.top.appendChild(group)
 
-        m.streamIndex = -1
-        setQuality(m.readItemTask.content.item)
-
-        setAudio(m.readItemTask.content.item)
-
-        addButton(buttonGroup, "play", "playButton")
-
-        'TODO: save previous settings
-        addButton(buttonGroup, "audio", "audioButton")
-        addButton(buttonGroup, m.qualities[m.qualityIndex], "qualityButton")
-        m.qualityButton = m.buttons[m.buttons.Count()-1]
-        addButton(buttonGroup, m.streams[m.streamIndex], "streamButton")
-        m.streamButton = m.buttons[m.buttons.Count()-1]
-
-        m.currentButtonIndex = 0
-
-        group.appendChild(buttonGroup)
-        m.top.appendChild(group)
-
-        m.buttons[0].setFocus(true)
-
-   end if
+    m.buttons[0].setFocus(true)
 end sub
 
 sub addButton(group as Object, text as String, callback as String)
@@ -236,6 +223,8 @@ end sub
 sub gotoVideo(seek as Float)
     print "VideoDescriptionPanel:gotoVideo"
     nPanel = createObject("roSGNode", "VideoNode")
+
+    videoUri = m.readItemTask.content.item.videos[0].files[0].url[0]
 
     for each video in m.readItemTask.content.item.videos[0].files
         if video.quality = m.qualities[m.qualityIndex]
@@ -314,7 +303,7 @@ sub setQuality(item as Object)
     qualityCount = item.videos[0].files.Count()
     m.qualities = createObject("roArray", qualityCount, false)
     m.qualityIndex = -1
-    for i=0 to item.videos[0].files.Count()-1  step 1
+    for i = 0 to item.videos[0].files.Count()-1  step 1
         m.qualities.push(item.videos[0].files[i].quality)
         if item.videos[0].files[i].quality = "1080p"
             m.qualityIndex = i
@@ -340,7 +329,7 @@ sub setStreams(item as Object)
     m.streams.Sort("")
 
     m.streamIndex = -1
-    for i=0 to m.streams.Count()-1  step 1
+    for i = 0 to m.streams.Count()-1  step 1
         if m.streams[i] = preferredStream
             m.streamIndex = i
         end if
@@ -448,7 +437,7 @@ function getDurationString(durationSeconds as  Integer) as String
     result = createObject("roString")
     if hour > 0
         if hour < 10
-            result.AppendString("0",1)
+            result.AppendString("0")
         end if
 
         hourString = hour.ToStr()
@@ -461,7 +450,7 @@ function getDurationString(durationSeconds as  Integer) as String
 
     if minute > 0
         if minute < 10
-            result.AppendString("0",1)
+            result.AppendString("0")
         end if
         minuteString = minute.ToStr()
         result.AppendString(minuteString, minuteString.Len())
@@ -473,7 +462,7 @@ function getDurationString(durationSeconds as  Integer) as String
 
     if second > 0
         if second < 10
-            result.AppendString("0",1)
+            result.AppendString("0")
         end if
         secondString = second.ToStr()
         result.AppendString(secondString, secondString.Len())
@@ -519,7 +508,7 @@ function getGenres(genres as Object) as String
     genreString = createObject("roString")
     gString = "Жанры: "
     genreString.AppendString(gString,gString.Len())
-    for i=0 To genres.Count() - 1 Step 1
+    for i = 0 To genres.Count() - 1 Step 1
         if i>0
             genreString.AppendString(", ", 2)
         end if

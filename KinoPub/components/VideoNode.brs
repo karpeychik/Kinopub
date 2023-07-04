@@ -149,7 +149,7 @@ end sub
 
 function getContentPlaylist(preferredAudio as Object, firstVideo as Integer, firstSeek as String) as Object
     content = createObject("roSGNode", "ContentNode")
-    for i=firstVideo to m.top.playList.getChildCount()-1
+    for i = firstVideo to m.top.playList.getChildCount()-1
         item = m.top.playList.getChild(i)
         videoContent = createObject("roSGNode", "ContentNode")
         videoContent.streamformat = item.videoFormat
