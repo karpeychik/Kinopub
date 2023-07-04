@@ -79,7 +79,7 @@ sub markWatched()
     parameters.Push("video")
     parameters.Push(m.top.playlist.getChild(contentIndex).videoNumber.ToStr())
 
-    if(m.top.playlist.getChild(contentIndex).seasonId <> invalid)
+    if m.top.playlist.getChild(contentIndex).seasonId <> invalid
         parameters.Push("season")
         parameters.Push(m.top.playlist.getChild(contentIndex).seasonId)
     end if
@@ -93,8 +93,8 @@ sub markWatched()
 
     print "Marking watched"
     playlistIndex = m.firstPlaylistVideo + contentIndex
-    m.top.playList.getChild(playListIndex).watched = true
-    print m.top.playList.getChild(playListIndex)
+    m.top.playList.getChild(playlistIndex).watched = true
+    print m.top.playList.getChild(playlistIndex)
 end sub
 
 sub markTime()
@@ -111,7 +111,7 @@ sub markTime()
     parameters.Push("video")
     parameters.Push(m.top.playlist.getChild(contentIndex).videoNumber.ToStr())
 
-    if(m.top.playlist.getChild(contentIndex).seasonId <> invalid)
+    if m.top.playlist.getChild(contentIndex).seasonId <> invalid
         parameters.Push("season")
         parameters.Push(m.top.playlist.getChild(contentIndex).seasonId)
     end if
@@ -125,8 +125,8 @@ sub markTime()
 
     print "Marking unwatched"
     playlistIndex = m.firstPlaylistVideo + contentIndex
-    m.top.playList.getChild(playListIndex).watched = false
-    print m.top.playList.getChild(playListIndex)
+    m.top.playList.getChild(playlistIndex).watched = false
+    print m.top.playList.getChild(playlistIndex)
 end sub
 
 sub audioStreamUpdate()
@@ -165,7 +165,7 @@ function getContentPlaylist(preferredAudio as Object, firstVideo as Integer, fir
         end if
         videocontent.title = ""
         videocontent.PlayStart = item.seek
-        content.appendChild(videoContent)
+        content.appendChild(videocontent)
     end for
     return content
 end function

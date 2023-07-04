@@ -55,10 +55,10 @@ sub setCategories()
     print "CategoriesListPanel:setCategories()"
 
     content = createObject("roSGNode", "ContentNode")
-    if(m.top.pType <> "bookmarks")
+    if m.top.pType <> "bookmarks"
         itemcontent = content.createChild("ContentNode")
         itemcontent.setField("id", "bookmarks")
-        itemContent.addFields({ kinoPubId: "bookmarks"})
+        itemcontent.addFields({ kinoPubId: "bookmarks"})
         itemcontent.setField("title", recode("Закладки"))
 
         itemId = 0
@@ -138,6 +138,6 @@ sub categorySelected()
     end if
 end sub
 
-sub recode(str as string) as string
+function recode(str as string) as string
     return m.global.utilities.callFunc("Encode", {str: str})
-end sub
+end function

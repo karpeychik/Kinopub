@@ -79,7 +79,7 @@ sub fetchUrl()
             end if
             
             'Check if we have hit the timeout
-            if timer.totalmilliseconds() > m.top.timeout then
+            if timer.totalmilliseconds() > m.top.timeout
                 print "ContentReader:timeout exceeded"
                 readInternet.AsyncCancel()
                 errorCode = -2

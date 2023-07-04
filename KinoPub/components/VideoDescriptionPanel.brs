@@ -125,7 +125,7 @@ sub itemReceived()
         group.addItemSpacingAfterChild =  false
         group.translation = [textLeft, 0]
         addLabel(group, title, 1, m.font24, 0, 0, labelWidth)
-        if(rate.Len() > 0)
+        if rate.Len() > 0
             addLabel(group, rate, 1, m.font18, 0, 0, labelWidth)
         end if
 
@@ -321,7 +321,7 @@ sub setQuality(item as Object)
         end if
     end for
 
-    if(m.qualityIndex = -1)
+    if m.qualityIndex = -1
         m.qualityIndex = m.qualities.Count() - 1
     end if
 
@@ -332,7 +332,7 @@ sub setStreams(item as Object)
     print "VideoDescriptionPanel:setStreams"
 
     preferredStream = "hls4"
-    if(m.streamIndex >= 0)
+    if m.streamIndex >= 0
         preferredStream = m.streams[m.streamIndex]
     end if
 
@@ -393,7 +393,7 @@ end function
 function getRate(item as Object)
     result = createObject("roString")
 
-    if(item.DoesExist("imdb_rating") and item.imdb_rating <> invalid)
+    if item.DoesExist("imdb_rating") and item.imdb_rating <> invalid
         iString = "imbd: "
         result.AppendString(iString,iString.Len())
 
@@ -405,7 +405,7 @@ function getRate(item as Object)
         result.AppendString("    ", 4)
     end if
 
-    if(item.DoesExist("kinopoisk_rating") and item.kinopoisk_rating <> invalid)
+    if item.DoesExist("kinopoisk_rating") and item.kinopoisk_rating <> invalid
         iString = "Кинопоиск: "
         result.AppendString(iString,iString.Len())
 
@@ -446,8 +446,8 @@ function getDurationString(durationSeconds as  Integer) as String
     hour = durationSeconds MOD 60
 
     result = createObject("roString")
-    if(hour > 0)
-        if(hour < 10)
+    if hour > 0
+        if hour < 10
             result.AppendString("0",1)
         end if
 
@@ -459,8 +459,8 @@ function getDurationString(durationSeconds as  Integer) as String
 
     result.AppendString(":", 1)
 
-    if(minute > 0)
-        if(minute < 10)
+    if minute > 0
+        if minute < 10
             result.AppendString("0",1)
         end if
         minuteString = minute.ToStr()
@@ -471,8 +471,8 @@ function getDurationString(durationSeconds as  Integer) as String
 
     result.AppendString(":", 1)
 
-    if(second > 0)
-        if(second < 10)
+    if second > 0
+        if second < 10
             result.AppendString("0",1)
         end if
         secondString = second.ToStr()
@@ -556,8 +556,8 @@ print "VideoDescriptionPanel:onKeyEvent"
     return false
 end function
 
-sub recode(str as string) as string
+function recode(str as string) as string
     str = str.Replace("&#151;", "-")
     str = str.Replace("&#133;", "...")
     return m.global.utilities.callFunc("Encode", {str: str})
-end sub
+end function

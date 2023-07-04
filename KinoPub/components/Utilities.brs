@@ -50,7 +50,7 @@ function Encode(params as Object) as String
                 newCode = 129
             end if
             
-            if(newCode <> -1) 
+            if newCode <> -1 
                 input[i] = &HC0+ ((newCode >> 6) and &H1F)
                 input[i+1] = &H80 + (newCode and &H3F)
             end if

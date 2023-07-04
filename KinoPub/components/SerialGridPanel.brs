@@ -149,7 +149,7 @@ sub showSerial()
     plot = m.readSerialTask.content.item.plot
     
     addLabel(labelGroup, title, 1, m.font24, 0, 0, labelWidth)
-    if(rate.Len() > 0)
+    if rate.Len() > 0
         addLabel(labelGroup, rate, 1, m.font18, 0, 0, labelWidth)
     end if 
     
@@ -176,7 +176,7 @@ sub showSerial()
     rowList.rowItemSize = [ [100, 200] ]
     rowList.rowItemSpacing = [[ 40, 0 ]]
     rowList.showRowLabel = [ true ]
-    rowlist.itemSize = [ 1000, 200 ]
+    rowList.itemSize = [ 1000, 200 ]
     rowList.showRowLabel = false
     rowList.drawFocusFeedback = false
     rowList.vertFocusAnimationStyle = "fixedFocusWrap" 
@@ -254,9 +254,9 @@ function buildSeasonNode(seasonIndex as Integer)
             thumbnail: episode.thumbnail,
             number: episode.number,
             audios: episode.audios,
-            watched: episode.watched
+            watched: episode.watched,
             watchedTime: episode.watching.time,
-            watchingStatus: episode.watching.status
+            watchingStatus: episode.watching.status,
             subtitles: episode.subtitles,
             files: episode.files})
             
@@ -345,8 +345,8 @@ sub addLabel(group as Object, text as String, maxLines as Integer, fnt as Object
     group.appendChild(label) 
 end sub
 
-sub recode(str as string) as string
+function recode(str as string) as string
     str = str.Replace("&#151;", "-")
     str = str.Replace("&#133;", "...")
     return m.global.utilities.callFunc("Encode", {str: str})
-end sub
+end function

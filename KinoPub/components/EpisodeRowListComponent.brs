@@ -19,8 +19,8 @@ sub showcontent()
     
     borderStroke = 2
     
-    availableWidth = itemContent.itemWidth - (borderStroke*2)
-    availableHeight = itemContent.itemheight - (borderStroke*2)
+    availableWidth = itemcontent.itemWidth - (borderStroke*2)
+    availableHeight = itemcontent.itemheight - (borderStroke*2)
    
     widthHeight = availableWidth * 270 / 480
     heightWidth = availableHeight * 480 / 270
@@ -33,7 +33,7 @@ sub showcontent()
         width = heightWidth
     end if
     
-    left = itemContent.itemwidth/2 - width/2
+    left = itemcontent.itemwidth/2 - width/2
     
     rectLeft = left - borderStroke
     rectWidth = width + (borderStroke*2)
@@ -90,18 +90,18 @@ sub showcontent()
     itemlabel.font = m.font18 
     itemlabel.translation = [ left + 2, height + borderStroke - labelRectHeight ]
     itemlabel.horizAlign = "right"
-    itemLabel.vertAlign = "center"
+    itemlabel.vertAlign = "center"
     itemlabel.width = width - 7
     itemlabel.height = labelRectHeight
-    itemLabel.text = itemcontent.itemTitle
-    m.itemLabel = itemLabel
-    m.top.appendChild(itemLabel)
+    itemlabel.text = itemcontent.itemTitle
+    m.itemLabel = itemlabel
+    m.top.appendChild(itemlabel)
     
     if itemcontent.EpisodeWatched
         poster.opacity = 0.5
-        itemLabel.color = "#80FF80"
+        itemlabel.color = "#80FF80"
     else
-        itemLabel.color = "#DDDDFF"
+        itemlabel.color = "#DDDDFF"
     end if
     
     m.top.itemContent.observeField("episodeWatched", "watchedChange")

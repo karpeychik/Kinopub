@@ -37,7 +37,7 @@ sub start()
     rowList.rowItemSize = [ [m.posterWidth, m.posterHeight] ]
     rowList.rowItemSpacing = [[ m.separ, m.separ ]]
     rowList.showRowLabel = [ true ]
-    rowlist.itemSize = [ m.panelWidth, m.posterHeight ]
+    rowList.itemSize = [ m.panelWidth, m.posterHeight ]
     rowList.showRowLabel = false
     rowList.drawFocusFeedback = false
     rowList.vertFocusAnimationStyle = "floatingFocus" 
@@ -234,8 +234,8 @@ function getDuration(durationSeconds as  Integer) as String
     hour = durationSeconds MOD 60
     
     result = createObject("roString")
-    if(hour > 0)
-        if(hour < 10)
+    if hour > 0
+        if hour < 10
             result.AppendString("0",1)
         end if
         
@@ -247,8 +247,8 @@ function getDuration(durationSeconds as  Integer) as String
     
     result.AppendString(":", 1)
     
-    if(minute > 0)
-        if(minute < 10)
+    if minute > 0
+        if minute < 10
             result.AppendString("0",1)
         end if
         minuteString = minute.ToStr()
@@ -259,8 +259,8 @@ function getDuration(durationSeconds as  Integer) as String
     
     result.AppendString(":", 1)
     
-    if(second > 0)
-        if(second < 10)
+    if second > 0
+        if second < 10
             result.AppendString("0",1)
         end if
         secondString = second.ToStr()
@@ -284,7 +284,7 @@ function getPreferredQuality(episode as Object) as Object
         end if
     end for
     
-    if(qualityIndex = -1)
+    if qualityIndex = -1
         qualityIndex = qualities.Count() - 1
     end if
     

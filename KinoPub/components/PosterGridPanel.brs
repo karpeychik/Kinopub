@@ -162,6 +162,6 @@ sub itemSelected()
     end if
 end sub
 
-sub recode(str as string) as string
+function recode(str as string) as string
     return m.global.utilities.callFunc("Encode", {str: str})
-end sub
+end function

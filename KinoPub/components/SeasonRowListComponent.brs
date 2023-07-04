@@ -17,8 +17,8 @@ sub showcontent()
     
     borderStroke = 2
     
-    availableWidth = itemContent.itemWidth - (borderStroke*2)
-    availableHeight = itemContent.itemheight - (borderStroke*2) - 18
+    availableWidth = itemcontent.itemWidth - (borderStroke*2)
+    availableHeight = itemcontent.itemheight - (borderStroke*2) - 18
    
     widthHeight = availableWidth * 250 / 165
     heightWidth = availableHeight * 165 / 250
@@ -31,7 +31,7 @@ sub showcontent()
         width = heightWidth
     end if
     
-    left = itemContent.itemwidth/2 - width/2
+    left = itemcontent.itemwidth/2 - width/2
     
     rectLeft = left - borderStroke
     rectWidth = width + (borderStroke*2)
@@ -55,17 +55,17 @@ sub showcontent()
     end if
     m.top.appendChild(poster)
     
-    itemContent.observeField("seasonWatched","updateWatched")
+    itemcontent.observeField("seasonWatched","updateWatched")
    
     itemlabel = createObject("roSGNode", "Label")
     itemlabel.font = m.font18 
     itemlabel.translation = [ 0, height + borderStroke ]
     itemlabel.horizAlign = "center"
-    itemlabel.width = itemContent.itemwidth
+    itemlabel.width = itemcontent.itemwidth
     itemlabel.height = 18
-    itemLabel.text = itemcontent.title
+    itemlabel.text = itemcontent.title
     
-    m.top.appendChild(itemLabel)
+    m.top.appendChild(itemlabel)
     
 end sub
 

@@ -16,11 +16,11 @@ sub showChannelSGScreen()
     screen.show()
     scene.setFocus(true)
 
-    while(true)
+    while true
         msg = wait(0, port)
         msgType = type(msg)
         if msgType = "roSGScreenEvent"
-            if msg.isScreenClosed() then return
+            if msg.isScreenClosed() return
         end if
     end while
 end sub
