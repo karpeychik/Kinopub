@@ -71,7 +71,7 @@ sub fetchUrl()
         timer.mark()
 
         while true
-            msg = wait(100,port) '100 millisecond pause
+            msg = wait(100, port) '100 millisecond pause
             if type(msg) = "roUrlEvent"
                 errorCode = msg.getresponsecode()
                 if errorCode = 200

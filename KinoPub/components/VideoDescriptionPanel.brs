@@ -437,11 +437,11 @@ function getDurationString(durationSeconds as  Integer) as String
     result = createObject("roString")
     if hour > 0
         if hour < 10
-            result.AppendString("0")
+            result.AppendString("0", 1)
         end if
 
         hourString = hour.ToStr()
-        result.AppendString(hourString,hourString.Len())
+        result.AppendString(hourString, hourString.Len())
     else
         result.AppendString("00", 2)
     end if
@@ -450,7 +450,7 @@ function getDurationString(durationSeconds as  Integer) as String
 
     if minute > 0
         if minute < 10
-            result.AppendString("0")
+            result.AppendString("0", 1)
         end if
         minuteString = minute.ToStr()
         result.AppendString(minuteString, minuteString.Len())
@@ -462,7 +462,7 @@ function getDurationString(durationSeconds as  Integer) as String
 
     if second > 0
         if second < 10
-            result.AppendString("0")
+            result.AppendString("0", 1)
         end if
         secondString = second.ToStr()
         result.AppendString(secondString, secondString.Len())
