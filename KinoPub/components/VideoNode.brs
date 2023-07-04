@@ -151,21 +151,21 @@ function getContentPlaylist(preferredAudio as Object, firstVideo as Integer, fir
     content = createObject("roSGNode", "ContentNode")
     for i=firstVideo to m.top.playList.getChildCount()-1
         item = m.top.playList.getChild(i)
-        videocontent = createObject("roSGNode", "ContentNode")
-        videocontent.streamformat = item.videoFormat
-        videocontent.url = item.videoUri
+        videoContent = createObject("roSGNode", "ContentNode")
+        videoContent.streamformat = item.videoFormat
+        videoContent.url = item.videoUri
         if preferredAudio = invalid
-            videocontent.TrackIdAudio = item.audioTrack
+            videoContent.TrackIdAudio = item.audioTrack
         else
-            videocontent.TrackIdAudio = preferredAudio
+            videoContent.TrackIdAudio = preferredAudio
         end if
 
         if item.subtitleUrl <> invalid
-            videocontent.srt = item.subtitleUrl
+            videoContent.srt = item.subtitleUrl
         end if
-        videocontent.title = ""
-        videocontent.PlayStart = item.seek
-        content.appendChild(videocontent)
+        videoContent.title = ""
+        videoContent.PlayStart = item.seek
+        content.appendChild(videoContent)
     end for
     return content
 end function

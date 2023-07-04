@@ -70,10 +70,10 @@ sub showPosterGrid()
     end if
 
     for each item in m.readPosterGridTask.content.items
-        itemcontent = m.top.grid.content.getChild(m.itemsLoaded)
-        itemcontent.setField("shortdescriptionline1", recode(item.title))
-        itemcontent.setField("hdgridposterurl", item.posters.small)
-        itemcontent.addFields({kinoPubId: item.id.ToStr(), kinoPubType: item.type})
+        itemContent = m.top.grid.content.getChild(m.itemsLoaded)
+        itemContent.setField("shortdescriptionline1", recode(item.title))
+        itemContent.setField("hdgridposterurl", item.posters.small)
+        itemContent.addFields({kinoPubId: item.id.ToStr(), kinoPubType: item.type})
         m.itemsLoaded = m.itemsLoaded + 1
     end for
 

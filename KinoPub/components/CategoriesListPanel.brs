@@ -56,27 +56,27 @@ sub setCategories()
 
     content = createObject("roSGNode", "ContentNode")
     if m.top.pType <> "bookmarks"
-        itemcontent = content.createChild("ContentNode")
-        itemcontent.setField("id", "bookmarks")
-        itemcontent.addFields({ kinoPubId: "bookmarks"})
-        itemcontent.setField("title", recode("Закладки"))
+        itemContent = content.createChild("ContentNode")
+        itemContent.setField("id", "bookmarks")
+        itemContent.addFields({ kinoPubId: "bookmarks"})
+        itemContent.setField("title", recode("Закладки"))
 
         itemId = 0
         for each item in m.readContentTask.content.items
-            itemcontent = content.createChild("ContentNode")
-            itemcontent.setField("id", itemId.ToStr())
-            itemcontent.addFields({ kinoPubId: item.id})
-            itemcontent.setField("title", recode(item.title))
+            itemContent = content.createChild("ContentNode")
+            itemContent.setField("id", itemId.ToStr())
+            itemContent.addFields({ kinoPubId: item.id})
+            itemContent.setField("title", recode(item.title))
             itemId = itemId+1
         end for
 
     else
         itemId = 0
         for each item in m.readContentTask.content.items
-            itemcontent = content.createChild("ContentNode")
-            itemcontent.setField("id", itemId.ToStr())
-            itemcontent.addFields({kinoPubId: item.id.ToStr()})
-            itemcontent.setField("title", recode(item.title))
+            itemContent = content.createChild("ContentNode")
+            itemContent.setField("id", itemId.ToStr())
+            itemContent.addFields({kinoPubId: item.id.ToStr()})
+            itemContent.setField("title", recode(item.title))
             itemId = itemId+1
         end for
     end if
