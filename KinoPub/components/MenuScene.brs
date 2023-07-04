@@ -94,7 +94,7 @@ sub deviceNotify()
     version = osVersion.major + "." + osVersion.minor + "." + osVersion.revision + "-" + osVersion.build
     m.deviceNotifyTask.parameters = ["access_token", m.global.accessToken]
     m.deviceNotifyTask.postParameters = FormatJson({
-        "title": deviceInfo.GetFriendlyName().EncodeUriComponent(),
+        "title": deviceInfo.GetFriendlyName(),
         "hardware": deviceInfo.GetModel(),
         "software": version})
     m.deviceNotifyTask.control = "RUN"
