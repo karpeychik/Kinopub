@@ -1,0 +1,12 @@
+{
+    "plugins": [ "@rokucommunity/bslint" ],
+    "lintConfig": "bslint.json",
+    "rootDir": "Kinopub",
+    "files": [
+        "manifest",
+        "source/**/*.*",
+        "components/**/*.*",
+        "images/**/*.*",
+        "fonts/**/*.*"
+    ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "kinopub",
+  "version": "1.0.0",
+  "description": "This is a Roku channel for Kino.pub. The author of this chanel has no affiliation with Kino.pub. I have put this channel together simply to have some fun and make watching this service possible through Roku.",
+  "scripts": {
+    "lint": "bslint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@rokucommunity/bslint": "^0.8.6",
+    "brighterscript": "^0.65.1"
+  }
+}
