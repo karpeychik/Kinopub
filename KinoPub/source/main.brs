@@ -1,12 +1,10 @@
-﻿' ********** Copyright 2016 Roku Corp.  All Rights Reserved. ********** 
-
-sub Main()
+﻿sub Main()
     showChannelSGScreen()
 end sub
 
 sub showChannelSGScreen()
     screen = CreateObject("roSGScreen")
-    m.port = CreateObject("roMessagePort")
+    port = CreateObject("roMessagePort")
     
     m.global = screen.getGlobalNode()  
     m.global.id = "GlobalNode"
@@ -16,9 +14,10 @@ sub showChannelSGScreen()
     screen.setMessagePort(m.port)
     scene = screen.CreateScene("MenuScene")
     screen.show()
+    scene.setFocus(true)
 
     while(true)
-        msg = wait(0, m.port)
+        msg = wait(0, port)
         msgType = type(msg)
         if msgType = "roSGScreenEvent"
             if msg.isScreenClosed() then return

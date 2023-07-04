@@ -4,13 +4,14 @@
 	<script type="text/brightscript" uri="pkg:/components/ContentReader.brs" />
 	
     <interface>
-        <field id ="baseUrl" type = "string" />
-        <field id ="requestType" type = "string" />
-        <field id ="parameters" type = "stringarray" />
-        <field id ="content" type = "roAssociativeArray" />
-        <field id="error" type="string" />
-        <field id="refreshAuth" type="bool" />
-        <field id="authFailure" type="bool" />
-        <field id="timeout" type="integer" />
+        <field id = "baseUrl" type = "string" />
+        <field id = "requestType" type = "string" />
+        <field id = "parameters" type = "stringarray" />
+        <field id = "postParameters" type = "string" />
+        <field id = "content" type = "assocarray" />
+        <field id = "error" type="string" />
+        <field id = "refreshAuth" type="bool" />
+        <field id = "authFailure" type="bool" />
+        <field id = "timeout" type="integer" />
     </interface> 
 </component>
