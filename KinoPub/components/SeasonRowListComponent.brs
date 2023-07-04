@@ -1,6 +1,6 @@
 sub init()
     'm.itemposter = m.top.findNode("itemPoster")
-    
+
     m.font18  = CreateObject("roSGNode", "Font")
     m.font18.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
     m.font18.size = 18
@@ -13,16 +13,16 @@ sub showcontent()
     end if
 
     m.firstLoad = false
-    itemcontent = m.top.itemContent 
-    
+    itemContent = m.top.itemContent
+
     borderStroke = 2
-    
+
     availableWidth = itemContent.itemWidth - (borderStroke*2)
     availableHeight = itemContent.itemheight - (borderStroke*2) - 18
-   
+
     widthHeight = availableWidth * 250 / 165
     heightWidth = availableHeight * 165 / 250
-    
+
     if widthHeight <= availableHeight
         width = availableWidth
         height = widthHeight
@@ -30,9 +30,9 @@ sub showcontent()
         height = availableHeight
         width = heightWidth
     end if
-    
-    left = itemContent.itemwidth/2 - width/2
-    
+
+    left = itemContent.itemwidth / 2 - width / 2
+
     rectLeft = left - borderStroke
     rectWidth = width + (borderStroke*2)
     rectHeight = height + (borderStroke*2)
@@ -42,31 +42,31 @@ sub showcontent()
     m.rectangle.translation = [rectLeft, 0]
     m.rectangle.opacity = 0
     m.top.appendChild(m.rectangle)
-   
+
     poster = createObject("roSGNode", "Poster")
     m.poster = poster
     poster.width = width
     poster.translation = [left, borderStroke ]
     poster.height = height
     poster.loadDisplayMode = "scaleToFit"
-    poster.uri = itemcontent.HDPosterUrl
-    if itemcontent.seasonWatched
+    poster.uri = itemContent.HDPosterUrl
+    if itemContent.seasonWatched
         poster.opacity = 0.5
     end if
     m.top.appendChild(poster)
-    
+
     itemContent.observeField("seasonWatched","updateWatched")
-   
-    itemlabel = createObject("roSGNode", "Label")
-    itemlabel.font = m.font18 
-    itemlabel.translation = [ 0, height + borderStroke ]
-    itemlabel.horizAlign = "center"
-    itemlabel.width = itemContent.itemwidth
-    itemlabel.height = 18
-    itemLabel.text = itemcontent.title
-    
+
+    itemLabel = createObject("roSGNode", "Label")
+    itemLabel.font = m.font18
+    itemLabel.translation = [ 0, height + borderStroke ]
+    itemLabel.horizAlign = "center"
+    itemLabel.width = itemContent.itemwidth
+    itemLabel.height = 18
+    itemLabel.text = itemContent.title
+
     m.top.appendChild(itemLabel)
-    
+
 end sub
 
 sub updateWatched()
@@ -89,5 +89,5 @@ sub showfocus()
 end sub
 
 sub showrowfocus()
-    'm.itemlabel.opacity = m.top.rowFocusPercent
+    'm.itemLabel.opacity = m.top.rowFocusPercent
 end sub

@@ -61,7 +61,7 @@ sub showPosterGrid()
             m.totalItems = m.readPosterGridTask.content.pagination.total_items
         end if
 
-        for i=0 to m.readPosterGridTask.content.items.Count()-1 step 1
+        for i = 0 to m.readPosterGridTask.content.items.Count()-1 step 1
             content = createObject("roSGNode", "ContentNode")
             m.top.grid.content.appendChild(content)
         end for
@@ -70,10 +70,10 @@ sub showPosterGrid()
     end if
 
     for each item in m.readPosterGridTask.content.items
-        itemcontent = m.top.grid.content.getChild(m.itemsLoaded)
-        itemcontent.setField("shortdescriptionline1", recode(item.title))
-        itemcontent.setField("hdgridposterurl", item.posters.small)
-        itemcontent.addFields({kinoPubId: item.id.ToStr(), kinoPubType: item.type})
+        itemContent = m.top.grid.content.getChild(m.itemsLoaded)
+        itemContent.setField("shortdescriptionline1", recode(item.title))
+        itemContent.setField("hdgridposterurl", item.posters.small)
+        itemContent.addFields({kinoPubId: item.id.ToStr(), kinoPubType: item.type})
         m.itemsLoaded = m.itemsLoaded + 1
     end for
 
@@ -100,7 +100,7 @@ sub itemFocused()
     firstLastRowItem = lastRow * m.numColumns
     if m.shouldPage and m.top.grid.itemFocused >= firstLastRowItem and m.itemsLoaded < m.totalItems and m.itemsLoaded < m.maxItemsToLoad
         m.itemsPromised = m.itemsPromised + m.perPage
-        for i=0 to m.perPage-1 step 1
+        for i = 0 to m.perPage-1 step 1
             content = createObject("roSGNode", "ContentNode")
             m.top.grid.content.appendChild(content)
         end for
@@ -162,6 +162,6 @@ sub itemSelected()
     end if
 end sub
 
-sub recode(str as string) as string
+function recode(str as string) as string
     return m.global.utilities.callFunc("Encode", {str: str})
-end sub
+end function

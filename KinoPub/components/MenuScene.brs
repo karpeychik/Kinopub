@@ -134,7 +134,7 @@ sub nPanelAdded()
     currentPanel.observeField("nPanel", "nPanelAdded")
 
     nextIndex = index + 1
-    while(m.panelArray[nextIndex] <> invalid)
+    while m.panelArray[nextIndex] <> invalid
         m.panelArray[nextIndex].unobserveField("nPanel")
         m.panelArray[nextIndex].unobserveField("dialog")
         m.panelArray[nextIndex] = invalid
@@ -184,10 +184,10 @@ end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
     print "MenuScene:onKeyEvent"
-      if press then
+      if press
         if key = "back"
 
-          if (m.video <> invalid)
+          if m.video <> invalid
             m.top.removeChild(m.video)
             previousPanel = m.video.previousPanel
             m.video = invalid
@@ -208,6 +208,6 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
       return false
  end function
 
-sub recode(str as string) as string
+function recode(str as string) as string
     return m.global.utilities.callFunc("Encode", {str: str})
-end sub
+end function

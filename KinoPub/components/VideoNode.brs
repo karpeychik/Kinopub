@@ -79,7 +79,7 @@ sub markWatched()
     parameters.Push("video")
     parameters.Push(m.top.playlist.getChild(contentIndex).videoNumber.ToStr())
 
-    if(m.top.playlist.getChild(contentIndex).seasonId <> invalid)
+    if m.top.playlist.getChild(contentIndex).seasonId <> invalid
         parameters.Push("season")
         parameters.Push(m.top.playlist.getChild(contentIndex).seasonId)
     end if
@@ -93,8 +93,8 @@ sub markWatched()
 
     print "Marking watched"
     playlistIndex = m.firstPlaylistVideo + contentIndex
-    m.top.playList.getChild(playListIndex).watched = true
-    print m.top.playList.getChild(playListIndex)
+    m.top.playList.getChild(playlistIndex).watched = true
+    print m.top.playList.getChild(playlistIndex)
 end sub
 
 sub markTime()
@@ -111,7 +111,7 @@ sub markTime()
     parameters.Push("video")
     parameters.Push(m.top.playlist.getChild(contentIndex).videoNumber.ToStr())
 
-    if(m.top.playlist.getChild(contentIndex).seasonId <> invalid)
+    if m.top.playlist.getChild(contentIndex).seasonId <> invalid
         parameters.Push("season")
         parameters.Push(m.top.playlist.getChild(contentIndex).seasonId)
     end if
@@ -125,8 +125,8 @@ sub markTime()
 
     print "Marking unwatched"
     playlistIndex = m.firstPlaylistVideo + contentIndex
-    m.top.playList.getChild(playListIndex).watched = false
-    print m.top.playList.getChild(playListIndex)
+    m.top.playList.getChild(playlistIndex).watched = false
+    print m.top.playList.getChild(playlistIndex)
 end sub
 
 sub audioStreamUpdate()
@@ -149,22 +149,22 @@ end sub
 
 function getContentPlaylist(preferredAudio as Object, firstVideo as Integer, firstSeek as String) as Object
     content = createObject("roSGNode", "ContentNode")
-    for i=firstVideo to m.top.playList.getChildCount()-1
+    for i = firstVideo to m.top.playList.getChildCount()-1
         item = m.top.playList.getChild(i)
-        videocontent = createObject("roSGNode", "ContentNode")
-        videocontent.streamformat = item.videoFormat
-        videocontent.url = item.videoUri
+        videoContent = createObject("roSGNode", "ContentNode")
+        videoContent.streamformat = item.videoFormat
+        videoContent.url = item.videoUri
         if preferredAudio = invalid
-            videocontent.TrackIdAudio = item.audioTrack
+            videoContent.TrackIdAudio = item.audioTrack
         else
-            videocontent.TrackIdAudio = preferredAudio
+            videoContent.TrackIdAudio = preferredAudio
         end if
 
         if item.subtitleUrl <> invalid
-            videocontent.srt = item.subtitleUrl
+            videoContent.srt = item.subtitleUrl
         end if
-        videocontent.title = ""
-        videocontent.PlayStart = item.seek
+        videoContent.title = ""
+        videoContent.PlayStart = item.seek
         content.appendChild(videoContent)
     end for
     return content

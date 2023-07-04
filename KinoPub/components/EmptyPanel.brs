@@ -5,9 +5,9 @@ sub init()
     m.top.hasNextPanel = true
 
     m.infolabel = m.top.findNode("infoLabel")
-      
+
     m.top.isVideo = false
-    
+
     m.currentCategory = ""
-      
+
 end sub
