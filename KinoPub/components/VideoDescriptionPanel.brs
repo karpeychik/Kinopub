@@ -395,6 +395,9 @@ sub setAudio(item as Object)
             end if
             title = recode(title)
         end if
+        if title = m.audio
+            m.audioIndex = index - 1 ' index starts from 1, audioIndex from 0
+        end if
         m.audioTitles.push(title)
         index = index + 1
     end for
