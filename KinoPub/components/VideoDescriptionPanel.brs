@@ -217,13 +217,16 @@ sub gotoVideo(seek as Float)
     print "VideoDescriptionPanel:gotoVideo"
     nPanel = createObject("roSGNode", "VideoNode")
 
-    videoUri = m.readItemTask.content.item.videos[0].files[0].url[0]
-
     for each video in m.readItemTask.content.item.videos[0].files
         if video.quality = m.qualities[m.qualityIndex]
             videoUri = video.url[m.streams[m.streamIndex]]
         end if
     end for
+
+    if videoUri = invalid
+        print "VideoDescriptionPanel:gotoVideo: videoUri is invalid"
+        return
+    end if
 
     'TODO: what if we couldn't find the correct video? Should handle and not crash
     playlist = createObject("roSGNode", "ContentNode")
@@ -243,30 +246,29 @@ sub gotoVideo(seek as Float)
     m.top.nPanel = nPanel
 end sub
 
+sub showDialog(list as Object, index as Integer, callback as String, font as Object)
+    m.dialog = createObject("roSGNode", "Dialog")
+    m.dialog.buttons = list
+    m.dialog.ButtonGroup.focusButton = index
+    m.dialog.ButtonGroup.textFont = font
+    m.dialog.ButtonGroup.focusedTextFont = font
+    m.dialog.observeField("buttonSelected",callback)
+    m.top.dialog = m.dialog
+end sub
+
 sub audioButton()
     print "VideoDescriptionPanel:audioButton"
-    m.dialog = createObject("roSGNode", "Dialog")
-    m.dialog.buttons = m.audioTitles
-    m.dialog.ButtonGroup.textFont = m.font18
-    m.dialog.ButtonGroup.focusedTextFont = m.font18
-    m.dialog.observeField("buttonSelected", "audioSelected")
-    m.top.dialog = m.dialog
+    showDialog(m.audioTitles, m.audioIndex, "audioSelected", m.font18)
 end sub
 
 sub streamButton()
     print "VideoDescriptionPanel:streamButton"
-    m.dialog = createObject("roSGNode", "Dialog")
-    m.dialog.buttons = m.streams
-    m.dialog.observeField("buttonSelected", "streamSelected")
-    m.top.dialog = m.dialog
+    showDialog(m.streams, m.streamIndex, "streamSelected", m.font24)
 end sub
 
 sub qualityButton()
     print "VideoDescriptionPanel:qualityButton"
-    m.dialog = createObject("roSGNode", "Dialog")
-    m.dialog.buttons = m.qualities
-    m.dialog.observeField("buttonSelected", "qualitySelected")
-    m.top.dialog = m.dialog
+    showDialog(m.qualities, m.qualityIndex, "qualitySelected", m.font24)
 end sub
 
 function settingsKey() as String
@@ -536,7 +538,7 @@ function getGenres(genres as Object) as String
     gString = "Жанры: "
     genreString.AppendString(gString,gString.Len())
     for i = 0 To genres.Count() - 1 Step 1
-        if i>0
+        if i > 0
             genreString.AppendString(", ", 2)
         end if
 
