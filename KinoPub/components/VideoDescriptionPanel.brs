@@ -9,7 +9,7 @@ sub init()
     m.top.hasNextPanel = false
 
     m.top.updateFocus = false
-    m.top.observeField("updateFocus",updateFocus)
+    m.top.observeField("updateFocus", updateFocus)
     m.top.observeField("start","showVideoDetails")
     m.top.isVideo = false
 end sub
@@ -45,23 +45,27 @@ sub itemReceived()
     print "VideoDescriptionPanel:itemReceived"
     ' deviceInfo = createObject("roDeviceInfo")
 
-    title = m.readItemTask.content.item.title
-    imageUri = m.readItemTask.content.item.posters.big
+    loadSettings()
+
+    contentItem = m.readItemTask.content.item
+
+    title    = contentItem.title
+    imageUri = contentItem.posters.big
 
     ' gridRect = m.top.boundingRect()
 
-    availableWidth = m.top.width / 2 - 120
+    availableWidth  = m.top.width / 2 - 120
     availableHeight = m.top.height - 100
 
     widthHeight = availableWidth * 250 / 165
     heightWidth = availableHeight * 165 / 250
 
     if widthHeight <= availableHeight
-        width = availableWidth
+        width  = availableWidth
         height = widthHeight
     else
         height = availableHeight
-        width = heightWidth
+        width  = heightWidth
     end if
 
     left = availableWidth / 2 - width / 2
@@ -87,28 +91,23 @@ sub itemReceived()
     m.font16.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
     m.font16.size = 16
 
-    title = m.readItemTask.content.item.title
-    year =  m.readItemTask.content.item.year.ToStr()
-    title = getTitle(title, year)
+    title       = contentItem.title
+    year        = contentItem.year.ToStr()
+    title       = getTitle(title, year)
+    duration    = getDuration(contentItem.duration.total)
+    genreString = getGenres(contentItem.genres)
+    director    = getDirector(contentItem)
+    cast        = getCast(contentItem)
+    rate        = getRate(contentItem)
 
-    duration = getDuration(m.readItemTask.content.item.duration.total)
-
-    genreString = getGenres(m.readItemTask.content.item.genres)
-
-    director = getDirector(m.readItemTask.content.item)
-
-    cast = getCast(m.readItemTask.content.item)
-
-    rate = getRate(m.readItemTask.content.item)
-
-    plot = m.readItemTask.content.item.plot
+    plot = contentItem.plot
 
     textLeft = left + width + 50
 
     'HACKHACK: the unusedSpace here is a total banana. There is unused space on the screen which doesn't belong
     'to the panel and is not accounted in m.top.width. I couldn't figure out how to calculate it so hack.
     unusedSpace = 135
-    labelWidth = m.top.width - textLeft + unusedSpace
+    labelWidth  = m.top.width - textLeft + unusedSpace
 
     group = createObject("roSGNode", "LayoutGroup")
     group.addItemSpacingAfterChild =  false
@@ -118,12 +117,11 @@ sub itemReceived()
         addLabel(group, rate, 1, m.font18, 0, 0, labelWidth)
     end if
 
-    addLabel(group, duration, 1, m.font18, 0, 0, labelWidth)
+    addLabel(group, duration,    1, m.font18, 0, 0, labelWidth)
     addLabel(group, genreString, 2, m.font18, 0, 0, labelWidth)
-    addLabel(group, director, 1, m.font18, 0, 0, labelWidth)
-    addLabel(group, cast, 2, m.font18, 0, 0, labelWidth)
-
-    addLabel(group, plot, 8, m.font16, 0, 0, labelWidth)
+    addLabel(group, director,    1, m.font18, 0, 0, labelWidth)
+    addLabel(group, cast,        2, m.font18, 0, 0, labelWidth)
+    addLabel(group, plot,        8, m.font16, 0, 0, labelWidth)
 
     groupSpacings = createObject("roArray", group.getChildCount(), false)
     for i = 0 to group.getChildCount() - 2 step 1
@@ -138,29 +136,23 @@ sub itemReceived()
     buttonGroup.layoutDirection = "horiz"
     buttonGroup.width = labelWidth
 
-    m.streamIndex = -1
-    setQuality(m.readItemTask.content.item)
+    setQuality(contentItem)
+    setAudio(contentItem)
 
-    setAudio(m.readItemTask.content.item)
-
-    addButton(buttonGroup, "play", "playButton")
-
-    'TODO: save previous settings
-    addButton(buttonGroup, "audio", "audioButton")
-    addButton(buttonGroup, m.qualities[m.qualityIndex], "qualityButton")
-    m.qualityButton = m.buttons[m.buttons.Count()-1]
-    addButton(buttonGroup, m.streams[m.streamIndex], "streamButton")
-    m.streamButton = m.buttons[m.buttons.Count()-1]
+    m.playButton    = addButton(buttonGroup, "play",  "playButton")
+    m.audioButton   = addButton(buttonGroup, "audio", "audioButton")
+    m.qualityButton = addButton(buttonGroup, m.qualities[m.qualityIndex], "qualityButton")
+    m.streamButton  = addButton(buttonGroup, m.streams[m.streamIndex],    "streamButton")
 
     m.currentButtonIndex = 0
 
     group.appendChild(buttonGroup)
     m.top.appendChild(group)
 
-    m.buttons[0].setFocus(true)
+    m.playButton.setFocus(true)
 end sub
 
-sub addButton(group as Object, text as String, callback as String)
+function addButton(group as Object, text as String, callback as String)
     button = createObject("roSGNode", "Button")
     'button.width = "10"
     button.maxWidth = "100"
@@ -178,7 +170,8 @@ sub addButton(group as Object, text as String, callback as String)
     button.observeField("buttonSelected", callback)
     m.buttons.Push(button)
     group.appendChild(button)
-end sub
+    return button
+end function
 
 sub playButton()
     print "VideoDescriptionPanel:playButton"
@@ -276,13 +269,43 @@ sub qualityButton()
     m.top.dialog = m.dialog
 end sub
 
+function settingsKey() as String
+    return "video-%d-settings".Format(m.readItemTask.content.item.id)
+end function
+
+sub saveSettings()
+    print "saveSettings"
+    sec = createObject("roRegistrySection", settingsKey())
+    sec.Write("quality", m.qualities[m.qualityIndex])
+    sec.Write("stream",  m.streams[m.streamIndex])
+    sec.Write("audio",   m.audioTitles[m.audioIndex])
+    sec.Flush()
+end sub
+
+function loadSetting(section as Object, key as String, defaultValue as String) as String
+    value = section.Read(key)
+    if value = invalid or value = ""
+        value = defaultValue
+    end if
+    return value
+end function
+
+sub loadSettings()
+    print "loadSettings"
+    sec = createObject("roRegistrySection", settingsKey())
+
+    m.quality = loadSetting(sec, "quality", "1080p")
+    m.stream  = loadSetting(sec, "stream",  "hls4")
+    m.audio   = loadSetting(sec, "audio",   "audio")
+end sub
+
 sub qualitySelected()
     print "VideoDescriptionPanel:qualitySelected"
     m.qualityIndex = m.dialog.buttonSelected
     m.dialog.close = true
     setStreams(m.readItemTask.content.item)
     m.qualityButton.text = m.qualities[m.qualityIndex]
-    m.streamButton.text = m.streams[m.streamIndex]
+    saveSettings()
 end sub
 
 sub streamSelected()
@@ -290,22 +313,25 @@ sub streamSelected()
     m.streamIndex = m.dialog.buttonSelected
     m.dialog.close = true
     m.streamButton.text = m.streams[m.streamIndex]
+    saveSettings()
 end sub
 
 sub audioSelected()
     print "VideoDescriptionPanel:audioSelected"
     m.audioIndex = m.dialog.buttonSelected
     m.dialog.close = true
+    saveSettings()
 end sub
 
 sub setQuality(item as Object)
     print "VideoDescriptionPanel:setQuality"
-    qualityCount = item.videos[0].files.Count()
+    files = item.videos[0].files
+    qualityCount = files.Count()
     m.qualities = createObject("roArray", qualityCount, false)
     m.qualityIndex = -1
-    for i = 0 to item.videos[0].files.Count()-1  step 1
-        m.qualities.push(item.videos[0].files[i].quality)
-        if item.videos[0].files[i].quality = "1080p"
+    for i = 0 to files.Count() - 1  step 1
+        m.qualities.push(files[i].quality)
+        if files[i].quality = m.quality
             m.qualityIndex = i
         end if
     end for
@@ -320,16 +346,17 @@ end sub
 sub setStreams(item as Object)
     print "VideoDescriptionPanel:setStreams"
 
-    preferredStream = "hls4"
-    if m.streamIndex >= 0
+    if m.streamIndex <> invalid and m.streamIndex >= 0
         preferredStream = m.streams[m.streamIndex]
+    else
+        preferredStream = "hls4"
     end if
 
     m.streams =  item.videos[0].files[m.qualityIndex].url.Keys()
     m.streams.Sort("")
 
     m.streamIndex = -1
-    for i = 0 to m.streams.Count()-1  step 1
+    for i = 0 to m.streams.Count() - 1 step 1
         if m.streams[i] = preferredStream
             m.streamIndex = i
         end if
