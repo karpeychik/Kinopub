@@ -12,7 +12,7 @@ Right now only dev mode install is supported. If there is enough demand I will t
 To get started you need a couple of things.
 1) Get yourself an IDE. There is a good plugin for Eclipse. There is a plugin for VS Code (I can't call it good but...)
 2) Switch your Roku into dev mode. This is described above.
-3) [Have fun.](https://sdkdocs.roku.com/display/sdkdoc/Roku+SDK+Documentation)
+3) Have fun: [Roku SDK](https://sdkdocs.roku.com/display/sdkdoc/Roku+SDK+Documentation) and [Kino.pub API](https://kinoapi.com/)
 4) Build and deploy using your IDE (or manually)
 
 # How to build
@@ -24,4 +24,4 @@ make
 `out/apps/Kino.pub.zip` will be your application.
 
 # Contribute
-Shoot an email with the account to add as a contributor to ulka@outlook.com.
+Shoot an email with the account to add as a contributor to psavichev@gmail.com
