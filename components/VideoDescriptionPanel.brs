@@ -1,7 +1,6 @@
 'TODO: This component relies heavily on the item only having a single Video array element. Is that safe?
 
 sub init()
-    print "Init VideoDescriptionPanel"
     m.top.panelSize = "full"
     m.top.isFullScreen = true
     m.top.leftPosition = 130
@@ -15,7 +14,6 @@ sub init()
 end sub
 
 sub showVideoDetails()
-    print "showVideoDetails"
     m.readItemTask = createObject("roSGNode", "ContentReader")
     m.readItemTask.baseUrl = m.top.itemUri
     m.readItemTask.parameters = m.top.itemUriParameters
@@ -42,7 +40,6 @@ sub error()
 end sub
 
 sub itemReceived()
-    print "VideoDescriptionPanel:itemReceived"
     ' deviceInfo = createObject("roDeviceInfo")
 
     loadSettings()
@@ -174,7 +171,6 @@ function addButton(group as Object, text as String, callback as String)
 end function
 
 sub playButton()
-    print "VideoDescriptionPanel:playButton"
     episode = m.readItemTask.content.item.videos[0]
     if episode.doesExist("watching") and episode.watching <> invalid and episode.watching.doesExist("status") and episode.watching.doesExist("time") and episode.watching.status = 0 and episode.watching.time <> invalid
         m.dialog = createObject("roSGNode", "Dialog")
@@ -213,16 +209,23 @@ sub watchingDialogResponse()
     gotoVideo(seekTo)
 end sub
 
-sub gotoVideo(seek as Float)
-    print "VideoDescriptionPanel:gotoVideo"
-    nPanel = createObject("roSGNode", "VideoNode")
-
+function findMatchingVideoUri()
     for each video in m.readItemTask.content.item.videos[0].files
         if video.quality = m.qualities[m.qualityIndex]
             videoUri = video.url[m.streams[m.streamIndex]]
+            if videoUri <> invalid
+                return videoUri
+            end if
         end if
     end for
 
+    return invalid
+end function
+
+sub gotoVideo(seek as Float)
+    nPanel = createObject("roSGNode", "VideoPlayer")
+
+    videoUri = findMatchingVideoUri()
     if videoUri = invalid
         print "VideoDescriptionPanel:gotoVideo: videoUri is invalid"
         return
@@ -257,17 +260,14 @@ sub showDialog(list as Object, index as Integer, callback as String, font as Obj
 end sub
 
 sub audioButton()
-    print "VideoDescriptionPanel:audioButton"
     showDialog(m.audioTitles, m.audioIndex, "audioSelected", m.font18)
 end sub
 
 sub streamButton()
-    print "VideoDescriptionPanel:streamButton"
     showDialog(m.streams, m.streamIndex, "streamSelected", m.font24)
 end sub
 
 sub qualityButton()
-    print "VideoDescriptionPanel:qualityButton"
     showDialog(m.qualities, m.qualityIndex, "qualitySelected", m.font24)
 end sub
 
@@ -276,7 +276,6 @@ function settingsKey() as String
 end function
 
 sub saveSettings()
-    print "saveSettings"
     sec = createObject("roRegistrySection", settingsKey())
     sec.Write("quality", m.qualities[m.qualityIndex])
     sec.Write("stream",  m.streams[m.streamIndex])
@@ -293,7 +292,6 @@ function loadSetting(section as Object, key as String, defaultValue as String) a
 end function
 
 sub loadSettings()
-    print "loadSettings"
     sec = createObject("roRegistrySection", settingsKey())
 
     m.quality = loadSetting(sec, "quality", "1080p")
@@ -302,7 +300,6 @@ sub loadSettings()
 end sub
 
 sub qualitySelected()
-    print "VideoDescriptionPanel:qualitySelected"
     m.qualityIndex = m.dialog.buttonSelected
     m.dialog.close = true
     setStreams(m.readItemTask.content.item)
@@ -311,7 +308,6 @@ sub qualitySelected()
 end sub
 
 sub streamSelected()
-    print "VideoDescriptionPanel:streamSelected"
     m.streamIndex = m.dialog.buttonSelected
     m.dialog.close = true
     m.streamButton.text = m.streams[m.streamIndex]
@@ -319,14 +315,12 @@ sub streamSelected()
 end sub
 
 sub audioSelected()
-    print "VideoDescriptionPanel:audioSelected"
     m.audioIndex = m.dialog.buttonSelected
     m.dialog.close = true
     saveSettings()
 end sub
 
 sub setQuality(item as Object)
-    print "VideoDescriptionPanel:setQuality"
     files = item.videos[0].files
     qualityCount = files.Count()
     m.qualities = createObject("roArray", qualityCount, false)
@@ -346,8 +340,6 @@ sub setQuality(item as Object)
 end sub
 
 sub setStreams(item as Object)
-    print "VideoDescriptionPanel:setStreams"
-
     if m.streamIndex <> invalid and m.streamIndex >= 0
         preferredStream = m.streams[m.streamIndex]
     else
@@ -506,7 +498,6 @@ function getDurationString(durationSeconds as  Integer) as String
 end function
 
 sub addLabel(group as Object, text as String, maxLines as Integer, fnt as Object, x as Integer, y as Integer, labelWidth as Integer)
-    print "VideoDescriptionPanel:addLabel"
     label = createObject("roSGNode", "Label")
     label.height = 0
     label.numLines = 0
@@ -522,7 +513,6 @@ sub addLabel(group as Object, text as String, maxLines as Integer, fnt as Object
 end sub
 
 function getTitle(title as String, year as String) as String
-    print "VideoDescriptionPanel:getTitle"
     newTitle = createObject("roString")
 
     newTitle.AppendString(title, title.Len())
@@ -535,8 +525,7 @@ function getTitle(title as String, year as String) as String
     return newTitle
 end function
 
-function getGenres(genres as Object) as String
-    print "VideoDescriptionPanel:getGenres"
+function getGenres(genres as Object) as string
     genreString = createObject("roString")
     gString = "Жанры: "
     genreString.AppendString(gString,gString.Len())
@@ -552,14 +541,12 @@ function getGenres(genres as Object) as String
 end function
 
 sub updateFocus()
-    print "VideoDescriptionPanel:updateFocus"
     if m.top.updateFocus
         m.buttons[0].setFocus(true)
     end if
 end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
-print "VideoDescriptionPanel:onKeyEvent"
     if press
         if key = "right" and m.currentButtonIndex < m.buttons.Count() - 1
             m.currentButtonIndex = m.currentButtonIndex + 1

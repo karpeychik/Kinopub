@@ -1,6 +1,5 @@
 'TODO: add rating to the 2nd caption line
 sub init()
-    print "Initializing poster"
     m.top.panelSize = "full"
     m.top.isFullScreen = true
     m.top.leftPosition = 130
@@ -34,7 +33,6 @@ sub init()
 end sub
 
 sub loadCategoryPosters()
-    print "loadCategoryPosters"
     m.top.grid.content = createObject("roSGNode", "ContentNode")
     m.top.overhangTitle = "Kino.pub"
     m.readPosterGridTask = createObject("roSGNode", "ContentReader")
@@ -46,8 +44,6 @@ sub loadCategoryPosters()
 end sub
 
 sub showPosterGrid()
-    print "PosterGrid:showPosterGrid"
-
     if m.firstPage
         m.shouldPage = false
         m.totalItems = 0
@@ -94,7 +90,6 @@ sub showPosterGrid()
 end sub
 
 sub itemFocused()
-    print "PosterGrid:itemFocused"
     itemCount = m.top.grid.content.getChildCount()
     lastRow = (itemCount-1) \ m.numColumns
     firstLastRowItem = lastRow * m.numColumns
@@ -113,7 +108,6 @@ sub itemFocused()
 end sub
 
 sub loadPage(pageNumber as Integer)
-    print "PosterGrid:loadPage"
     m.isLoading = true
     m.readPosterGridTask.unobserveField("content")
     m.readPosterGridTask = createObject("roSGNode", "ContentReader")
@@ -145,7 +139,6 @@ sub error()
 end sub
 
 sub itemSelected()
-    print "PosterGrid:itemSelected"
     selectedItem = m.top.grid.content.getChild(m.top.grid.itemSelected)
     if selectedItem.kinoPubType = "movie"
         nPanel = createObject("roSGNode", "VideoDescriptionPanel")

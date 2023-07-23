@@ -3,5 +3,8 @@
 
 	<script type="text/brightscript" uri="pkg:/components/EmptyPanel.brs" />
 	<interface>
-    </interface>
+		<field id="isVideo" type ="bool" />
+		<field id="panelSet" type="node" />
+		<field id="pType" type="string" />
+	</interface>
 </component>

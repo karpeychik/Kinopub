@@ -2,7 +2,6 @@
 'TODO: extract base class from this and video description?
 
 sub init()
-    print "SerialGridPanel:init()"
     m.top.panelSize = "full"
     m.top.isFullScreen = true
     m.top.leftPosition = 130
@@ -15,7 +14,6 @@ sub init()
 end sub
 
 sub loadSerial()
-    print "SerialGridPanel:loadSerial()"
     m.top.overhangTitle = "Kino.pub"
 
     m.progressDialog = createObject("roSGNode", "ProgressDialog")
@@ -51,16 +49,11 @@ end sub
 
 sub slideBack()
     if m.top.isInFocusChain() and false = m.top.panelSet.isGoingBack
-        print "SerialGridPanel:slideBack"
         for i = 0 to m.rowList.content.getChild(0).getChildCount()-1
             season = m.rowList.content.getChild(0).getChild(i)
             seasonWatched = true
             for j = season.getChildCount()-1 to 0 step -1
                 episode = season.getChild(j)
-
-                if i = 1
-                    print episode
-                end if
 
                 if 1 <> episode.watched
                     seasonWatched = false
@@ -76,8 +69,6 @@ sub slideBack()
 end sub
 
 sub showSerial()
-    print "SerialGridPanel:showSerial()"
-
     imageUri = m.readSerialTask.content.item.posters.medium
 
     availableWidth = m.top.width / 3
@@ -220,9 +211,6 @@ sub showSerial()
 end sub
 
 sub rowItemSelected()
-    print "SerialGridPanel:rowItemSelected"
-    print m.rowList.rowItemSelected
-
     seasonIndex = m.rowList.rowItemSelected[1]
     seasonNode = m.rowList.content.getChild(0).getChild(seasonIndex)
 
@@ -236,7 +224,6 @@ sub rowItemSelected()
 end sub
 
 function buildSeasonNode(seasonIndex as Integer)
-    print "SerialGridPanel:buildContentNode"
     content = createObject("roSGNode", "ContentNode")
     serial = m.readSerialTask.content.item
 
@@ -267,7 +254,6 @@ function buildSeasonNode(seasonIndex as Integer)
 end function
 
 function getGenres(genres as Object) as String
-    print "SerialGridPanel:getGenres"
     genreString = createObject("roString")
     gString = "Жанр: "
     genreString.AppendString(gString,gString.Len())
@@ -330,7 +316,6 @@ function getCast(item as Object)
 end function
 
 sub addLabel(group as Object, text as String, maxLines as Integer, fnt as Object, x as Integer, y as Integer, labelWidth as Integer)
-    print "VideoDescriptionPanel:addLabel"
     label = createObject("roSGNode", "Label")
     label.height = 0
     label.numLines = 0

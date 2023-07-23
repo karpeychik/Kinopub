@@ -1,5 +1,4 @@
 sub init()
-    print "SeasonRowListPanel:init()"
     m.top.panelSize = "full"
     m.top.isFullScreen = true
     m.top.leftPosition = 130
@@ -99,7 +98,6 @@ sub start()
 end sub
 
 sub updateFocus()
-    print "SeasonRowListPanel:updateFocus()"
     if m.top.updateFocus
         if m.playlist <> invalid
             for i = 0 to m.playlist.getChildCount()-1 step 1
@@ -161,8 +159,6 @@ sub watchingDialogResponse()
 end sub
 
 sub gotoVideo(episodeIndex as Integer, seekTo as Float)
-    print "SeasonRowListPanel:gotoVideo()"
-
     ' serial = m.top.serial
     episode = m.top.seasonNode.getChild(m.episodeIndex)
     quality = getPreferredQuality(episode)
@@ -219,7 +215,7 @@ sub gotoVideo(episodeIndex as Integer, seekTo as Float)
     m.playListFirstIndex = episodeIndex
     m.focusedIndex = episodeIndex
 
-    nPanel = createObject("roSGNode", "VideoNode")
+    nPanel = createObject("roSGNode", "VideoPlayer")
     nPanel.playlist = playlist
 
     if nPanel <> invalid
@@ -275,7 +271,6 @@ function getDuration(durationSeconds as  Integer) as String
 end function
 
 function getPreferredQuality(episode as Object) as Object
-    print "SeasonListPanel:getPreferredQuality()"
     qualityCount = episode.files.Count()
     qualities = createObject("roArray", qualityCount, false)
     qualityIndex = -1

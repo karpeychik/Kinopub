@@ -1,6 +1,4 @@
 sub init()
-    print "EpisodeRowListComponent:init()"
-
     m.font18  = CreateObject("roSGNode", "Font")
     m.font18.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
     m.font18.size = 12
@@ -10,7 +8,6 @@ sub init()
 end sub
 
 sub showcontent()
-    print "EpisodeRowListComponent:showContent()"
     if m.loaded
         return
     end if

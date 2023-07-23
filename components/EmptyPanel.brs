@@ -1,5 +1,4 @@
 sub init()
-    print "EmptyPanel:init()"
     m.top.panelSize = "medium"
     m.top.focusable = true
     m.top.hasNextPanel = true
@@ -9,5 +8,4 @@ sub init()
     m.top.isVideo = false
 
     m.currentCategory = ""
-
 end sub

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component name="VideoNode" extends="Group" initialFocus = "exampleVideo">
+<component name="VideoPlayer" extends="Scene">
+    <script type="text/brightscript" uri="pkg:/components/VideoPlayer.brs" />
 
-    <script type="text/brightscript" uri="pkg:/components/VideoNode.brs" />
-	
     <children>
     </children>
     <interface>
@@ -13,12 +12,12 @@
         <field id="videoId" type="string"/>
         <field id="seasonId" type="string"/>
         <field id="videoNumber" type="integer"/>
-        
+
         <field id="playlist" type="node" />
-        
+
         <field id="previousPanel" type="node" />
         <field id="isVideo" type="bool" />
         <field id="start" type="bool" />
     </interface>
-	
+
 </component>

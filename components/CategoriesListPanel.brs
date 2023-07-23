@@ -1,5 +1,4 @@
 sub init()
-    print "CategoriesListPanel:init()"
     m.top.panelSize = "medium"
     m.top.focusable = true
     m.top.hasNextPanel = true
@@ -18,7 +17,6 @@ sub init()
 end sub
 
 sub start()
-    print "CategoriesListPanel:start()"
     m.readContentTask = createObject("roSGNode", "ContentReader")
     m.readContentTask.observeField("content", "setcategories")
     m.readContentTask.observeField("error", "error")
@@ -52,8 +50,6 @@ sub error()
 end sub
 
 sub setCategories()
-    print "CategoriesListPanel:setCategories()"
-
     content = createObject("roSGNode", "ContentNode")
     if m.top.pType <> "bookmarks"
         itemContent = content.createChild("ContentNode")

@@ -23,7 +23,6 @@ sub getcontent()
 end sub
 
 sub fetchUrl()
-    print "ContentReader:getContent"
     print "m.top.baseUrl is " + m.top.baseUrl
     url = buildUrl(m.top.baseUrl, m.top.parameters)
     errorCode = 200
