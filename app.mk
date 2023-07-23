@@ -65,8 +65,8 @@ SOURCEDIR := .
 DISTREL := $(APPS_ROOT_DIR)/out
 COMMONREL := $(APPS_ROOT_DIR)/common
 
-ZIPREL := $(DISTREL)/apps
-PKGREL := $(DISTREL)/packages
+ZIPREL := $(DISTREL)
+PKGREL := $(DISTREL)
 CHECK_TMP_DIR := $(DISTREL)/tmp-check
 
 DATE_TIME := $(shell date +%F-%T)

@@ -19,7 +19,7 @@ or if you want to send the release to tv:
 export DEVPASSWORD=<roku tv password>; export ROKU_DEV_TARGET=<roku tv ip>; make && make install
 ```
 
-`out/apps/Kino.pub.zip` will be your application.
+`out/Kino.pub.zip` will be your application.
 
 # Contribute
 Shoot an email with the account to add as a contributor to psavichev@gmail.com
