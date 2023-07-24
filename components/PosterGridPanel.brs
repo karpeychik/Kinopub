@@ -57,7 +57,7 @@ sub showPosterGrid()
             m.totalItems = m.readPosterGridTask.content.pagination.total_items
         end if
 
-        for i = 0 to m.readPosterGridTask.content.items.Count()-1 step 1
+        for i = 0 to m.readPosterGridTask.content.items.Count() - 1 step 1
             content = createObject("roSGNode", "ContentNode")
             m.top.grid.content.appendChild(content)
         end for

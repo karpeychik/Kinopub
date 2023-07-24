@@ -66,7 +66,6 @@ sub itemReceived()
     end if
 
     left = availableWidth / 2 - width / 2
-    print left
 
     poster = createObject("roSGNode", "Poster")
     poster.translation = [left, 0]
@@ -223,7 +222,7 @@ function findMatchingVideoUri()
 end function
 
 sub gotoVideo(seek as Float)
-    nPanel = createObject("roSGNode", "VideoPlayer")
+    nPanel = createObject("roSGNode", "VideoNode")
 
     videoUri = findMatchingVideoUri()
     if videoUri = invalid

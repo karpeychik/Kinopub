@@ -91,7 +91,6 @@ sub setCategories()
 end sub
 
 sub itemFocused()
-    print "CategoriesListPanel:itemFocused()"
     categorycontent = m.top.list.content.getChild(m.top.list.itemFocused)
     selectedCategory = categorycontent.kinoPubId.ToStr()
     if selectedCategory = "bookmarks"
@@ -108,7 +107,6 @@ sub itemFocused()
 end sub
 
 sub categorySelected()
-    print "CategoriesListPanel:categorySelected()"
     print m.emptyPanel.isInFocusChain()
     print m.emptyPanel.hasFocus()
     print m.top.panelSet.isGoingBack

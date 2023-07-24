@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component name="VideoPlayer" extends="Scene">
-    <script type="text/brightscript" uri="pkg:/components/VideoPlayer.brs" />
+<component name="VideoNode" extends="Group">
+    <script type="text/brightscript" uri="pkg:/components/VideoNode.brs" />
 
     <children>
     </children>

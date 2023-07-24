@@ -21,7 +21,7 @@ function Encode(params as Object) as String
     str = params.str
     input = createObject("roByteArray")
     input.FromAsciiString(str)
-    for i = 0 to input.Count()-1 step 1
+    for i = 0 to input.Count() - 1 step 1
         firstByte = input[i]
         if firstByte > 240
             i = i+3

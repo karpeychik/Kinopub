@@ -27,8 +27,6 @@ sub init()
 end sub
 
 sub start()
-    print "SeasonRowListPanel:init()"
-
     m.rowList = createObject("roSGNode", "RowList")
     rowList = m.rowList
     rowList.itemComponentName = "EpisodeRowListComponent"
@@ -46,7 +44,7 @@ sub start()
     content = createObject("roSGNode", "ContentNode")
     columnCount = 0
     row = createObject("roSGNode", "ContentNode")
-    for i = 0 to m.top.seasonNode.getChildCount()-1
+    for i = 0 to m.top.seasonNode.getChildCount() - 1
         item = m.top.seasonNode.getChild(i)
         if columnCount = m.numColumns
             columnCount = 0
@@ -87,8 +85,6 @@ sub start()
         content.appendChild(row)
     end if
 
-    print  content.getChildCount()
-    print content.getChild(0).getChildCount()
     rowList.content = content
 
     m.top.appendChild(rowList)
@@ -100,7 +96,7 @@ end sub
 sub updateFocus()
     if m.top.updateFocus
         if m.playlist <> invalid
-            for i = 0 to m.playlist.getChildCount()-1 step 1
+            for i = 0 to m.playlist.getChildCount() - 1 step 1
                 episodeIndex = m.playListFirstIndex + i
                 rowIndex = episodeIndex \ m.numColumns
                 columnIndex = episodeIndex MOD m.numColumns
@@ -116,7 +112,6 @@ sub updateFocus()
 end sub
 
 sub rowItemSelected()
-    print "SeasonRowListPanel:rowItemSelected()"
     episodeIndex = m.rowList.rowItemSelected[0] * m.numColumns + m.rowList.rowItemSelected[1]
     m.episodeIndex = episodeIndex
     episode = m.top.seasonNode.getChild(episodeIndex)
@@ -166,7 +161,7 @@ sub gotoVideo(episodeIndex as Integer, seekTo as Float)
     nPanel = invalid
 
     playlist = createObject("roSGNode", "ContentNode")
-    for i = episodeIndex to m.top.seasonNode.getChildCount()-1
+    for i = episodeIndex to m.top.seasonNode.getChildCount() - 1
         episode = m.top.seasonNode.getChild(i)
         quality = getPreferredQuality(episode)
 
@@ -215,11 +210,10 @@ sub gotoVideo(episodeIndex as Integer, seekTo as Float)
     m.playListFirstIndex = episodeIndex
     m.focusedIndex = episodeIndex
 
-    nPanel = createObject("roSGNode", "VideoPlayer")
+    nPanel = createObject("roSGNode", "VideoNode")
     nPanel.playlist = playlist
 
     if nPanel <> invalid
-        print "SeasonListPanel:PanelSelected"
         m.top.nPanel = nPanel
     end if
 end sub
@@ -274,7 +268,7 @@ function getPreferredQuality(episode as Object) as Object
     qualityCount = episode.files.Count()
     qualities = createObject("roArray", qualityCount, false)
     qualityIndex = -1
-    for i = 0 to episode.files.Count()-1  step 1
+    for i = 0 to episode.files.Count() - 1  step 1
         qualities.push(episode.files[i].quality)
         if episode.files[i].quality = "1080p"
             qualityIndex = i
@@ -295,7 +289,7 @@ function getPreferredStream(file as Object) as Object
     streams.Sort("")
 
     streamIndex = -1
-    for i = 0 to streams.Count()-1  step 1
+    for i = 0 to streams.Count() - 1  step 1
         if streams[i] = preferredStream
             streamIndex = i
         end if
