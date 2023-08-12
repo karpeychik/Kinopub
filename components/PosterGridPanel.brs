@@ -25,8 +25,8 @@ sub init()
     posterWidth = gridRect.width / numColumns
     m.top.grid.basePosterSize = [ posterWidth, (250 * posterWidth) / 165]
 
-    m.top.observeField("start","loadCategoryPosters")
-    m.top.grid.observeField("itemSelected","itemSelected")
+    m.top.observeField("start", "loadCategoryPosters")
+    m.top.grid.observeField("itemSelected", "itemSelected")
     m.nextPage = 1
     m.top.isVideo = false
     m.firstPage = true

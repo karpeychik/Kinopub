@@ -7,7 +7,7 @@ sub init()
 
     m.top.overhang.visible = false
     m.top.panelset.visible = false
-    m.top.panelSet.observeField("isGoingBack","slideBack")
+    m.top.panelSet.observeField("isGoingBack", "slideBack")
 
     start()
 
@@ -70,8 +70,8 @@ sub startPanels()
     m.panelArray[0].panelSet = m.top.panelSet
     m.panelArray[0].pType = ""
     m.panelArray[0].nPanel = invalid
-    m.panelArray[0].observeField("nPanel","nPanelAdded")
-    m.panelArray[0].observeField("dialog","dialogAdded")
+    m.panelArray[0].observeField("nPanel", "nPanelAdded")
+    m.panelArray[0].observeField("dialog", "dialogAdded")
     m.panelArray[0].start = true
 end sub
 
@@ -135,7 +135,7 @@ sub nPanelAdded()
 
     m.panelArray[index + 1] = nPanel
     nPanel.observeField("nPanel", "nPanelAdded")
-    nPanel.observeField("dialog","dialogAdded")
+    nPanel.observeField("dialog", "dialogAdded")
 
     if nPanel.isVideo
         m.top.overhang.visible = false

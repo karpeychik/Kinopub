@@ -8,8 +8,8 @@ sub init()
 
     m.top.updateFocus = false
 
-    m.top.observeField("start","start")
-    m.top.observeField("updateFocus","updateFocus")
+    m.top.observeField("start", "start")
+    m.top.observeField("updateFocus", "updateFocus")
 
     'HACKHACK: These are expected thumbnail dimensions. How can we make sure that this is always the case?
     thumbWidth = 480
@@ -22,7 +22,6 @@ sub init()
 
     m.separ = 0
 
-    ' gridRect = m.top.boundingRect()
     m.numColumns = Fix(m.panelWidth / (m.posterWidth + m.separ))
 end sub
 
@@ -133,7 +132,7 @@ sub rowItemSelected()
         m.dialog.titleFont = font
         m.dialog.buttonGroup.textFont = font
         m.dialog.buttonGroup.focusedTextFont = font
-        m.dialog.observeField("buttonSelected","watchingDialogResponse")
+        m.dialog.observeField("buttonSelected", "watchingDialogResponse")
         m.top.dialog = m.dialog
     else
         'There is no existing status to continue, start from scratch

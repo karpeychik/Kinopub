@@ -9,7 +9,7 @@ sub init()
 
     m.top.updateFocus = false
     m.top.observeField("updateFocus", updateFocus)
-    m.top.observeField("start","showVideoDetails")
+    m.top.observeField("start", "showVideoDetails")
     m.top.isVideo = false
 end sub
 
@@ -189,7 +189,7 @@ sub playButton()
         m.dialog.titleFont = font
         m.dialog.buttonGroup.textFont = font
         m.dialog.buttonGroup.focusedTextFont = font
-        m.dialog.observeField("buttonSelected","watchingDialogResponse")
+        m.dialog.observeField("buttonSelected", "watchingDialogResponse")
         m.top.dialog = m.dialog
     else
         'There is no existing status to continue, start from scratch

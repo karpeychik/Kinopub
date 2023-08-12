@@ -13,7 +13,7 @@ sub init()
     m.top.dialog = invalid
 
     m.currentCategory = ""
-    m.top.observeField("start","start")
+    m.top.observeField("start", "start")
 end sub
 
 sub start()
