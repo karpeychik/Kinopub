@@ -2,14 +2,14 @@
 <component name="SeasonRowListPanel" extends="Panel" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
 
 	<script type="text/brightscript" uri="pkg:/components/SeasonRowListPanel.brs" />
-	
+
 	<interface>
-	   <field id="seasonNode" type="node" />
-       <field id="nPanel" type="node" />
-       <field id="dialog" type="node" />
-       <field id="isVideo" type="bool" />
-       <field id="start" type="bool" />
-       <field id="panelSet" type="node" />
-       <field id="updateFocus" type="bool" />
+      <field id="seasonNode" type="node" />
+      <field id="nPanel" type="node" />
+      <field id="dialog" type="node" />
+      <field id="isVideo" type="bool" />
+      <field id="start" type="bool" />
+      <field id="panelSet" type="node" />
+      <field id="updateFocus" type="bool" />
 	</interface>
 </component>

@@ -46,7 +46,7 @@ sub showcontent()
     poster = createObject("roSGNode", "Poster")
     m.poster = poster
     poster.width = width
-    poster.translation = [left, borderStroke ]
+    poster.translation = [left, borderStroke]
     poster.height = height
     poster.loadDisplayMode = "scaleToFit"
     poster.uri = itemContent.HDPosterUrl

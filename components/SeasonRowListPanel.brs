@@ -113,32 +113,41 @@ end sub
 sub rowItemSelected()
     episodeIndex = m.rowList.rowItemSelected[0] * m.numColumns + m.rowList.rowItemSelected[1]
     m.episodeIndex = episodeIndex
-    episode = m.top.seasonNode.getChild(episodeIndex)
-    if episode.doesExist("watchingStatus") and episode.doesExist("watchedTime") and episode.watchingStatus = 0 and episode.watchedTime <> invalid
-        m.dialog = createObject("roSGNode", "Dialog")
 
-        font  = CreateObject("roSGNode", "Font")
-        font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-        font.size = 24
+    ' selectedItem = m.top.grid.content.getChild(m.top.grid.itemSelected)
+    nPanel = createObject("roSGNode", "EpisodeVideoDescriptionPanel")
+    nPanel.itemUriParameters = ["access_token", m.global.accessToken]
+    ' itemUrl = "https://api.service-kp.com/v1/items/" + selectedItem.kinoPubId
+    ' nPanel.itemUri = itemUrl
+    m.top.nPanel = nPanel
 
-        title = createObject("roString")
-        appStr = "Вы хотите продолжить c "
-        title.appendString(appStr, appStr.Len())
-        durationStr = getDuration(episode.watchedTime)
-        title.AppendString(durationStr,durationStr.Len())
 
-        m.dialog.buttons = [ recode("Да"), recode("Нет")]
-        m.dialog.title = recode(title)
-        m.dialog.titleFont = font
-        m.dialog.buttonGroup.textFont = font
-        m.dialog.buttonGroup.focusedTextFont = font
-        m.dialog.observeField("buttonSelected", "watchingDialogResponse")
-        m.top.dialog = m.dialog
-    else
-        'There is no existing status to continue, start from scratch
-        gotoVideo(episodeIndex, 0.0)
-    end if
 
+    ' episode = m.top.seasonNode.getChild(episodeIndex)
+    ' if episode.doesExist("watchingStatus") and episode.doesExist("watchedTime") and episode.watchingStatus = 0 and episode.watchedTime <> invalid
+    '     m.dialog = createObject("roSGNode", "Dialog")
+
+    '     font  = CreateObject("roSGNode", "Font")
+    '     font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
+    '     font.size = 24
+
+    '     title = createObject("roString")
+    '     appStr = "Вы хотите продолжить c "
+    '     title.appendString(appStr, appStr.Len())
+    '     durationStr = getDuration(episode.watchedTime)
+    '     title.AppendString(durationStr,durationStr.Len())
+
+    '     m.dialog.buttons = [ recode("Да"), recode("Нет")]
+    '     m.dialog.title = recode(title)
+    '     m.dialog.titleFont = font
+    '     m.dialog.buttonGroup.textFont = font
+    '     m.dialog.buttonGroup.focusedTextFont = font
+    '     m.dialog.observeField("buttonSelected", "watchingDialogResponse")
+    '     m.top.dialog = m.dialog
+    ' else
+    '     'There is no existing status to continue, start from scratch
+    '     gotoVideo(episodeIndex, 0.0)
+    ' end if
 end sub
 
 sub watchingDialogResponse()

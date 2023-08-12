@@ -198,8 +198,6 @@ sub showSerial()
 
     content.appendChild(row)
 
-    print content
-
     rowList.content = content
 
     vGroup.appendChild(rowList)
@@ -214,7 +212,6 @@ sub rowItemSelected()
     seasonIndex = m.rowList.rowItemSelected[1]
     seasonNode = m.rowList.content.getChild(0).getChild(seasonIndex)
 
-    'nPanel = createObject("roSGNode", "SeasonListPanel")
     nPanel = createObject("roSGNode", "SeasonRowListPanel")
     nPanel.serial = m.readSerialTask.content.item
     nPanel.seasonIndex = seasonIndex
@@ -258,7 +255,7 @@ function getGenres(genres as Object) as String
     gString = "Жанр: "
     genreString.AppendString(gString,gString.Len())
     for i = 0 To genres.Count() - 1 Step 1
-        if i>0
+        if i > 0
             genreString.AppendString(", ", 2)
         end if
 
