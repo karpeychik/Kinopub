@@ -4,6 +4,7 @@
 	<script type="text/brightscript" uri="pkg:/components/SeasonRowListPanel.brs" />
 
 	<interface>
+      <field id="serial" type="assocarray" />
       <field id="seasonNode" type="node" />
       <field id="nPanel" type="node" />
       <field id="dialog" type="node" />

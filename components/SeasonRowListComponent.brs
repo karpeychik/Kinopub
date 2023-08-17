@@ -70,7 +70,7 @@ sub showcontent()
 end sub
 
 sub updateWatched()
-    print "SeasonRowListComponent:updateWatched()"
+    ' print "SeasonRowListComponent:updateWatched()"
     if m.top.itemContent.seasonWatched
         m.poster.opacity = 0.5
     else

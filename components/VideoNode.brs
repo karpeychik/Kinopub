@@ -1,5 +1,5 @@
 sub init()
-    print "VideoNode:init()"
+    ' print "VideoNode:init()"
 
     m.top.isVideo = true
     m.top.seek = 0.0
@@ -17,7 +17,7 @@ sub init()
 end sub
 
 sub startVideo()
-    print "VideoNode:startVideo()"
+    ' print "VideoNode:startVideo()"
 
     content = getContentPlaylist(invalid, 0, m.top.playlist.getChild(0).seek.ToStr())
 
@@ -36,8 +36,8 @@ sub startVideo()
 end sub
 
 sub stateChanged()
-    print "VideoNode:StateChanged: "
-    print m.video.state
+    ' print "VideoNode:StateChanged: "
+    ' print m.video.state
     contentIndex = m.video.contentIndex
     if m.video.state = "playing"
         playlist = m.top.playlist
@@ -56,7 +56,7 @@ sub stateChanged()
 end sub
 
 sub timerFired()
-    print "VideoNode:timerFired"
+    ' print "VideoNode:timerFired"
     if m.video.position > 0 and (m.video.position / m.video.duration) < 0.85
         m.watched = false
         markTime()

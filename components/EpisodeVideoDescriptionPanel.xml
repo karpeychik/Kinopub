@@ -5,6 +5,9 @@
 	<children>
 	</children>
 	<interface>
+		<field id="serial" type="assocarray" />
+		<field id="season" type="node" />
+		<field id="episode" type="node" />
 		<field id="nPanel" type="node" />
 		<field id="dialog" type="node" />
 		<field id="panelSet" type="node" />

@@ -69,7 +69,9 @@ sub slideBack()
 end sub
 
 sub showSerial()
-    imageUri = m.readSerialTask.content.item.posters.medium
+    serial = m.readSerialTask.content.item
+
+    imageUri = serial.posters.medium
 
     availableWidth = m.top.width / 3
     availableHeight = m.top.height * 7 / 12
@@ -132,12 +134,12 @@ sub showSerial()
     textLeft = left + width + 50
     labelWidth = m.top.width - textLeft + unusedSpace
 
-    title = m.readSerialTask.content.item.title
-    genreString = getGenres(m.readSerialTask.content.item.genres)
-    director = getDirector(m.readSerialTask.content.item)
-    cast = getCast(m.readSerialTask.content.item)
-    rate = getRate(m.readSerialTask.content.item)
-    plot = m.readSerialTask.content.item.plot
+    title = serial.title
+    genreString = getGenres(serial.genres)
+    director = getDirector(serial)
+    cast = getCast(serial)
+    rate = getRate(serial)
+    plot = serial.plot
 
     addLabel(labelGroup, title, 1, m.font24, 0, 0, labelWidth)
     if rate.Len() > 0
@@ -179,19 +181,18 @@ sub showSerial()
     row = createObject("roSGNode", "ContentNode")
     row.title = "Seasons"
 
-    for i = 0 to m.readSerialTask.content.item.seasons.Count() - 1 step 1
+    for i = 0 to serial.seasons.Count() - 1 step 1
         seasonWatched = true
-        for each episode in m.readSerialTask.content.item.seasons[i].episodes
+        for each episode in serial.seasons[i].episodes
             if episode.watched <> 1
                 seasonWatched = false
                 exit for
             end if
         end for
 
-
         itemContent = buildSeasonNode(i)
-        itemContent.title = recode("Сезон " + m.readSerialTask.content.item.seasons[i].number.ToStr())
-        itemContent.HDPosterUrl = m.readSerialTask.content.item.posters.small
+        itemContent.title = recode("Сезон " + serial.seasons[i].number.ToStr())
+        itemContent.HDPosterUrl = serial.posters.small
         itemContent.addFields({itemWidth: 100, itemHeight: 200, seasonWatched: seasonWatched })
         row.appendChild(itemContent)
     end for
@@ -213,8 +214,10 @@ sub rowItemSelected()
     seasonNode = m.rowList.content.getChild(0).getChild(seasonIndex)
 
     nPanel = createObject("roSGNode", "SeasonRowListPanel")
+    ' print m.readSerialTask.content.item
     nPanel.serial = m.readSerialTask.content.item
-    nPanel.seasonIndex = seasonIndex
+    ' TODO: maybe uncomment?
+    ' nPanel.seasonIndex = seasonIndex
     nPanel.seasonNode = seasonNode
 
     m.top.nPanel = nPanel

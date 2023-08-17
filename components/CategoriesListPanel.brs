@@ -107,9 +107,9 @@ sub itemFocused()
 end sub
 
 sub categorySelected()
-    print m.emptyPanel.isInFocusChain()
-    print m.emptyPanel.hasFocus()
-    print m.top.panelSet.isGoingBack
+    ' print m.emptyPanel.isInFocusChain()
+    ' print m.emptyPanel.hasFocus()
+    ' print m.top.panelSet.isGoingBack
     if m.emptyPanel.isInFocusChain()
         if not m.top.panelSet.isGoingBack
             if m.currentCategory <> "bookmarks"

@@ -107,7 +107,7 @@ sub showcontent()
 end sub
 
 sub watchedChange()
-    print "EpisodeRowListComponent:watchedChange()"
+    ' print "EpisodeRowListComponent:watchedChange()"
     if m.top.itemContent.episodeWatched
         m.poster.opacity = 0.5
         m.itemLabel.color = "#80FF80"

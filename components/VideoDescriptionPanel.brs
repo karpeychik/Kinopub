@@ -49,8 +49,6 @@ sub itemReceived()
     title    = contentItem.title
     imageUri = contentItem.posters.big
 
-    ' gridRect = m.top.boundingRect()
-
     availableWidth  = m.top.width / 2 - 120
     availableHeight = m.top.height - 100
 
@@ -150,7 +148,6 @@ end sub
 
 function addButton(group as Object, text as String, callback as String)
     button = createObject("roSGNode", "Button")
-    'button.width = "10"
     button.maxWidth = "100"
     button.minWidth = "100"
     button.focusable = true
@@ -324,7 +321,7 @@ sub setQuality(item as Object)
     qualityCount = files.Count()
     m.qualities = createObject("roArray", qualityCount, false)
     m.qualityIndex = -1
-    for i = 0 to files.Count() - 1  step 1
+    for i = 0 to files.Count() - 1 step 1
         m.qualities.push(files[i].quality)
         if files[i].quality = m.quality
             m.qualityIndex = i

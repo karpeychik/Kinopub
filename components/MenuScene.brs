@@ -14,26 +14,26 @@ sub init()
 end sub
 
 sub start()
-    date = createObject("roDateTime")
-    print "CurrentTime: " + date.AsSeconds().ToStr()
+    ' date = createObject("roDateTime")
+    ' print "CurrentTime: " + date.AsSeconds().ToStr()
 
     sec = createObject("roRegistrySection", "Authentication")
     if sec.Exists("AuthenticationToken") and sec.Exists("RefreshToken") and sec.Exists("TokenExpiration") and sec.Exists("TokenType")
         authToken = sec.Read("AuthenticationToken")
         refreshToken = sec.Read("RefreshToken")
         expiry = sec.Read("TokenExpiration")
-        tokenType = sec.Read("TokenType")
+        ' tokenType = sec.Read("TokenType")
 
         m.global.addFields({accessToken: authToken, refreshToken: refreshToken, tokenExpiration: expiry.ToInt()})
 
-        print "Current auth:"
-        print "AuthToken: " + authToken
-        print "RefreshToken: " + refreshToken
-        print "Expiration:" + expiry
-        print "TokenType:" + tokenType
+        ' print "Current auth:"
+        ' print "AuthToken: " + authToken
+        ' print "RefreshToken: " + refreshToken
+        ' print "Expiration:" + expiry
+        ' print "TokenType:" + tokenType
         deviceNotify()
     else
-        print "Auth not found..."
+        ' print "Auth not found..."
         showAuthentication()
     end if
 
@@ -76,7 +76,7 @@ sub startPanels()
 end sub
 
 sub deviceNotify()
-    print "MenuScene:deviceNotify()"
+    ' print "MenuScene:deviceNotify()"
 
     deviceInfo = createObject("roDeviceInfo")
 
@@ -96,7 +96,7 @@ sub deviceNotify()
 end sub
 
 sub onDeviceNotify()
-    print "MenuScene:onDeviceNotify"
+    ' print "MenuScene:onDeviceNotify"
     if m.deviceNotifyTask.authFailure
         print "Auth failed"
         showAuthentication()
@@ -106,7 +106,7 @@ sub onDeviceNotify()
 end sub
 
 sub slideBack()
-    print m.top.panelSet.isGoingBack
+    ' print m.top.panelSet.isGoingBack
 end sub
 
 sub nPanelAdded()

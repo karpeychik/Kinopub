@@ -112,13 +112,13 @@ end sub
 
 sub rowItemSelected()
     episodeIndex = m.rowList.rowItemSelected[0] * m.numColumns + m.rowList.rowItemSelected[1]
-    m.episodeIndex = episodeIndex
+    episode = m.top.seasonNode.getChild(episodeIndex)
 
-    ' selectedItem = m.top.grid.content.getChild(m.top.grid.itemSelected)
     nPanel = createObject("roSGNode", "EpisodeVideoDescriptionPanel")
     nPanel.itemUriParameters = ["access_token", m.global.accessToken]
-    ' itemUrl = "https://api.service-kp.com/v1/items/" + selectedItem.kinoPubId
-    ' nPanel.itemUri = itemUrl
+    nPanel.serial  = m.top.serial
+    nPanel.season  = m.top.seasonNode
+    nPanel.episode = episode
     m.top.nPanel = nPanel
 
 
@@ -150,165 +150,165 @@ sub rowItemSelected()
     ' end if
 end sub
 
-sub watchingDialogResponse()
-    button = m.dialog.buttonSelected
-    m.dialog.close = true
-    seekTo = 0.0
-    if button = 0
-        seekTo = m.top.seasonNode.getChild(m.episodeIndex).watchedTime
-    end if
+' sub watchingDialogResponse()
+'     button = m.dialog.buttonSelected
+'     m.dialog.close = true
+'     seekTo = 0.0
+'     if button = 0
+'         seekTo = m.top.seasonNode.getChild(m.episodeIndex).watchedTime
+'     end if
 
-    gotoVideo(m.episodeIndex, seekTo)
-end sub
+'     gotoVideo(m.episodeIndex, seekTo)
+' end sub
 
-sub gotoVideo(episodeIndex as Integer, seekTo as Float)
-    ' serial = m.top.serial
-    episode = m.top.seasonNode.getChild(m.episodeIndex)
-    quality = getPreferredQuality(episode)
+' sub gotoVideo(episodeIndex as Integer, seekTo as Float)
+'     ' serial = m.top.serial
+'     episode = m.top.seasonNode.getChild(m.episodeIndex)
+'     quality = getPreferredQuality(episode)
 
-    nPanel = invalid
+'     nPanel = invalid
 
-    playlist = createObject("roSGNode", "ContentNode")
-    for i = episodeIndex to m.top.seasonNode.getChildCount() - 1
-        episode = m.top.seasonNode.getChild(i)
-        quality = getPreferredQuality(episode)
+'     playlist = createObject("roSGNode", "ContentNode")
+'     for i = episodeIndex to m.top.seasonNode.getChildCount() - 1
+'         episode = m.top.seasonNode.getChild(i)
+'         quality = getPreferredQuality(episode)
 
-        for each item in episode.files
-            if item.quality = quality
-                stream = getPreferredStream(item)
+'         for each item in episode.files
+'             if item.quality = quality
+'                 stream = getPreferredStream(item)
 
-                videoFormat = stream
-                videoUri    = item.url[stream]
-                audioTrack  = episode.audios[0].index.ToStr()
-                videoId     = m.top.seasonNode.videoId
-                videoNumber = i + 1
-                seasonId    = (m.top.seasonNode.seasonIndex + 1).ToStr()
+'                 videoFormat = stream
+'                 videoUri    = item.url[stream]
+'                 audioTrack  = episode.audios[0].index.ToStr()
+'                 videoId     = m.top.seasonNode.videoId
+'                 videoNumber = i + 1
+'                 seasonId    = (m.top.seasonNode.seasonIndex + 1).ToStr()
 
-                if i = episodeIndex
-                    seek = seekTo
-                else
-                    seek = 0
-                end if
+'                 if i = episodeIndex
+'                     seek = seekTo
+'                 else
+'                     seek = 0
+'                 end if
 
-                exit for
-            end if
-        end for
+'                 exit for
+'             end if
+'         end for
 
-        if episode.watched = 1
-            episodeWatched = true
-        else
-            episodeWatched = false
-        end if
+'         if episode.watched = 1
+'             episodeWatched = true
+'         else
+'             episodeWatched = false
+'         end if
 
-        episodeEntry = createObject("roSGNode", "ContentNode")
-        episodeEntry.addFields({
-            videoFormat: videoFormat,
-            videoUri:    videoUri,
-            audioTrack:  audioTrack,
-            videoId:     videoId,
-            videoNumber: videoNumber,
-            seasonId:    seasonId,
-            seek:        seek,
-            watched:     episodeWatched
-        })
-        playlist.appendChild(episodeEntry)
-    end for
+'         episodeEntry = createObject("roSGNode", "ContentNode")
+'         episodeEntry.addFields({
+'             videoFormat: videoFormat,
+'             videoUri:    videoUri,
+'             audioTrack:  audioTrack,
+'             videoId:     videoId,
+'             videoNumber: videoNumber,
+'             seasonId:    seasonId,
+'             seek:        seek,
+'             watched:     episodeWatched
+'         })
+'         playlist.appendChild(episodeEntry)
+'     end for
 
-    m.playlist = playlist
-    m.playListFirstIndex = episodeIndex
-    m.focusedIndex = episodeIndex
+'     m.playlist = playlist
+'     m.playListFirstIndex = episodeIndex
+'     m.focusedIndex = episodeIndex
 
-    nPanel = createObject("roSGNode", "VideoNode")
-    nPanel.playlist = playlist
+'     nPanel = createObject("roSGNode", "VideoNode")
+'     nPanel.playlist = playlist
 
-    if nPanel <> invalid
-        m.top.nPanel = nPanel
-    end if
-end sub
+'     if nPanel <> invalid
+'         m.top.nPanel = nPanel
+'     end if
+' end sub
 
-function getDuration(durationSeconds as  Integer) as String
-    second = durationSeconds MOD 60
-    durationSeconds = durationSeconds \ 60
-    minute = durationSeconds MOD 60
-    durationSeconds = durationSeconds \ 60
-    hour = durationSeconds MOD 60
+' function getDuration(durationSeconds as  Integer) as String
+'     second = durationSeconds MOD 60
+'     durationSeconds = durationSeconds \ 60
+'     minute = durationSeconds MOD 60
+'     durationSeconds = durationSeconds \ 60
+'     hour = durationSeconds MOD 60
 
-    result = createObject("roString")
-    if hour > 0
-        if hour < 10
-            result.AppendString("0",1)
-        end if
+'     result = createObject("roString")
+'     if hour > 0
+'         if hour < 10
+'             result.AppendString("0",1)
+'         end if
 
-        hourString = hour.ToStr()
-        result.AppendString(hourString,hourString.Len())
-    else
-        result.AppendString("00", 2)
-    end if
+'         hourString = hour.ToStr()
+'         result.AppendString(hourString,hourString.Len())
+'     else
+'         result.AppendString("00", 2)
+'     end if
 
-    result.AppendString(":", 1)
+'     result.AppendString(":", 1)
 
-    if minute > 0
-        if minute < 10
-            result.AppendString("0",1)
-        end if
-        minuteString = minute.ToStr()
-        result.AppendString(minuteString, minuteString.Len())
-    else
-        result.AppendString("00", 2)
-    end if
+'     if minute > 0
+'         if minute < 10
+'             result.AppendString("0",1)
+'         end if
+'         minuteString = minute.ToStr()
+'         result.AppendString(minuteString, minuteString.Len())
+'     else
+'         result.AppendString("00", 2)
+'     end if
 
-    result.AppendString(":", 1)
+'     result.AppendString(":", 1)
 
-    if second > 0
-        if second < 10
-            result.AppendString("0",1)
-        end if
-        secondString = second.ToStr()
-        result.AppendString(secondString, secondString.Len())
-    else
-        result.AppendString("00", 2)
-    end if
+'     if second > 0
+'         if second < 10
+'             result.AppendString("0",1)
+'         end if
+'         secondString = second.ToStr()
+'         result.AppendString(secondString, secondString.Len())
+'     else
+'         result.AppendString("00", 2)
+'     end if
 
-    return result
-end function
+'     return result
+' end function
 
-function getPreferredQuality(episode as Object) as Object
-    qualityCount = episode.files.Count()
-    qualities = createObject("roArray", qualityCount, false)
-    qualityIndex = -1
-    for i = 0 to episode.files.Count() - 1  step 1
-        qualities.push(episode.files[i].quality)
-        if episode.files[i].quality = "1080p"
-            qualityIndex = i
-        end if
-    end for
+' function getPreferredQuality(episode as Object) as Object
+'     qualityCount = episode.files.Count()
+'     qualities = createObject("roArray", qualityCount, false)
+'     qualityIndex = -1
+'     for i = 0 to episode.files.Count() - 1 step 1
+'         qualities.push(episode.files[i].quality)
+'         if episode.files[i].quality = "1080p"
+'             qualityIndex = i
+'         end if
+'     end for
 
-    if qualityIndex = -1
-        qualityIndex = qualities.Count() - 1
-    end if
+'     if qualityIndex = -1
+'         qualityIndex = qualities.Count() - 1
+'     end if
 
-    return qualities[qualityIndex]
-end function
+'     return qualities[qualityIndex]
+' end function
 
-function getPreferredStream(file as Object) as Object
-    preferredStream = "hls4"
+' function getPreferredStream(file as Object) as Object
+'     preferredStream = "hls4"
 
-    streams =  file.url.Keys()
-    streams.Sort("")
+'     streams =  file.url.Keys()
+'     streams.Sort("")
 
-    streamIndex = -1
-    for i = 0 to streams.Count() - 1  step 1
-        if streams[i] = preferredStream
-            streamIndex = i
-        end if
-    end for
+'     streamIndex = -1
+'     for i = 0 to streams.Count() - 1 step 1
+'         if streams[i] = preferredStream
+'             streamIndex = i
+'         end if
+'     end for
 
-    if streamIndex = -1
-        streamIndex = 0
-    end if
+'     if streamIndex = -1
+'         streamIndex = 0
+'     end if
 
-    return streams[streamIndex]
-end function
+'     return streams[streamIndex]
+' end function
 
 function recode(str as String)
     return m.global.utilities.callFunc("Encode", {str: str})
