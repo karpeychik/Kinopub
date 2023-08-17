@@ -50,20 +50,30 @@ end sub
 
 sub addCategory(content as object, id as string, kinoPubId as string, title as string)
     itemContent = content.createChild("ContentNode")
-
     itemContent.setField("id", id)
     itemContent.addFields({ kinoPubId: kinoPubId})
     itemContent.setField("title", recode(title))
 end sub
 
 sub setCategories()
+    items = m.readContentTask.content.items
+
+    ' If there is only one item in the category, open it right away
+    if items.Count() = 1
+        item = items[0]
+        m.preparedPanel = createObject("roSGNode", "PosterGridPanel")
+        m.preparedPanel.previousPanel = m.top.previousPanel
+        m.currentCategory = item.id.ToStr()
+        openSubMenu()
+        return
+    end if
+
     content = createObject("roSGNode", "ContentNode")
     if m.top.pType <> "bookmarks"
         addCategory(content, "bookmarks", "bookmarks", "Закладки")
     end if
-    m.items = m.readContentTask.content.items
     itemId = 0
-    for each item in m.items
+    for each item in items
         addCategory(content, itemId.ToStr(), item.id.ToStr(), item.title)
         itemId = itemId + 1
     end for
@@ -92,13 +102,8 @@ sub itemFocused()
         m.currentCategory = "bookmarks"
     else
         m.preparedPanel = createObject("roSGNode", "PosterGridPanel")
-        m.preparedPanel.previousPanel = m.top ' ???
+        m.preparedPanel.previousPanel = m.top
         m.currentCategory = selectedCategory
-    end if
-
-    ' If there is only one item in the category, open it right away
-    if m.items.Count() = 1
-        openSubMenu()
     end if
 end sub
 
