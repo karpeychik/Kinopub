@@ -56,8 +56,9 @@ sub setCategories()
         itemContent.addFields({ kinoPubId: "bookmarks"})
         itemContent.setField("title", recode("Закладки"))
     end if
+    m.items = m.readContentTask.content.items
     itemId = 0
-    for each item in m.readContentTask.content.items
+    for each item in m.items
         itemContent = content.createChild("ContentNode")
         itemContent.setField("id", itemId.ToStr())
         itemContent.addFields({kinoPubId: item.id.ToStr()})
@@ -79,6 +80,7 @@ sub setCategories()
 end sub
 
 sub itemFocused()
+    print "focused"
     categorycontent = m.top.list.content.getChild(m.top.list.itemFocused)
     selectedCategory = categorycontent.kinoPubId.ToStr()
     if selectedCategory = "bookmarks"
@@ -92,6 +94,11 @@ sub itemFocused()
         m.preparedPanel.previousPanel = m.top
         m.currentCategory = selectedCategory
     end if
+
+    ' If there is only one item in the category, open it right away
+    if m.items.Count() = 1
+        openSubMenu()
+    end if
 end sub
 
 sub categorySelected()
@@ -100,22 +107,26 @@ sub categorySelected()
     ' print m.top.panelSet.isGoingBack
     if m.emptyPanel.isInFocusChain()
         if not m.top.panelSet.isGoingBack
-            if m.currentCategory <> "bookmarks"
-                if m.top.pType <> "bookmarks"
-                    m.preparedPanel.gridContentBaseUri = "https://api.service-kp.com/v1/items"
-                    m.preparedPanel.gridContentUriParameters = ["type", m.currentCategory]
-                    m.preparedPanel.category = m.currentCategory
-                else
-                    m.preparedPanel.gridContentBaseUri = "https://api.service-kp.com/v1/bookmarks/" + m.currentCategory
-                    m.preparedPanel.gridContentUriParameters = []
-                    m.preparedPanel.category = ""
-                end if
-            end if
-
-            m.top.nPanel = m.preparedPanel
+            openSubMenu()
         else
             m.emptyPanel.setFocus(false)
             m.top.list.setFocus(true)
         end if
     end if
+end sub
+
+sub openSubMenu()
+    if m.currentCategory <> "bookmarks"
+        if m.top.pType <> "bookmarks"
+            m.preparedPanel.gridContentBaseUri = "https://api.service-kp.com/v1/items"
+            m.preparedPanel.gridContentUriParameters = ["type", m.currentCategory]
+            m.preparedPanel.category = m.currentCategory
+        else
+            m.preparedPanel.gridContentBaseUri = "https://api.service-kp.com/v1/bookmarks/" + m.currentCategory
+            m.preparedPanel.gridContentUriParameters = []
+            m.preparedPanel.category = ""
+        end if
+    end if
+
+    m.top.nPanel = m.preparedPanel
 end sub
