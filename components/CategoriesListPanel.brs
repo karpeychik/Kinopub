@@ -48,21 +48,23 @@ sub error()
     m.top.dialog = m.dialog
 end sub
 
+sub addCategory(content as object, id as string, kinoPubId as string, title as string)
+    itemContent = content.createChild("ContentNode")
+
+    itemContent.setField("id", id)
+    itemContent.addFields({ kinoPubId: kinoPubId})
+    itemContent.setField("title", recode(title))
+end sub
+
 sub setCategories()
     content = createObject("roSGNode", "ContentNode")
     if m.top.pType <> "bookmarks"
-        itemContent = content.createChild("ContentNode")
-        itemContent.setField("id", "bookmarks")
-        itemContent.addFields({ kinoPubId: "bookmarks"})
-        itemContent.setField("title", recode("Закладки"))
+        addCategory(content, "bookmarks", "bookmarks", "Закладки")
     end if
     m.items = m.readContentTask.content.items
     itemId = 0
     for each item in m.items
-        itemContent = content.createChild("ContentNode")
-        itemContent.setField("id", itemId.ToStr())
-        itemContent.addFields({kinoPubId: item.id.ToStr()})
-        itemContent.setField("title", recode(item.title))
+        addCategory(content, itemId.ToStr(), item.id.ToStr(), item.title)
         itemId = itemId + 1
     end for
 
@@ -80,7 +82,6 @@ sub setCategories()
 end sub
 
 sub itemFocused()
-    print "focused"
     categorycontent = m.top.list.content.getChild(m.top.list.itemFocused)
     selectedCategory = categorycontent.kinoPubId.ToStr()
     if selectedCategory = "bookmarks"
@@ -91,7 +92,7 @@ sub itemFocused()
         m.currentCategory = "bookmarks"
     else
         m.preparedPanel = createObject("roSGNode", "PosterGridPanel")
-        m.preparedPanel.previousPanel = m.top
+        m.preparedPanel.previousPanel = m.top ' ???
         m.currentCategory = selectedCategory
     end if
 
