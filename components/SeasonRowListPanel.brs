@@ -89,7 +89,6 @@ sub start()
     m.top.appendChild(rowList)
 
     rowList.setFocus(true)
-
 end sub
 
 sub updateFocus()
