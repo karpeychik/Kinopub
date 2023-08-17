@@ -29,7 +29,6 @@ sub start()
 
     m.readContentTask.parameters = []
     m.readContentTask.control = "RUN"
-
 end sub
 
 sub error()
@@ -49,33 +48,35 @@ sub error()
     m.top.dialog = m.dialog
 end sub
 
+sub addCategory(content as object, id as string, kinoPubId as string, title as string)
+    itemContent = content.createChild("ContentNode")
+    itemContent.setField("id", id)
+    itemContent.addFields({ kinoPubId: kinoPubId})
+    itemContent.setField("title", recode(title))
+end sub
+
 sub setCategories()
+    items = m.readContentTask.content.items
+
+    ' If there is only one item in the category, open it right away
+    if items.Count() = 1
+        item = items[0]
+        m.preparedPanel = createObject("roSGNode", "PosterGridPanel")
+        m.preparedPanel.previousPanel = m.top.previousPanel
+        m.currentCategory = item.id.ToStr()
+        openSubMenu()
+        return
+    end if
+
     content = createObject("roSGNode", "ContentNode")
     if m.top.pType <> "bookmarks"
-        itemContent = content.createChild("ContentNode")
-        itemContent.setField("id", "bookmarks")
-        itemContent.addFields({ kinoPubId: "bookmarks"})
-        itemContent.setField("title", recode("Закладки"))
-
-        itemId = 0
-        for each item in m.readContentTask.content.items
-            itemContent = content.createChild("ContentNode")
-            itemContent.setField("id", itemId.ToStr())
-            itemContent.addFields({ kinoPubId: item.id})
-            itemContent.setField("title", recode(item.title))
-            itemId = itemId+1
-        end for
-
-    else
-        itemId = 0
-        for each item in m.readContentTask.content.items
-            itemContent = content.createChild("ContentNode")
-            itemContent.setField("id", itemId.ToStr())
-            itemContent.addFields({kinoPubId: item.id.ToStr()})
-            itemContent.setField("title", recode(item.title))
-            itemId = itemId+1
-        end for
+        addCategory(content, "bookmarks", "bookmarks", "Закладки")
     end if
+    itemId = 0
+    for each item in items
+        addCategory(content, itemId.ToStr(), item.id.ToStr(), item.title)
+        itemId = itemId + 1
+    end for
 
     m.top.list.content = content
     m.top.list.observeField("itemFocused", "itemFocused")
@@ -112,19 +113,7 @@ sub categorySelected()
     ' print m.top.panelSet.isGoingBack
     if m.emptyPanel.isInFocusChain()
         if not m.top.panelSet.isGoingBack
-            if m.currentCategory <> "bookmarks"
-                if m.top.pType <> "bookmarks"
-                    m.preparedPanel.gridContentBaseUri = "https://api.service-kp.com/v1/items"
-                    m.preparedPanel.gridContentUriParameters = ["type", m.currentCategory]
-                    m.preparedPanel.category = m.currentCategory
-                else
-                    m.preparedPanel.gridContentBaseUri = "https://api.service-kp.com/v1/bookmarks/" + m.currentCategory
-                    m.preparedPanel.gridContentUriParameters = []
-                    m.preparedPanel.category = ""
-                end if
-            end if
-
-            m.top.nPanel = m.preparedPanel
+            openSubMenu()
         else
             m.emptyPanel.setFocus(false)
             m.top.list.setFocus(true)
@@ -132,6 +121,18 @@ sub categorySelected()
     end if
 end sub
 
-function recode(str as string) as string
-    return m.global.utilities.callFunc("Encode", {str: str})
-end function
+sub openSubMenu()
+    if m.currentCategory <> "bookmarks"
+        if m.top.pType <> "bookmarks"
+            m.preparedPanel.gridContentBaseUri = "https://api.service-kp.com/v1/items"
+            m.preparedPanel.gridContentUriParameters = ["type", m.currentCategory]
+            m.preparedPanel.category = m.currentCategory
+        else
+            m.preparedPanel.gridContentBaseUri = "https://api.service-kp.com/v1/bookmarks/" + m.currentCategory
+            m.preparedPanel.gridContentUriParameters = []
+            m.preparedPanel.category = ""
+        end if
+    end if
+
+    m.top.nPanel = m.preparedPanel
+end sub

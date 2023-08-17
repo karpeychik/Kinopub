@@ -317,9 +317,3 @@ sub addLabel(group as Object, text as String, maxLines as Integer, fnt as Object
     label.text = recode(text)
     group.appendChild(label)
 end sub
-
-function recode(str as string) as string
-    str = str.Replace("&#151;", "-")
-    str = str.Replace("&#133;", "...")
-    return m.global.utilities.callFunc("Encode", {str: str})
-end function

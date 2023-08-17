@@ -154,7 +154,3 @@ sub itemSelected()
         m.top.nPanel = nPanel
     end if
 end sub
-
-function recode(str as string) as string
-    return m.global.utilities.callFunc("Encode", {str: str})
-end function
