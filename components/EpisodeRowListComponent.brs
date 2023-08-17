@@ -1,7 +1,5 @@
 sub init()
-    m.font18  = CreateObject("roSGNode", "Font")
-    m.font18.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-    m.font18.size = 12
+    loadFonts()
     m.itemContent = invalid
 
     m.loaded = false
@@ -84,7 +82,7 @@ sub showcontent()
     m.top.appendChild(labelRect)
 
     itemLabel = createObject("roSGNode", "Label")
-    itemLabel.font = m.font18
+    itemLabel.font = m.font12
     itemLabel.translation = [ left + 2, height + borderStroke - labelRectHeight ]
     itemLabel.horizAlign = "right"
     itemLabel.vertAlign = "center"
