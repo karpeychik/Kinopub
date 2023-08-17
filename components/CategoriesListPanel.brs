@@ -55,26 +55,15 @@ sub setCategories()
         itemContent.setField("id", "bookmarks")
         itemContent.addFields({ kinoPubId: "bookmarks"})
         itemContent.setField("title", recode("Закладки"))
-
-        itemId = 0
-        for each item in m.readContentTask.content.items
-            itemContent = content.createChild("ContentNode")
-            itemContent.setField("id", itemId.ToStr())
-            itemContent.addFields({ kinoPubId: item.id})
-            itemContent.setField("title", recode(item.title))
-            itemId = itemId+1
-        end for
-
-    else
-        itemId = 0
-        for each item in m.readContentTask.content.items
-            itemContent = content.createChild("ContentNode")
-            itemContent.setField("id", itemId.ToStr())
-            itemContent.addFields({kinoPubId: item.id.ToStr()})
-            itemContent.setField("title", recode(item.title))
-            itemId = itemId+1
-        end for
     end if
+    itemId = 0
+    for each item in m.readContentTask.content.items
+        itemContent = content.createChild("ContentNode")
+        itemContent.setField("id", itemId.ToStr())
+        itemContent.addFields({kinoPubId: item.id.ToStr()})
+        itemContent.setField("title", recode(item.title))
+        itemId = itemId + 1
+    end for
 
     m.top.list.content = content
     m.top.list.observeField("itemFocused", "itemFocused")
