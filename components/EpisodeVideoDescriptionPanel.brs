@@ -48,10 +48,6 @@ sub itemReceived()
     season  = m.top.season
     episode = m.top.episode
 
-    print serial
-    print season
-    print episode
-
     loadSettings()
 
     availableWidth  = m.top.width / 2 - 120
@@ -102,9 +98,12 @@ sub itemReceived()
     group = createObject("roSGNode", "LayoutGroup")
     group.addItemSpacingAfterChild =  false
     group.translation = [textLeft, 0]
-    addLabel(group, serial.title, 1, m.font24, 0, 0, labelWidth)
-    addLabel(group, season.TITLE, 1, m.font24, 0, 0, labelWidth)
-    addLabel(group, "Серия %d: %s".Format(episode.number, episode.title), 1, m.font24, 0, 0, labelWidth)
+
+    episode_title = "Серия %d: %s".Format(episode.number, episode.title)
+
+    addLabel(group, serial.title,  1, m.font24, 0, 0, labelWidth)
+    addLabel(group, season.TITLE,  1, m.font18, 0, 0, labelWidth)
+    addLabel(group, episode_title, 1, m.font18, 0, 0, labelWidth)
 
     groupSpacings = createObject("roArray", group.getChildCount(), false)
     for i = 0 to group.getChildCount() - 2 step 1
@@ -149,7 +148,7 @@ function addButton(group as Object, text as String, callback as String)
     button.focusedTextFont = m.font16
     button.height = 40
     button.text = text
-    ' button.observeField("buttonSelected", callback)
+    button.observeField("buttonSelected", callback)
     m.buttons.Push(button)
     group.appendChild(button)
     return button
