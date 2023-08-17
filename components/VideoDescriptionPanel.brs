@@ -549,9 +549,3 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
 
     return false
 end function
-
-function recode(str as string) as string
-    str = str.Replace("&#151;", "-")
-    str = str.Replace("&#133;", "...")
-    return m.global.utilities.callFunc("Encode", {str: str})
-end function

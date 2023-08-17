@@ -29,7 +29,6 @@ sub start()
 
     m.readContentTask.parameters = []
     m.readContentTask.control = "RUN"
-
 end sub
 
 sub error()
@@ -131,7 +130,3 @@ sub categorySelected()
         end if
     end if
 end sub
-
-function recode(str as string) as string
-    return m.global.utilities.callFunc("Encode", {str: str})
-end function

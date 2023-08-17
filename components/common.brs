@@ -15,3 +15,9 @@ sub loadFonts()
   m.font12.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
   m.font12.size = 12
 end sub
+
+function recode(str as string) as string
+  str = str.Replace("&#151;", "-")
+  str = str.Replace("&#133;", "...")
+  return m.global.utilities.callFunc("Encode", {str: str})
+end function

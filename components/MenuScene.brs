@@ -10,7 +10,6 @@ sub init()
     m.top.panelSet.observeField("isGoingBack", "slideBack")
 
     start()
-
 end sub
 
 sub start()
@@ -193,7 +192,3 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
 
     return false
  end function
-
-function recode(str as string) as string
-    return m.global.utilities.callFunc("Encode", {str: str})
-end function
