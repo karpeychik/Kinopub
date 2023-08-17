@@ -1,5 +1,3 @@
-'TODO: This component relies heavily on the item only having a single Video array element. Is that safe?
-
 sub init()
     m.top.panelSize = "full"
     m.top.isFullScreen = true
@@ -9,22 +7,9 @@ sub init()
 
     m.top.updateFocus = false
     m.top.observeField("updateFocus", updateFocus)
-    ' m.top.observeField("start", "showVideoDetails")
-    m.top.observeField("start", "itemReceived")
+    m.top.observeField("start", "showVideoDetails")
     m.top.isVideo = false
 end sub
-
-' sub showVideoDetails()
-'     ' Here:
-'     ' По идее у нас тут уже есть все нужные нам данные
-
-'     ' m.readItemTask = createObject("roSGNode", "ContentReader")
-'     ' m.readItemTask.baseUrl = m.top.itemUri
-'     ' m.readItemTask.parameters = m.top.itemUriParameters
-'     ' m.readItemTask.observeField("content", "itemReceived")
-'     ' m.readItemTask.observeField("error", "error")
-'     ' m.readItemTask.control = "RUN"
-' end sub
 
 sub error()
     print "EpisodeVideoDescriptionPanel:error()"
@@ -43,7 +28,7 @@ sub error()
     m.top.dialog = m.dialog
 end sub
 
-sub itemReceived()
+sub showVideoDetails()
     serial  = m.top.serial
     season  = m.top.season
     episode = m.top.episode
@@ -449,34 +434,6 @@ sub addLabel(group as Object, text as String, maxLines as Integer, fnt as Object
     label.text = recode(text)
     group.appendChild(label)
 end sub
-
-' function getTitle(title as String, year as String) as String
-'     newTitle = createObject("roString")
-
-'     newTitle.AppendString(title, title.Len())
-'     if year.Len() > 0
-'         newTitle.AppendString(" (", 2)
-'         newTitle.AppendString(year, year.Len())
-'         newTitle.AppendString(")", 1)
-'     end if
-
-'     return newTitle
-' end function
-
-' function getGenres(genres as Object) as string
-'     genreString = createObject("roString")
-'     gString = "Жанры: "
-'     genreString.AppendString(gString,gString.Len())
-'     for i = 0 To genres.Count() - 1 Step 1
-'         if i > 0
-'             genreString.AppendString(", ", 2)
-'         end if
-
-'         genreString.AppendString(genres[i].title, genres[i].title.Len())
-'     end for
-
-'     return genreString
-' end function
 
 sub updateFocus()
     if m.top.updateFocus
