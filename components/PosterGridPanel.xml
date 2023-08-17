@@ -21,6 +21,7 @@
         <field id="isVideo" type = "bool" />
         <field id="start" type="bool" />
         <field id="panelSet" type="node" />
+        <field id="previousPanel" type="node" />
         <field id="category" type = "string" />
     </interface>
 </component>

@@ -2,7 +2,6 @@
 'TODO: extract base class from this and video description?
 
 sub init()
-    print "SerialGridPanel:init()"
     m.top.panelSize = "full"
     m.top.isFullScreen = true
     m.top.leftPosition = 130
@@ -15,7 +14,6 @@ sub init()
 end sub
 
 sub loadSerial()
-    print "SerialGridPanel:loadSerial()"
     m.top.overhangTitle = "Kino.pub"
 
     m.progressDialog = createObject("roSGNode", "ProgressDialog")
@@ -51,16 +49,11 @@ end sub
 
 sub slideBack()
     if m.top.isInFocusChain() and false = m.top.panelSet.isGoingBack
-        print "SerialGridPanel:slideBack"
-        for i = 0 to m.rowList.content.getChild(0).getChildCount()-1
+        for i = 0 to m.rowList.content.getChild(0).getChildCount() - 1
             season = m.rowList.content.getChild(0).getChild(i)
             seasonWatched = true
-            for j = season.getChildCount()-1 to 0 step -1
+            for j = season.getChildCount() - 1 to 0 step -1
                 episode = season.getChild(j)
-
-                if i = 1
-                    print episode
-                end if
 
                 if 1 <> episode.watched
                     seasonWatched = false
@@ -76,9 +69,9 @@ sub slideBack()
 end sub
 
 sub showSerial()
-    print "SerialGridPanel:showSerial()"
+    serial = m.readSerialTask.content.item
 
-    imageUri = m.readSerialTask.content.item.posters.medium
+    imageUri = serial.posters.medium
 
     availableWidth = m.top.width / 3
     availableHeight = m.top.height * 7 / 12
@@ -141,12 +134,12 @@ sub showSerial()
     textLeft = left + width + 50
     labelWidth = m.top.width - textLeft + unusedSpace
 
-    title = m.readSerialTask.content.item.title
-    genreString = getGenres(m.readSerialTask.content.item.genres)
-    director = getDirector(m.readSerialTask.content.item)
-    cast = getCast(m.readSerialTask.content.item)
-    rate = getRate(m.readSerialTask.content.item)
-    plot = m.readSerialTask.content.item.plot
+    title = serial.title
+    genreString = getGenres(serial.genres)
+    director = getDirector(serial)
+    cast = getCast(serial)
+    rate = getRate(serial)
+    plot = serial.plot
 
     addLabel(labelGroup, title, 1, m.font24, 0, 0, labelWidth)
     if rate.Len() > 0
@@ -188,26 +181,23 @@ sub showSerial()
     row = createObject("roSGNode", "ContentNode")
     row.title = "Seasons"
 
-    for i = 0 to m.readSerialTask.content.item.seasons.Count()-1 step 1
+    for i = 0 to serial.seasons.Count() - 1 step 1
         seasonWatched = true
-        for each episode in m.readSerialTask.content.item.seasons[i].episodes
+        for each episode in serial.seasons[i].episodes
             if episode.watched <> 1
                 seasonWatched = false
                 exit for
             end if
         end for
 
-
         itemContent = buildSeasonNode(i)
-        itemContent.title = recode("Сезон " + m.readSerialTask.content.item.seasons[i].number.ToStr())
-        itemContent.HDPosterUrl = m.readSerialTask.content.item.posters.small
+        itemContent.title = recode("Сезон " + serial.seasons[i].number.ToStr())
+        itemContent.HDPosterUrl = serial.posters.small
         itemContent.addFields({itemWidth: 100, itemHeight: 200, seasonWatched: seasonWatched })
         row.appendChild(itemContent)
     end for
 
     content.appendChild(row)
-
-    print content
 
     rowList.content = content
 
@@ -220,23 +210,20 @@ sub showSerial()
 end sub
 
 sub rowItemSelected()
-    print "SerialGridPanel:rowItemSelected"
-    print m.rowList.rowItemSelected
-
     seasonIndex = m.rowList.rowItemSelected[1]
     seasonNode = m.rowList.content.getChild(0).getChild(seasonIndex)
 
-    'nPanel = createObject("roSGNode", "SeasonListPanel")
     nPanel = createObject("roSGNode", "SeasonRowListPanel")
+    ' print m.readSerialTask.content.item
     nPanel.serial = m.readSerialTask.content.item
-    nPanel.seasonIndex = seasonIndex
+    ' TODO: maybe uncomment?
+    ' nPanel.seasonIndex = seasonIndex
     nPanel.seasonNode = seasonNode
 
     m.top.nPanel = nPanel
 end sub
 
 function buildSeasonNode(seasonIndex as Integer)
-    print "SerialGridPanel:buildContentNode"
     content = createObject("roSGNode", "ContentNode")
     serial = m.readSerialTask.content.item
 
@@ -267,12 +254,11 @@ function buildSeasonNode(seasonIndex as Integer)
 end function
 
 function getGenres(genres as Object) as String
-    print "SerialGridPanel:getGenres"
     genreString = createObject("roString")
     gString = "Жанр: "
     genreString.AppendString(gString,gString.Len())
     for i = 0 To genres.Count() - 1 Step 1
-        if i>0
+        if i > 0
             genreString.AppendString(", ", 2)
         end if
 
@@ -297,8 +283,6 @@ function getRate(item as Object)
         iString = "imbd: "
         result.AppendString(iString,iString.Len())
 
-        print type(item.imdb_rating)
-        print item.imdb_rating
         rate = item.imdb_rating.ToStr()
         if rate.Len() > 3
             rate = rate.Left(3)
@@ -330,7 +314,6 @@ function getCast(item as Object)
 end function
 
 sub addLabel(group as Object, text as String, maxLines as Integer, fnt as Object, x as Integer, y as Integer, labelWidth as Integer)
-    print "VideoDescriptionPanel:addLabel"
     label = createObject("roSGNode", "Label")
     label.height = 0
     label.numLines = 0

@@ -1,5 +1,3 @@
-'TODO: This component relies heavily on the item only having a single Video array element. Is that safe?
-
 sub init()
     m.top.panelSize = "full"
     m.top.isFullScreen = true
@@ -13,18 +11,9 @@ sub init()
     m.top.isVideo = false
 end sub
 
-sub showVideoDetails()
-    m.readItemTask = createObject("roSGNode", "ContentReader")
-    m.readItemTask.baseUrl = m.top.itemUri
-    m.readItemTask.parameters = m.top.itemUriParameters
-    m.readItemTask.observeField("content", "itemReceived")
-    m.readItemTask.observeField("error", "error")
-    m.readItemTask.control = "RUN"
-end sub
-
 sub error()
-    print "VideoDescriptionPanel:error()"
-    source = "VideoDescriptionPanel:"
+    print "EpisodeVideoDescriptionPanel:error()"
+    source = "EpisodeVideoDescriptionPanel:"
     errorMessage = m.global.utilities.callFunc("GetErrorMessage", {errorCode: m.readItemTask.error, source: source})
     print errorMessage
     font  = CreateObject("roSGNode", "Font")
@@ -39,15 +28,12 @@ sub error()
     m.top.dialog = m.dialog
 end sub
 
-sub itemReceived()
-    ' deviceInfo = createObject("roDeviceInfo")
+sub showVideoDetails()
+    serial  = m.top.serial
+    season  = m.top.season
+    episode = m.top.episode
 
     loadSettings()
-
-    contentItem = m.readItemTask.content.item
-
-    title    = contentItem.title
-    imageUri = contentItem.posters.big
 
     availableWidth  = m.top.width / 2 - 120
     availableHeight = m.top.height - 100
@@ -64,6 +50,8 @@ sub itemReceived()
     end if
 
     left = availableWidth / 2 - width / 2
+
+    imageUri = episode.thumbnail
 
     poster = createObject("roSGNode", "Poster")
     poster.translation = [left, 0]
@@ -85,17 +73,6 @@ sub itemReceived()
     m.font16.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
     m.font16.size = 16
 
-    title       = contentItem.title
-    year        = contentItem.year.ToStr()
-    title       = getTitle(title, year)
-    duration    = getDuration(contentItem.duration.total)
-    genreString = getGenres(contentItem.genres)
-    director    = getDirector(contentItem)
-    cast        = getCast(contentItem)
-    rate        = getRate(contentItem)
-
-    plot = contentItem.plot
-
     textLeft = left + width + 50
 
     'HACKHACK: the unusedSpace here is a total banana. There is unused space on the screen which doesn't belong
@@ -106,16 +83,12 @@ sub itemReceived()
     group = createObject("roSGNode", "LayoutGroup")
     group.addItemSpacingAfterChild =  false
     group.translation = [textLeft, 0]
-    addLabel(group, title, 1, m.font24, 0, 0, labelWidth)
-    if rate.Len() > 0
-        addLabel(group, rate, 1, m.font18, 0, 0, labelWidth)
-    end if
 
-    addLabel(group, duration,    1, m.font18, 0, 0, labelWidth)
-    addLabel(group, genreString, 2, m.font18, 0, 0, labelWidth)
-    addLabel(group, director,    1, m.font18, 0, 0, labelWidth)
-    addLabel(group, cast,        2, m.font18, 0, 0, labelWidth)
-    addLabel(group, plot,        8, m.font16, 0, 0, labelWidth)
+    episode_title = "Серия %d: %s".Format(episode.number, episode.title)
+
+    addLabel(group, serial.title,  1, m.font24, 0, 0, labelWidth)
+    addLabel(group, season.TITLE,  1, m.font18, 0, 0, labelWidth)
+    addLabel(group, episode_title, 1, m.font18, 0, 0, labelWidth)
 
     groupSpacings = createObject("roArray", group.getChildCount(), false)
     for i = 0 to group.getChildCount() - 2 step 1
@@ -130,8 +103,8 @@ sub itemReceived()
     buttonGroup.layoutDirection = "horiz"
     buttonGroup.width = labelWidth
 
-    setQuality(contentItem)
-    setAudio(contentItem)
+    setQuality()
+    setAudio()
 
     m.playButton    = addButton(buttonGroup, "play",  "playButton")
     m.audioButton   = addButton(buttonGroup, "audio", "audioButton")
@@ -167,8 +140,8 @@ function addButton(group as Object, text as String, callback as String)
 end function
 
 sub playButton()
-    episode = m.readItemTask.content.item.videos[0]
-    if episode.doesExist("watching") and episode.watching <> invalid and episode.watching.doesExist("status") and episode.watching.doesExist("time") and episode.watching.status = 0 and episode.watching.time <> invalid
+    episode = m.top.episode
+    if episode.doesExist("watchingStatus") and episode.doesExist("watchedTime") and episode.watchingStatus = 0 and episode.watchedTime <> invalid
         m.dialog = createObject("roSGNode", "Dialog")
 
         font  = CreateObject("roSGNode", "Font")
@@ -178,8 +151,8 @@ sub playButton()
         title = createObject("roString")
         appStr = "Вы хотите продолжить c "
         title.appendString(appStr, appStr.Len())
-        durationStr = getDurationString(episode.watching.time)
-        title.AppendString(durationStr,durationStr.Len())
+        durationStr = getDurationString(episode.watchedTime)
+        title.AppendString(durationStr, durationStr.Len())
 
         m.dialog.buttons = [ recode("Да"), recode("Нет")]
         m.dialog.title = recode(title)
@@ -206,7 +179,7 @@ sub watchingDialogResponse()
 end sub
 
 function findMatchingVideoUri()
-    for each video in m.readItemTask.content.item.videos[0].files
+    for each video in m.top.episode.files
         if video.quality = m.qualities[m.qualityIndex]
             videoUri = video.url[m.streams[m.streamIndex]]
             if videoUri <> invalid
@@ -230,16 +203,24 @@ sub gotoVideo(seek as Float)
     'TODO: what if we couldn't find the correct video? Should handle and not crash
     playlist = createObject("roSGNode", "ContentNode")
     episodeEntry = createObject("roSGNode", "ContentNode")
-        episodeEntry.addFields({
-            videoFormat: m.streams[m.streamIndex],
-            videoUri : videoUri,
-            audioTrack : m.audioIndexes[m.audioIndex],
-            videoId : m.readItemTask.content.item.id.ToStr(),
-            videoNumber : 1,
-            seasonId : invalid,
-            seek : seek,
-            watched : false})
-        playlist.appendChild(episodeEntry)
+
+    if m.top.episode.watched = 1
+        episodeWatched = true
+    else
+        episodeWatched = false
+    end if
+
+    episodeEntry.addFields({
+        videoFormat: m.streams[m.streamIndex],
+        videoUri:    videoUri,
+        audioTrack:  m.audioIndexes[m.audioIndex],
+        videoId:     m.top.season.videoId,
+        videoNumber: 1, ' TODO: previously it was (i + 1) in (for i = episodeIndex to m.top.seasonNode.getChildCount() - 1)
+        seasonId:    (m.top.season.seasonIndex + 1).ToStr(),
+        seek:        seek,
+        watched:     episodeWatched
+    })
+    playlist.appendChild(episodeEntry)
 
     nPanel.playlist = playlist
     m.top.nPanel = nPanel
@@ -268,7 +249,7 @@ sub qualityButton()
 end sub
 
 function settingsKey() as String
-    return "video-%d-settings".Format(m.readItemTask.content.item.id)
+    return "series-%d-settings".Format(m.top.serial.id)
 end function
 
 sub saveSettings()
@@ -298,7 +279,7 @@ end sub
 sub qualitySelected()
     m.qualityIndex = m.dialog.buttonSelected
     m.dialog.close = true
-    setStreams(m.readItemTask.content.item)
+    setStreams()
     m.qualityButton.text = m.qualities[m.qualityIndex]
     saveSettings()
 end sub
@@ -316,8 +297,8 @@ sub audioSelected()
     saveSettings()
 end sub
 
-sub setQuality(item as Object)
-    files = item.videos[0].files
+sub setQuality()
+    files = m.top.episode.files
     qualityCount = files.Count()
     m.qualities = createObject("roArray", qualityCount, false)
     m.qualityIndex = -1
@@ -332,17 +313,19 @@ sub setQuality(item as Object)
         m.qualityIndex = m.qualities.Count() - 1
     end if
 
-    setStreams(item)
+    m.video = files[m.qualityIndex]
+
+    setStreams()
 end sub
 
-sub setStreams(item as Object)
+sub setStreams()
     if m.streamIndex <> invalid and m.streamIndex >= 0
         preferredStream = m.streams[m.streamIndex]
     else
         preferredStream = "hls4"
     end if
 
-    m.streams =  item.videos[0].files[m.qualityIndex].url.Keys()
+    m.streams = m.video.url.Keys()
     m.streams.Sort("")
 
     m.streamIndex = -1
@@ -357,8 +340,8 @@ sub setStreams(item as Object)
     end if
 end sub
 
-sub setAudio(item as Object)
-    audios = item.videos[0].audios
+sub setAudio()
+    audios = m.top.episode.audios
     m.audioTitles  = createObject("roArray", audios.Count(), false)
     m.audioIndexes = createObject("roArray", audios.Count(), false)
     m.audioIndex = 0
@@ -391,63 +374,7 @@ sub setAudio(item as Object)
     end for
 end sub
 
-function getDirector(item as Object)
-    result = createObject("roString")
-    directorString = "Режиссер: "
-    result.AppendString(directorString, directorString.Len())
-    result.AppendString(item.director, item.director.Len())
-    return result
-end function
-
-function getRate(item as Object)
-    result = createObject("roString")
-
-    if item.DoesExist("imdb_rating") and item.imdb_rating <> invalid
-        iString = "imbd: "
-        result.AppendString(iString,iString.Len())
-
-        rate = item.imdb_rating.ToStr()
-        if rate.Len() > 3
-            rate = rate.Left(3)
-        end if
-        result.AppendString(rate, rate.Len())
-        result.AppendString("    ", 4)
-    end if
-
-    if item.DoesExist("kinopoisk_rating") and item.kinopoisk_rating <> invalid
-        iString = "Кинопоиск: "
-        result.AppendString(iString,iString.Len())
-
-        rate = item.kinopoisk_rating.ToStr()
-        if rate.Len() > 3
-            rate = rate.Left(3)
-        end if
-        result.AppendString(rate, rate.Len())
-    end if
-
-    return result
-end function
-
-function getCast(item as Object)
-    result = createObject("roString")
-    cString = "В ролях: "
-    result.AppendString(cString, cString.Len())
-    result.AppendString(item.cast, item.cast.Len())
-    return result
-end function
-
-function getDuration(durationSeconds as  Integer) as String
-    durationString = getDurationString(durationSeconds)
-
-    result = createObject("roString")
-    dString = "Длительность: "
-    result.AppendString(dString,dString.Len())
-    result.AppendString(durationString,durationString.Len())
-
-    return result
-end function
-
-function getDurationString(durationSeconds as  Integer) as String
+function getDurationString(durationSeconds as Integer) as String
     second = durationSeconds MOD 60
     durationSeconds = durationSeconds \ 60
     minute = durationSeconds MOD 60
@@ -507,34 +434,6 @@ sub addLabel(group as Object, text as String, maxLines as Integer, fnt as Object
     label.text = recode(text)
     group.appendChild(label)
 end sub
-
-function getTitle(title as String, year as String) as String
-    newTitle = createObject("roString")
-
-    newTitle.AppendString(title, title.Len())
-    if year.Len() > 0
-        newTitle.AppendString(" (", 2)
-        newTitle.AppendString(year, year.Len())
-        newTitle.AppendString(")", 1)
-    end if
-
-    return newTitle
-end function
-
-function getGenres(genres as Object) as string
-    genreString = createObject("roString")
-    gString = "Жанры: "
-    genreString.AppendString(gString,gString.Len())
-    for i = 0 To genres.Count() - 1 Step 1
-        if i > 0
-            genreString.AppendString(", ", 2)
-        end if
-
-        genreString.AppendString(genres[i].title, genres[i].title.Len())
-    end for
-
-    return genreString
-end function
 
 sub updateFocus()
     if m.top.updateFocus

@@ -5,12 +5,12 @@
   <interface>
         <field id="nPanel" type ="node" />
         <field id="dialog" type="node" />
-        
+
         <field id="isVideo" type ="bool" />
         <field id="start" type="bool" />
         <field id="pType" type="string" />
         <field id="panelSet" type="node" />
-        
+        <field id="previousPanel" type="node" />
     </interface>
 
   <children>

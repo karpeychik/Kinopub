@@ -9,7 +9,7 @@ end sub
 sub getcontent()
     currentTime = createObject("roDateTime")
     currentSeconds = currentTime.AsSeconds()
-    print "Auth mode:" m.top.refreshAuth
+    ' print "Auth mode:" m.top.refreshAuth
     if m.top.refreshAuth and m.global.doesExist("tokenExpiration") and currentSeconds + 3600 > m.global.tokenExpiration
         print "Token is about to expire, need to refresh"
         renewToken()
@@ -23,14 +23,12 @@ sub getcontent()
 end sub
 
 sub fetchUrl()
-    print "ContentReader:getContent"
-    print "m.top.baseUrl is " + m.top.baseUrl
     url = buildUrl(m.top.baseUrl, m.top.parameters)
     errorCode = 200
     data = invalid
 
 #if development
-    print "ContentReader: DevMode: getContent: " + url
+    ' print "ContentReader: DevMode: getContent: " + url
     if url.Instr("https://api.service-kp.com/v1/types?") >= 0
         data = ReadAsciiFile("pkg:/devcontent/types.json")
     else if url.Instr("https://api.service-kp.com/v1/bookmarks/174340?") >= 0
@@ -47,7 +45,7 @@ sub fetchUrl()
         data = ReadAsciiFile("pkg:/devcontent/Items.txt")
     end if
 #else
-    print "ContentReader: RealMode: getContent: " + m.top.requestType + ": " + url
+    ' print "ContentReader: RealMode: getContent: " + m.top.requestType + ": " + url
 
     port = createobject("roMessagePort")
 
@@ -83,7 +81,7 @@ sub fetchUrl()
 
             'Check if we have hit the timeout
             if timer.totalmilliseconds() > m.top.timeout
-                print "ContentReader:timeout exceeded"
+                ' print "ContentReader:timeout exceeded"
                 readInternet.AsyncCancel()
                 errorCode = -2
                 exit while
@@ -96,9 +94,9 @@ sub fetchUrl()
     'urlContent = readInternet.GetToString()
 #end if
 
-    print "ContentReader:errorCode:" + errorCode.ToStr()
+    ' print "ContentReader:errorCode:" + errorCode.ToStr()
     if errorCode = 401
-        print "Got 401 back - auth"
+        ' print "Got 401 back - auth"
         m.top.authFailure = true
     else if errorCode <> 200
         m.top.error = errorCode.ToStr()
@@ -117,7 +115,7 @@ function buildUrl(baseUrl as String, parameters as Object) as String
         url.AppendString("?", 1)
         ' tempStr = createObject("roString")
         foundAuth = false
-        for i = 0 to parameters.Count()-1 step 2
+        for i = 0 to parameters.Count() - 1 step 2
             if i > 0
                 url.AppendString("&", 1)
             end if
@@ -153,13 +151,13 @@ function buildUrl(baseUrl as String, parameters as Object) as String
 end function
 
 sub renewToken()
-    print "ContentReader:renewToken()"
-    print "Old auth:"
-    print "AuthToken: " + m.global.accessToken
-    print "RefreshToken: " + m.global.refreshToken
-    print "Expiration: " + m.global.tokenExpiration.ToStr()
+    ' print "ContentReader:renewToken()"
+    ' print "Old auth:"
+    ' print "AuthToken: " + m.global.accessToken
+    ' print "RefreshToken: " + m.global.refreshToken
+    ' print "Expiration: " + m.global.tokenExpiration.ToStr()
     url = buildUrl("https://api.service-kp.com/oauth2/token", ["grant_type", "refresh_token", "refresh_token", m.global.refreshToken, "client_id", m.global.clientId, "client_secret", m.global.clientSecret])
-    print "Refresh url: " + url
+    ' print "Refresh url: " + url
     readInternet = createObject("roUrlTransfer")
     readInternet.setUrl(url)
     readInternet.SetCertificatesFile("common:/certs/ca-bundle.crt")
@@ -167,7 +165,7 @@ sub renewToken()
     urlContent = readInternet.GetToString()
 
     if urlContent = ""
-        print "Renew response is empty"
+        ' print "Renew response is empty"
         m.top.authFailure = true
     else
         json = parseJSON(urlContent)
@@ -183,10 +181,10 @@ sub renewToken()
             sec.Write("TokenExpiration",     m.global.tokenExpiration.ToStr())
             sec.Flush()
 
-            print "Current auth:"
-            print "AuthToken: "    + m.global.accessToken
-            print "RefreshToken: " + m.global.refreshToken
-            print "Expiration: "   + m.global.tokenExpiration.ToStr()
+            ' print "Current auth:"
+            ' print "AuthToken: "    + m.global.accessToken
+            ' print "RefreshToken: " + m.global.refreshToken
+            ' print "Expiration: "   + m.global.tokenExpiration.ToStr()
         else
             print "Couldn't refresh access token."
             m.top.authFailure = true

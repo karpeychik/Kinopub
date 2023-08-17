@@ -1,12 +1,11 @@
 sub init()
-    print "Authenticator:init"
-
+    ' print "Authenticator:init"
     buildAuthScene()
     retrieveCode()
 end sub
 
 sub retrieveCode()
-    print "Authenticator:retrieveCode"
+    ' print "Authenticator:retrieveCode"
     m.readContentTask = createObject("roSGNode", "ContentReader")
     m.readContentTask.observeField("content", "codeReceived")
     m.readContentTask.baseUrl = "https://api.service-kp.com/oauth2/device"
@@ -18,14 +17,13 @@ sub retrieveCode()
 end sub
 
 sub codeReceived()
-    print "Authenticator:codeReceived"
-    print m.readContentTask.content
+    ' print "Authenticator:codeReceived"
+    ' print m.readContentTask.content
 
     m.code = m.readContentTask.content.code
 
     descriptionLabel = m.top.findNode("description")
     codeLabel = m.top.findNode("code")
-
 
     descriptionLabel.text = recode("В браузере перейдите на " + m.readContentTask.content.verification_uri + " и добавьте устройство, используя код:")
     codeLabel.text = recode(m.readContentTask.content.user_code)
@@ -42,7 +40,7 @@ sub codeReceived()
 end sub
 
 sub buildAuthScene()
-    print "Authenticator:buildAuthScene"
+    ' print "Authenticator:buildAuthScene"
 
     deviceInfo = CreateObject("roDeviceInfo")
     resolution = deviceInfo.GetDisplaySize()
@@ -121,7 +119,7 @@ sub buildAuthScene()
 end sub
 
 sub timerFired()
-    print "Authenticator:timerFired()"
+    ' print "Authenticator:timerFired()"
     m.authenticationCheck = createObject("roSGNode", "ContentReader")
     m.authenticationCheck.observeField("content", "authenticationResponse")
     m.authenticationCheck.baseUrl = "https://api.service-kp.com/oauth2/device"
@@ -133,16 +131,16 @@ sub timerFired()
 end sub
 
 sub refreshCode()
-    print "Authentecator:refreshCode"
+    ' print "Authentecator:refreshCode"
     m.timer.control = "stop"
     retrieveCode()
 end sub
 
 sub authenticationResponse()
-    print "Authenticator:authenticationResponse()"
-    print m.authenticationCheck.content
+    ' print "Authenticator:authenticationResponse()"
+    ' print m.authenticationCheck.content
     if m.authenticationCheck.content.doesExist("access_token")
-       print "Authentified!"
+       ' print "Authentified!"
        m.timer.control = "stop"
        m.top.refresh_token = m.authenticationCheck.content.refresh_token
        m.top.token_type = m.authenticationCheck.content.token_type
@@ -154,7 +152,7 @@ sub authenticationResponse()
 end sub
 
 sub addLabel(group as Object, id as String, text as String, maxLines as Integer, fnt as Object, x as Integer, y as Integer, labelWidth as Integer)
-    print "Authenticator:addLabel"
+    ' print "Authenticator:addLabel"
     label = createObject("roSGNode", "Label")
     label.id = id
     label.height = 0

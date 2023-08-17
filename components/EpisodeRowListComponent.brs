@@ -1,6 +1,4 @@
 sub init()
-    print "EpisodeRowListComponent:init()"
-
     m.font18  = CreateObject("roSGNode", "Font")
     m.font18.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
     m.font18.size = 12
@@ -10,7 +8,6 @@ sub init()
 end sub
 
 sub showcontent()
-    print "EpisodeRowListComponent:showContent()"
     if m.loaded
         return
     end if
@@ -19,8 +16,8 @@ sub showcontent()
 
     borderStroke = 2
 
-    availableWidth = itemContent.itemWidth - (borderStroke*2)
-    availableHeight = itemContent.itemheight - (borderStroke*2)
+    availableWidth = itemContent.itemWidth - (borderStroke * 2)
+    availableHeight = itemContent.itemheight - (borderStroke * 2)
 
     widthHeight = availableWidth * 270 / 480
     heightWidth = availableHeight * 480 / 270
@@ -36,8 +33,8 @@ sub showcontent()
     left = itemContent.itemwidth / 2 - width / 2
 
     rectLeft = left - borderStroke
-    rectWidth = width + (borderStroke*2)
-    rectHeight = height + (borderStroke*2)
+    rectWidth = width + (borderStroke * 2)
+    rectHeight = height + (borderStroke * 2)
 
     m.rectangleL = createObject("roSGNode", "Rectangle")
     m.rectangleL.width = borderStroke
@@ -110,7 +107,7 @@ sub showcontent()
 end sub
 
 sub watchedChange()
-    print "EpisodeRowListComponent:watchedChange()"
+    ' print "EpisodeRowListComponent:watchedChange()"
     if m.top.itemContent.episodeWatched
         m.poster.opacity = 0.5
         m.itemLabel.color = "#80FF80"

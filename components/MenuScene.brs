@@ -2,40 +2,38 @@
 'TODO: custom overhang
 
 sub init()
-    print "MenuScene: Init"
-
     utilities = createObject("roSGNode", "Utilities")
     m.global.addFields({utilities: utilities})
 
     m.top.overhang.visible = false
     m.top.panelset.visible = false
-    m.top.panelSet.observeField("isGoingBack","slideBack")
+    m.top.panelSet.observeField("isGoingBack", "slideBack")
 
     start()
 
 end sub
 
 sub start()
-    date = createObject("roDateTime")
-    print "CurrentTime: " + date.AsSeconds().ToStr()
+    ' date = createObject("roDateTime")
+    ' print "CurrentTime: " + date.AsSeconds().ToStr()
 
     sec = createObject("roRegistrySection", "Authentication")
     if sec.Exists("AuthenticationToken") and sec.Exists("RefreshToken") and sec.Exists("TokenExpiration") and sec.Exists("TokenType")
         authToken = sec.Read("AuthenticationToken")
         refreshToken = sec.Read("RefreshToken")
         expiry = sec.Read("TokenExpiration")
-        tokenType = sec.Read("TokenType")
+        ' tokenType = sec.Read("TokenType")
 
         m.global.addFields({accessToken: authToken, refreshToken: refreshToken, tokenExpiration: expiry.ToInt()})
 
-        print "Current auth:"
-        print "AuthToken: " + authToken
-        print "RefreshToken: " + refreshToken
-        print "Expiration:" + expiry
-        print "TokenType:" + tokenType
+        ' print "Current auth:"
+        ' print "AuthToken: " + authToken
+        ' print "RefreshToken: " + refreshToken
+        ' print "Expiration:" + expiry
+        ' print "TokenType:" + tokenType
         deviceNotify()
     else
-        print "Auth not found..."
+        ' print "Auth not found..."
         showAuthentication()
     end if
 
@@ -47,7 +45,6 @@ sub showAuthentication()
 end sub
 
 sub authenticated()
-    print "MenuScene:authenticated()"
     sec = createObject("roRegistrySection", "Authentication")
     sec.Write("AuthenticationToken", m.authenticator.access_token)
     sec.Write("RefreshToken", m.authenticator.refresh_token)
@@ -62,8 +59,6 @@ sub authenticated()
 end sub
 
 sub startPanels()
-    print "MenuScene:startPanels()"
-
     m.top.overhang.visible = true
     m.top.panelset.visible = true
 
@@ -75,13 +70,13 @@ sub startPanels()
     m.panelArray[0].panelSet = m.top.panelSet
     m.panelArray[0].pType = ""
     m.panelArray[0].nPanel = invalid
-    m.panelArray[0].observeField("nPanel","nPanelAdded")
-    m.panelArray[0].observeField("dialog","dialogAdded")
+    m.panelArray[0].observeField("nPanel", "nPanelAdded")
+    m.panelArray[0].observeField("dialog", "dialogAdded")
     m.panelArray[0].start = true
 end sub
 
 sub deviceNotify()
-    print "MenuScene:deviceNotify()"
+    ' print "MenuScene:deviceNotify()"
 
     deviceInfo = createObject("roDeviceInfo")
 
@@ -101,7 +96,7 @@ sub deviceNotify()
 end sub
 
 sub onDeviceNotify()
-    print "MenuScene:onDeviceNotify"
+    ' print "MenuScene:onDeviceNotify"
     if m.deviceNotifyTask.authFailure
         print "Auth failed"
         showAuthentication()
@@ -111,13 +106,10 @@ sub onDeviceNotify()
 end sub
 
 sub slideBack()
-    print "MenuScene:slideBack"
-    print m.top.panelSet.isGoingBack
+    ' print m.top.panelSet.isGoingBack
 end sub
 
 sub nPanelAdded()
-    print "MenuScene:nPanelAdded"
-
     index = 0
     while m.panelArray[index] <> invalid and m.panelArray[index].nPanel = invalid
         index = index + 1
@@ -141,12 +133,11 @@ sub nPanelAdded()
         nextIndex = nextIndex + 1
     end while
 
-    m.panelArray[index+1] = nPanel
+    m.panelArray[index + 1] = nPanel
     nPanel.observeField("nPanel", "nPanelAdded")
-    nPanel.observeField("dialog","dialogAdded")
+    nPanel.observeField("dialog", "dialogAdded")
 
     if nPanel.isVideo
-        print "MenuScene:nPanelAdded:video"
         m.top.overhang.visible = false
         m.top.panelset.visible = false
         m.video = nPanel
@@ -155,17 +146,13 @@ sub nPanelAdded()
         m.top.appendChild(nPanel)
         nPanel.setFocus(true)
     else
-        print "MenuScene:nPanelAdded:panel"
         m.top.panelSet.appendChild(nPanel)
         nPanel.panelSet = m.top.panelSet
         nPanel.start = true
     end if
-
-    print "MenuScene:nPanelAdded:end"
 end sub
 
 sub dialogAdded()
-    print "MenuScene:dialogAdded"
     index = 0
     while m.panelArray[index] <> invalid and m.panelArray[index].dialog = invalid
         index = index + 1
@@ -183,8 +170,7 @@ sub dialogAdded()
 end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
-    print "MenuScene:onKeyEvent"
-      if press
+    if press
         if key = "back"
 
           if m.video <> invalid
@@ -203,9 +189,9 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
             return true
           end if
         end if
-      end if
+    end if
 
-      return false
+    return false
  end function
 
 function recode(str as string) as string

@@ -1,5 +1,4 @@
 sub init()
-    print "CategoriesListPanel:init()"
     m.top.panelSize = "medium"
     m.top.focusable = true
     m.top.hasNextPanel = true
@@ -14,11 +13,10 @@ sub init()
     m.top.dialog = invalid
 
     m.currentCategory = ""
-    m.top.observeField("start","start")
+    m.top.observeField("start", "start")
 end sub
 
 sub start()
-    print "CategoriesListPanel:start()"
     m.readContentTask = createObject("roSGNode", "ContentReader")
     m.readContentTask.observeField("content", "setcategories")
     m.readContentTask.observeField("error", "error")
@@ -52,8 +50,6 @@ sub error()
 end sub
 
 sub setCategories()
-    print "CategoriesListPanel:setCategories()"
-
     content = createObject("roSGNode", "ContentNode")
     if m.top.pType <> "bookmarks"
         itemContent = content.createChild("ContentNode")
@@ -95,7 +91,6 @@ sub setCategories()
 end sub
 
 sub itemFocused()
-    print "CategoriesListPanel:itemFocused()"
     categorycontent = m.top.list.content.getChild(m.top.list.itemFocused)
     selectedCategory = categorycontent.kinoPubId.ToStr()
     if selectedCategory = "bookmarks"
@@ -112,10 +107,9 @@ sub itemFocused()
 end sub
 
 sub categorySelected()
-    print "CategoriesListPanel:categorySelected()"
-    print m.emptyPanel.isInFocusChain()
-    print m.emptyPanel.hasFocus()
-    print m.top.panelSet.isGoingBack
+    ' print m.emptyPanel.isInFocusChain()
+    ' print m.emptyPanel.hasFocus()
+    ' print m.top.panelSet.isGoingBack
     if m.emptyPanel.isInFocusChain()
         if not m.top.panelSet.isGoingBack
             if m.currentCategory <> "bookmarks"

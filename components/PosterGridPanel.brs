@@ -1,6 +1,5 @@
 'TODO: add rating to the 2nd caption line
 sub init()
-    print "Initializing poster"
     m.top.panelSize = "full"
     m.top.isFullScreen = true
     m.top.leftPosition = 130
@@ -26,15 +25,14 @@ sub init()
     posterWidth = gridRect.width / numColumns
     m.top.grid.basePosterSize = [ posterWidth, (250 * posterWidth) / 165]
 
-    m.top.observeField("start","loadCategoryPosters")
-    m.top.grid.observeField("itemSelected","itemSelected")
+    m.top.observeField("start", "loadCategoryPosters")
+    m.top.grid.observeField("itemSelected", "itemSelected")
     m.nextPage = 1
     m.top.isVideo = false
     m.firstPage = true
 end sub
 
 sub loadCategoryPosters()
-    print "loadCategoryPosters"
     m.top.grid.content = createObject("roSGNode", "ContentNode")
     m.top.overhangTitle = "Kino.pub"
     m.readPosterGridTask = createObject("roSGNode", "ContentReader")
@@ -46,8 +44,6 @@ sub loadCategoryPosters()
 end sub
 
 sub showPosterGrid()
-    print "PosterGrid:showPosterGrid"
-
     if m.firstPage
         m.shouldPage = false
         m.totalItems = 0
@@ -61,7 +57,7 @@ sub showPosterGrid()
             m.totalItems = m.readPosterGridTask.content.pagination.total_items
         end if
 
-        for i = 0 to m.readPosterGridTask.content.items.Count()-1 step 1
+        for i = 0 to m.readPosterGridTask.content.items.Count() - 1 step 1
             content = createObject("roSGNode", "ContentNode")
             m.top.grid.content.appendChild(content)
         end for
@@ -94,7 +90,6 @@ sub showPosterGrid()
 end sub
 
 sub itemFocused()
-    print "PosterGrid:itemFocused"
     itemCount = m.top.grid.content.getChildCount()
     lastRow = (itemCount-1) \ m.numColumns
     firstLastRowItem = lastRow * m.numColumns
@@ -113,7 +108,6 @@ sub itemFocused()
 end sub
 
 sub loadPage(pageNumber as Integer)
-    print "PosterGrid:loadPage"
     m.isLoading = true
     m.readPosterGridTask.unobserveField("content")
     m.readPosterGridTask = createObject("roSGNode", "ContentReader")
@@ -145,7 +139,6 @@ sub error()
 end sub
 
 sub itemSelected()
-    print "PosterGrid:itemSelected"
     selectedItem = m.top.grid.content.getChild(m.top.grid.itemSelected)
     if selectedItem.kinoPubType = "movie"
         nPanel = createObject("roSGNode", "VideoDescriptionPanel")
