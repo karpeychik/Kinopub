@@ -1,5 +1,5 @@
 sub init()
-    loadFonts()
+    m.font12 = createFont(12)
     m.itemContent = invalid
 
     m.loaded = false

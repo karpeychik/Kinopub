@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component name="PosterGridPanel" extends="GridPanel" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
+<component name="PosterGridPanel" extends="GridPanel"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
 
-	<script type="text/brightscript" uri="pkg:/components/common.brs" />
-	<script type="text/brightscript" uri="pkg:/components/PosterGridPanel.brs" />
+  <script type="text/brightscript" uri="pkg:/components/common.brs" />
+  <script type="text/brightscript" uri="pkg:/components/PosterGridPanel.brs" />
 
-	<children>
-	   <PosterGrid
-          id = "posterGrid"
-          caption1NumLines = "1"
-          itemSpacing = "[ 10, 10 ]"
-          useAtlas = "true"
-          posterDisplayMode = "scaleToFit" >
-          <Font role = "caption1Font" uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf" size = "14" />
-       </PosterGrid>
-	</children>
-	<interface>
-	    <field id="nPanel" type = "node" />
-        <field id="dialog" type="node" />
-        <field id="overhangtext" type = "string" />
-        <field id="gridContentBaseUri" type = "uri" />
-        <field id="gridContentUriParameters" type = "roArray" />
-        <field id="isVideo" type = "bool" />
-        <field id="start" type="bool" />
-        <field id="panelSet" type="node" />
-        <field id="previousPanel" type="node" />
-        <field id="category" type = "string" />
-    </interface>
+  <children>
+    <PosterGrid
+      id="posterGrid"
+      caption1NumLines="1"
+      itemSpacing="[ 10, 10 ]"
+      useAtlas="true"
+      posterDisplayMode="scaleToFit">
+      <Font role="caption1Font" uri="pkg:/fonts/NotoSans-Regular-w1251-rename.ttf" size="14" />
+    </PosterGrid>
+  </children>
+  <interface>
+    <field id="nPanel" type="node" />
+    <field id="dialog" type="node" />
+    <field id="overhangtext" type="string" />
+    <field id="gridContentBaseUri" type="uri" />
+    <field id="gridContentUriParameters" type="roArray" />
+    <field id="isVideo" type="bool" />
+    <field id="start" type="bool" />
+    <field id="panelSet" type="node" />
+    <field id="previousPanel" type="node" />
+    <field id="category" type="string" />
+  </interface>
 </component>

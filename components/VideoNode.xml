@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="VideoNode" extends="Group">
-    <script type="text/brightscript" uri="pkg:/components/VideoNode.brs" />
-
-    <children>
-    </children>
-    <interface>
-        <field id="videoUri" type="string"/>
-        <field id="videoFormat" type="string" />
-        <field id="audioTrack" type="string"/>
-        <field id="seek" type="integer" />
-        <field id="videoId" type="string"/>
-        <field id="seasonId" type="string"/>
-        <field id="videoNumber" type="integer"/>
-
-        <field id="playlist" type="node" />
-
-        <field id="previousPanel" type="node" />
-        <field id="isVideo" type="bool" />
-        <field id="start" type="bool" />
-    </interface>
+  <script type="text/brightscript" uri="pkg:/components/VideoNode.brs" />
+  <children>
+  </children>
+  <interface>
+    <field id="videoUri" type="string" />
+    <field id="videoFormat" type="string" />
+    <field id="audioTrack" type="string" />
+    <field id="seek" type="integer" />
+    <field id="videoId" type="string" />
+    <field id="seasonId" type="string" />
+    <field id="videoNumber" type="integer" />
+    <field id="playlist" type="node" />
+    <field id="previousPanel" type="node" />
+    <field id="isVideo" type="bool" />
+    <field id="start" type="bool" />
+  </interface>
 
 </component>
