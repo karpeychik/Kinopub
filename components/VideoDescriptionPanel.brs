@@ -153,7 +153,7 @@ sub playButton()
         title = createObject("roString")
         appStr = "Вы хотите продолжить c "
         AppendString(title, appStr)
-        durationStr = getDurationString(episode.watching.time)
+        durationStr = durationToString(episode.watching.time)
         AppendString(title, durationStr)
 
         m.dialog.buttons = [ recode("Да"), recode("Нет")]
@@ -412,58 +412,12 @@ function getCast(item as Object)
 end function
 
 function getDuration(durationSeconds as  Integer) as String
-    durationString = getDurationString(durationSeconds)
+    durationString = durationToString(durationSeconds)
 
     result = createObject("roString")
     dString = "Длительность: "
     AppendString(result, dString)
     AppendString(result, durationString)
-
-    return result
-end function
-
-function getDurationString(durationSeconds as  Integer) as String
-    second = durationSeconds MOD 60
-    durationSeconds = durationSeconds \ 60
-    minute = durationSeconds MOD 60
-    durationSeconds = durationSeconds \ 60
-    hour = durationSeconds MOD 60
-
-    result = createObject("roString")
-    if hour > 0
-        if hour < 10
-            AppendString(result, "0")
-        end if
-
-        hourString = hour.ToStr()
-        AppendString(result, hourString)
-    else
-        AppendString(result, "00")
-    end if
-
-    AppendString(result, ":")
-
-    if minute > 0
-        if minute < 10
-            AppendString(result, "0")
-        end if
-        minuteString = minute.ToStr()
-        AppendString(result, minuteString)
-    else
-        AppendString(result, "00")
-    end if
-
-    AppendString(result, ":")
-
-    if second > 0
-        if second < 10
-            AppendString(result, "0")
-        end if
-        secondString = second.ToStr()
-        AppendString(result, secondString)
-    else
-        AppendString(result, "00")
-    end if
 
     return result
 end function

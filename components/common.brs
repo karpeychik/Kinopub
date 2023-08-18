@@ -35,3 +35,49 @@ sub showErrorDialog(errorSource as string, errorCode as string)
   m.dialog.messageFont = font
   m.top.dialog = m.dialog
 end sub
+
+function durationToString(durationSeconds as  Integer) as String
+  second = durationSeconds MOD 60
+  durationSeconds = durationSeconds \ 60
+  minute = durationSeconds MOD 60
+  durationSeconds = durationSeconds \ 60
+  hour = durationSeconds MOD 60
+
+  result = createObject("roString")
+  if hour > 0
+    if hour < 10
+      AppendString(result, "0")
+    end if
+
+    hourString = hour.ToStr()
+    AppendString(result, hourString)
+  else
+    AppendString(result, "00")
+  end if
+
+  AppendString(result, ":")
+
+  if minute > 0
+    if minute < 10
+      AppendString(result, "0")
+    end if
+    minuteString = minute.ToStr()
+    AppendString(result, minuteString)
+  else
+    AppendString(result, "00")
+  end if
+
+  AppendString(result, ":")
+
+  if second > 0
+    if second < 10
+      AppendString(result, "0")
+    end if
+    secondString = second.ToStr()
+    AppendString(result, secondString)
+  else
+    AppendString(result, "00")
+  end if
+
+  return result
+end function

@@ -126,7 +126,7 @@ sub playButton()
         title = createObject("roString")
         appStr = "Вы хотите продолжить c "
         AppendString(title, appStr)
-        durationStr = getDurationString(episode.watchedTime)
+        durationStr = durationToString(episode.watchedTime)
         AppendString(title, durationStr)
 
         m.dialog.buttons = [ recode("Да"), recode("Нет")]
@@ -348,52 +348,6 @@ sub setAudio()
         index = index + 1
     end for
 end sub
-
-function getDurationString(durationSeconds as Integer) as String
-    second = durationSeconds MOD 60
-    durationSeconds = durationSeconds \ 60
-    minute = durationSeconds MOD 60
-    durationSeconds = durationSeconds \ 60
-    hour = durationSeconds MOD 60
-
-    result = createObject("roString")
-    if hour > 0
-        if hour < 10
-            AppendString(result, "0")
-        end if
-
-        hourString = hour.ToStr()
-        AppendString(result, hourString)
-    else
-        AppendString(result, "00")
-    end if
-
-    AppendString(result, ":")
-
-    if minute > 0
-        if minute < 10
-            AppendString(result, "0")
-        end if
-        minuteString = minute.ToStr()
-        AppendString(result, minuteString)
-    else
-        AppendString(result, "00")
-    end if
-
-    AppendString(result, ":")
-
-    if second > 0
-        if second < 10
-            AppendString(result, "0")
-        end if
-        secondString = second.ToStr()
-        AppendString(result, secondString)
-    else
-        AppendString(result, "00")
-    end if
-
-    return result
-end function
 
 sub addLabel(group as Object, text as String, maxLines as Integer, fnt as Object, x as Integer, y as Integer, labelWidth as Integer)
     label = createObject("roSGNode", "Label")
