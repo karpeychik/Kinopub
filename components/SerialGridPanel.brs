@@ -35,9 +35,8 @@ sub error()
     source = "SerialGridPanel:"
     errorMessage = m.global.utilities.callFunc("GetErrorMessage", {errorCode: m.readSerialTask.error, source: source})
     print errorMessage
-    font  = CreateObject("roSGNode", "Font")
-    font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-    font.size = 24
+
+    font = createFont(24)
 
     m.dialog = createObject("roSGNode", "Dialog")
     m.dialog.title = recode("Ошибка")

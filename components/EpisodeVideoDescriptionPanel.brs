@@ -16,9 +16,8 @@ sub error()
     source = "EpisodeVideoDescriptionPanel:"
     errorMessage = m.global.utilities.callFunc("GetErrorMessage", {errorCode: m.readItemTask.error, source: source})
     print errorMessage
-    font  = CreateObject("roSGNode", "Font")
-    font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-    font.size = 24
+
+    font = createFont(24)
 
     m.dialog = createObject("roSGNode", "Dialog")
     m.dialog.title = recode("Ошибка")
@@ -134,9 +133,7 @@ sub playButton()
     if episode.doesExist("watchingStatus") and episode.doesExist("watchedTime") and episode.watchingStatus = 0 and episode.watchedTime <> invalid
         m.dialog = createObject("roSGNode", "Dialog")
 
-        font  = CreateObject("roSGNode", "Font")
-        font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-        font.size = 24
+        font = createFont(24)
 
         title = createObject("roString")
         appStr = "Вы хотите продолжить c "

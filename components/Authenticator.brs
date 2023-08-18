@@ -45,21 +45,10 @@ sub buildAuthScene()
     deviceInfo = CreateObject("roDeviceInfo")
     resolution = deviceInfo.GetDisplaySize()
 
-    m.largeFont  = CreateObject("roSGNode", "Font")
-    m.largeFont.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-    m.largeFont.size = 40
-
-    m.mediumFont  = CreateObject("roSGNode", "Font")
-    m.mediumFont.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-    m.mediumFont.size = 18
-
-    m.mLFont  = CreateObject("roSGNode", "Font")
-    m.mLFont.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-    m.mLFont.size = 25
-
-    m.veryLargeFont  = CreateObject("roSGNode", "Font")
-    m.veryLargeFont.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-    m.veryLargeFont.size = 70
+    m.largeFont     = createFont(40)
+    m.mediumFont    = createFont(18)
+    m.mLFont        = createFont(25)
+    m.veryLargeFont = createFont(70)
 
     fullWidth = resolution.w
     fullHeight = resolution.h
