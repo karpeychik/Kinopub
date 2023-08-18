@@ -117,15 +117,9 @@ end sub
 
 sub showfocus()
     if m.top.focusPercent > 0.5
-        m.rectangleL.opacity = 1
-        m.rectangleR.opacity = 1
-        m.rectangleT.opacity = 1
-        m.rectangleB.opacity = 1
+        newOpacity = 1
     else
-        m.rectangleL.opacity = 0
-        m.rectangleR.opacity = 0
-        m.rectangleT.opacity = 0
-        m.rectangleB.opacity = 0
+        newOpacity = 0
     end if
     m.rectangleL.opacity = newOpacity
     m.rectangleR.opacity = newOpacity

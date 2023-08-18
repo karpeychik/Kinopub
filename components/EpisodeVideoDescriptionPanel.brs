@@ -12,19 +12,7 @@ sub init()
 end sub
 
 sub error()
-    print "EpisodeVideoDescriptionPanel:error()"
-    source = "EpisodeVideoDescriptionPanel:"
-    errorMessage = m.global.utilities.callFunc("GetErrorMessage", {errorCode: m.readItemTask.error, source: source})
-    print errorMessage
-
-    font = createFont(24)
-
-    m.dialog = createObject("roSGNode", "Dialog")
-    m.dialog.title = recode("Ошибка")
-    m.dialog.titleFont = font
-    m.dialog.message = recode(errorMessage)
-    m.dialog.messageFont = font
-    m.top.dialog = m.dialog
+    showErrorDialog("EpisodeVideoDescriptionPanel:", m.readItemTask.error)
 end sub
 
 sub showVideoDetails()

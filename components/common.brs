@@ -20,3 +20,18 @@ function recode(str as string) as string
   str = str.Replace("&#133;", "...")
   return m.global.utilities.callFunc("Encode", {str: str})
 end function
+
+sub showErrorDialog(errorSource as string, errorCode as string)
+  print "showErrorDialog()"
+  errorMessage = m.global.utilities.callFunc("GetErrorMessage", { errorCode: errorCode, source: errorSource })
+  print errorMessage
+
+  font = createFont(24)
+
+  m.dialog = createObject("roSGNode", "Dialog")
+  m.dialog.title = recode("Ошибка")
+  m.dialog.titleFont = font
+  m.dialog.message = recode(errorMessage)
+  m.dialog.messageFont = font
+  m.top.dialog = m.dialog
+end sub

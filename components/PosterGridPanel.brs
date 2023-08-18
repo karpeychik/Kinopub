@@ -122,19 +122,7 @@ sub loadPage(pageNumber as Integer)
 end sub
 
 sub error()
-    print "PosterGrid:error()"
-    source = "PosterGrid:"+m.nextPage.ToStr()
-    errorMessage = m.global.utilities.callFunc("GetErrorMessage", {errorCode: m.readPosterGridTask.error, source: source})
-    print errorMessage
-
-    font = createFont(24)
-
-    m.dialog = createObject("roSGNode", "Dialog")
-    m.dialog.title = recode("Ошибка")
-    m.dialog.titleFont = font
-    m.dialog.message = recode(errorMessage)
-    m.dialog.messageFont = font
-    m.top.dialog = m.dialog
+    showErrorDialog("PosterGrid:" + m.nextPage.ToStr(), m.readPosterGridTask.error)
 end sub
 
 sub itemSelected()

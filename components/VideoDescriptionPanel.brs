@@ -23,19 +23,7 @@ sub showVideoDetails()
 end sub
 
 sub error()
-    print "VideoDescriptionPanel:error()"
-    source = "VideoDescriptionPanel:"
-    errorMessage = m.global.utilities.callFunc("GetErrorMessage", {errorCode: m.readItemTask.error, source: source})
-    print errorMessage
-
-    font = createFont(24)
-
-    m.dialog = createObject("roSGNode", "Dialog")
-    m.dialog.title = recode("Ошибка")
-    m.dialog.titleFont = font
-    m.dialog.message = recode(errorMessage)
-    m.dialog.messageFont = font
-    m.top.dialog = m.dialog
+    showErrorDialog("VideoDescriptionPanel:" + m.top.pType, m.readItemTask.error)
 end sub
 
 sub itemReceived()
@@ -51,7 +39,7 @@ sub itemReceived()
     availableWidth  = m.top.width / 2 - 120
     availableHeight = m.top.height - 100
 
-    widthHeight = availableWidth * 250 / 165
+    widthHeight = availableWidth  * 250 / 165
     heightWidth = availableHeight * 165 / 250
 
     if widthHeight <= availableHeight
