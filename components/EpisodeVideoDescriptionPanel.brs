@@ -137,9 +137,9 @@ sub playButton()
 
         title = createObject("roString")
         appStr = "Вы хотите продолжить c "
-        title.appendString(appStr, appStr.Len())
+        AppendString(title, appStr)
         durationStr = getDurationString(episode.watchedTime)
-        title.AppendString(durationStr, durationStr.Len())
+        AppendString(title, durationStr)
 
         m.dialog.buttons = [ recode("Да"), recode("Нет")]
         m.dialog.title = recode(title)
@@ -339,7 +339,7 @@ sub setAudio()
             title = createObject("roString")
             title.AppendString("Track ", 6)
             str = index.ToStr()
-            title.AppendString(str, str.Len())
+            AppendString(title, str)
         else
             title = track.type.title
             if track.lang <> invalid
@@ -371,37 +371,37 @@ function getDurationString(durationSeconds as Integer) as String
     result = createObject("roString")
     if hour > 0
         if hour < 10
-            result.AppendString("0", 1)
+            AppendString(result, "0")
         end if
 
         hourString = hour.ToStr()
-        result.AppendString(hourString, hourString.Len())
+        AppendString(result, hourString)
     else
-        result.AppendString("00", 2)
+        AppendString(result, "00")
     end if
 
-    result.AppendString(":", 1)
+    AppendString(result, ":")
 
     if minute > 0
         if minute < 10
-            result.AppendString("0", 1)
+            AppendString(result, "0")
         end if
         minuteString = minute.ToStr()
-        result.AppendString(minuteString, minuteString.Len())
+        AppendString(result, minuteString)
     else
-        result.AppendString("00", 2)
+        AppendString(result, "00")
     end if
 
-    result.AppendString(":", 1)
+    AppendString(result, ":")
 
     if second > 0
         if second < 10
-            result.AppendString("0", 1)
+            AppendString(result, "0")
         end if
         secondString = second.ToStr()
-        result.AppendString(secondString, secondString.Len())
+        AppendString(result, secondString)
     else
-        result.AppendString("00", 2)
+        AppendString(result, "00")
     end if
 
     return result

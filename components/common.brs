@@ -11,6 +11,10 @@ function createFont(size as integer) as object
   return font
 end function
 
+sub AppendString(str as string, addition as string)
+  str.AppendString(addition, addition.Len())
+end sub
+
 function recode(str as string) as string
   str = str.Replace("&#151;", "-")
   str = str.Replace("&#133;", "...")

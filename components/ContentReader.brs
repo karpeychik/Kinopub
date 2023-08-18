@@ -109,15 +109,15 @@ end sub
 
 function buildUrl(baseUrl as String, parameters as Object) as String
     url = createObject("roString")
-    url.AppendString(baseUrl, baseUrl.len())
+    AppendString(url, baseUrl)
     foundAuth = false
     if parameters.Count() > 0
-        url.AppendString("?", 1)
+        AppendString(url, "?")
         ' tempStr = createObject("roString")
         foundAuth = false
         for i = 0 to parameters.Count() - 1 step 2
             if i > 0
-                url.AppendString("&", 1)
+                AppendString(url, "&")
             end if
 
             key = parameters[i]
@@ -128,23 +128,23 @@ function buildUrl(baseUrl as String, parameters as Object) as String
                 foundAuth = true
             end if
 
-            url.AppendString(key, key.Len())
-            url.AppendString("=", 1)
-            url.AppendString(value, value.Len())
+            AppendString(url, key)
+            AppendString(url, "=")
+            AppendString(url, value)
         end for
     end if
 
     if false = foundAuth and m.top.refreshAuth
         if parameters.Count() > 0
-            url.AppendString("&", 1)
+            AppendString(url, "&")
         else
-            url.AppendString("?", 1)
+            AppendString(url, "?")
         end if
 
         appendString = "access_token"
-        url.AppendString(appendString, appendString.Len())
-        url.AppendString("=", 1)
-        url.AppendString(m.global.accessToken, m.global.accessToken.Len())
+        AppendString(url, appendString)
+        AppendString(url, "=")
+        AppendString(url, m.global.accessToken)
     end if
 
     return url

@@ -164,9 +164,9 @@ sub playButton()
 
         title = createObject("roString")
         appStr = "Вы хотите продолжить c "
-        title.appendString(appStr, appStr.Len())
+        AppendString(title, appStr)
         durationStr = getDurationString(episode.watching.time)
-        title.AppendString(durationStr,durationStr.Len())
+        AppendString(title, durationStr)
 
         m.dialog.buttons = [ recode("Да"), recode("Нет")]
         m.dialog.title = recode(title)
@@ -356,7 +356,7 @@ sub setAudio(item as Object)
             title = createObject("roString")
             title.AppendString("Track ", 6)
             str = index.ToStr()
-            title.AppendString(str, str.Len())
+            AppendString(title, str)
         else
             title = track.type.title
             if track.lang <> invalid
@@ -381,8 +381,8 @@ end sub
 function getDirector(item as Object)
     result = createObject("roString")
     directorString = "Режиссер: "
-    result.AppendString(directorString, directorString.Len())
-    result.AppendString(item.director, item.director.Len())
+    AppendString(result, directorString)
+    AppendString(result, item.director)
     return result
 end function
 
@@ -391,25 +391,25 @@ function getRate(item as Object)
 
     if item.DoesExist("imdb_rating") and item.imdb_rating <> invalid
         iString = "imbd: "
-        result.AppendString(iString,iString.Len())
+        AppendString(result, iString)
 
         rate = item.imdb_rating.ToStr()
         if rate.Len() > 3
             rate = rate.Left(3)
         end if
-        result.AppendString(rate, rate.Len())
+        AppendString(result, rate)
         result.AppendString("    ", 4)
     end if
 
     if item.DoesExist("kinopoisk_rating") and item.kinopoisk_rating <> invalid
         iString = "Кинопоиск: "
-        result.AppendString(iString,iString.Len())
+        AppendString(result, iString)
 
         rate = item.kinopoisk_rating.ToStr()
         if rate.Len() > 3
             rate = rate.Left(3)
         end if
-        result.AppendString(rate, rate.Len())
+        AppendString(result, rate)
     end if
 
     return result
@@ -418,8 +418,8 @@ end function
 function getCast(item as Object)
     result = createObject("roString")
     cString = "В ролях: "
-    result.AppendString(cString, cString.Len())
-    result.AppendString(item.cast, item.cast.Len())
+    AppendString(result, cString)
+    AppendString(result, item.cast)
     return result
 end function
 
@@ -428,8 +428,8 @@ function getDuration(durationSeconds as  Integer) as String
 
     result = createObject("roString")
     dString = "Длительность: "
-    result.AppendString(dString,dString.Len())
-    result.AppendString(durationString,durationString.Len())
+    AppendString(result, dString)
+    AppendString(result, durationString)
 
     return result
 end function
@@ -444,37 +444,37 @@ function getDurationString(durationSeconds as  Integer) as String
     result = createObject("roString")
     if hour > 0
         if hour < 10
-            result.AppendString("0", 1)
+            AppendString(result, "0")
         end if
 
         hourString = hour.ToStr()
-        result.AppendString(hourString, hourString.Len())
+        AppendString(result, hourString)
     else
-        result.AppendString("00", 2)
+        AppendString(result, "00")
     end if
 
-    result.AppendString(":", 1)
+    AppendString(result, ":")
 
     if minute > 0
         if minute < 10
-            result.AppendString("0", 1)
+            AppendString(result, "0")
         end if
         minuteString = minute.ToStr()
-        result.AppendString(minuteString, minuteString.Len())
+        AppendString(result, minuteString)
     else
-        result.AppendString("00", 2)
+        AppendString(result, "00")
     end if
 
-    result.AppendString(":", 1)
+    AppendString(result, ":")
 
     if second > 0
         if second < 10
-            result.AppendString("0", 1)
+            AppendString(result, "0")
         end if
         secondString = second.ToStr()
-        result.AppendString(secondString, secondString.Len())
+        AppendString(result, secondString)
     else
-        result.AppendString("00", 2)
+        AppendString(result, "00")
     end if
 
     return result
@@ -498,11 +498,11 @@ end sub
 function getTitle(title as String, year as String) as String
     newTitle = createObject("roString")
 
-    newTitle.AppendString(title, title.Len())
+    AppendString(newTitle, title)
     if year.Len() > 0
         newTitle.AppendString(" (", 2)
-        newTitle.AppendString(year, year.Len())
-        newTitle.AppendString(")", 1)
+        AppendString(newTitle, year)
+        AppendString(newTitle, ")")
     end if
 
     return newTitle
@@ -511,13 +511,13 @@ end function
 function getGenres(genres as Object) as string
     genreString = createObject("roString")
     gString = "Жанры: "
-    genreString.AppendString(gString,gString.Len())
+    AppendString(genreString, gString)
     for i = 0 To genres.Count() - 1 Step 1
         if i > 0
-            genreString.AppendString(", ", 2)
+            AppendString(genreString, ", ")
         end if
 
-        genreString.AppendString(genres[i].title, genres[i].title.Len())
+        AppendString(genreString, genres[i].title)
     end for
 
     return genreString

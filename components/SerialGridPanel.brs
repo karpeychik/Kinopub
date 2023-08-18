@@ -245,13 +245,13 @@ end function
 function getGenres(genres as Object) as String
     genreString = createObject("roString")
     gString = "Жанр: "
-    genreString.AppendString(gString,gString.Len())
+    AppendString(genreString, gString)
     for i = 0 To genres.Count() - 1 Step 1
         if i > 0
-            genreString.AppendString(", ", 2)
+            AppendString(genreString, ", ")
         end if
 
-        genreString.AppendString(genres[i].title, genres[i].title.Len())
+        AppendString(genreString, genres[i].title)
     end for
 
     return genreString
@@ -260,8 +260,8 @@ end function
 function getDirector(item as Object)
     result = createObject("roString")
     directorString = "Режиссер: "
-    result.AppendString(directorString, directorString.Len())
-    result.AppendString(item.director, item.director.Len())
+    AppendString(result, directorString)
+    AppendString(result, item.director)
     return result
 end function
 
@@ -270,25 +270,25 @@ function getRate(item as Object)
 
     if item.DoesExist("imdb_rating") and item.imdb_rating <> invalid
         iString = "imbd: "
-        result.AppendString(iString,iString.Len())
+        AppendString(result, iString)
 
         rate = item.imdb_rating.ToStr()
         if rate.Len() > 3
             rate = rate.Left(3)
         end if
-        result.AppendString(rate, rate.Len())
+        AppendString(result, rate)
         result.AppendString("    ", 4)
     end if
 
     if item.DoesExist("kinopoisk_rating") and item.kinopoisk_rating <> invalid
         iString = "Кинопоиск: "
-        result.AppendString(iString,iString.Len())
+        AppendString(result, iString)
 
         rate = item.kinopoisk_rating.ToStr()
         if rate.Len() > 3
             rate = rate.Left(3)
         end if
-        result.AppendString(rate, rate.Len())
+        AppendString(result, rate)
     end if
 
     return result
@@ -297,8 +297,8 @@ end function
 function getCast(item as Object)
     result = createObject("roString")
     cString = "В ролях: "
-    result.AppendString(cString, cString.Len())
-    result.AppendString(item.cast, item.cast.Len())
+    AppendString(result, cString)
+    AppendString(result, item.cast)
     return result
 end function
 
