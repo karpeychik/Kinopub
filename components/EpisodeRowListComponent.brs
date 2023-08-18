@@ -127,6 +127,10 @@ sub showfocus()
         m.rectangleT.opacity = 0
         m.rectangleB.opacity = 0
     end if
+    m.rectangleL.opacity = newOpacity
+    m.rectangleR.opacity = newOpacity
+    m.rectangleT.opacity = newOpacity
+    m.rectangleB.opacity = newOpacity
 end sub
 
 sub showrowfocus()
