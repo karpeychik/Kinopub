@@ -64,7 +64,7 @@ sub buildAuthScene()
     rect.color = "#000000"
 
     group = createObject("roSGNode", "LayoutGroup")
-    group.addItemSpacingAfterChild =  false
+    group.addItemSpacingAfterChild = false
     group.translation = rect.translation
     group.itemSpacings = [ 20, 30, 30, 30 ]
     group.horizAlignment = "custom"

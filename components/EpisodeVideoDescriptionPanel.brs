@@ -58,7 +58,7 @@ sub showVideoDetails()
     labelWidth  = m.top.width - textLeft + unusedSpace
 
     group = createObject("roSGNode", "LayoutGroup")
-    group.addItemSpacingAfterChild =  false
+    group.addItemSpacingAfterChild = false
     group.translation = [textLeft, 0]
 
     episode_title = "Серия %d: %s".Format(episode.number, episode.title)

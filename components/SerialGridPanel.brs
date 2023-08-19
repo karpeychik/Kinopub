@@ -79,12 +79,12 @@ sub showSerial()
     loadFonts()
 
     vGroup = createObject("roSGNode", "LayoutGroup")
-    vGroup.addItemSpacingAfterChild =  true
+    vGroup.addItemSpacingAfterChild = true
     vGroup.translation = [left, 0]
     vGroup.itemSpacings = [ 25.0 ]
 
     group = createObject("roSGNode", "LayoutGroup")
-    group.addItemSpacingAfterChild =  true
+    group.addItemSpacingAfterChild = true
     group.translation = [left, 0]
     group.layoutDirection = "horiz"
     group.itemSpacings = [ 50.0 ]
@@ -100,7 +100,7 @@ sub showSerial()
     group.appendChild(poster)
 
     labelGroup = createObject("roSGNode", "LayoutGroup")
-    labelGroup.addItemSpacingAfterChild =  false
+    labelGroup.addItemSpacingAfterChild = false
     labelGroup.translation = [left, 0]
     labelGroup.focusable = false
 

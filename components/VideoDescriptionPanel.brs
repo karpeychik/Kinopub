@@ -81,7 +81,7 @@ sub itemReceived()
     labelWidth  = m.top.width - textLeft + unusedSpace
 
     group = createObject("roSGNode", "LayoutGroup")
-    group.addItemSpacingAfterChild =  false
+    group.addItemSpacingAfterChild = false
     group.translation = [textLeft, 0]
     addLabel(group, title, 1, m.font24, 0, 0, labelWidth)
     if rate.Len() > 0
@@ -317,7 +317,7 @@ sub setStreams(item as Object)
         preferredStream = "hls4"
     end if
 
-    m.streams =  item.videos[0].files[m.qualityIndex].url.Keys()
+    m.streams = item.videos[0].files[m.qualityIndex].url.Keys()
     m.streams.Sort("")
 
     m.streamIndex = -1
