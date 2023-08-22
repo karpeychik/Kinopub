@@ -142,9 +142,9 @@ function buildUrl(baseUrl as String, parameters as Object) as String
         end if
 
         appendString = "access_token"
-        AppendString(url, appendString)
-        AppendString(url, "=")
-        AppendString(url, m.global.accessToken)
+        appendString(url, appendString)
+        appendString(url, "=")
+        appendString(url, m.global.accessToken)
     end if
 
     return url

@@ -120,7 +120,3 @@ sub rowItemSelected()
     nPanel.episode = episode
     m.top.nPanel = nPanel
 end sub
-
-function recode(str as String)
-    return m.global.utilities.callFunc("Encode", {str: str})
-end function
