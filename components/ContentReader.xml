@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component name="ContentReader" extends="Task" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
+<component name="ContentReader" extends="Task" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
 
-	<script type="text/brightscript" uri="pkg:/components/ContentReader.brs" />
-	
-    <interface>
-        <field id = "baseUrl" type = "string" />
-        <field id = "requestType" type = "string" />
-        <field id = "parameters" type = "stringarray" />
-        <field id = "postParameters" type = "string" />
-        <field id = "content" type = "assocarray" />
-        <field id = "error" type="string" />
-        <field id = "refreshAuth" type="bool" />
-        <field id = "authFailure" type="bool" />
-        <field id = "timeout" type="integer" />
-    </interface> 
+  <script type="text/brightscript" uri="pkg:/components/common.brs" />
+  <script type="text/brightscript" uri="pkg:/components/ContentReader.brs" />
+
+  <interface>
+    <field id="baseUrl" type="string" />
+    <field id="requestType" type="string" />
+    <field id="parameters" type="stringarray" />
+    <field id="postParameters" type="string" />
+    <field id="content" type="assocarray" />
+    <field id="error" type="string" />
+    <field id="refreshAuth" type="bool" />
+    <field id="authFailure" type="bool" />
+    <field id="timeout" type="integer" />
+  </interface>
 </component>

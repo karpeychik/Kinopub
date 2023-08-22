@@ -1,27 +1,22 @@
-<?xml version = "1.0" encoding = "utf-8" ?>
-<component name = "CategoriesListPanel" extends = "ListPanel" >
-
-	<script type="text/brightscript" uri="pkg:/components/common.brs" />
-  <script type = "text/brightscript" uri="pkg:/components/CategoriesListPanel.brs"/>
+<?xml version="1.0" encoding="utf-8"?>
+<component name="CategoriesListPanel" extends="ListPanel">
+  <script type="text/brightscript" uri="pkg:/components/common.brs" />
+  <script type="text/brightscript" uri="pkg:/components/CategoriesListPanel.brs" />
 
   <interface>
-        <field id="nPanel" type ="node" />
-        <field id="dialog" type="node" />
-
-        <field id="isVideo" type ="bool" />
-        <field id="start" type="bool" />
-        <field id="pType" type="string" />
-        <field id="panelSet" type="node" />
-        <field id="previousPanel" type="node" />
-    </interface>
+    <field id="nPanel" type="node" />
+    <field id="dialog" type="node" />
+    <field id="isVideo" type="bool" />
+    <field id="start" type="bool" />
+    <field id="pType" type="string" />
+    <field id="panelSet" type="node" />
+    <field id="previousPanel" type="node" />
+  </interface>
 
   <children>
-
-    <LabelList id = "categoriesLabelList" >
-        <Font role = "font" uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf" size = "24" />
-        <Font role = "focusedFont" uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf" size = "24" />
+    <LabelList id="categoriesLabelList">
+      <Font role="font" uri="pkg:/fonts/NotoSans-Regular-w1251-rename.ttf" size="24" />
+      <Font role="focusedFont" uri="pkg:/fonts/NotoSans-Regular-w1251-rename.ttf" size="24" />
     </LabelList>
-
   </children>
-
 </component>

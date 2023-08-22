@@ -32,20 +32,7 @@ sub start()
 end sub
 
 sub error()
-    print "CategoriesListPanel:error()"
-    source = "CategoriesListPanel:"+m.top.pType
-    errorMessage = m.global.utilities.callFunc("GetErrorMessage", {errorCode: m.readContentTask.error, source: source})
-    print errorMessage
-    font  = CreateObject("roSGNode", "Font")
-    font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-    font.size = 24
-
-    m.dialog = createObject("roSGNode", "Dialog")
-    m.dialog.title = recode("Ошибка")
-    m.dialog.titleFont = font
-    m.dialog.message = recode(errorMessage)
-    m.dialog.messageFont = font
-    m.top.dialog = m.dialog
+    showErrorDialog("CategoriesListPanel:" + m.top.pType, m.readContentTask.error)
 end sub
 
 sub addCategory(content as object, id as string, kinoPubId as string, title as string)

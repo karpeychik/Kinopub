@@ -12,20 +12,7 @@ sub init()
 end sub
 
 sub error()
-    print "EpisodeVideoDescriptionPanel:error()"
-    source = "EpisodeVideoDescriptionPanel:"
-    errorMessage = m.global.utilities.callFunc("GetErrorMessage", {errorCode: m.readItemTask.error, source: source})
-    print errorMessage
-    font  = CreateObject("roSGNode", "Font")
-    font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-    font.size = 24
-
-    m.dialog = createObject("roSGNode", "Dialog")
-    m.dialog.title = recode("Ошибка")
-    m.dialog.titleFont = font
-    m.dialog.message = recode(errorMessage)
-    m.dialog.messageFont = font
-    m.top.dialog = m.dialog
+    showErrorDialog("EpisodeVideoDescriptionPanel:", m.readItemTask.error)
 end sub
 
 sub showVideoDetails()
@@ -71,7 +58,7 @@ sub showVideoDetails()
     labelWidth  = m.top.width - textLeft + unusedSpace
 
     group = createObject("roSGNode", "LayoutGroup")
-    group.addItemSpacingAfterChild =  false
+    group.addItemSpacingAfterChild = false
     group.translation = [textLeft, 0]
 
     episode_title = "Серия %d: %s".Format(episode.number, episode.title)
@@ -134,15 +121,13 @@ sub playButton()
     if episode.doesExist("watchingStatus") and episode.doesExist("watchedTime") and episode.watchingStatus = 0 and episode.watchedTime <> invalid
         m.dialog = createObject("roSGNode", "Dialog")
 
-        font  = CreateObject("roSGNode", "Font")
-        font.uri = "pkg:/fonts/NotoSans-Regular-w1251-rename.ttf"
-        font.size = 24
+        font = createFont(24)
 
         title = createObject("roString")
         appStr = "Вы хотите продолжить c "
-        title.appendString(appStr, appStr.Len())
-        durationStr = getDurationString(episode.watchedTime)
-        title.AppendString(durationStr, durationStr.Len())
+        AppendString(title, appStr)
+        durationStr = durationToString(episode.watchedTime)
+        AppendString(title, durationStr)
 
         m.dialog.buttons = [ recode("Да"), recode("Нет")]
         m.dialog.title = recode(title)
@@ -342,7 +327,7 @@ sub setAudio()
             title = createObject("roString")
             title.AppendString("Track ", 6)
             str = index.ToStr()
-            title.AppendString(str, str.Len())
+            AppendString(title, str)
         else
             title = track.type.title
             if track.lang <> invalid
@@ -363,52 +348,6 @@ sub setAudio()
         index = index + 1
     end for
 end sub
-
-function getDurationString(durationSeconds as Integer) as String
-    second = durationSeconds MOD 60
-    durationSeconds = durationSeconds \ 60
-    minute = durationSeconds MOD 60
-    durationSeconds = durationSeconds \ 60
-    hour = durationSeconds MOD 60
-
-    result = createObject("roString")
-    if hour > 0
-        if hour < 10
-            result.AppendString("0", 1)
-        end if
-
-        hourString = hour.ToStr()
-        result.AppendString(hourString, hourString.Len())
-    else
-        result.AppendString("00", 2)
-    end if
-
-    result.AppendString(":", 1)
-
-    if minute > 0
-        if minute < 10
-            result.AppendString("0", 1)
-        end if
-        minuteString = minute.ToStr()
-        result.AppendString(minuteString, minuteString.Len())
-    else
-        result.AppendString("00", 2)
-    end if
-
-    result.AppendString(":", 1)
-
-    if second > 0
-        if second < 10
-            result.AppendString("0", 1)
-        end if
-        secondString = second.ToStr()
-        result.AppendString(secondString, secondString.Len())
-    else
-        result.AppendString("00", 2)
-    end if
-
-    return result
-end function
 
 sub addLabel(group as Object, text as String, maxLines as Integer, fnt as Object, x as Integer, y as Integer, labelWidth as Integer)
     label = createObject("roSGNode", "Label")

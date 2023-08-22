@@ -15,10 +15,10 @@ sub showcontent()
 
     borderStroke = 2
 
-    availableWidth = itemContent.itemWidth - borderStroke * 2
+    availableWidth  = itemContent.itemWidth  - borderStroke * 2
     availableHeight = itemContent.itemheight - borderStroke * 2 - 18
 
-    widthHeight = availableWidth * 250 / 165
+    widthHeight = availableWidth  * 250 / 165
     heightWidth = availableHeight * 165 / 250
 
     if widthHeight <= availableHeight
@@ -64,7 +64,6 @@ sub showcontent()
     itemLabel.text = itemContent.title
 
     m.top.appendChild(itemLabel)
-
 end sub
 
 sub updateWatched()

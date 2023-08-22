@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="Utilities" extends="Group" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
 
-	<script type="text/brightscript" uri="pkg:/components/Utilities.brs" />
-	<interface>
-	   <function name="GetErrorMessage" />
-	   <function name="Encode" />
-	</interface>
+  <script type="text/brightscript" uri="pkg:/components/Utilities.brs" />
+  <interface>
+     <function name="GetErrorMessage" />
+     <function name="Encode" />
+  </interface>
 </component>

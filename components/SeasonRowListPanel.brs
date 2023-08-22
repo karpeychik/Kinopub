@@ -55,17 +55,17 @@ sub start()
 
         if item.doesExist("number")
             if item.number < 9
-                title.AppendString("0", 1)
-                title.AppendString(item.number.ToStr(), 1)
+                AppendString(title, "0")
+                AppendString(title, item.number.ToStr())
             else
                 str = item.number.ToStr()
-                title.AppendString(str, str.Len())
+                AppendString(title, str)
             end if
 
-            title.AppendString(": ", 2)
+            AppendString(title, ": ")
         end if
 
-        title.appendString(item.title, item.title.Len())
+        AppendString(title, item.title)
 
         title = recode(title)
         episodeWatched = false
@@ -120,7 +120,3 @@ sub rowItemSelected()
     nPanel.episode = episode
     m.top.nPanel = nPanel
 end sub
-
-function recode(str as String)
-    return m.global.utilities.callFunc("Encode", {str: str})
-end function
