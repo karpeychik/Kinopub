@@ -125,18 +125,19 @@ sub markTime()
 end sub
 
 sub audioStreamUpdate()
-    videoTrackIndex = m.video.audioTrack
-    currentVideo = m.video.contentIndex
-    currentTime = m.video.position
-
-    'm.video.control = "stop"
-    if m.top.playlist.getChildCount() > 1
-        newContent = getContentPlaylist(videoTrackIndex, currentVideo, currentTime.ToStr())
-
-        m.video.content = newContent
-        m.firstPlaylistVideo = currentVideo
-        m.video.control = "play"
+    if m.top.playlist.getChildCount() = 0
+        return
     end if
+
+    videoTrackIndex = m.video.audioTrack
+    currentVideo    = m.video.contentIndex
+    currentTime     = m.video.position
+
+    newContent = getContentPlaylist(videoTrackIndex, currentVideo, currentTime.ToStr())
+
+    m.video.content = newContent
+    m.firstPlaylistVideo = currentVideo
+    m.video.control = "play"
 end sub
 
 function getContentPlaylist(preferredAudio as Object, firstVideo as Integer, firstSeek as String) as Object
@@ -161,3 +162,13 @@ function getContentPlaylist(preferredAudio as Object, firstVideo as Integer, fir
     end for
     return content
 end function
+
+function onKeyEvent(key as String, press as Boolean) as Boolean
+    if press AND key = "back" AND m.video <> invalid
+        markTime()
+        m.video.control = "pause"
+        return false
+    end if
+
+    return false
+ end function
