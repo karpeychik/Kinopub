@@ -18,8 +18,9 @@ end sub
 
 sub startVideo()
     ' print "VideoNode:startVideo()"
+    currentMedia = m.top.playlist.getChild(0)
 
-    content = getContentPlaylist(invalid, 0, m.top.playlist.getChild(0).seek.ToStr())
+    content = getContentPlaylist(invalid, 0, currentMedia.seek.ToStr(), currentMedia.title)
 
     m.video = createObject("roSGNode", "Video")
     m.top.appendChild(m.video)
@@ -31,7 +32,6 @@ sub startVideo()
 
     m.video.control = "play"
     m.video.observeField("audioTrack", "audioStreamUpdate")
-    ' m.video.observeField("contentIndex", "trackUpdate")
     m.video.setFocus(true)
 end sub
 
@@ -133,14 +133,16 @@ sub audioStreamUpdate()
     currentVideo    = m.video.contentIndex
     currentTime     = m.video.position
 
-    newContent = getContentPlaylist(videoTrackIndex, currentVideo, currentTime.ToStr())
+    currentMedia = m.top.playlist.getChild(0)
+
+    newContent = getContentPlaylist(videoTrackIndex, currentVideo, currentTime.ToStr(), currentMedia.title)
 
     m.video.content = newContent
     m.firstPlaylistVideo = currentVideo
     m.video.control = "play"
 end sub
 
-function getContentPlaylist(preferredAudio as Object, firstVideo as Integer, firstSeek as String) as Object
+function getContentPlaylist(preferredAudio as Object, firstVideo as Integer, firstSeek as String, title as String) as Object
     content = createObject("roSGNode", "ContentNode")
     for i = firstVideo to m.top.playList.getChildCount() - 1
         item = m.top.playList.getChild(i)
@@ -156,7 +158,7 @@ function getContentPlaylist(preferredAudio as Object, firstVideo as Integer, fir
         if item.subtitleUrl <> invalid
             videoContent.srt = item.subtitleUrl
         end if
-        videoContent.title = ""
+        videoContent.title = title
         videoContent.PlayStart = item.seek
         content.appendChild(videoContent)
     end for
