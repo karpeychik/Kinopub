@@ -190,6 +190,7 @@ sub gotoVideo(seek as Float)
         videoUri:    videoUri,
         audioTrack:  m.audioIndexes[m.audioIndex],
         videoId:     m.top.season.videoId,
+        title:       "%s: %s".Format(m.top.serial.title, m.top.episode.title),
         videoNumber: 1, ' TODO: previously it was (i + 1) in (for i = episodeIndex to m.top.seasonNode.getChildCount() - 1)
         seasonId:    (m.top.season.seasonIndex + 1).ToStr(),
         seek:        seek,

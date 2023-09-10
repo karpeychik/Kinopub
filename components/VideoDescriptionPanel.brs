@@ -33,7 +33,6 @@ sub itemReceived()
 
     contentItem = m.readItemTask.content.item
 
-    title    = contentItem.title
     imageUri = contentItem.posters.big
 
     availableWidth  = m.top.width / 2 - 120
@@ -62,9 +61,8 @@ sub itemReceived()
 
     loadFonts()
 
-    title       = contentItem.title
     year        = contentItem.year.ToStr()
-    title       = getTitle(title, year)
+    title       = getTitle(contentItem.title, year)
     duration    = getDuration(contentItem.duration.total)
     genreString = getGenres(contentItem.genres)
     director    = getDirector(contentItem)
@@ -205,16 +203,18 @@ sub gotoVideo(seek as Float)
     'TODO: what if we couldn't find the correct video? Should handle and not crash
     playlist = createObject("roSGNode", "ContentNode")
     episodeEntry = createObject("roSGNode", "ContentNode")
-        episodeEntry.addFields({
-            videoFormat: m.streams[m.streamIndex],
-            videoUri : videoUri,
-            audioTrack : m.audioIndexes[m.audioIndex],
-            videoId : m.readItemTask.content.item.id.ToStr(),
-            videoNumber : 1,
-            seasonId : invalid,
-            seek : seek,
-            watched : false})
-        playlist.appendChild(episodeEntry)
+    episodeEntry.addFields({
+        videoFormat: m.streams[m.streamIndex],
+        videoUri: videoUri,
+        audioTrack: m.audioIndexes[m.audioIndex],
+        videoId: m.readItemTask.content.item.id.ToStr(),
+        title: getTitle(m.readItemTask.content.item.title, m.readItemTask.content.item.year.ToStr()),
+        videoNumber: 1,
+        seasonId: invalid,
+        seek: seek,
+        watched: false
+    })
+    playlist.appendChild(episodeEntry)
 
     nPanel.playlist = playlist
     m.top.nPanel = nPanel
@@ -442,7 +442,7 @@ function getTitle(title as String, year as String) as String
 
     AppendString(newTitle, title)
     if year.Len() > 0
-        newTitle.AppendString(" (", 2)
+        AppendString(newTitle, " (")
         AppendString(newTitle, year)
         AppendString(newTitle, ")")
     end if
