@@ -220,26 +220,29 @@ sub gotoVideo(seek as Float)
     m.top.nPanel = nPanel
 end sub
 
-sub showDialog(list as Object, index as Integer, callback as String, font as Object)
-    m.dialog = createObject("roSGNode", "Dialog")
+sub showDialog(list as Object, index as Integer, callback as String, font as Object, title as String)
+    m.dialog = createObject("roSGNode", "StandardMessageDialog")
+    m.dialog.title   = title
     m.dialog.buttons = list
-    m.dialog.ButtonGroup.focusButton = index
-    m.dialog.ButtonGroup.textFont = font
-    m.dialog.ButtonGroup.focusedTextFont = font
-    m.dialog.observeField("buttonSelected",callback)
+    m.dialog.observeField("buttonSelected", callback)
     m.top.dialog = m.dialog
+
+    ' Set focus on proper button
+    buttonArea = findNodeBySubtype(m.dialog, "StdDlgButtonArea")
+    buttons = findNodesBySubtype(buttonArea, "StdDlgButton")
+    buttons[index].setFocus(true)
 end sub
 
 sub audioButton()
-    showDialog(m.audioTitles, m.audioIndex, "audioSelected", m.font18)
+    showDialog(m.audioTitles, m.audioIndex, "audioSelected", m.font18, "Аудио")
 end sub
 
 sub streamButton()
-    showDialog(m.streams, m.streamIndex, "streamSelected", m.font24)
+    showDialog(m.streams, m.streamIndex, "streamSelected", m.font24, "Стрим")
 end sub
 
 sub qualityButton()
-    showDialog(m.qualities, m.qualityIndex, "qualitySelected", m.font24)
+    showDialog(m.qualities, m.qualityIndex, "qualitySelected", m.font24, "Качество")
 end sub
 
 function settingsKey() as String
@@ -356,7 +359,6 @@ sub setAudio(item as Object)
             if track.codec <> invalid
                 title = title + " - " + UCase(track.codec)
             end if
-            title = recode(title)
         end if
         if title = m.audio
             m.audioIndex = index - 1 ' index starts from 1, audioIndex from 0
