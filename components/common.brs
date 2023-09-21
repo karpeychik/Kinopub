@@ -21,6 +21,35 @@ function recode(str as string) as string
   return m.global.utilities.callFunc("Encode", {str: str})
 end function
 
+' Returns whether or not passed value is valid
+function isValid(input as dynamic) as boolean
+  return input <> invalid
+end function
+
+function findNodesBySubtype(node, subtype)
+  foundNodes = []
+
+  for each child in node.getChildren(-1, 0)
+    if lcase(child.subtype()) = "group"
+      return findNodesBySubtype(child, subtype)
+    end if
+
+    if lcase(child.subtype()) = lcase(subtype)
+      foundNodes.push(child)
+    end if
+  end for
+
+  return foundNodes
+end function
+
+function findNodeBySubtype(parent, subtype)
+  foundNodes = findNodesBySubtype(parent, subtype)
+  if foundNodes.count() > 0
+    return foundNodes[0]
+  end if
+  return invalid
+end function
+
 sub showErrorDialog(errorSource as string, errorCode as string)
   print "showErrorDialog()"
   errorMessage = m.global.utilities.callFunc("GetErrorMessage", { errorCode: errorCode, source: errorSource })
