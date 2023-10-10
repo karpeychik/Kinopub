@@ -27,7 +27,6 @@ Shoot an email with the account to add as a contributor to psavichev@gmail.com
 Help wanted with:
 - Search (https://kinoapi.com/api_video.html#video-search)
 - Better UI for TV series
-- Fix audio track select for big amount of audio tracks
 - Add subtitles (without captions)
 - Implement fresh/hot/popular videos (https://kinoapi.com/api_video.html#shortcut)
 - Implement history (https://kinoapi.com/api_history.html)
