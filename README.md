@@ -21,6 +21,8 @@ export DEVPASSWORD=<roku tv password>; export ROKU_DEV_TARGET=<roku tv ip>; make
 
 `out/Kino.pub.zip` will be your application.
 
+After adding your device on https://kino.pub/device, I suggest you to click on ⚙︎ and enable 4K videos support in settings if your device supports it.
+
 # Contribute
 Shoot an email with the account to add as a contributor to psavichev@gmail.com
 
