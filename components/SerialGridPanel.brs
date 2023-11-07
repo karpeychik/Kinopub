@@ -150,7 +150,7 @@ sub showSerial()
     rowList.showRowLabel = false
     rowList.drawFocusFeedback = false
     rowList.vertFocusAnimationStyle = "fixedFocusWrap"
-    rowList.rowFocusAnimationStyle = "floatingFocus"
+    rowList.rowFocusAnimationStyle = "fixedFocusWrap"
     rowList.observeField("rowItemSelected", "rowItemSelected")
     m.rowList = rowList
 

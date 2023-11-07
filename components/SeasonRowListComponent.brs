@@ -30,8 +30,8 @@ sub showcontent()
 
     left = itemContent.itemwidth / 2 - width / 2
 
-    rectLeft = left - borderStroke
-    rectWidth = width + borderStroke * 2
+    rectLeft   = left   - borderStroke
+    rectWidth  = width  + borderStroke * 2
     rectHeight = height + borderStroke * 2
     m.rectangle = createObject("roSGNode", "Rectangle")
     m.rectangle.width = rectWidth
