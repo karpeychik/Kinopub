@@ -1,6 +1,6 @@
 {
   "name": "kinopub",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "This is a Roku channel for Kino.pub. The author of this chanel has no affiliation with Kino.pub. I have put this channel together simply to have some fun and make watching this service possible through Roku.",
   "scripts": {
     "lint": "bslint"
