@@ -1,7 +1,6 @@
 sub init()
     'm.itemposter = m.top.findNode("itemPoster")
-
-    loadFonts()
+    m.font18 = createFont(18)
     m.firstLoad = true
 end sub
 
@@ -13,7 +12,7 @@ sub showcontent()
     m.firstLoad = false
     itemContent = m.top.itemContent
 
-    borderStroke = 2
+    borderStroke = 3
 
     availableWidth  = itemContent.itemWidth  - borderStroke * 2
     availableHeight = itemContent.itemheight - borderStroke * 2 - 18
@@ -31,14 +30,15 @@ sub showcontent()
 
     left = itemContent.itemwidth / 2 - width / 2
 
-    rectLeft = left - borderStroke
-    rectWidth = width + borderStroke * 2
+    rectLeft   = left   - borderStroke
+    rectWidth  = width  + borderStroke * 2
     rectHeight = height + borderStroke * 2
     m.rectangle = createObject("roSGNode", "Rectangle")
-    m.rectangle.width = rectWidth
+    m.rectangle.width  = rectWidth
     m.rectangle.height = rectHeight
     m.rectangle.translation = [rectLeft, 0]
     m.rectangle.opacity = 0
+    m.rectangle.color = "#00ffff"
     m.top.appendChild(m.rectangle)
 
     poster = createObject("roSGNode", "Poster")

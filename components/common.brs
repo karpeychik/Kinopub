@@ -1,7 +1,8 @@
 sub loadFonts()
-  m.font24 = createFont(24)
-  m.font16 = createFont(16)
   m.font12 = createFont(12)
+  m.font16 = createFont(16)
+  m.font18 = createFont(18)
+  m.font24 = createFont(24)
 end sub
 
 function createFont(size as integer) as object

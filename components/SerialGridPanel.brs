@@ -144,13 +144,13 @@ sub showSerial()
     rowList.itemComponentName = "SeasonRowListComponent"
     rowList.numRows = 1
     rowList.rowItemSize = [ [100, 200] ]
-    rowList.rowItemSpacing = [[ 40, 0 ]]
+    rowList.rowItemSpacing = [[ 30, 0 ]]
     rowList.showRowLabel = [ true ]
     rowList.itemSize = [ 1000, 200 ]
     rowList.showRowLabel = false
     rowList.drawFocusFeedback = false
     rowList.vertFocusAnimationStyle = "fixedFocusWrap"
-    rowList.rowFocusAnimationStyle = "floatingFocus"
+    rowList.rowFocusAnimationStyle = "fixedFocusWrap"
     rowList.observeField("rowItemSelected", "rowItemSelected")
     m.rowList = rowList
 
@@ -159,8 +159,9 @@ sub showSerial()
     row.title = "Seasons"
 
     for i = 0 to serial.seasons.Count() - 1 step 1
+        season = serial.seasons[i]
         seasonWatched = true
-        for each episode in serial.seasons[i].episodes
+        for each episode in season.episodes
             if episode.watched <> 1
                 seasonWatched = false
                 exit for
@@ -168,7 +169,7 @@ sub showSerial()
         end for
 
         itemContent = buildSeasonNode(i)
-        itemContent.title = recode("Сезон " + serial.seasons[i].number.ToStr())
+        itemContent.title = recode("Сезон " + season.number.ToStr())
         itemContent.HDPosterUrl = serial.posters.small
         itemContent.addFields({itemWidth: 100, itemHeight: 200, seasonWatched: seasonWatched })
         row.appendChild(itemContent)
