@@ -1,7 +1,6 @@
 sub init()
     'm.itemposter = m.top.findNode("itemPoster")
-
-    loadFonts()
+    m.font18 = createFont(18)
     m.firstLoad = true
 end sub
 
