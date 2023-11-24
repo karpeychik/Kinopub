@@ -73,6 +73,7 @@ DATE_TIME := $(shell date +%F-%T)
 
 APP_ZIP_FILE := $(ZIPREL)/$(APPNAME).zip
 APP_PKG_FILE := $(PKGREL)/$(APPNAME)_$(DATE_TIME).pkg
+VERSION_APP_ZIP_FILE := $(ZIPREL)/$(APPNAME)_$(VERSION).zip
 
 # these variables are only used for the .pkg file version tagging.
 APP_NAME := $(APPNAME)
@@ -156,6 +157,10 @@ $(APPNAME): manifest
 	@if [ -e "$(APP_ZIP_FILE)" ]; then \
 		rm -f $(APP_ZIP_FILE); \
 	fi
+	@echo "  >> removing old application zip $(VERSION_APP_ZIP_FILE)"
+	@if [ -e "$(VERSION_APP_ZIP_FILE)" ]; then \
+		rm -f $(VERSION_APP_ZIP_FILE); \
+	fi
 
 	@echo "  >> creating destination directory $(ZIPREL)"
 	@if [ ! -d $(ZIPREL) ]; then \
@@ -187,6 +192,8 @@ $(APPNAME): manifest
 		echo "  >> deleting imports";\
 		rm -r -f $(APPSOURCEDIR)/common; \
 	fi \
+
+	cp $(APP_ZIP_FILE) $(VERSION_APP_ZIP_FILE)
 
 	@echo "*** packaging $(APPNAME) complete ***"
 
@@ -543,29 +550,6 @@ app-pkg: $(APPNAME) check
 	@rm $(APP_KEY_PASS_TMP)
 
 	@echo "*** Package $(APPNAME) complete ***"
-
-# -------------------------------------------------------------------------
-# teamcity: used to build .zip and .pkg file on TeamCity.
-# See app-pkg target for info on options for specifying the signing password.
-# -------------------------------------------------------------------------
-.PHONY: teamcity
-teamcity: app-pkg
-ifeq ($(IS_TEAMCITY_BUILD),true)
-	@echo "Adding TeamCity artifacts..."
-
-	sudo rm -f /tmp/artifacts
-	sudo mkdir -p /tmp/artifacts
-
-	cp $(APP_ZIP_FILE) /tmp/artifacts/$(APP_NAME)-$(APP_VERSION).zip
-	@echo "##teamcity[publishArtifacts '/tmp/artifacts/$(APP_NAME)-$(APP_VERSION).zip']"
-
-	cp $(APP_PKG_FILE) /tmp/artifacts/$(APP_NAME)-$(APP_VERSION).pkg
-	@echo "##teamcity[publishArtifacts '/tmp/artifacts/$(APP_NAME)-$(APP_VERSION).pkg']"
-
-	@echo "TeamCity artifacts complete."
-else
-	@echo "Not running on TeamCity, skipping artifacts."
-endif
 
 ##########################################################################
 

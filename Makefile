@@ -16,7 +16,7 @@
 #    Set in your this variable in your shell startup (e.g. .bashrc)
 ##########################################################################
 APPNAME = Kino.pub
-VERSION = 1.0
+VERSION = `grep 'version"' package.json | cut -d '"' -f 4`
 
 ZIP_EXCLUDE= -x .*\* -x node_modules\* -x out\* -x devcontent\* -x \*.pkg -x storeassets\* -x keys\* -x \*/.\*
 
