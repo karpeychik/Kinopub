@@ -1,0 +1,42 @@
+name: Create GitHub Release
+
+on:
+  push:
+    branches:
+      - master
+      - github-release
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Extract version from package.json
+        run: |
+          VERSION=$(grep 'version"' package.json | cut -d '"' -f 4)
+          echo "Release version is $VERSION"
+          echo "::set-env name=VERSION::$VERSION"
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            out/Kino.pub_${{ env.VERSION }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish Release URL
+        run: |
+          echo "Release URL: ${{ steps.create_release.outputs.upload_url }}"

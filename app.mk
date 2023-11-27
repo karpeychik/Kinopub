@@ -50,11 +50,6 @@ else ifneq (,$(findstring CYGWIN,$(UNAME_S)))
 	HOST_OS := cygwin
 endif
 
-IS_TEAMCITY_BUILD ?=
-ifneq ($(TEAMCITY_BUILDCONF_NAME),)
-IS_TEAMCITY_BUILD := true
-endif
-
 # get the root directory in absolute form, so that current directory
 # can be changed during the make if needed.
 APPS_ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
@@ -78,10 +73,6 @@ VERSION_APP_ZIP_FILE := $(ZIPREL)/$(APPNAME)_$(VERSION).zip
 # these variables are only used for the .pkg file version tagging.
 APP_NAME := $(APPNAME)
 APP_VERSION := $(VERSION)
-ifeq ($(IS_TEAMCITY_BUILD),true)
-APP_NAME    := $(subst /,-,$(TEAMCITY_BUILDCONF_NAME))
-APP_VERSION := $(BUILD_NUMBER)
-endif
 
 APPSOURCEDIR := $(SOURCEDIR)/source
 IMPORTFILES := $(foreach f,$(IMPORTS),$(COMMONREL)/$f.brs)
@@ -253,9 +244,6 @@ endif
 .PHONY: check
 check: $(APPNAME)
 ifeq ($(APP_CHECK_DISABLED),true)
-ifeq ($(IS_TEAMCITY_BUILD),true)
-	@echo "*** Warning: application check skipped ***"
-endif
 else
 ifeq ($(wildcard $(BRIGHTSCRIPT_TOOL)),)
 	@echo "*** Note: application check not available ***"
